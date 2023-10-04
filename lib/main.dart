@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "India's first All Medicine Distributor" ,
       //removing debug banner
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
