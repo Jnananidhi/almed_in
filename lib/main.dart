@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Roboto Bold'
+        fontFamily: 'DMSans Bold'
       ),
       home: const HomeScreen(),
     );

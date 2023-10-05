@@ -83,17 +83,18 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Roboto Thin
+    - family: DMSans Light
       fonts:
-        - asset: assets/font/Roboto-Thin.ttf
-    - family: Roboto Regular
+        - asset: assets/font/DMSans-ExtraLight.ttf
+          weight: 200
+    - family: DMSans Regular
       fonts:
-        - asset: assets/font/Roboto-Regular.ttf
-          weight: 300
-    - family: Roboto Bold
+        - asset: assets/font/DMSans-Regular.ttf
+          weight: 400
+    - family: DMSans Bold
       fonts:
-        - asset: assets/font/Roboto-Bold.ttf
-          weight: 700
+        - asset: assets/font/DMSans-SemiBold.ttf
+          weight: 600
 
   #   - family: Trajan Pro
   #     fonts:
