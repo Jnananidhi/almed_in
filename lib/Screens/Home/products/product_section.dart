@@ -37,7 +37,7 @@ class ProductSection extends StatelessWidget {
                     border: Border(
                         bottom: BorderSide(color: kSecondaryColor, width: 3))),
                 child: const Text(
-                  "Brands",
+                  "Company",
                   style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
                 ),
               ),
