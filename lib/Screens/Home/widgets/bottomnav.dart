@@ -14,12 +14,12 @@ class BottomNav extends StatelessWidget {
     return Container(
       color: kgreyColor,
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            constraints: BoxConstraints(maxWidth: kMaxWidth),
+            constraints: const BoxConstraints(maxWidth: kMaxWidth),
             child: Column(
               children: [
                 Column(
@@ -70,12 +70,11 @@ class BottomNav extends StatelessWidget {
                       child: Text(
                         "Almed.in All Rights Reserved",
                         style: TextStyle(
-                          fontFamily: 'DMSans Regular' ,
                           fontSize: _size.width >= 370 ? 15 : 10,
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text("Designed with ❤️ by Linkable Technologies",
                       style: TextStyle(
                         fontSize: _size.width >= 370 ? 15 : 10,
