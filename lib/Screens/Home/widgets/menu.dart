@@ -33,16 +33,8 @@ class Navigation extends StatelessWidget {
                             },
                             icon: Icon(Icons.menu)),
                       //title
-                      AutoSizeText(
-                        "Spick-Android",
-                        maxLines: 1,
-                        minFontSize: 16,
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width >= 348
-                              ? 22
-                              : 17,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Image.asset('logo.png',
+                      height: 80,
                       ),
                       const Spacer(),
                       if (Responsive.isDesktop(context)) WebMenu(),
@@ -99,11 +91,15 @@ class WebMenu extends StatelessWidget {
           press: () {},
         ),
         MenuItems(
-          title: 'Products',
+          title: 'About US',
           press: () {},
         ),
         MenuItems(
-          title: 'Category',
+          title: 'Why Almed',
+          press: () {},
+        ),
+        MenuItems(
+          title: 'FAQ',
           press: () {},
         ),
         MenuItems(

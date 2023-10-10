@@ -49,13 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Text(
-                    "Spick-Android",
-                    textScaleFactor: 1.6,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  child: Image(image: AssetImage('logo.png')),
                 ),
               ),
               Padding(
@@ -75,14 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 10,
                     ),
                     MenuItems(
-                      title: 'Products',
+                      title: 'About Us',
                       press: () {},
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     MenuItems(
-                      title: 'Category',
+                      title: 'Why Almed',
+                      press: () {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    MenuItems(
+                      title: 'FAQ',
                       press: () {},
                     ),
                     const SizedBox(

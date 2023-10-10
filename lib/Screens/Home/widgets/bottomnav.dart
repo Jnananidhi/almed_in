@@ -27,7 +27,7 @@ class BottomNav extends StatelessWidget {
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        "Spick-Android",
+                        "Almed.in",
                         style: TextStyle(
                           fontSize: _size.width >= 370 ? 22 : 16,
                           fontWeight: FontWeight.bold,

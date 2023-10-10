@@ -35,15 +35,15 @@ class _AllBrandsProductState extends State<AllBrandsProduct> {
                   fontSize: _size.width >= 414 ? 18 : 12,
                   fontWeight: FontWeight.bold,
                 ),
-                tabs: [
+                tabs: const [
                   Tab(
-                    text: "iPhone",
+                    text: "Therapeautic",
                   ),
                   Tab(
-                    text: "Samsung",
+                    text: "Strength",
                   ),
                   Tab(
-                    text: "Headphone",
+                    text: "Form",
                   ),
                 ]),
             if (Responsive.isDesktop(context))
