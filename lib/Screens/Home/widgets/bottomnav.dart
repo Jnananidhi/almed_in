@@ -22,20 +22,65 @@ class BottomNav extends StatelessWidget {
             constraints: BoxConstraints(maxWidth: kMaxWidth),
             child: Column(
               children: [
+                Column(
+                  children: [
+                    Text(
+                        "Are you a vendor?",
+                    style: TextStyle(
+                      fontFamily: 'DMSans Bold' ,
+                      fontSize: _size.width >= 370 ? 20 : 10,
+                    ),
+                    ),
+                    MaterialButton(
+                      color: kSecondaryColor,
+                      onPressed: () {},
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(color: kWhiteColor),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Disclaimer",
+                      style: TextStyle(
+                        fontFamily: 'DMSans Bold' ,
+                        fontSize: _size.width >= 370 ? 20 : 10,
+                      ),
+                    ),
+
+            Text(
+              "The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: 'DMSans Regular' ,
+                fontSize: _size.width >= 370 ? 15 : 10,
+              ),
+            ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                ),
                 Row(
                   children: [
                     InkWell(
                       onTap: () {},
                       child: Text(
-                        "Almed.in",
+                        "Almed.in All Rights Reserved",
                         style: TextStyle(
-                          fontSize: _size.width >= 370 ? 22 : 16,
-                          fontWeight: FontWeight.bold,
+                          fontFamily: 'DMSans Regular' ,
+                          fontSize: _size.width >= 370 ? 15 : 10,
                         ),
                       ),
                     ),
                     Spacer(),
-                    _size.width >= 550 ? WebMenu() : MobMenu(),
+                    Text("Designed with ❤️ by Linkable Technologies",
+                      style: TextStyle(
+                        fontSize: _size.width >= 370 ? 15 : 10,
+                      ),
+                    ),
                   ],
                 ),
               ],
