@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
+  List filteredContacts = [];
+  List dropcontact = [];
+  final searchcontroller = TextEditingController();
+  void searchContacts(String searchTerm) {
+    setState(() {
+      filteredContacts = dropcontact.where((contact) {
+        return contact['FIRST_NAME']
+            .toLowerCase()
+            .contains(searchTerm.toLowerCase()) ||
+            contact['DESIGNATION']
+                .toLowerCase()
+                .contains(searchTerm.toLowerCase()) ||
+            contact['ORGANIZATION']
+                .toLowerCase()
+                .contains(searchTerm.toLowerCase()) ||
+            contact['DEPARTMENT']
+                .toLowerCase()
+                .contains(searchTerm.toLowerCase());
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +85,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     MenuItems(
                       title: 'FAQ',
-                      press: () {},
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const FaqScreen()),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -80,11 +106,27 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body:Column(children: <Widget>[
-
-          Expanded(
+          Container(
+            padding:
+            const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            child: TextField(
+              controller: searchcontroller,
+              onChanged: searchContacts,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  border: new OutlineInputBorder(
+                      borderSide: new BorderSide(
+                          color: const Color.fromARGB(255, 211, 199, 242))),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).primaryColor,
+                  )),
+            ),
+          ),
+          const Expanded(
             child: SingleChildScrollView(
               child: Column(
-                children: const [
+                children: [
                   //now we create menu and header
                   Navigation(),
                   //now we create banner

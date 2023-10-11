@@ -1,4 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:almed_in/Screens/Home/faq_screen.dart';
+import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
@@ -52,7 +54,8 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
 
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                        },
                         icon: const Icon(
                           Icons.shopping_cart_outlined,
                           color: kDarkgreyColor,
@@ -110,23 +113,43 @@ class WebMenu extends StatelessWidget {
         MenuItems(
           isActive: true,
           title: 'Home',
-          press: () {},
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          },
         ),
         MenuItems(
+
           title: 'About US',
-          press: () {},
+          press: () {
+
+          },
         ),
         MenuItems(
+
           title: 'Why Almed',
           press: () {},
         ),
         MenuItems(
+
           title: 'FAQ',
-          press: () {},
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const FaqScreen()),
+            );
+          },
         ),
         MenuItems(
           title: 'Contact Us',
-          press: () {},
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  ContactUsApp()),
+            );
+          },
         ),
       ],
     );
