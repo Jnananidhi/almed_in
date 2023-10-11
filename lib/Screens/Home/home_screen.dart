@@ -17,27 +17,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List filteredContacts = [];
-  List dropcontact = [];
-  final searchcontroller = TextEditingController();
-  void searchContacts(String searchTerm) {
-    setState(() {
-      filteredContacts = dropcontact.where((contact) {
-        return contact['FIRST_NAME']
-            .toLowerCase()
-            .contains(searchTerm.toLowerCase()) ||
-            contact['DESIGNATION']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase()) ||
-            contact['ORGANIZATION']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase()) ||
-            contact['DEPARTMENT']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase());
-      }).toList();
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,23 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body:Column(children: <Widget>[
-          Container(
-            padding:
-            EdgeInsets.only(top: 20, left: 5, right: 5, bottom: 10),
-            child: TextField(
-              controller: searchcontroller,
-              onChanged: searchContacts,
-              decoration: InputDecoration(
-                  labelText: "Search",
-                  border: new OutlineInputBorder(
-                      borderSide: new BorderSide(
-                          color: Color.fromARGB(255, 211, 199, 242))),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).primaryColor,
-                  )),
-            ),
-          ),
+
           Expanded(
             child: SingleChildScrollView(
               child: Column(

@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 
-class Navigation extends StatelessWidget {
+class Navigation extends StatefulWidget {
   const Navigation({
     Key? key,
   }) : super(key: key);
+  @override
+  State<Navigation> createState() => _NavigationState();
+}
+class _NavigationState extends State<Navigation> {
+
+  final searchcontroller = TextEditingController();
+  void searchContacts(String searchTerm) {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +24,7 @@ class Navigation extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
+
           Container(
             constraints: const BoxConstraints(
               maxWidth: kMaxWidth,
@@ -40,14 +50,7 @@ class Navigation extends StatelessWidget {
                       if (Responsive.isDesktop(context)) WebMenu(),
 
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.search,
-                          color: kDarkgreyColor,
-                          size: 25,
-                        ),
-                      ),
+
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
@@ -67,9 +70,28 @@ class Navigation extends StatelessWidget {
                     ],
                   ),
                 ),
+                Container(
+                  padding:
+                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: TextField(
+                      controller: searchcontroller,
+                      onChanged: searchContacts,
+                      decoration: InputDecoration(
+                          border: new OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                  color:Color(0xFF00AFBB))),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Theme.of(context).primaryColor,
+                          )),
+                    ),
+                  ), ),
               ],
             ),
           ),
+
         ],
       ),
     );

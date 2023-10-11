@@ -15,6 +15,7 @@ class Cateegory extends StatefulWidget {
 }
 
 class _CateegoryState extends State<Cateegory> {
+
   bool isHover = false;
   List contact = [];
   bool showAllItems = false;
@@ -28,6 +29,10 @@ class _CateegoryState extends State<Cateegory> {
       setState(() {
         contact = jsonData;
       });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
     }
     print(contact);
     return contact;
@@ -47,6 +52,7 @@ class _CateegoryState extends State<Cateegory> {
 
   @override
     Widget build(BuildContext context) {
+    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
     return Column(
     children: [
 
@@ -58,7 +64,7 @@ class _CateegoryState extends State<Cateegory> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-                    for (var item in contact.take(4))
+                    for (var item in contact.take(crossAxisCount))
                     CategoryCard(
                     title: item['COMPANY_NAME'],
                     press: () {
@@ -76,17 +82,15 @@ class _CateegoryState extends State<Cateegory> {
           height: 200, // Fixed height for the additional items grid
           child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: (contact.length - 4) ~/ 4 + 1, // Calculate the number of rows
+                itemCount: (contact.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
                   itemBuilder: (context, rowIndex) {
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                       children: [
-                        for (var i = rowIndex * 4 + 4; i < (rowIndex + 1) * 4 + 4; i++)
+                        for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
                           if (i < contact.length)
                             Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.all(6.0), // Add space between cards
-                                child: Align(
+                              child: Align(
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: CategoryCard(
                                     title: contact[i]['COMPANY_NAME'],
@@ -96,7 +100,7 @@ class _CateegoryState extends State<Cateegory> {
                                   ),
                                 ),
                               ),
-                            ),
+
                       ],
                 );
               },
