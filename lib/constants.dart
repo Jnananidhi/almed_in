@@ -19,3 +19,5 @@ final kDefaultShadow = BoxShadow(
   blurRadius: 20,
   color: const Color(0xFF0700B1).withOpacity(0.15),
 );
+
+const String api = "http://192.168.15.100:8080/";
