@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final currentRoute = getCurrentRouteName(context);
     return Scaffold(
+      appBar: Navigation(),
         backgroundColor: kWhiteColor,
         //scrollable widget
         drawer: Drawer(
@@ -108,29 +109,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body:Column(children: <Widget>[
-          Container(
-            padding:
-            const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-            child: TextField(
-              controller: searchcontroller,
-              onChanged: searchContacts,
-              decoration: InputDecoration(
-                  labelText: "Search",
-                  border: new OutlineInputBorder(
-                      borderSide: new BorderSide(
-                          color: const Color.fromARGB(255, 211, 199, 242))),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).primaryColor,
-                  )),
-            ),
-          ),
+
           const Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  //now we create menu and header
-                  Navigation(),
+
                   //now we create banner
                   //for this import packages
                   HeroBanner(),

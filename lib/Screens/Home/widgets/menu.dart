@@ -6,10 +6,12 @@ import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:almed_in/utils/utils.dart';
 
-class Navigation extends StatefulWidget {
+class Navigation extends StatefulWidget implements PreferredSizeWidget {
   const Navigation({
     Key? key,
   }) : super(key: key);
+  @override
+  Size get preferredSize => Size.fromHeight(180.0);
   @override
   State<Navigation> createState() => _NavigationState();
 }
@@ -52,8 +54,18 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
                       if (Responsive.isDesktop(context)) const WebMenu(),
 
-                      const Spacer(),
 
+
+                      const Spacer(),
+                      IconButton(
+                        onPressed: () {showSearch(context: context, delegate: MySearchDelegate());
+                        },
+                        icon: const Icon(
+                          Icons.search,
+                          color: kDarkgreyColor,
+                          size: 25,
+                        ),
+                      ),
                       IconButton(
                         onPressed: () {
                         },
@@ -100,6 +112,12 @@ class _NavigationState extends State<Navigation> {
       ),
     );
   }
+}
+
+class MySearchDelegate extends SearchDelegate{
+
+  @override
+  widget? buildLeading(BuildContext context)=>
 }
 
 class WebMenu extends StatelessWidget {
