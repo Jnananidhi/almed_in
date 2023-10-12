@@ -54,11 +54,8 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
                       if (Responsive.isDesktop(context)) const WebMenu(),
 
-
-
-                      const Spacer(),
                       IconButton(
-                        onPressed: () {showSearch(context: context, delegate: MySearchDelegate());
+                        onPressed: () {
                         },
                         icon: const Icon(
                           Icons.search,
@@ -66,6 +63,9 @@ class _NavigationState extends State<Navigation> {
                           size: 25,
                         ),
                       ),
+
+                      const Spacer(),
+
                       IconButton(
                         onPressed: () {
                         },
@@ -112,12 +112,6 @@ class _NavigationState extends State<Navigation> {
       ),
     );
   }
-}
-
-class MySearchDelegate extends SearchDelegate{
-
-  @override
-  widget? buildLeading(BuildContext context)=>
 }
 
 class WebMenu extends StatelessWidget {
