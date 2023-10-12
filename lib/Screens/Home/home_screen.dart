@@ -1,4 +1,5 @@
 import 'package:almed_in/Screens/Home/faq_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/utils/utils.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final currentRoute = getCurrentRouteName(context);
     return Scaffold(
-      appBar: Navigation(),
+        appBar: Navigation(),
         backgroundColor: kWhiteColor,
         //scrollable widget
         drawer: Drawer(
@@ -115,8 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
 
-                  //now we create banner
-                  //for this import packages
+                  Search_bar(),
                   HeroBanner(),
                   ProductSection(),
                   BottomNav()
