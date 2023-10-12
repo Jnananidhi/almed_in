@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:almed_in/utils/utils.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({
@@ -49,7 +50,7 @@ class _NavigationState extends State<Navigation> {
                       height: 80,
                       ),
                       const Spacer(),
-                      if (Responsive.isDesktop(context)) WebMenu(),
+                      if (Responsive.isDesktop(context)) const WebMenu(),
 
                       const Spacer(),
 
@@ -108,10 +109,12 @@ class WebMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentRoute = getCurrentRouteName(context);
     return Row(
       children: [
         MenuItems(
-          isActive: true,
+
+          isActive: currentRoute == '/Home',
           title: 'Home',
           press: () {
             Navigator.push(
@@ -121,19 +124,19 @@ class WebMenu extends StatelessWidget {
           },
         ),
         MenuItems(
-
+          isActive: currentRoute == '/AboutUs',
           title: 'About US',
           press: () {
 
           },
         ),
         MenuItems(
-
+          isActive: currentRoute == '/WhyAlmed',
           title: 'Why Almed',
           press: () {},
         ),
         MenuItems(
-
+          isActive: currentRoute == '/Faq',
           title: 'FAQ',
           press: () {
             Navigator.push(
@@ -143,6 +146,7 @@ class WebMenu extends StatelessWidget {
           },
         ),
         MenuItems(
+          isActive: currentRoute == '/ContactUs',
           title: 'Contact Us',
           press: () {
             Navigator.push(
@@ -156,44 +160,7 @@ class WebMenu extends StatelessWidget {
   }
 }
 
-class MobMenu extends StatelessWidget {
-  const MobMenu({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            MenuItems(
-              isActive: true,
-              title: 'Home',
-              press: () {},
-            ),
-            MenuItems(
-              title: 'Products',
-              press: () {},
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            MenuItems(
-              title: 'Category',
-              press: () {},
-            ),
-            MenuItems(
-              title: 'Contact Us',
-              press: () {},
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
 
 class MenuItems extends StatefulWidget {
   final String title;
