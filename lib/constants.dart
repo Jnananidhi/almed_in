@@ -20,4 +20,4 @@ final kDefaultShadow = BoxShadow(
   color: const Color(0xFF0700B1).withOpacity(0.15),
 );
 
-const String api = "http://192.168.15.100:8080/";
+const String api = "http://localhost:8080/";

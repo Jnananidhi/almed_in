@@ -24,11 +24,11 @@ class _HeroBannerState extends State<HeroBanner> {
             items: [
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_1.png',
+                  image: 'assets/products/banner/banner1.jpg',
                   press: () {}),
               SliderCard(
                   title: 'Mobile',
-                  image: 'assets/products/banner/banner_2.png',
+                  image: 'assets/products/banner/banner2.jpg',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
@@ -90,56 +90,18 @@ class SliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      color: kgreyColor,
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      color: kWhiteColor,
       child: Row(
         children: [
           Expanded(
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AutoSizeText(
-                "$title Made For You",
-                textAlign: TextAlign.center,
-                minFontSize: 16,
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: _size.width >= 500 ? 28 : 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              InkWell(
-                onTap: press,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                  ),
-                  child: Text(
-                    "Shop Now",
-                    style: TextStyle(
-                      fontSize: _size.width >= 500 ? 18 : 12,
-                      color: kWhiteColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          )),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 image,
                 height: _size.width >= 500 ? 400 : 200,
-                width: _size.width >= 500 ? 400 : 200,
-                fit: BoxFit.contain,
+                width: _size.width >= 500 ? 1200 : 200,
+                fit: BoxFit.fill,
               ),
             ],
           )),

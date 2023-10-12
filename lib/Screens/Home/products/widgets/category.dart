@@ -21,7 +21,7 @@ class _CateegoryState extends State<Cateegory> {
   bool showAllItems = false;
 
   Future getAllcategory() async {
-    var url = "http://localhost/almed_company.php";
+    var url = "${api}almed_company.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -66,7 +66,7 @@ class _CateegoryState extends State<Cateegory> {
             children: [
                     for (var item in contact.take(crossAxisCount))
                     CategoryCard(
-                    title: item['COMPANY_NAME'],
+                    title: item['Company'],
                     press: () {
                     // Handle card tap action here
                     },
@@ -93,7 +93,7 @@ class _CateegoryState extends State<Cateegory> {
                               child: Align(
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: CategoryCard(
-                                    title: contact[i]['COMPANY_NAME'],
+                                    title: contact[i]['Company'],
                                     press: () {
                                       // Handle card tap action here
                                     },
