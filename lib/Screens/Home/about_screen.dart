@@ -111,8 +111,8 @@ class _AboutScreenState extends State<AboutScreen> {
                               ),
                               SizedBox(height: 20),
                               Text(
-                                aboutus,
-                                style: TextStyle(fontSize: 16),
+                                aboutus,textAlign: TextAlign.justify,
+                                style: TextStyle(fontSize: 16,),
                               ),
                               SizedBox(height: 20),
                               Text(

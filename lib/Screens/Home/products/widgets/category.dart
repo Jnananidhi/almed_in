@@ -220,9 +220,14 @@ class _CategoryCardState extends State<CategoryCard> {
           padding: const EdgeInsets.symmetric(
             vertical: 10,
           ),
+
           decoration: BoxDecoration(
-            color: isHovered ?   kgreyColor:Colors.white, // Change color on hover
-              boxShadow: [if (isHovered) kDefaultShadow]
+            color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
+              boxShadow: [if (isHovered) kDefaultShadow],
+            border: Border.all(
+              color: kgreyColor, // Set the border color to grey
+              width: 3.0,       // Set the border width
+            ),
           ),
           child: Column(
             children: [

@@ -1,13 +1,14 @@
+import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
+import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:almed_in/utils/utils.dart';
 
 
-import '../about_screen.dart';
 
 class Navigation extends StatefulWidget    {
 
@@ -83,7 +84,10 @@ class _NavigationState extends State<Navigation> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()),
+                          );
+                        },
                         icon: const Icon(
                           Icons.person_outline,
                           color: kDarkgreyColor,

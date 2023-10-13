@@ -1,13 +1,10 @@
+import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/utils/utils.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:almed_in/constants.dart';
-
-import 'about_screen.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
@@ -112,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        body: Column(children: <Widget>[
+        body:Column(children: <Widget>[
           Navigation(),
           Search_bar(),
           Expanded(

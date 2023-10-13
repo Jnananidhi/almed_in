@@ -110,38 +110,44 @@ class ContactUsApp extends StatelessWidget {
 class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-        decoration: const BoxDecoration(color: kgreyColor ,borderRadius: BorderRadius.all(Radius.circular(50))),
-      child: Column(
-        children: [
-      Container(
-      constraints: const BoxConstraints(
-      maxWidth: kMaxWidth,
-      ),
-      child: Column(
+    return Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      margin: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+      elevation: 10,
+      child: Container(
+          decoration: const BoxDecoration(color: kWhiteColor ,borderRadius: BorderRadius.all(Radius.circular(50))),
+        child: Column(
           children: [
-      Padding(
-      padding:
-      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child:Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Contact Us',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+        Container(
+        constraints: const BoxConstraints(
+        maxWidth: kMaxWidth,
+        ),
+        child: Column(
+            children: [
+        Padding(
+        padding:
+        const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Contact Us',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          const Text('Please fill out the form to raise a query.'),
-          const SizedBox(height: 20),
-          ContactForm(),
-        ],
-      ),
-    )],
-      ))]));
+            const SizedBox(height: 20),
+            const Text('Please fill out the form to raise a query.'),
+            const SizedBox(height: 20),
+            ContactForm(),
+          ],
+        ),
+      )],
+        ))])),
+    );
   }
 }
 
