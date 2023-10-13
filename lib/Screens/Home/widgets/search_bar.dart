@@ -89,17 +89,9 @@ class _Search_barState extends State<Search_bar> {
         maxWidth: kMaxWidth,
     ),
     child: Column(
-    children: [
-    Padding(
-    padding:
-    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-    child: Container(
-      color: kWhiteColor,
-      width: double.infinity,
-      child: Column(
           children: [
       Container(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+
       child: Align(
         alignment: Alignment.topCenter,
         child: TextField(
@@ -148,7 +140,7 @@ class _Search_barState extends State<Search_bar> {
                 }).toList(),
             ),
         ),
-    )])))]));
+    )]));
 
   }
 }

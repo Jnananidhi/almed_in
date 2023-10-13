@@ -69,15 +69,7 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
                       if (Responsive.isDesktop(context)) const WebMenu(),
                       const Spacer(),
-                      IconButton(
-                        onPressed: () {
-                        },
-                        icon: const Icon(
-                          Icons.search,
-                          color: kDarkgreyColor,
-                          size: 25,
-                        ),
-                      ),
+
 
 
 
