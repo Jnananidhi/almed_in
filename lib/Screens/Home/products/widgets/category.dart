@@ -34,7 +34,7 @@ class _CateegoryState extends State<Cateegory> {
       print('Failed to load data. Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
     }
-    print(contact);
+
     return contact;
   }
 
@@ -227,7 +227,7 @@ class _CategoryCardState extends State<CategoryCard> {
           child: Column(
             children: [
               // Add any widgets you want to display within the card, e.g., Text
-              Text(widget.title),
+              Text(widget.title,style:TextStyle(fontSize: 20)),
             ],
           ),
         ),

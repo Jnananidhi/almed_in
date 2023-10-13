@@ -1,4 +1,3 @@
-import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
@@ -6,20 +5,34 @@ import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:almed_in/utils/utils.dart';
+import 'package:http/http.dart' as http;
 
-class Navigation extends StatefulWidget implements PreferredSizeWidget {
+class Navigation extends StatefulWidget  implements PreferredSizeWidget  {
+  @override
+  Size get preferredSize => Size.fromHeight(100.0);
   const Navigation({
     Key? key,
   }) : super(key: key);
-  @override
-  Size get preferredSize => Size.fromHeight(180.0);
+
+
+
   @override
   State<Navigation> createState() => _NavigationState();
 }
 class _NavigationState extends State<Navigation> {
-
+  List contact = [];
   final searchcontroller = TextEditingController();
+  List<String> searchSuggestions = [];
+
   void searchContacts(String searchTerm) {
+    // Clear the previous search suggestions
+    searchSuggestions.clear();
+
+    // If the search term is empty, clear suggestions
+    if (searchTerm.isEmpty) {
+      setState(() {});
+      return;
+    }
 
   }
 
@@ -65,7 +78,7 @@ class _NavigationState extends State<Navigation> {
                         ),
                       ),
 
-                      const Spacer(),
+
 
                       IconButton(
                         onPressed: () {
@@ -87,33 +100,14 @@ class _NavigationState extends State<Navigation> {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: TextField(
-                      controller: searchcontroller,
-                      onChanged: searchContacts,
-                      decoration: InputDecoration(
-                          border: new OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                  color:Color(0xFF00AFBB))),
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Theme.of(context).primaryColor,
-                          )),
-                    ),
-                  ), ),
-              ],
-            ),
-          ),
 
-        ],
-      ),
-    );
+
+        ]))]));}
+
   }
-}
+
+
+
 
 class WebMenu extends StatelessWidget {
   const WebMenu({

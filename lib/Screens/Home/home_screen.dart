@@ -1,4 +1,3 @@
-import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/utils/utils.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -119,8 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 children: [
 
-                  //now we create banner
-                  //for this import packages
+                  Search_bar(),
                   HeroBanner(),
                   ProductSection(),
                   BottomNav()
