@@ -9,9 +9,8 @@ import 'package:almed_in/utils/utils.dart';
 
 import '../about_screen.dart';
 
-class Navigation extends StatefulWidget  implements PreferredSizeWidget  {
-  @override
-  Size get preferredSize => Size.fromHeight(100.0);
+class Navigation extends StatefulWidget    {
+
   const Navigation({
     Key? key,
   }) : super(key: key);

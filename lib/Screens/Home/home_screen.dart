@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final currentRoute = getCurrentRouteName(context);
     return Scaffold(
-      appBar: const Navigation(),
         backgroundColor: kWhiteColor,
         //scrollable widget
         drawer: Drawer(
@@ -114,13 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         body: Column(children: <Widget>[
-
+          Navigation(),
+          Search_bar(),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
 
-                  Search_bar(),
+
                   HeroBanner(),
                   ProductSection(),
                   BottomNav()
