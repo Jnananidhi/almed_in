@@ -34,17 +34,29 @@ class _Search_barState extends State<Search_bar> {
       return;
     }
 
+    // Split the search term into individual words
+    List<String> searchWords = searchTerm.toLowerCase().split(" ");
+
     // Filter the contacts based on the search term
     for (var item in contact) {
-      print("hello");
-      String name = item['COMPANY_NAME'].toString();
-      if (name.toLowerCase().startsWith(searchTerm.toLowerCase())) {
-        searchSuggestions.add(name);
+      String name = item['Name'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['Name'].toString());
+          break; // Break the loop if a match is found for this item
+        }
       }
     }
 
-    setState(() {});
+    setState(() {
+      // You can perform any UI updates here
+    });
   }
+
+
+
   Future getAllcategory() async {
     var url = "http://localhost/almed_company.php";
     var response = await http.post(Uri.parse(url));
@@ -117,8 +129,9 @@ class _Search_barState extends State<Search_bar> {
         color: kgreyColor,
         constraints: const BoxConstraints(
         maxWidth: kMaxWidth,
+          maxHeight: 200,
         ),
-        height: 200, // Set your desired fixed height
+         // Set your desired fixed height
 
         child: SingleChildScrollView( // Wrap with a SingleChildScrollView
             child: Column(
