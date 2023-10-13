@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/utils/utils.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final currentRoute = getCurrentRouteName(context);
     return Scaffold(
-      appBar: Navigation(),
+      appBar: const Navigation(),
         backgroundColor: kWhiteColor,
         //scrollable widget
         drawer: Drawer(
@@ -74,7 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     MenuItems(
                       title: 'About Us',
-                      press: () {},
+                      press: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const AboutScreen()),
+                        );
+                      },
                     ),
                     const SizedBox(
                       height: 10,
@@ -108,9 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        body:Column(children: <Widget>[
+        body:const Column(children: <Widget>[
 
-          const Expanded(
+          Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [

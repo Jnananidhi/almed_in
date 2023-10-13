@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -24,19 +23,19 @@ class _HeroBannerState extends State<HeroBanner> {
             items: [
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner1.jpg',
+                  image: 'assets/products/banner/banner3.jpg',
                   press: () {}),
               SliderCard(
                   title: 'Mobile',
-                  image: 'assets/products/banner/banner2.jpg',
+                  image: 'assets/products/banner/banner4.jpg',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_3.png',
+                  image: 'assets/products/banner/banner1.jpg',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_4.png',
+                  image: 'assets/products/banner/banner4.jpg',
                   press: () {}),
             ],
             options: CarouselOptions(

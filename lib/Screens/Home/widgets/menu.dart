@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
@@ -139,14 +140,13 @@ class WebMenu extends StatelessWidget {
           isActive: currentRoute == '/AboutUs',
           title: 'About US',
           press: () {
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AboutScreen()),
+            );
           },
         ),
-        MenuItems(
-          isActive: currentRoute == '/WhyAlmed',
-          title: 'Why Almed',
-          press: () {},
-        ),
+
         MenuItems(
           isActive: currentRoute == '/Faq',
           title: 'FAQ',

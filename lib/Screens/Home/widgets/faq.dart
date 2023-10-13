@@ -21,6 +21,10 @@ class _FaqState extends State<Faq> {
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
                ExpandableCard(
+                   question: "Why ALMED?",
+                   description: WhyAlmed,
+                   press: () {}),
+               ExpandableCard(
                    question: "Why chemist should order in almed.in?",
                    description: '''We have good coverage of all molecule contents of medicines and made available in almed.in. We have better quality products and margin. Our deliveries are very fast.''',
                    press: () {}),
@@ -64,6 +68,10 @@ class _FaqState extends State<Faq> {
            Column(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
+               ExpandableCard(
+                   question: "Why ALMED?",
+                   description: WhyAlmed,
+                   press: () {}),
                ExpandableCard(
                    question: "Why chemist should order in almed.in?",
                    description: '''We have good coverage of all molecule contents of medicines and made available in almed.in. We have better quality products and margin. Our deliveries are very fast.''',

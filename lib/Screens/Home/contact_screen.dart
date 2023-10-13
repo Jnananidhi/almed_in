@@ -111,7 +111,7 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+        margin: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
         decoration: const BoxDecoration(color: kgreyColor ,borderRadius: BorderRadius.all(Radius.circular(50))),
       child: Column(
         children: [

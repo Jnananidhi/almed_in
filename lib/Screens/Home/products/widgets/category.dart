@@ -57,6 +57,8 @@ class _CateegoryState extends State<Cateegory> {
     children: [
 
     Container(
+        decoration: BoxDecoration(
+             boxShadow: [if (isHover) kDefaultShadow]),
       child: Padding(
       padding: EdgeInsets.all(8.0), // Add space between cards
       child:
