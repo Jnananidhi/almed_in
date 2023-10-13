@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:almed_in/utils/utils.dart';
-import 'package:http/http.dart' as http;
+
 
 import '../about_screen.dart';
 
@@ -69,7 +69,7 @@ class _NavigationState extends State<Navigation> {
                       ),
                       const Spacer(),
                       if (Responsive.isDesktop(context)) const WebMenu(),
-
+                      const Spacer(),
                       IconButton(
                         onPressed: () {
                         },

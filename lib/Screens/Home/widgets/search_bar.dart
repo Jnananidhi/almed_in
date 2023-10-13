@@ -58,7 +58,7 @@ class _Search_barState extends State<Search_bar> {
 
 
   Future getAllcategory() async {
-    var url = "http://localhost/almed_company.php";
+    var url = "${api}almed_company.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {

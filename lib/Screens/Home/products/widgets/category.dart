@@ -21,7 +21,7 @@ class _CateegoryState extends State<Cateegory> {
   bool showAllItems = false;
 
   Future getAllcategory() async {
-    var url = "http://localhost/almed_company.php";
+    var url = "${api}almed_company.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
