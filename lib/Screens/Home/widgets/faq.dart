@@ -30,7 +30,7 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "Why alternate medicines?",
-                   description: ''' Non availability \n High cost \n Assured quality \n Overcome the competition ''',
+                   description: '''Non availability \n High cost \n Assured quality \n Overcome the competition ''',
                    press: () {}),
                ExpandableCard(
                    question: "How can I order in almed.in?",

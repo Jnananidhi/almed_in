@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -233,8 +234,8 @@ class _ContactFormState extends State<ContactForm> {
             maxLines: 5,
           ),
           const SizedBox(height: 20),
-              MaterialButton(
-                color: kSecondaryColor,
+              CustomButton(
+                label: 'Submit',
                 onPressed: () {
                   if(nameController.text.isEmpty|| emailController.text.isEmpty || messageController.text.isEmpty){
                     showDialog(
@@ -275,10 +276,7 @@ class _ContactFormState extends State<ContactForm> {
                   // Handle form submission here
                   senddata();}
                 },
-                child: const Text(
-                  "Submit",
-                  style: TextStyle(color: kWhiteColor),
-                ),
+
               )
         ],
       ),

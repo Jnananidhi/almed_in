@@ -1,3 +1,5 @@
+import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
+import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -6,37 +8,37 @@ import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
-import 'package:almed_in/utils/utils.dart';
+
+
 
 
 
 class Navigation extends StatefulWidget    {
-
   const Navigation({
     Key? key,
   }) : super(key: key);
-
-
-
   @override
   State<Navigation> createState() => _NavigationState();
+
 }
+
 class _NavigationState extends State<Navigation> {
   List contact = [];
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
+   final Usermanagement = UserManagement();
 
   void searchContacts(String searchTerm) {
     // Clear the previous search suggestions
     searchSuggestions.clear();
-
     // If the search term is empty, clear suggestions
     if (searchTerm.isEmpty) {
       setState(() {});
       return;
     }
-
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +66,21 @@ class _NavigationState extends State<Navigation> {
                             },
                             icon: Icon(Icons.menu)),
                       //title
-                      Image.asset('logo.png',
-                      height: 80,
+                      Container(
+                        color: kWhiteColor,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+                              );
+                            },
+                              child: Image.asset('logo.png',
+                                height: 80,
+                              ),
+                          ),
                       ),
+
                       const Spacer(),
                       if (Responsive.isDesktop(context)) const WebMenu(),
                       const Spacer(),
@@ -85,8 +99,19 @@ class _NavigationState extends State<Navigation> {
                       ),
                       IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => UserProfile()),
-                          );
+                          if({Usermanagement.isLoggedIn} == false)
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  LoginPage()),
+                            );
+                          }
+                          else{
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  LoginPage()),
+                            );
+                          }
                         },
                         icon: const Icon(
                           Icons.person_outline,
@@ -113,12 +138,10 @@ class WebMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute = getCurrentRouteName(context);
     return Row(
       children: [
         MenuItems(
 
-          isActive: currentRoute == '/Home',
           title: 'Home',
           press: () {
             Navigator.push(
@@ -128,7 +151,6 @@ class WebMenu extends StatelessWidget {
           },
         ),
         MenuItems(
-          isActive: currentRoute == '/AboutUs',
           title: 'About US',
           press: () {
             Navigator.push(
@@ -139,7 +161,6 @@ class WebMenu extends StatelessWidget {
         ),
 
         MenuItems(
-          isActive: currentRoute == '/Faq',
           title: 'FAQ',
           press: () {
             Navigator.push(
@@ -149,7 +170,6 @@ class WebMenu extends StatelessWidget {
           },
         ),
         MenuItems(
-          isActive: currentRoute == '/ContactUs',
           title: 'Contact Us',
           press: () {
             Navigator.push(

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 //color
-const kPrimaryColor = Color(0xff654ce6);
+const kPrimaryColor = Colors.deepPurple;
 const kSecondaryColor = Color(0xffa594ff);
 const kDarkblueColor = Color(0xff25396f);
 const kgreyColor = Color(0xfff1f1f1);

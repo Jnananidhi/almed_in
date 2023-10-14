@@ -4,7 +4,6 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/faq.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
-import 'package:almed_in/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class FaqScreen extends StatefulWidget {
@@ -19,7 +18,6 @@ class _FaqScreenState extends State<FaqScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final currentRoute = getCurrentRouteName(context);
     return Scaffold(
     backgroundColor: kWhiteColor,
     //scrollable widget

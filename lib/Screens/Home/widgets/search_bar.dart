@@ -6,7 +6,6 @@ import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
-import 'package:almed_in/utils/utils.dart';
 import 'package:http/http.dart' as http;
 
 class Search_bar extends StatefulWidget  {

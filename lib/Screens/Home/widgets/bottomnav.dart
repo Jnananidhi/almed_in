@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 
@@ -31,13 +32,9 @@ class BottomNav extends StatelessWidget {
                       fontSize: _size.width >= 370 ? 20 : 10,
                     ),
                     ),
-                    MaterialButton(
-                      color: kSecondaryColor,
+                    CustomButton(
                       onPressed: () {},
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(color: kWhiteColor),
-                      ),
+                      label: 'Login',
                     ),
                     const SizedBox(
                       height: 15,
