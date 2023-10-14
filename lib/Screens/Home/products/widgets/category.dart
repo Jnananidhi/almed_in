@@ -81,7 +81,8 @@ class _CateegoryState extends State<Cateegory> {
 
     if (showAllItems)
     Container(
-          height: 200, // Fixed height for the additional items grid
+      padding: EdgeInsets.all(8.0),
+          height: contact.length/0.1, // Fixed height for the additional items grid
           child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (contact.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
