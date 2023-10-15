@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
@@ -49,11 +50,11 @@ class _AllBrandsProductState extends State<AllBrandsProduct> {
             if (Responsive.isDesktop(context))
               Container(
                 height: 350,
-                child: const TabBarView(
+                child:  TabBarView(
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: iPhoneProductCard(),
+                      child: DatabaseDataCard(),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),

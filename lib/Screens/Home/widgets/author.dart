@@ -22,17 +22,17 @@ class Author extends StatelessWidget {
                   image: "assets/products/users/pharmacy.png",
                   title: 'M.S.R Pharma',
                   description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you won't find anywhere else, you'll find on Almed.in''',
-                  press: () {}),
+                 ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'Sridhar Medicals',
                   description: ''' As an online medicine distribution platform, Almed in is our most preferred choice, especially since the delivery process is so fast and easy. It has the fastest delivery of medicines we have experienced. This is important for us since this ensures that even the most uncommon of generic drug components are delivered within a short span of time. The right medicine at the right time can save lives and no one understands it better than Almed.in.''',
-                  press: () {}),
+                 ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'Maruthi Medicals',
                   description: '''Almed in never fails to surprise us when it comes to delivering medicines, even the most atypical ones, that too, at a break-neck speed. We were looking for particular capsules and syrups urgently and had approached many companies for the same. But it was Almed in that came to our rescue by supplying the products within a mere hour.''',
-                  press: () {}),
+                  ),
             ],
           ),
         if (!Responsive.isDesktop(context))
@@ -43,17 +43,17 @@ class Author extends StatelessWidget {
                   image: "assets/products/users/pharmacy.png",
                   title: 'M.S.R Pharma',
                   description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you won't find anywhere else, you'll find on Almed.in''',
-                  press: () {}),
+                  ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'Sridhar Medicals',
                   description: ''' As an online medicine distribution platform, Almed in is our most preferred choice, especially since the delivery process is so fast and easy. It has the fastest delivery of medicines we have experienced. This is important for us since this ensures that even the most uncommon of generic drug components are delivered within a short span of time. The right medicine at the right time can save lives and no one understands it better than Almed.in.''',
-                  press: () {}),
+                  ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'Maruthi Medicals',
                   description: '''Almed in never fails to surprise us when it comes to delivering medicines, even the most atypical ones, that too, at a break-neck speed. We were looking for particular capsules and syrups urgently and had approached many companies for the same. But it was Almed in that came to our rescue by supplying the products within a mere hour.''',
-                  press: () {}),
+                 ),
             ],
           ),
       ],
@@ -67,11 +67,11 @@ class CategoryCard extends StatefulWidget {
     Key? key,
     required this.image,
     required this.title,
-    required this.press,
+
     required this.description,
   }) : super(key: key);
   final String image, title, description;
-  final VoidCallback press;
+
   @override
   State<CategoryCard> createState() => _CategoryCardState();
 }
@@ -84,7 +84,6 @@ class _CategoryCardState extends State<CategoryCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: InkWell(
-        onTap: widget.press,
         onHover: (value) {
           setState(() {
             isHover = value;
@@ -130,13 +129,7 @@ class _CategoryCardState extends State<CategoryCard> {
               const SizedBox(
                 height: 15,
               ),
-              CustomButton(
-                label: 'See details',
-                onPressed: () {
-                  // Handle button press here
-                  print('Button Pressed');
-                },
-              ),
+
             ],
           ),
         ),

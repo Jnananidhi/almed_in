@@ -91,6 +91,7 @@ class SliderCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       color: kWhiteColor,
+      width: kMaxWidth,
       child: Row(
         children: [
           Expanded(
@@ -99,7 +100,7 @@ class SliderCard extends StatelessWidget {
               Image.asset(
                 image,
                 height: _size.width >= 500 ? 400 : 200,
-                width: _size.width >= 500 ? 1200 : 200,
+                width: _size.width >= 500 ? 1200 : 600,
                 fit: BoxFit.fill,
               ),
             ],
