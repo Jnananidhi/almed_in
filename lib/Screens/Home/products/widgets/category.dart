@@ -80,6 +80,7 @@ class _CateegoryState extends State<Cateegory> {
     ),
 
     if (showAllItems)
+    if( MediaQuery.of(context).size.width > 600)
     Container(
       padding: EdgeInsets.all(8.0),
           height: contact.length/0.1, // Fixed height for the additional items grid
@@ -109,6 +110,37 @@ class _CateegoryState extends State<Cateegory> {
               },
             ),
           ),
+      if (showAllItems)
+      if( MediaQuery.of(context).size.width < 600)
+        Container(
+          padding: EdgeInsets.all(8.0),
+          height: crossAxisCount*contact.length/0.1, // Fixed height for the additional items grid
+          child: ListView.builder(
+            scrollDirection: Axis.vertical, // Display items vertically
+            itemCount: (contact.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+            itemBuilder: (context, rowIndex) {
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                children: [
+                  for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                    if (i < contact.length)
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.topCenter, // Align each card to the top
+                          child: CategoryCard(
+                            title: contact[i]['Company'],
+                            press: () {
+                              // Handle card tap action here
+                            },
+                          ),
+                        ),
+                      ),
+
+                ],
+              );
+            },
+          ),
+        ),
         ElevatedButton(
           onPressed: toggleShowAllItems,
           child: Text(showAllItems ? "Hide" : "View More"),
@@ -196,8 +228,11 @@ class CategoryCard extends StatefulWidget {
 class _CategoryCardState extends State<CategoryCard> {
   bool isHovered = false;
 
+
   @override
+
   Widget build(BuildContext context) {
+
     Size _size = MediaQuery.of(context).size;
     return MouseRegion(
       onEnter: (_) {
@@ -210,6 +245,13 @@ class _CategoryCardState extends State<CategoryCard> {
           isHovered = false;
         });
       },
+      child:  AnimatedDefaultTextStyle(
+        duration: Duration(milliseconds: 300),
+        style: TextStyle(
+        fontSize: isHovered ? 20.0 : 16.0,
+        fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+        color: isHovered ? Colors.blue : Colors.black,),
+
       child: InkWell(
         onTap: widget.press,
         child: Container(
@@ -233,12 +275,12 @@ class _CategoryCardState extends State<CategoryCard> {
           child: Column(
             children: [
               // Add any widgets you want to display within the card, e.g., Text
-              Text(widget.title,style:TextStyle(fontSize: 20)),
+              Text(widget.title,),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }
 
