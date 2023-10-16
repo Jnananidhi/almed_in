@@ -47,7 +47,7 @@ class _ExpandableCardState extends State<ExpandableCard> {
             widget.question,
             style: const TextStyle(
               fontSize: 20,
-              fontFamily:'DMSans SemiBold' ,
+              fontFamily:'DMSans Bold' ,
               color: Colors.black,
             ),
           ),

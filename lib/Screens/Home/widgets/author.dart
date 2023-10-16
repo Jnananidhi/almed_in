@@ -123,7 +123,7 @@ class _CategoryCardState extends State<CategoryCard> {
                  padding: const EdgeInsets.all(8.0),
                  child: Text(
                     widget.description,textAlign: TextAlign.justify,
-                    style: const TextStyle(fontSize: 16,fontFamily: 'DMSans-Regular'),
+                    style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular'),
                   ),
                ),
               const SizedBox(

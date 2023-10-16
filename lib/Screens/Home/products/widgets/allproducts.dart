@@ -30,9 +30,11 @@ class _AllBrandsProductState extends State<AllBrandsProduct> {
                 labelColor: kPrimaryColor,
                 indicatorWeight: 2.0,
                 unselectedLabelStyle: TextStyle(
+                  fontFamily: 'DMSans Regular',
                   fontSize: _size.width >= 414 ? 18 : 12,
                 ),
                 labelStyle: TextStyle(
+                  fontFamily: 'DMSans Regular',
                   fontSize: _size.width >= 414 ? 18 : 12,
                   fontWeight: FontWeight.bold,
                 ),

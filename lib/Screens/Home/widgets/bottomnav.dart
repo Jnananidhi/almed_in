@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
@@ -33,7 +34,12 @@ class BottomNav extends StatelessWidget {
                     ),
                     ),
                     CustomButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  const LoginPage()),
+                        );
+                      },
                       label: 'Login',
                     ),
                     const SizedBox(
