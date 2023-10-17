@@ -1,4 +1,5 @@
 
+import 'package:almed_in/Screens/Home/Authentication/forgot1.dart';
 import 'package:almed_in/Screens/Home/Authentication/register_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
@@ -155,7 +156,6 @@ class _BodyState extends State<Body> {
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: 'Password',
-            counterText: 'Forgot password?',
             suffixIcon: InkWell(
               onTap: togglePasswordVisibility,
               child: Icon(
@@ -178,6 +178,21 @@ class _BodyState extends State<Body> {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
+        ),
+        TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => forgot1()),
+          );
+        },
+        child: Text(
+        'Forgot Password?',textAlign: TextAlign.right,
+        style: TextStyle(
+        color: Colors.blue,
+        decoration: TextDecoration.underline,
+        ),
+        ),
         ),
         const SizedBox(height: 40),
         Container(

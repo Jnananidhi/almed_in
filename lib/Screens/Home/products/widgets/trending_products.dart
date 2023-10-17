@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/model/trending_model.dart';
@@ -147,7 +148,12 @@ class _TrendingProductsState extends State<TrendingProducts> {
                                 borderRadius: BorderRadius.circular(50)),
                             color: kSecondaryColor,
                             height: 40,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  ProductListScreen()),
+                              );
+                            },
                             child: const Text(
                               "Shop Now",
                               style: TextStyle(color: kWhiteColor),
