@@ -137,6 +137,12 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
               ),
             ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
           onPressed: toggleShowAllItems,
           child: Text(showAllItems ? "Hide" : "View More"),
         ),

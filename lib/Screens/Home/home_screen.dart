@@ -1,5 +1,6 @@
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/allproducts.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/banner.dart';
@@ -113,9 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-
-
                   HeroBanner(),
+
                   ProductSection(),
                   BottomNav()
                   //now we will make our site responsive

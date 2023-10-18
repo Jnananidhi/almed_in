@@ -142,6 +142,12 @@ class _CateegoryState extends State<Cateegory> {
           ),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kPrimaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
           onPressed: toggleShowAllItems,
           child: Text(showAllItems ? "Hide" : "View More"),
         ),
@@ -250,7 +256,7 @@ class _CategoryCardState extends State<CategoryCard> {
         style: TextStyle(
         fontSize: isHovered ? 20.0 : 16.0,
         fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-        color: isHovered ? Colors.blue : Colors.black,),
+        color: isHovered ? kPrimaryColor : Colors.black,),
 
       child: InkWell(
         onTap: widget.press,
