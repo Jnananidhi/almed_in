@@ -1,51 +1,20 @@
-
+import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../widgets/menu.dart';
 
-class Productt {
-  final String id;
-  final String name;
-  final String quantity;
-  final String imageUrl;
-  final String mrp;
-  final String discount;
+class ProductScreen extends StatefulWidget {
 
-  Productt({
-    required this.id,
-    required this.name,
-    required this.quantity,
-    required this.imageUrl,
-    required this.mrp,
-    required this.discount,
-  });
-
-  factory Productt.fromJson(Map<String, dynamic> json) {
-    return Productt(
-      id: json['id'],
-      name: json['name'],
-      quantity: json['quantity'],
-      imageUrl: json['image_url'],
-      mrp: json['mrp'],
-      discount: json['discount'],
-    );
-  }
-}
-
-class ProductListScreen extends StatefulWidget {
-  final String? selectedProductName;
-
-  ProductListScreen({this.selectedProductName});
 
   @override
-  _ProductListScreenState createState() => _ProductListScreenState();
+  ProductScreenState createState() => ProductScreenState();
 }
-
-class _ProductListScreenState extends State<ProductListScreen> {
+class ProductScreenState extends State<ProductScreen> {
   List<Productt> products = [];
 
   @override
@@ -60,12 +29,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
-      if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
-        // Filter the products list based on the selected product name
-        productsData = productsData.where((product) =>
-        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
-        ).toList();
-      }
       setState(() {
         products = productsData;
       });
@@ -85,12 +48,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
         children: [
           Navigation(), // Display the custom Navigation widget again, if needed
           Expanded(
-            child: ListView.builder(
+            child:StaggeredGridView.countBuilder(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              crossAxisCount: 4,
               itemCount: products.length,
               itemBuilder: (context, index) {
                 final product = products[index];
-                return ProductListItem(product);
+                return ProductItem(product);
               },
+              staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
             ),
           ),
         ],
@@ -98,11 +67,4 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 }
-
-
-
-
-
-
-
 

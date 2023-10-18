@@ -4,6 +4,8 @@ import 'package:almed_in/constants.dart';
 import 'package:almed_in/model/trending_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import '../product.dart';
+
 class TrendingProductCard extends StatelessWidget {
   const TrendingProductCard({
     Key? key,
@@ -151,7 +153,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>  ProductListScreen()),
+                                MaterialPageRoute(builder: (context) =>  ProductScreen()),
                               );
                             },
                             child: const Text(
