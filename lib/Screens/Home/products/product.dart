@@ -29,6 +29,7 @@ class ProductScreenState extends State<ProductScreen> {
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
+      print(productsData);
       setState(() {
         products = productsData;
       });

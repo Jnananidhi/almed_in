@@ -90,6 +90,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               itemBuilder: (context, index) {
                 final product = products[index];
                 return ProductListItem(product);
+
               },
             ),
           ),
