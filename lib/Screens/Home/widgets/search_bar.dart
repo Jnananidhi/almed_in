@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:almed_in/Screens/Home/faq_screen.dart';
-import 'package:almed_in/Screens/Home/home_screen.dart';
-import 'package:almed_in/Screens/Home/contact_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
-import 'package:almed_in/responsive.dart';
 import 'package:http/http.dart' as http;
+
+import '../products/product_listing.dart';
+import 'package:universal_html/html.dart' as html;
 
 class Search_bar extends StatefulWidget  {
   const Search_bar({
@@ -23,6 +23,12 @@ class _Search_barState extends State<Search_bar> {
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
 
+  void clearSearchSuggestions() {
+    searchSuggestions.clear();
+    searchcontroller.clear(); // Clear the text in the search box
+    setState(() {});
+  }
+
   void searchContacts(String searchTerm) {
     // Clear the previous search suggestions
     searchSuggestions.clear();
@@ -38,12 +44,12 @@ class _Search_barState extends State<Search_bar> {
 
     // Filter the contacts based on the search term
     for (var item in contact) {
-      String name = item['Name'].toString().toLowerCase();
+      String name = item['pname'].toString().toLowerCase();
 
       // Check for matches with each individual word
       for (var word in searchWords) {
         if (name.contains(word)) {
-          searchSuggestions.add(item['Name'].toString());
+          searchSuggestions.add(item['pname'].toString());
           break; // Break the loop if a match is found for this item
         }
       }
@@ -57,7 +63,7 @@ class _Search_barState extends State<Search_bar> {
 
 
   Future getAllcategory() async {
-    var url = "${api}almed_company.php";
+    var url = "${api}product.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -78,8 +84,17 @@ class _Search_barState extends State<Search_bar> {
   @override
   void initState() {
     getAllcategory();
+    html.window.onClick.listen((event) {
+      final clickedElement = event.target;
+
+      // Check if the clicked element is not a child of the search box.
+      if (clickedElement != searchcontroller) {
+        clearSearchSuggestions();
+      }
+    });
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,30 +105,52 @@ class _Search_barState extends State<Search_bar> {
     child: Column(
           children: [
       Container(
-
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: TextField(
-          controller: searchcontroller,
-          onChanged: (searchTerm) {
-            setState(() {
-              searchContacts(searchTerm);
-            });
-          },
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFF00AFBB)),
-            ),
-            prefixIcon: Icon(
-              Icons.search,
-              color: Theme
-                  .of(context)
-                  .primaryColor,
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: TextField(
+            controller: searchcontroller,
+            onSubmitted: (searchTerm) {
+              // Perform navigation to the product screen with the search term
+              if (searchTerm.isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                  ),
+                );
+              }
+            },
+            onChanged: (searchTerm) {
+              setState(() {
+                searchContacts(searchTerm);
+              });
+            },
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF00AFBB)),
+              ),
+              suffixIcon: InkWell(
+                onTap: () {
+                  // Perform navigation to the product screen with the search term
+                  String searchTerm = searchcontroller.text;
+                  if (searchTerm.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                      ),
+                    );
+                  }
+                },
+                child: Icon(
+                  Icons.search,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
             ),
           ),
         ),
       ),
-    ),
 
     if (searchSuggestions.isNotEmpty)
     Container(
@@ -133,7 +170,11 @@ class _Search_barState extends State<Search_bar> {
                         // You can perform an action when a suggestion is tapped
                         // For example, fill the search input with the suggestion
                         searchcontroller.text = suggestion;
-                        // Perform your search action here
+                        String selectedProductName = suggestion;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  ProductListScreen(selectedProductName: selectedProductName),),
+                        );
                     },
                     );
                 }).toList(),

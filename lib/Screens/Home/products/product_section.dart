@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:almed_in/Screens/Home/products/widgets/headphone_product.dart';
-import 'package:almed_in/Screens/Home/products/widgets/samsung_products.dart';
 import 'package:almed_in/Screens/Home/widgets/author.dart';
-import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
-import 'package:almed_in/model/trending_model.dart';
 import 'package:almed_in/responsive.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import 'widgets/allproducts.dart';
 import 'widgets/category.dart';
-import 'widgets/iphone_products.dart';
 import 'widgets/trending_products.dart';
 
 class ProductSection extends StatelessWidget {

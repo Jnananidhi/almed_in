@@ -35,6 +35,10 @@ class Productt {
 }
 
 class ProductListScreen extends StatefulWidget {
+  final String? selectedProductName;
+
+  ProductListScreen({this.selectedProductName});
+
   @override
   _ProductListScreenState createState() => _ProductListScreenState();
 }
@@ -48,11 +52,18 @@ class _ProductListScreenState extends State<ProductListScreen> {
     fetchProducts();
   }
 
+
   Future<void> fetchProducts() async {
     final response = await http.get(Uri.parse('${api}getProducts.php'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
+      if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
+        // Filter the products list based on the selected product name
+        productsData = productsData.where((product) =>
+        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
+        ).toList();
+      }
       setState(() {
         products = productsData;
       });
@@ -61,6 +72,8 @@ class _ProductListScreenState extends State<ProductListScreen> {
       print('Failed to load products');
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,5 +91,11 @@ class _ProductListScreenState extends State<ProductListScreen> {
     );
   }
 }
+
+
+
+
+
+
 
 

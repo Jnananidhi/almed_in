@@ -8,134 +8,209 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class DatabaseDataCard extends StatelessWidget {
-  Future<List<Map<String, dynamic>>?> fetchDataFromDatabase() async {
-    try {
-      var url = "${api}almed_company.php";
-      var response = await http.post(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final List<dynamic> data = json.decode(response.body);
-        return data.cast<Map<String, dynamic>>();
-      } else {
-        throw Exception('Failed to load data from the database');
-      }
-    } catch (e) {
-      print('Error: $e');
-      return null; // Return null in case of an error
+class DatabaseDataCard extends StatefulWidget {
+
+  const DatabaseDataCard({
+    Key? key,
+  }) : super(key: key);
+  @override
+  State<DatabaseDataCard> createState() => _DatabaseDataCardState();
+}
+
+class _DatabaseDataCardState extends State<DatabaseDataCard> {
+  bool isHover = false;
+  List therapeautic = [];
+  bool showAllItems = false;
+
+  Future getAllcategory() async {
+    var url = "${api}therapeautic.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        therapeautic = jsonData;
+      });
     }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return therapeautic;
+  }
+
+  @override
+  void initState() {
+    getAllcategory();
+    super.initState();
+  }
+
+  void toggleShowAllItems() {
+    setState(() {
+      showAllItems = !showAllItems;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, dynamic>>?>(
-      future: fetchDataFromDatabase(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator(); // Loading indicator
-        } else if (snapshot.hasError || snapshot.data == null) {
-          return Text('Error: Failed to load data from the database');
-        } else if (snapshot.hasData) {
-          final List<Map<String, dynamic>> databaseData = snapshot.data!;
-          return GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // Display four items in a row
-            ),
-            itemCount: databaseData.length,
-            itemBuilder: (BuildContext context, int index) {
-              return DatabaseDataItem(
-                data: databaseData[index]['Company'], // Display the 'name' field
-              );
+    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
+    return Column(
+      children: [
 
-            },
-          );
-        } else {
-          return Text('No data available');
-        }
-      },
+        Container(
+            decoration: BoxDecoration(
+                boxShadow: [if (isHover) kDefaultShadow]),
+            child:
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (var item in therapeautic.take(crossAxisCount))
+                      DatabaseDataItem(
+                        title:  item['therapeautic'],
+                        press: (){},
+
+                      ),
+                  ],
+                ),
+              ),
+            ),
+
+        if (showAllItems)
+          if( MediaQuery.of(context).size.width > 600)
+            Container(
+              padding: EdgeInsets.all(8.0),
+              height: therapeautic.length/0.1, // Fixed height for the additional items grid
+              child: ListView.builder(
+                scrollDirection: Axis.vertical, // Display items vertically
+                itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemBuilder: (context, rowIndex) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                    children: [
+                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                        if (i < therapeautic.length)
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topCenter, // Align each card to the top
+                              child: DatabaseDataItem(
+                                title: therapeautic[i]['therapeautic'],
+                                press: (){},
+
+                              ),
+                            ),
+                          ),
+
+                    ],
+                  );
+                },
+              ),
+            ),
+        if (showAllItems)
+          if( MediaQuery.of(context).size.width < 600)
+            Container(
+              padding: EdgeInsets.all(8.0),
+              height: crossAxisCount*therapeautic.length/0.1, // Fixed height for the additional items grid
+              child: ListView.builder(
+                scrollDirection: Axis.vertical, // Display items vertically
+                itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemBuilder: (context, rowIndex) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                    children: [
+                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                        if (i < therapeautic.length)
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topCenter, // Align each card to the top
+                              child: DatabaseDataItem(
+                                title: therapeautic[i]['therapeautic'],
+                                press: (){},
+                              ),
+                            ),
+                          ),
+
+                    ],
+                  );
+                },
+              ),
+            ),
+        ElevatedButton(
+          onPressed: toggleShowAllItems,
+          child: Text(showAllItems ? "Hide" : "View More"),
+        ),
+      ],
     );
   }
 }
 
-
 class DatabaseDataItem extends StatefulWidget {
-  final String data;
+  final String title;
+  final Function() press;
 
-  DatabaseDataItem({required this.data});
+  DatabaseDataItem({required this.title, required this.press});
 
   @override
   _DatabaseDataItemState createState() => _DatabaseDataItemState();
 }
 
 class _DatabaseDataItemState extends State<DatabaseDataItem> {
+
   bool isHovered = false;
 
 
   @override
+
   Widget build(BuildContext context) {
 
+    Size _size = MediaQuery.of(context).size;
     return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: Container(
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey, width: 1),
-          boxShadow: isHovered
-              ? [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 3),
-            ),
-          ]
-              : [], // Apply shadow on hover
-        ),
-        child: Stack(
-            fit: StackFit.passthrough,
-            children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              widget.data,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 10),
+        onEnter: (_) {
+          setState(() {
+            isHovered = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isHovered = false;
+          });
+        },
+        child:  AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 300),
+          style: TextStyle(
+            fontSize: isHovered ? 20.0 : 16.0,
+            fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+            color: isHovered ? Colors.blue : Colors.black,),
 
-          ],
-        ),
+          child: InkWell(
+            onTap: widget.press,
+            child: Container(
+              width: _size.width <= 770
+                  ? _size.width
+                  : _size.width >= 975
+                  ? 300
+                  : 200,
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+              ),
 
-        isHovered
-            ? Container(
-          color: Colors.black12,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MaterialButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50)),
-                color: kSecondaryColor,
-                height: 40,
-                onPressed: () {},
-                child: const Text(
-                  "View",
-                  style: TextStyle(color: kWhiteColor),
+              decoration: BoxDecoration(
+                color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
+                boxShadow: [if (isHovered) kDefaultShadow],
+                border: Border.all(
+                  color: kgreyColor, // Set the border color to grey
+                  width: 3.0,       // Set the border width
                 ),
               ),
-            ],
+              child: Column(
+                children: [
+                  // Add any widgets you want to display within the card, e.g., Text
+                  Text(widget.title,),
+                ],
+              ),
+            ),
           ),
-        ) : Container(),
-    ])));
+        ));
   }
 }

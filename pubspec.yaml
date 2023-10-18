@@ -42,6 +42,7 @@ dependencies:
   http:
   expansion_tile_card: ^3.0.0
   email_otp: ^2.0.1
+  universal_html: ^2.0.0
 
 
 

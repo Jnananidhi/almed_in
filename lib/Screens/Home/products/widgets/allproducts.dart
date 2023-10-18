@@ -1,8 +1,10 @@
+import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
 import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 
+import 'form.dart';
 import 'headphone_product.dart';
 import 'iphone_products.dart';
 import 'samsung_products.dart';
@@ -60,11 +62,11 @@ class _AllBrandsProductState extends State<AllBrandsProduct> {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: SamsungProductCard(),
+                      child:StrengthCard(),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: HeadPhoneProductCard(),
+                      child:FormCard(),
                     ),
                   ],
                 ),
