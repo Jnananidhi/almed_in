@@ -20,6 +20,11 @@ class Search_bar extends StatefulWidget  {
 }
 class _Search_barState extends State<Search_bar> {
   List contact = [];
+  List strength = [];
+  List therapeautic = [];
+  List form = [];
+  List product = [];
+  List company = [];
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
 
@@ -55,6 +60,67 @@ class _Search_barState extends State<Search_bar> {
       }
     }
 
+    // Filter the 'strength' list based on the search term
+    for (var item in strength) {
+      String name = item['STRENGTH'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['STRENGTH'].toString());
+          break; // Break the loop if a match is found for this item
+        }
+      }
+    }
+
+    // Filter the 'strength' list based on the search term
+    for (var item in therapeautic) {
+      String name = item['therapeautic'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['therapeautic'].toString());
+          break; // Break the loop if a match is found for this item
+        }
+      }
+    }
+
+    // Filter the 'strength' list based on the search term
+    for (var item in form) {
+      String name = item['FORM'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['FORM'].toString());
+          break; // Break the loop if a match is found for this item
+        }
+      }
+    }
+    for (var item in product) {
+      String name = item['Name'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['Name'].toString());
+          break; // Break the loop if a match is found for this item
+        }
+      }
+    }
+    for (var item in company) {
+      String name = item['Company'].toString().toLowerCase();
+
+      // Check for matches with each individual word
+      for (var word in searchWords) {
+        if (name.contains(word)) {
+          searchSuggestions.add(item['Company'].toString());
+          break; // Break the loop if a match is found for this item
+        }
+      }
+    }
+
     setState(() {
       // You can perform any UI updates here
     });
@@ -80,10 +146,102 @@ class _Search_barState extends State<Search_bar> {
     print('hello');
     return contact;
   }
+  Future getstrength() async {
+    var url = "${api}STRENGTH.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        strength = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return strength;
+  }
+  Future gettherapeautic() async {
+    var url = "${api}therapeautic.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        therapeautic = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return therapeautic;
+  }
+  Future getform() async {
+    var url = "${api}FORM.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        form = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return form;
+  }
+
+  Future getproduct_name() async {
+    var url = "${api}product_name.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        product = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return product;
+  }
+
+  Future getcompany() async {
+    var url = "${api}product_name.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        company = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return company;
+  }
 
   @override
   void initState() {
     getAllcategory();
+    getstrength();
+    gettherapeautic();
+    getform();
+    getproduct_name();
+    getcompany();
     html.window.onClick.listen((event) {
       final clickedElement = event.target;
 
