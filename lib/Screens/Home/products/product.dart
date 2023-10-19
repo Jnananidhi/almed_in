@@ -46,7 +46,8 @@ class ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Navigation(), // Display the custom Navigation widget if needed
+          Navigation(),
+          // Display the custom Navigation widget if needed
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {

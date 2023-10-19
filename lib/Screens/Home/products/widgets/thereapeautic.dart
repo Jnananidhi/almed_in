@@ -59,6 +59,7 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
       children: [
 
         Container(
+          padding: EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
                 boxShadow: [if (isHover) kDefaultShadow]),
             child:
@@ -187,7 +188,7 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
           style: TextStyle(
             fontSize: isHovered ? 20.0 : 16.0,
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-            color: isHovered ? Colors.blue : Colors.black,),
+            color: isHovered ? kPrimaryColor : Colors.black,),
 
           child: InkWell(
             onTap: widget.press,

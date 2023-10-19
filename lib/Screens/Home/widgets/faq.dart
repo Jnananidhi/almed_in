@@ -30,11 +30,11 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "Why alternate medicines?",
-                   description: '''Non availability \n High cost \n Assured quality \n Overcome the competition ''',
+                   description: '''Non availability \nHigh cost \nAssured quality \nOvercome the competition ''',
                    press: () {}),
                ExpandableCard(
                    question: "How can I order in almed.in?",
-                   description: ''' Visit our website aimed in\nRegister (first time only)\nblace the order by searching molecule names.\nMake payment or select cash on delivery option.\n(You will get medicines within one hour''',
+                   description: '''Visit our website aimed in\nRegister (first time only)\nblace the order by searching molecule names.\nMake payment or select cash on delivery option.\n(You will get medicines within one hour''',
                    press: () {}),
                ExpandableCard(
                    question: "What is the self-ife of the medicines you supply?",
@@ -42,7 +42,7 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "How do | cancel my order?",
-                   description: ''' You can cancel the order before or at the time of delivery. If Payment is made for such orders, refund will be processed to the payment source, if the order amount paid online''',
+                   description: '''You can cancel the order before or at the time of delivery. If Payment is made for such orders, refund will be processed to the payment source, if the order amount paid online''',
                    press: () {}),
                ExpandableCard(
                    question: "Where we serve?",
@@ -54,11 +54,11 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "How almed in products are chosen to list?",
-                   description: ''' We are giving you best quality product with minimum rate\nWe are giving least possible MRP product\nWe are giving least possible rate product of GMP manufacturing.''',
+                   description: '''We are giving you best quality product with minimum rate\nWe are giving least possible MRP product\nWe are giving least possible rate product of GMP manufacturing.''',
                    press: () {}),
                ExpandableCard(
                    question: "Do you refund for unsold or expiry products ?",
-                   description: ''' Mostly No. But in some cases, if the company gives us a refund, we will refund as per norms.''',
+                   description: '''Mostly No. But in some cases, if the company gives us a refund, we will refund as per norms.''',
                    press: () {}),
 
 

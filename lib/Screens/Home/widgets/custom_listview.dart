@@ -22,8 +22,8 @@ class ProductListItem extends StatelessWidget {
         contentPadding: EdgeInsets.all(10),
         leading: Image.network(
           product.imageUrl,
-          width: 80,
-          height: 80,
+          width: 200,
+          height: 200,
         ),
         title: Text(
           product.name,

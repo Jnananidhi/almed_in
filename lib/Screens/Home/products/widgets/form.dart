@@ -57,8 +57,8 @@ class _FormCardState extends State<FormCard> {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
     return Column(
       children: [
-
         Container(
+          padding: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
               boxShadow: [if (isHover) kDefaultShadow]),
           child:
@@ -187,7 +187,7 @@ class _FormDataItemState extends State<FormDataItem> {
           style: TextStyle(
             fontSize: isHovered ? 20.0 : 16.0,
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-            color: isHovered ? Colors.blue : Colors.black,),
+            color: isHovered ? kPrimaryColor : Colors.black,),
 
           child: InkWell(
             onTap: widget.press,
@@ -198,7 +198,7 @@ class _FormDataItemState extends State<FormDataItem> {
                   ? 300
                   : 200,
               padding: const EdgeInsets.symmetric(
-                vertical: 10,
+                vertical: 10
               ),
 
               decoration: BoxDecoration(

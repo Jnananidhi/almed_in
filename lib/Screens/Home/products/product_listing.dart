@@ -80,7 +80,6 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column( // Use a Column to stack the Navigation widget and the ListView.builder
         children: [
           Navigation(), // Display the custom Navigation widget again, if needed
