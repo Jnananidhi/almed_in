@@ -35,7 +35,6 @@ class LoginPage extends StatelessWidget {
         child: Column(
             children: [
         const Navigation(),
-        const Search_bar(),
         Responsive.isMobile(context)?MobileBody(): Body(),
           const BottomNav()
             ],),),

@@ -15,7 +15,7 @@ class ProductListItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), // Adjust the value for the desired border curvature
+        borderRadius: BorderRadius.circular(5), // Adjust the value for the desired border curvature
       ),
       margin: EdgeInsets.all(10),
       child: ListTile(
@@ -74,6 +74,14 @@ class ProductItemState extends State<ProductItem> {
   bool isHover = false;
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final widthPercentage = 0.3; // 30% of the screen width
+    final heightPercentage = 0.4; // 20% of the screen height
+
+    final containerWidth = screenWidth * widthPercentage;
+    final containerHeight = screenHeight * heightPercentage;
     return InkWell(
       onTap: (){},
       onHover: (value) {
@@ -83,8 +91,8 @@ class ProductItemState extends State<ProductItem> {
       },
       child: AnimatedContainer(
         duration: kDefaultDuration,
-        width: 300,
-        height: 250,
+        width: containerWidth,
+        height: containerHeight,
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: kgreyColor, width: 3),
