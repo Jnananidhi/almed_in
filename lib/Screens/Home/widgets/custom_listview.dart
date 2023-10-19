@@ -152,7 +152,7 @@ class ProductItemState extends State<ProductItem> {
                       height: 40,
                       onPressed: () {},
                       child: const Text(
-                        "Quick View",
+                        "Add to Cart",
                         style: TextStyle(color: kWhiteColor),
                       ),
                     ),
@@ -166,7 +166,7 @@ class ProductItemState extends State<ProductItem> {
                       height: 40,
                       onPressed: () {},
                       child: const Text(
-                        "Shop Now",
+                        "Buy Now",
                         style: TextStyle(color: kWhiteColor),
                       ),
                     ),
