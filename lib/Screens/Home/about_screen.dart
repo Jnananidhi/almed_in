@@ -102,7 +102,7 @@ class _AboutScreenState extends State<AboutScreen> {
                         Container(
                           padding: const EdgeInsets.all(20),
                           child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
+
                             children: <Widget>[
                               SizedBox(height: 20),
                               Text(
@@ -112,18 +112,23 @@ class _AboutScreenState extends State<AboutScreen> {
                               SizedBox(height: 20),
                               Text(
                                 aboutus,textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: 16,),
+                                style: TextStyle(fontSize: 16, height: 2,),
                               ),
                               SizedBox(height: 20),
                               Text(
                                 'Contact Us:',
+                                textAlign: TextAlign.right,
                                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
+                              SizedBox(height: 20),
                               Text(
+                                textAlign: TextAlign.right,
                                 'Email: contact@example.com',
                                 style: TextStyle(fontSize: 16),
                               ),
+                              SizedBox(height: 20),
                               Text(
+                                textAlign: TextAlign.right,
                                 'Phone: +1 (123) 456-7890',
                                 style: TextStyle(fontSize: 16),
                               ),

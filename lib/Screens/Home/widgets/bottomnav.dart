@@ -57,6 +57,8 @@ class BottomNav extends StatelessWidget {
               "The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.",
               textAlign: TextAlign.center,
               style: TextStyle(
+                height: 1.5,
+                color: Colors.white,
                 fontFamily: 'DMSans Regular' ,
                 fontSize: _size.width >= 370 ? 15 : 10,
               ),

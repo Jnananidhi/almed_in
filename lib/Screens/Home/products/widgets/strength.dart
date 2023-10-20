@@ -193,6 +193,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
           child: InkWell(
             onTap: widget.press,
             child: Container(
+
               width: _size.width <= 770
                   ? _size.width
                   : _size.width >= 975
@@ -203,6 +204,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
               ),
 
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
                 color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
                 boxShadow: [if (isHovered) kDefaultShadow],
                 border: Border.all(

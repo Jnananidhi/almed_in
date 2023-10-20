@@ -202,6 +202,7 @@ class _FormDataItemState extends State<FormDataItem> {
               ),
 
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
                 color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
                 boxShadow: [if (isHovered) kDefaultShadow],
                 border: Border.all(

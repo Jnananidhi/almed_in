@@ -258,61 +258,75 @@ class _Search_barState extends State<Search_bar> {
   Widget build(BuildContext context) {
     return  Container(
         constraints: const BoxConstraints(
-        maxWidth: kMaxWidth,
+        maxWidth: kMaxWidth/1.5,
     ),
     child: Column(
           children: [
-      Container(
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: TextField(
-            controller: searchcontroller,
-            onSubmitted: (searchTerm) {
-              // Perform navigation to the product screen with the search term
-              if (searchTerm.isNotEmpty) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProductListScreen(selectedProductName: searchTerm),
-                  ),
-                );
-              }
-            },
-            onChanged: (searchTerm) {
-              setState(() {
-                searchContacts(searchTerm);
-              });
-            },
-            decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFF00AFBB)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0), // Adjust the value as needed
+                border: Border.all(
+                  color: Color(0xFF00AFBB),
+                ),
               ),
-              suffixIcon: InkWell(
-                onTap: () {
-                  // Perform navigation to the product screen with the search term
-                  String searchTerm = searchcontroller.text;
-                  if (searchTerm.isNotEmpty) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: TextField(
+                  controller: searchcontroller,
+                  onSubmitted: (searchTerm) {
+                    // Perform navigation to the product screen with the search term
+                    if (searchTerm.isNotEmpty) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                        ),
+                      );
+                    }
+                  },
+                  onChanged: (searchTerm) {
+                    setState(() {
+                      searchContacts(searchTerm);
+                    });
+                  },
+                  decoration: InputDecoration(
+                    hintText: "Search Content Here..",
+                    border: InputBorder.none, // Remove the default border
+                    suffixIcon: InkWell(
+
+                      child:ElevatedButton(
+                        child: Container(
+                            width: kMaxWidth/15.5,
+                            child: const Center(child: Text("Search"))),
+                        onPressed: (){
+                          // Perform navigation to the product screen with the search term
+                          String searchTerm = searchcontroller.text;
+                          if (searchTerm.isNotEmpty) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                              ),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: kWhiteColor, backgroundColor: Color(0xFF00AFBB),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
                       ),
-                    );
-                  }
-                },
-                child: Icon(
-                  Icons.search,
-                  color: Theme.of(context).primaryColor,
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
 
     if (searchSuggestions.isNotEmpty)
     Container(
+       width: kMaxWidth/1.5,
         color: kgreyColor,
         constraints: const BoxConstraints(
         maxWidth: kMaxWidth,

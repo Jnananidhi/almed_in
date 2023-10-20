@@ -107,21 +107,27 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        body:const Column(children: <Widget>[
-          Navigation(),
-          Search_bar(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  HeroBanner(),
+        body:Stack(
+          children: [const Column(children: <Widget>[
+            Navigation(),
+        Positioned(
+            top: 0, // adjust top position as needed
+            left: 0, // adjust left position as needed
+            child:
+            Search_bar(),),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HeroBanner(),
 
-                  ProductSection(),
-                  BottomNav()
-                  //now we will make our site responsive
-                ],
+                    ProductSection(),
+                    BottomNav()
+                    //now we will make our site responsive
+                  ],
+                ),
               ),
-            ),
-          )]));
+            )]),
+        ]));
   }
 }
