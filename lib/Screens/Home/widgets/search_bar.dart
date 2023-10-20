@@ -263,8 +263,10 @@ class _Search_barState extends State<Search_bar> {
     child: Column(
           children: [
             Container(
+
               padding: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20.0), // Adjust the value as needed
                 border: Border.all(
                   color: Color(0xFF00AFBB),
@@ -292,12 +294,16 @@ class _Search_barState extends State<Search_bar> {
                   },
                   decoration: InputDecoration(
                     hintText: "Search Content Here..",
-                    border: InputBorder.none, // Remove the default border
+                    border: InputBorder.none,
+                    // Remove the default border
+                    prefixIcon: Icon(Icons.search),
                     suffixIcon: InkWell(
 
                       child:ElevatedButton(
                         child: Container(
-                            width: kMaxWidth/15.5,
+                            width:  MediaQuery.of(context).size.width < 600
+                                ?  kMaxWidth/25.5// Adjust the value for mobile view
+                                :  kMaxWidth/15.5,
                             child: const Center(child: Text("Search"))),
                         onPressed: (){
                           // Perform navigation to the product screen with the search term
@@ -327,7 +333,13 @@ class _Search_barState extends State<Search_bar> {
     if (searchSuggestions.isNotEmpty)
     Container(
        width: kMaxWidth/1.5,
+      decoration: BoxDecoration(
         color: kgreyColor,
+        borderRadius: BorderRadius.circular(20.0), // Adjust the value as needed
+        border: Border.all(
+          color: Color(0xFF00AFBB),
+        ),
+      ),
         constraints: const BoxConstraints(
         maxWidth: kMaxWidth,
           maxHeight: 200,

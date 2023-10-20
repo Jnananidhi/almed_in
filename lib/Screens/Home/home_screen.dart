@@ -133,8 +133,12 @@ class _HomeScreenState extends State<HomeScreen> {
           // Add the Search_bar here to make it overlap other elements
           Positioned(
             top: 100,
-            left: MediaQuery.of(context).size.width * 0.25, // Adjust as needed
-            right: MediaQuery.of(context).size.width * 0.25,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
             child: Search_bar(),
           ),
         ],

@@ -91,7 +91,7 @@ class _NavigationState extends State<Navigation> {
                       if (Responsive.isDesktop(context)) const WebMenu(),
                       const Spacer(),
 
-
+                    // shoppic_cart icn badge
                       Consumer<CartProvider>(
                         builder: (context, cart, child) {
                           return GestureDetector(
@@ -109,16 +109,8 @@ class _NavigationState extends State<Navigation> {
                       ),
 
 
-                      // IconButton(
-                      //   onPressed: () {
-                      //
-                      //   },
-                      //   icon: const Icon(
-                      //     Icons.shopping_cart_outlined,
-                      //     color: kDarkgreyColor,
-                      //     size: 25,
-                      //   ),
-                      // ),
+
+
                       IconButton(
                         onPressed: () {
                           if({Usermanagement.isLoggedIn} == false)
