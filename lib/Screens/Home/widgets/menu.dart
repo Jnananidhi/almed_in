@@ -1,6 +1,8 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
+import 'package:almed_in/Screens/Home/cart_provider.dart';
+import 'package:almed_in/Screens/Home/cart_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
@@ -8,6 +10,10 @@ import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badges;
+
+
 
 
 
@@ -86,17 +92,33 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
 
 
-
-
-                      IconButton(
-                        onPressed: () {
+                      Consumer<CartProvider>(
+                        builder: (context, cart, child) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return CartScreen();
+                              }));
+                            },
+                            child: badges.Badge(
+                              badgeContent: Text(cart.cartItemCount.toString()),
+                              child: Icon(Icons.shopping_cart),
+                            ),
+                          );
                         },
-                        icon: const Icon(
-                          Icons.shopping_cart_outlined,
-                          color: kDarkgreyColor,
-                          size: 25,
-                        ),
                       ),
+
+
+                      // IconButton(
+                      //   onPressed: () {
+                      //
+                      //   },
+                      //   icon: const Icon(
+                      //     Icons.shopping_cart_outlined,
+                      //     color: kDarkgreyColor,
+                      //     size: 25,
+                      //   ),
+                      // ),
                       IconButton(
                         onPressed: () {
                           if({Usermanagement.isLoggedIn} == false)

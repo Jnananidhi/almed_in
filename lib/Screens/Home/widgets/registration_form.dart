@@ -48,6 +48,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   fontSize: 20,
                 ),
               ),
+
               Row(
                   children: [
                     Expanded(
@@ -88,7 +89,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Owner/ In charge/ Doctor Name',
-
                             filled: true,
                             fillColor: kgreyColor,
                             labelStyle: TextStyle(fontSize: 12),

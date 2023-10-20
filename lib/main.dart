@@ -2,9 +2,18 @@ import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:provider/provider.dart';
+
+import 'Screens/Home/cart_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => CartProvider()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

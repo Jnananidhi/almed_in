@@ -1,6 +1,8 @@
 
+import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 
@@ -150,7 +152,9 @@ class ProductItemState extends State<ProductItem> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       height: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<CartProvider>().addToCart(product);
+                      },
                       child: const Text(
                         "Add to Cart",
                         style: TextStyle(color: kWhiteColor),
