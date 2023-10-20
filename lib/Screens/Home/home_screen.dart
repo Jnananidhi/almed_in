@@ -113,6 +113,10 @@ class _HomeScreenState extends State<HomeScreen> {
           const Column(
             children: <Widget>[
               Navigation(),
+              // Divider(
+              //   height: 5, // Set the height of the divider line
+              //   color: Colors.grey, // Set the color of the divider line
+              // ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -128,11 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+
             ],
           ),
           // Add the Search_bar here to make it overlap other elements
           Positioned(
-            top: 100,
+            top: 105,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view
@@ -141,6 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 : MediaQuery.of(context).size.width * 0.25,
             child: Search_bar(),
           ),
+
         ],
       ),
     );
