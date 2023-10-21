@@ -23,19 +23,31 @@ class _HeroBannerState extends State<HeroBanner> {
             items: [
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner3.jpg',
+                  image: 'assets/products/banner/Banner1.png',
                   press: () {}),
               SliderCard(
                   title: 'Mobile',
-                  image: 'assets/products/banner/banner4.jpg',
+                  image: 'assets/products/banner/Banner2.png',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner1.jpg',
+                  image: 'assets/products/banner/Banner3.png',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner4.jpg',
+                  image: 'assets/products/banner/Banner4.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner5.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner6.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner7.png',
                   press: () {}),
             ],
             options: CarouselOptions(
@@ -61,7 +73,7 @@ class _HeroBannerState extends State<HeroBanner> {
                   });
                 })),
         DotsIndicator(
-          dotsCount: 4,
+          dotsCount: 7,
           position: index.toDouble(),
           decorator: DotsDecorator(
             activeColor: kPrimaryColor.withOpacity(0.5),
