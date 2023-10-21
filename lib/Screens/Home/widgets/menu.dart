@@ -13,6 +13,8 @@ import 'package:almed_in/responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 
+import '../products/product.dart';
+
 
 
 
@@ -81,14 +83,16 @@ class _NavigationState extends State<Navigation> {
                                 MaterialPageRoute(builder: (context) =>  const HomeScreen()),
                               );
                             },
-                              child: Image.asset('logo.png',
+                              child: Image.asset(
+                                'logo.png',  // Make sure the path is correct
+                                fit: BoxFit.contain,
                                 height: 80,
-                              ),
+                              )
                           ),
                       ),
 
                       const Spacer(),
-                      if (Responsive.isDesktop(context)) const WebMenu(),
+                      if (Responsive.isDesktop(context))  WebMenu(),
                       const Spacer(),
 
                     // shoppic_cart icn badge
@@ -108,9 +112,9 @@ class _NavigationState extends State<Navigation> {
                         },
                       ),
 
-
-
-
+                    Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child:
                       IconButton(
                         onPressed: () {
                           if({Usermanagement.isLoggedIn} == false)
@@ -132,7 +136,7 @@ class _NavigationState extends State<Navigation> {
                           color: kDarkgreyColor,
                           size: 25,
                         ),
-                      ),
+                      ),),
                     ],
                   ),
                 ),
@@ -145,13 +149,17 @@ class _NavigationState extends State<Navigation> {
 
 
 
-class WebMenu extends StatelessWidget {
-  const WebMenu({
-    Key? key,
-  }) : super(key: key);
+class WebMenu extends StatefulWidget {
+  @override
+  _WebMenuState createState() => _WebMenuState();
+}
 
+class _WebMenuState extends State<WebMenu> {
+  String selectedMenuItem = 'Select Type';
+  bool isHover = false;
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         MenuItems(
@@ -192,6 +200,45 @@ class WebMenu extends StatelessWidget {
             );
           },
         ),
+        // Add DropdownButton for additional menu items
+        DropdownButton<String>(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4.0),
+          value: selectedMenuItem,
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              setState(() {
+                selectedMenuItem = newValue;
+                // Add logic to navigate to the related page based on selectedMenuItem
+
+                  // Navigate to the Therapeutic page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                  );
+
+            },
+              );}
+              },
+          items: ['Select Type','Therapeutic', 'Company', 'Form', 'Strength']
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style:  TextStyle(
+              fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
+                fontSize:  18 ,
+                color: isHover ? kPrimaryColor : Colors.black,
+              ),
+              ),
+            );
+          }).toList(),
+          // Set the underline property to Container() to hide the underline.
+          underline: Container(),
+        )
+
+
+
       ],
     );
   }

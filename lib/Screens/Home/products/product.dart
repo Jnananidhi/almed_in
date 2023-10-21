@@ -9,8 +9,9 @@ import 'dart:convert';
 import '../widgets/menu.dart';
 
 class ProductScreen extends StatefulWidget {
+  final String? selectedMenuItem;
 
-
+  ProductScreen({this.selectedMenuItem});
   @override
   ProductScreenState createState() => ProductScreenState();
 }
@@ -47,6 +48,18 @@ class ProductScreenState extends State<ProductScreen> {
       body: Column(
         children: [
           Navigation(),
+
+          Padding(
+            padding: const EdgeInsets.all(10.20), // Adjust the padding as needed
+            child: Text(
+              widget.selectedMenuItem ?? "",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: Colors.black,
+              ),
+            ),
+          ),
           // Display the custom Navigation widget if needed
           Expanded(
             child: LayoutBuilder(

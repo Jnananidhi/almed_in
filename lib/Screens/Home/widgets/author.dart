@@ -90,6 +90,7 @@ class _CategoryCardState extends State<CategoryCard> {
           });
         },
         child: Container(
+
           padding: const EdgeInsets.symmetric(vertical: 10),
           width: _size.width <= 770
               ? _size.width
@@ -97,7 +98,10 @@ class _CategoryCardState extends State<CategoryCard> {
                   ? 300
                   : 200,
           decoration: BoxDecoration(
-              color: kgreyColor, boxShadow: [if (isHover) kDefaultShadow]),
+                borderRadius: BorderRadius.circular(20.0),
+                  color: Color(0xFFE9F3F3),// Adjust the value as needed
+
+              ),
           child: Column(
             children: [
               ClipRRect(

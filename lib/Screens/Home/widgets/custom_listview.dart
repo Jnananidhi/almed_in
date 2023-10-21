@@ -17,7 +17,7 @@ class ProductListItem extends StatelessWidget {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5), // Adjust the value for the desired border curvature
+        borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
       ),
       margin: EdgeInsets.all(10),
       child: ListTile(
@@ -97,6 +97,7 @@ class ProductItemState extends State<ProductItem> {
         height: containerHeight,
         decoration: BoxDecoration(
             color: Colors.white,
+            borderRadius: BorderRadius.circular(20.0),
             border: Border.all(color: kgreyColor, width: 3),
             boxShadow: [if (isHover) kDefaultShadow]),
         child: Stack(

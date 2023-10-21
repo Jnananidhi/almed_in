@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/products/product.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
@@ -18,28 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List filteredContacts = [];
-  List dropcontact = [];
-  final searchcontroller = TextEditingController();
-
-  void searchContacts(String searchTerm) {
-    setState(() {
-      filteredContacts = dropcontact.where((contact) {
-        return contact['FIRST_NAME']
-            .toLowerCase()
-            .contains(searchTerm.toLowerCase()) ||
-            contact['DESIGNATION']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase()) ||
-            contact['ORGANIZATION']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase()) ||
-            contact['DEPARTMENT']
-                .toLowerCase()
-                .contains(searchTerm.toLowerCase());
-      }).toList();
-    });
-  }
+  String selectedMenuItem = 'Select Type';
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +75,61 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
-                  const SizedBox(
-                    height: 10,
+
+                  DropdownButton<String>(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    value: selectedMenuItem,
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        setState(() {
+                          selectedMenuItem = newValue;
+                          // Add logic to navigate to the related page based on selectedMenuItem
+                          if (selectedMenuItem == 'Therapeutic') {
+                            // Navigate to the Therapeutic page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                            );
+                          } else if (selectedMenuItem == 'Company') {
+                            // Navigate to the Company page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                            );
+                          } else if (selectedMenuItem == 'Form') {
+                            // Navigate to the Form page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                            );
+                          } else if (selectedMenuItem == 'Strength') {
+                            // Navigate to the Strength page
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                            );
+                          }
+                        });
+                      }
+                    },
+                    items: ['Select Type','Therapeutic', 'Company', 'Form', 'Strength']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style:  TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize:  18 ,
+                            color: Colors.black,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    // Set the underline property to Container() to hide the underline.
+                    underline: Container(),
                   ),
+
                   MenuItems(
                     title: 'Contact Us',
                     press: () {},
