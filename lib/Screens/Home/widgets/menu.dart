@@ -211,10 +211,30 @@ class _WebMenuState extends State<WebMenu> {
                 // Add logic to navigate to the related page based on selectedMenuItem
 
                   // Navigate to the Therapeutic page
+                if (selectedMenuItem == 'Therapeutic') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                  );
+
+                } else if (selectedMenuItem == 'Strength') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
                   );
+                }
+                else if (selectedMenuItem == 'Company') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                  );
+                }else if (selectedMenuItem == 'Form') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                  );
+                }
 
             },
               );}

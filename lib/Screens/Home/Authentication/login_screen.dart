@@ -365,7 +365,7 @@ class _MobileBodyState extends State<MobileBody> {
                 borderRadius: BorderRadius.circular(15),
               ),
             ),
-          ),
+            ),
         ),
       ],
     );

@@ -109,16 +109,27 @@ class SliderCard extends StatelessWidget {
           Expanded(
               child: Column(
             children: [
-              Image.asset(
+              Container(
+              decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+            border: Border.all(
+              color: Color(0xFF00AFBB), // Border color
+              width: 1.0, // Border width
+            ),
+          ),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(20), // Same radius as the border
+              child: Image.asset(
                 image,
                 height: _size.width >= 500 ? 400 : 200,
                 width: _size.width >= 500 ? 1200 : 600,
                 fit: BoxFit.fill,
-              ),
-            ],
+              )),
+              )],
           )),
         ],
       ),
     );
   }
 }
+

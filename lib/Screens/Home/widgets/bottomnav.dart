@@ -14,7 +14,7 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      color: kSecondaryColor,
+      color: Color(0xFFEEF4FF),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -58,7 +58,7 @@ class BottomNav extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 height:2,
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'DMSans Regular' ,
                 fontSize: _size.width >= 370 ? 15 : 10,
               ),
