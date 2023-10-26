@@ -155,7 +155,7 @@ class WebMenu extends StatefulWidget {
 }
 
 class _WebMenuState extends State<WebMenu> {
-  String selectedMenuItem = 'Select Type';
+  String selectedMenuItem = 'Category';
   bool isHover = false;
   @override
   Widget build(BuildContext context) {
@@ -239,7 +239,7 @@ class _WebMenuState extends State<WebMenu> {
             },
               );}
               },
-          items: ['Select Type','Therapeutic', 'Company', 'Form', 'Strength']
+          items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
