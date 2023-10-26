@@ -1,4 +1,5 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
+import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
@@ -27,7 +28,7 @@ class BottomNav extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                        "Are you a vendor?",
+                        "Not finding the medicines?",
                     style: TextStyle(
                       fontFamily: 'DMSans Bold' ,
                       fontSize: _size.width >= 370 ? 20 : 10,
@@ -37,14 +38,22 @@ class BottomNav extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  const LoginPage()),
+                          MaterialPageRoute(builder: (context) =>   ContactUsApp()),
                         );
                       },
-                      label: 'Login',
+                      label: 'Let us Know',
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
                     Text(
                       "Disclaimer",
                       style: TextStyle(
@@ -64,7 +73,14 @@ class BottomNav extends StatelessWidget {
               ),
             ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
+                    ),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                   ],
                 ),

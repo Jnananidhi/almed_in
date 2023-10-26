@@ -94,6 +94,15 @@ class _NavigationState extends State<Navigation> {
                       const Spacer(),
                       if (Responsive.isDesktop(context))  WebMenu(),
                       const Spacer(),
+                      MenuItems(
+                        title: 'Vendor?',
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  LoginPage()),
+                          );
+                        },
+                      ),
 
                     // shoppic_cart icn badge
                       Consumer<CartProvider>(
@@ -155,11 +164,11 @@ class WebMenu extends StatefulWidget {
 }
 
 class _WebMenuState extends State<WebMenu> {
-  String selectedMenuItem = 'Category';
+  String selectedMenuItem = 'Categories';
   bool isHover = false;
   @override
   Widget build(BuildContext context) {
-
+    Size _size = MediaQuery.of(context).size;
     return Row(
       children: [
         MenuItems(
@@ -202,7 +211,7 @@ class _WebMenuState extends State<WebMenu> {
         ),
         // Add DropdownButton for additional menu items
         DropdownButton<String>(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10,),
           value: selectedMenuItem,
           onChanged: (String? newValue) {
             if (newValue != null) {
@@ -239,7 +248,7 @@ class _WebMenuState extends State<WebMenu> {
             },
               );}
               },
-          items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+          items: ['Categories','Therapeutic', 'Company', 'Form', 'Strength']
               .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
@@ -247,7 +256,8 @@ class _WebMenuState extends State<WebMenu> {
                 value,
                 style:  TextStyle(
               fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
-                fontSize:  18 ,
+                  fontSize: _size.width >= 370 ? 18 : 14,
+                fontFamily: 'DMSans Bold',
                 color: isHover ? kPrimaryColor : Colors.black,
               ),
               ),
@@ -256,15 +266,8 @@ class _WebMenuState extends State<WebMenu> {
           // Set the underline property to Container() to hide the underline.
           underline: Container(),
         ),
-        MenuItems(
-          title: 'Vendor login',
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  LoginPage()),
-            );
-          },
-        ),
+
+
 
       ],
     );
