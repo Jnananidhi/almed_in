@@ -1,6 +1,7 @@
 
 import 'package:almed_in/Screens/Home/Authentication/forgot1.dart';
 import 'package:almed_in/Screens/Home/Authentication/register_screen.dart';
+import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
@@ -191,7 +192,12 @@ class _BodyState extends State<Body> {
                 width: double.infinity,
                 height: 50,
                 child: const Center(child: Text("Sign In"))),
-            onPressed: () => print("it's pressed"),
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserProfile()),
+              );
+            },
             style: ElevatedButton.styleFrom(
               foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
               shape: RoundedRectangleBorder(
