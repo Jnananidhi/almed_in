@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String selectedMenuItem = 'Select Type';
+  String selectedMenuItem = 'Category';
 
   @override
   Widget build(BuildContext context) {
@@ -85,34 +85,33 @@ class _HomeScreenState extends State<HomeScreen> {
                           selectedMenuItem = newValue;
                           // Add logic to navigate to the related page based on selectedMenuItem
                           if (selectedMenuItem == 'Therapeutic') {
-                            // Navigate to the Therapeutic page
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
                             );
-                          } else if (selectedMenuItem == 'Company') {
-                            // Navigate to the Company page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen()),
-                            );
-                          } else if (selectedMenuItem == 'Form') {
-                            // Navigate to the Form page
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen()),
-                            );
+
                           } else if (selectedMenuItem == 'Strength') {
-                            // Navigate to the Strength page
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ProductScreen()),
+                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                            );
+                          }
+                          else if (selectedMenuItem == 'Company') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                            );
+                          }else if (selectedMenuItem == 'Form') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
                             );
                           }
                         });
                       }
                     },
-                    items: ['Select Type','Therapeutic', 'Company', 'Form', 'Strength']
+                    items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -168,19 +167,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           // Add the Search_bar here to make it overlap other elements
-          Positioned(
-            top: 105,
-            left: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view
-            right: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
-          ),
+         Positioned(
+                top: 105,
+                left: MediaQuery.of(context).size.width < 600
+                    ? 0 // Adjust the value for mobile view
+                    : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view
+                right: MediaQuery.of(context).size.width < 600
+                    ? 0 // Adjust the value for mobile view
+                    : MediaQuery.of(context).size.width * 0.25,
+                child: Search_bar(),
+              ),
+            ]),
+          );
 
-        ],
-      ),
-    );
+
   }
 }

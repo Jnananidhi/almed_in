@@ -49,6 +49,7 @@ dependencies:
   open_app_file: ^4.0.2 #file upload
   dio: ^5.3.3 #file upload
   path: ^1.8.3 #file upload
+  fluttertoast: ^8.0.7
 
 
 
