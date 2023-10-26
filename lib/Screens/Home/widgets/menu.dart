@@ -133,7 +133,7 @@ class _NavigationState extends State<Navigation> {
                         },
                         icon: const Icon(
                           Icons.person_outline,
-                          color: kDarkgreyColor,
+                          color: Colors.black,
                           size: 25,
                         ),
                       ),),
@@ -255,13 +255,31 @@ class _WebMenuState extends State<WebMenu> {
           }).toList(),
           // Set the underline property to Container() to hide the underline.
           underline: Container(),
-        )
-
-
+        ),
+        MenuItems(
+          title: 'Vendor login',
+          press: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>  LoginPage()),
+            );
+          },
+        ),
 
       ],
     );
   }
+
+
+    void navigateToVendorLogin() {
+      // Implement the navigation logic to the vendor login screen
+      // For example:
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()), // Replace VendorLoginScreen with your actual screen
+      );
+  }
+
 }
 
 
