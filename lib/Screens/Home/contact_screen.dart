@@ -92,12 +92,18 @@ class ContactUsApp extends StatelessWidget {
          ),
          body: Column(
              children: <Widget>[
+               const Navigation(),
+               const Divider(
+                 thickness: 1,
+                 height: 0.01, // Set the height of the divider line
+                 color: kPrimaryColor, // Set the color of the divider line
+               ),
                Expanded(
                  child: SingleChildScrollView(
                    child: Column(
                      children: [
                        //now we create menu and header
-                       const Navigation(),
+
                        ContactUsScreen(),
                        const BottomNav()
                        //now we will make our site responsive

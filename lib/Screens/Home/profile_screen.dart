@@ -202,22 +202,19 @@ class UserProfilePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Phone",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                      Text("+91 8088888688",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+                      Text("Phone :  +91 8088888688",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
                       Divider(
                         thickness: 1,
                         indent : 0,
                         endIndent : 10,
                       ),
-                      Text("Email",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                      Text("yourmail@gmail.com",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+                      Text("Email :   yourmail@gmail.com",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
                       Divider(
                         thickness: 1,
                         indent : 0,
                         endIndent : 10,
                       ),
-                      Text("Shipping Address",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                      Text("your full address",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+                      Text("Shipping Address :   your full address",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
 
                     ],
                   ),

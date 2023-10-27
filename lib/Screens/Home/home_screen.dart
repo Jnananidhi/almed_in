@@ -144,16 +144,17 @@ class _HomeScreenState extends State<HomeScreen> {
           const Column(
             children: <Widget>[
               Navigation(),
-              // Divider(
-              //   height: 5, // Set the height of the divider line
-              //   color: Colors.grey, // Set the color of the divider line
-              // ),
+              Divider(
+                thickness: 1,
+                height: 0.01, // Set the height of the divider line
+                color: kPrimaryColor, // Set the color of the divider line
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       const SizedBox(
-                        height: 50,
+                        height: 10,
                       ),
                       HeroBanner(),
                       ProductSection(),

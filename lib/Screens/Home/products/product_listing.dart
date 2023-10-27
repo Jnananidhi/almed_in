@@ -10,7 +10,7 @@ import '../widgets/menu.dart';
 class Productt {
   final String id;
   final String name;
-  final String quantity;
+  String quantity;
   final String imageUrl;
   final String mrp;
   final String discount;

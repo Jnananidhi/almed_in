@@ -1,6 +1,7 @@
 
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/widgets/order_success.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -169,7 +170,12 @@ class ProductItemState extends State<ProductItem> {
                           borderRadius: BorderRadius.circular(50)),
                       color: kSecondaryColor,
                       height: 40,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const OrderSuccessScreen()),
+                        );
+                      },
                       child: const Text(
                         "Buy Now",
                         style: TextStyle(color: kWhiteColor),

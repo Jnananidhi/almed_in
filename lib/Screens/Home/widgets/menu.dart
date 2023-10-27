@@ -84,9 +84,9 @@ class _NavigationState extends State<Navigation> {
                               );
                             },
                               child: Image.asset(
-                                'logo.png',  // Make sure the path is correct
+                                'logo_500w.png',  // Make sure the path is correct
                                 fit: BoxFit.contain,
-                                height: 80,
+                                height: 120,
                               )
                           ),
                       ),
@@ -172,7 +172,6 @@ class _WebMenuState extends State<WebMenu> {
     return Row(
       children: [
         MenuItems(
-
           title: 'Home',
           press: () {
             Navigator.push(
@@ -254,6 +253,7 @@ class _WebMenuState extends State<WebMenu> {
               value: value,
               child: Text(
                 value,
+
                 style:  TextStyle(
               fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
                   fontSize: _size.width >= 370 ? 18 : 14,
@@ -266,10 +266,8 @@ class _WebMenuState extends State<WebMenu> {
           // Set the underline property to Container() to hide the underline.
           underline: Container(),
         ),
-
-
-
       ],
+
     );
   }
 
@@ -317,6 +315,7 @@ class _MenuItemsState extends State<MenuItems> {
           });
         },
         child: Container(
+          margin: EdgeInsets.only(top:4),
           padding: const EdgeInsets.symmetric(vertical: 4.0),
           decoration: BoxDecoration(
               border: Border(

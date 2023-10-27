@@ -89,13 +89,18 @@ class _FaqScreenState extends State<FaqScreen> {
     ),
         body:const Column(
             children: <Widget>[
-
+              Navigation(),
+              const Divider(
+                thickness: 1,
+                height: 0.01, // Set the height of the divider line
+                color: kPrimaryColor, // Set the color of the divider line
+              ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   //now we create menu and header
-                  Navigation(),
+
 
                   Faq(),
                   //now we create banner

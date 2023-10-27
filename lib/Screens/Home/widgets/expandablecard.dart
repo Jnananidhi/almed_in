@@ -38,8 +38,7 @@ class _ExpandableCardState extends State<ExpandableCard> {
       Padding(
       padding:
       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      child:Center(
-      child: ExpansionTileCard(
+      child:ExpansionTileCard(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -60,7 +59,6 @@ class _ExpandableCardState extends State<ExpandableCard> {
                 style: const TextStyle(fontFamily:'DMSans Regular' ,fontSize: 16, color: Colors.black, )),
           )
         ],
-      ),
       ),
     )]))]));
   }
