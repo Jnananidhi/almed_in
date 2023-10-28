@@ -51,6 +51,7 @@ dependencies:
   path: ^1.8.3 #file upload
   fluttertoast: ^8.0.7
   lottie: ^2.7.0 #animations
+  overlay_support: ^1.0.6
 
 
 
