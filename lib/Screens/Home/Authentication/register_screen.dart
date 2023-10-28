@@ -91,11 +91,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         ),
         body: const Column(
           children: <Widget>[
+            Navigation(),
+            Divider(
+              thickness: 1,
+              height: 0.01, // Set the height of the divider line
+              color: kPrimaryColor, // Set the color of the divider line
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Navigation(),
+
                     RegistrationForm(),
                     BottomNav(),
                     // Add more widgets here as needed
