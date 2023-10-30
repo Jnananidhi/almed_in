@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
+import 'Checkoutscreen.dart';
 
 class ProductListItem extends StatelessWidget {
   final Productt product;
@@ -172,7 +173,7 @@ class ProductItemState extends State<ProductItem> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => OrderSuccessScreen()),
+                          MaterialPageRoute(builder: (context) => CheckoutScreen()),
                         );
                       },
                       child: const Text(

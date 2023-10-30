@@ -51,10 +51,10 @@ dependencies:
   path: ^1.8.3 #file upload
   fluttertoast: ^8.0.7
   lottie: ^2.7.0 #animations
-  shared_preferences: ^2.2.2
   overlay_support: ^1.0.6
   google_maps_flutter: ^2.5.0
   geolocator: ^10.1.0
+  shared_preferences:
 
 
 
