@@ -104,6 +104,7 @@ class CartScreen extends StatelessWidget {
                                           context
                                               .read<CartProvider>()
                                               .decrementQuantity(product);
+
                                         },
                                       ),
                                       Text('${product.quantity}'),

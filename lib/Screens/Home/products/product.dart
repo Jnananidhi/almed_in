@@ -48,7 +48,11 @@ class ProductScreenState extends State<ProductScreen> {
       body: Column(
         children: [
           Navigation(),
-
+          Divider(
+            thickness: 1,
+            height: 0.01, // Set the height of the divider line
+            color: kPrimaryColor, // Set the color of the divider line
+          ),
           Padding(
             padding: const EdgeInsets.all(10.20), // Adjust the padding as needed
             child: Text(

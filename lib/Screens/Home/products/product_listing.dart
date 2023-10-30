@@ -12,7 +12,7 @@ class Productt {
   final String name;
   String quantity;
   final String imageUrl;
-  final String mrp;
+   String mrp;
   final String discount;
 
   Productt({
