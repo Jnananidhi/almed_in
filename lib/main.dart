@@ -1,5 +1,4 @@
-import 'package:almed_in/Screens/Home/contact_screen.dart';
-import 'package:almed_in/Screens/Home/faq_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:provider/provider.dart';

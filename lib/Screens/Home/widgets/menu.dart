@@ -2,7 +2,7 @@ import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
-import 'package:almed_in/Screens/Home/cart_screen.dart';
+import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
