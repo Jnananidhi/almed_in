@@ -3,6 +3,7 @@ import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/order_success.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
@@ -170,6 +171,14 @@ class ProductItemState extends State<ProductItem> {
                         height: 40,
                         onPressed: () {
                           context.read<CartProvider>().addToCart(product);
+                            Fluttertoast.showToast(
+                            msg: "Item Added to Cart",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white);
+
                         },
                         child: const Text(
                           "Add to Cart",

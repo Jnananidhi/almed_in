@@ -68,10 +68,13 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                 child: Row(
                   children: [
                     for (var item in therapeautic.take(crossAxisCount))
-                      DatabaseDataItem(
-                        title:  item['therapeautic'],
-                        press: (){},
+                      Padding(
+                        padding:EdgeInsets.only(left: 3),
+                        child: DatabaseDataItem(
+                          title:  item['therapeautic'],
+                          press: (){},
 
+                        ),
                       ),
                   ],
                 ),
@@ -82,7 +85,7 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
           if( MediaQuery.of(context).size.width > 600)
             Container(
               padding: EdgeInsets.all(8.0),
-              height: therapeautic.length/0.1, // Fixed height for the additional items grid
+              height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -95,10 +98,13 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: DatabaseDataItem(
-                                title: therapeautic[i]['therapeautic'],
-                                press: (){},
+                              child: Padding(
+                                padding:EdgeInsets.only(bottom: 7),
+                                child: DatabaseDataItem(
+                                  title: therapeautic[i]['therapeautic'],
+                                  press: (){},
 
+                                ),
                               ),
                             ),
                           ),
@@ -112,7 +118,7 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
           if( MediaQuery.of(context).size.width < 600)
             Container(
               padding: EdgeInsets.all(8.0),
-              height: crossAxisCount*therapeautic.length/0.1, // Fixed height for the additional items grid
+              height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -125,9 +131,12 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: DatabaseDataItem(
-                                title: therapeautic[i]['therapeautic'],
-                                press: (){},
+                              child: Padding(
+                                padding:EdgeInsets.only(bottom: 7),
+                                child: DatabaseDataItem(
+                                  title: therapeautic[i]['therapeautic'],
+                                  press: (){},
+                                ),
                               ),
                             ),
                           ),
@@ -198,6 +207,7 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
                   : _size.width >= 975
                   ? 300
                   : 200,
+              height: 100,
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
               ),
@@ -214,7 +224,18 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
               child: Column(
                 children: [
                   // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,),
+                  Text(widget.title,textAlign: TextAlign.center,),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Icon(
+                        Icons.local_hospital, // You can use any medical icon here
+                        color: Colors.blue,
+                        size: 24,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

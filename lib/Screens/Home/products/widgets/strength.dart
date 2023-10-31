@@ -68,10 +68,12 @@ class _StrengthCardState extends State<StrengthCard> {
             child: Row(
               children: [
                 for (var item in strength.take(crossAxisCount))
-                  strengthDataItem(
-                    title:  item['STRENGTH'],
-                    press: (){},
-
+                  Padding(
+                    padding:EdgeInsets.only(left: 3),
+                    child: strengthDataItem(
+                      title:  item['STRENGTH'],
+                      press: (){},
+                    ),
                   ),
               ],
             ),
@@ -82,7 +84,7 @@ class _StrengthCardState extends State<StrengthCard> {
           if( MediaQuery.of(context).size.width > 600)
             Container(
               padding: EdgeInsets.all(8.0),
-              height: strength.length/0.1, // Fixed height for the additional items grid
+              height:  strength.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (strength.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -95,10 +97,13 @@ class _StrengthCardState extends State<StrengthCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: strengthDataItem(
-                                title: strength[i]['STRENGTH'],
-                                press: (){},
+                              child: Padding(
+                                padding:EdgeInsets.only(bottom: 7),
+                                child: strengthDataItem(
+                                  title: strength[i]['STRENGTH'],
+                                  press: (){},
 
+                                ),
                               ),
                             ),
                           ),
@@ -112,7 +117,7 @@ class _StrengthCardState extends State<StrengthCard> {
           if( MediaQuery.of(context).size.width < 600)
             Container(
               padding: EdgeInsets.all(8.0),
-              height: crossAxisCount*strength.length/0.1, // Fixed height for the additional items grid
+              height:  strength.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (strength.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -125,9 +130,12 @@ class _StrengthCardState extends State<StrengthCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: strengthDataItem(
-                                title: strength[i]['STRENGTH'],
-                                press: (){},
+                              child: Padding(
+                                padding:EdgeInsets.only(bottom: 7),
+                                child: strengthDataItem(
+                                  title: strength[i]['STRENGTH'],
+                                  press: (){},
+                                ),
                               ),
                             ),
                           ),
@@ -199,6 +207,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
                   : _size.width >= 975
                   ? 300
                   : 200,
+              height: 100,
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
               ),
@@ -215,7 +224,18 @@ class _strengthDataItemState extends State<strengthDataItem> {
               child: Column(
                 children: [
                   // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,),
+                  Text(widget.title,textAlign: TextAlign.center,),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Icon(
+                        Icons.local_hospital, // You can use any medical icon here
+                        color: Colors.blue,
+                        size: 24,
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

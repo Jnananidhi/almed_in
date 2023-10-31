@@ -67,11 +67,14 @@ class _CateegoryState extends State<Cateegory> {
           child: Row(
             children: [
                     for (var item in contact.take(crossAxisCount))
-                    CategoryCard(
-                    title: item['Company'],
-                    press: () {
-                    // Handle card tap action here
-                    },
+                    Padding(
+                      padding:EdgeInsets.only(left: 3),
+                      child: CategoryCard(
+                      title: item['Company'],
+                      press: () {
+                      // Handle card tap action here
+                      },
+                      ),
                     ),
                  ],
               ),
@@ -83,7 +86,7 @@ class _CateegoryState extends State<Cateegory> {
     if( MediaQuery.of(context).size.width > 600)
     Container(
       padding: EdgeInsets.all(8.0),
-          height: contact.length/0.1, // Fixed height for the additional items grid
+          height:contact.length*100/crossAxisCount, // Fixed height for the additional items grid
           child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (contact.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -96,11 +99,14 @@ class _CateegoryState extends State<Cateegory> {
                             Expanded(
                               child: Align(
                                   alignment: Alignment.topCenter, // Align each card to the top
-                                  child: CategoryCard(
-                                    title: contact[i]['Company'],
-                                    press: () {
-                                      // Handle card tap action here
-                                    },
+                                  child: Padding(
+                                    padding:EdgeInsets.only(bottom: 7),
+                                    child: CategoryCard(
+                                      title: contact[i]['Company'],
+                                      press: () {
+                                        // Handle card tap action here
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
@@ -114,7 +120,7 @@ class _CateegoryState extends State<Cateegory> {
       if( MediaQuery.of(context).size.width < 600)
         Container(
           padding: EdgeInsets.all(8.0),
-          height: crossAxisCount*contact.length/0.1, // Fixed height for the additional items grid
+          height: contact.length*100/crossAxisCount, // Fixed height for the additional items grid
           child: ListView.builder(
             scrollDirection: Axis.vertical, // Display items vertically
             itemCount: (contact.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
@@ -127,11 +133,14 @@ class _CateegoryState extends State<Cateegory> {
                       Expanded(
                         child: Align(
                           alignment: Alignment.topCenter, // Align each card to the top
-                          child: CategoryCard(
-                            title: contact[i]['Company'],
-                            press: () {
-                              // Handle card tap action here
-                            },
+                          child: Padding(
+                            padding:EdgeInsets.only(bottom: 5),
+                            child: CategoryCard(
+                              title: contact[i]['Company'],
+                              press: () {
+                                // Handle card tap action here
+                              },
+                            ),
                           ),
                         ),
                       ),
@@ -156,70 +165,6 @@ class _CateegoryState extends State<Cateegory> {
   }
 }
 
-// class CategoryCard  extends StatefulWidget {
-//   const CategoryCard({
-//     Key? key,
-//     required this.image,
-//     required this.title,
-//     required this.press,
-//   }) : super(key: key);
-//   final String image, title;
-//   final VoidCallback press;
-//   @override
-//   State<CategoryCard> createState() => _CategoryCardState();
-// }
-
-// class _CategoryCardState extends State<CategoryCard> {
-//   bool isHover = false;
-//   @override
-//   Widget build(BuildContext context) {
-//     Size _size = MediaQuery.of(context).size;
-//     return Padding(
-//       padding: const EdgeInsets.all(10),
-//       child: InkWell(
-//         onTap: widget.press,
-//         onHover: (value) {
-//           setState(() {
-//             isHover = value;
-//           });
-//         },
-//         child: Container(
-//           width: _size.width <= 770
-//               ? _size.width
-//               : _size.width >= 975
-//               ? 300
-//               : 200,
-//           padding: const EdgeInsets.symmetric(
-//             vertical: 10,
-//           ),
-//           decoration: BoxDecoration(
-//               color: kgreyColor, boxShadow: [if (isHover) kDefaultShadow]),
-//           child: Column(
-//             children: [
-//               Image.asset(
-//                 widget.image,
-//                 height: 200,
-//                 fit: BoxFit.contain,
-//               ),
-//               const SizedBox(
-//                 height: 15,
-//               ),
-//               MaterialButton(
-//                 color: kSecondaryColor,
-//                 height: 40,
-//                 onPressed: () {},
-//                 child: Text(
-//                   widget.title,
-//                   style: TextStyle(color: kWhiteColor),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class CategoryCard extends StatefulWidget {
   final String title;
@@ -267,6 +212,7 @@ class _CategoryCardState extends State<CategoryCard> {
               : _size.width >= 975
               ? 300
               : 200,
+          height: 100,
           padding: const EdgeInsets.symmetric(
             vertical: 10,
           ),
@@ -283,7 +229,18 @@ class _CategoryCardState extends State<CategoryCard> {
           child: Column(
             children: [
               // Add any widgets you want to display within the card, e.g., Text
-              Text(widget.title,),
+              Text(widget.title,textAlign: TextAlign.center,),
+              Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Icon(
+                    Icons.local_hospital, // You can use any medical icon here
+                    color: Colors.blue,
+                    size: 24,
+                  ),
+                ],
+              )
             ],
           ),
         ),
