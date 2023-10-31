@@ -1,4 +1,5 @@
 import 'package:almed_in/Screens/Home/cart_provider.dart';
+import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,8 @@ class BillSummary extends StatelessWidget {
         height: 300,
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey,width: 3),
+          color: lightColor,
+          border: Border.all(color: kPrimaryColor,width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(

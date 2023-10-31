@@ -34,10 +34,7 @@ class CartProvider with ChangeNotifier {
       _cartItems[index].quantity = quantity.toString(); // Convert back to String
 
       // Recalculate the price based on the new quantity
-
       double priceperitems = mrp*quantity;
-
-
       double newPrice = priceperitems; // Calculate the new price
 
       // Update the cart item price
@@ -73,8 +70,6 @@ class CartProvider with ChangeNotifier {
         _cartItems[index].quantity = quantity.toString(); // Convert back to String
 
         // Recalculate the price based on the new quantity
-
-
         double newPrice = mrp * quantity;  // Calculate the new price
 
         // Update the cart item price
@@ -88,6 +83,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
+  //for total MRP
   double calculateTotalMRP() {
     double totalMRP = 0;
     for (Productt product in _cartItems) {
@@ -99,9 +95,8 @@ class CartProvider with ChangeNotifier {
   double calculateTotalDiscount() {
     double totalDiscount = 0;
     for (Productt product in _cartItems) {
-      double mrp = double.parse(product.mrp);
       double discount = double.parse(product.discount);
-      totalDiscount += (mrp - discount);
+      totalDiscount = discount;
     }
     return totalDiscount;
   }

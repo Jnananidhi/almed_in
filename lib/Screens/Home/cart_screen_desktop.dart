@@ -2,6 +2,7 @@ import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/Screens/Home/widgets/menu_single.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,12 @@ class CartScreen extends StatelessWidget {
         backgroundColor: kWhiteColor,
         body: Column(
           children: [
+            Menu2(),
+            Divider(
+              thickness: 1,
+              height: 0.01, // Set the height of the divider line
+              color: kPrimaryColor, // Set the color of the divider line
+            ),
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
@@ -68,68 +75,73 @@ class CartScreen extends StatelessWidget {
                       itemCount: cart.cartItems.length,
                       itemBuilder: (context, index) {
                         final product = cart.cartItems[index];
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          elevation: 10,
-                          child: ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                product.imageUrl,
-                                width: 80,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
+                        return Container( // Wrap the Card with a Container
+                          height: 150, // Set the desired height
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            title: Text(product.name),
-                            subtitle: Text('\$${product.mrp}'),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: kgreyColor,
-                                      width: 1,
+                            elevation: 10,
+                            child: Align( // Use Align to center the contents vertically
+                              alignment: Alignment.center,
+                              child: ListTile(
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: Image.network(
+                                    product.imageUrl,
+                                    width: 80,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                title: Text(product.name),
+                                subtitle: Text('\$${product.mrp}'),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: kgreyColor,
+                                          width: 1,
+                                        ),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            icon: const Icon(Icons.remove),
+                                            onPressed: () {
+                                              context
+                                                  .read<CartProvider>()
+                                                  .decrementQuantity(product);
+                                            },
+                                          ),
+                                          Text('${product.quantity}'),
+                                          IconButton(
+                                            icon: const Icon(Icons.add),
+                                            onPressed: () {
+                                              context
+                                                  .read<CartProvider>()
+                                                  .incrementQuantity(product);
+                                            },
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.remove),
-                                        onPressed: () {
-                                          context
-                                              .read<CartProvider>()
-                                              .decrementQuantity(product);
-
-                                        },
-                                      ),
-                                      Text('${product.quantity}'),
-                                      IconButton(
-                                        icon: const Icon(Icons.add),
-                                        onPressed: () {
-                                          context
-                                              .read<CartProvider>()
-                                              .incrementQuantity(product);
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                    const SizedBox(width: 30),
+                                    IconButton(
+                                      onPressed: () {
+                                        context
+                                            .read<CartProvider>()
+                                            .removeFromCart(product);
+                                      },
+                                      icon: const Icon(Icons.delete_outline_rounded,
+                                          color: Colors.red),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 30),
-                                IconButton(
-                                  onPressed: () {
-                                    context
-                                        .read<CartProvider>()
-                                        .removeFromCart(product);
-                                  },
-                                  icon: const Icon(Icons.delete_outline_rounded,
-                                      color: Colors.red),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                         );

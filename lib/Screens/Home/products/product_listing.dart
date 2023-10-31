@@ -80,22 +80,22 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column( // Use a Column to stack the Navigation widget and the ListView.builder
-        children: [
-          Navigation(), // Display the custom Navigation widget again, if needed
-          Expanded(
-            child: ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return ProductListItem(product);
+        body: Column( // Use a Column to stack the Navigation widget and the ListView.builder
+          children: [
+            Navigation(), // Display the custom Navigation widget again, if needed
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductListItem(product);
 
-              },
+                },
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
   }
 }
 
