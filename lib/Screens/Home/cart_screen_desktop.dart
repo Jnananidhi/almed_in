@@ -2,6 +2,7 @@ import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/menu_single.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
@@ -13,62 +14,62 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cart = context.watch<CartProvider>();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Scaffold(
-        backgroundColor: kWhiteColor,
-        body: Column(
-          children: [
-            Menu2(),
-            Divider(
-              thickness: 1,
-              height: 0.01, // Set the height of the divider line
-              color: kPrimaryColor, // Set the color of the divider line
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "Your Cart",
-                style: TextStyle(
-                  fontSize: 24, // Adjust the font size as needed
-                  fontFamily: 'DMSans Bold',
-                ),
-              ),
-            ),
-            Text(
-              " ${cart.cartItems.length} items added to cart",
-              textAlign: TextAlign.left,
-              style: const TextStyle(
-                fontSize: 15,
+    return Scaffold(
+      backgroundColor: kWhiteColor,
+      body: Column(
+        children: [
+          Navigation(),
+          Divider(
+            thickness: 1,
+            height: 0.01, // Set the height of the divider line
+            color: kPrimaryColor, // Set the color of the divider line
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Your Cart",
+              style: TextStyle(
+                fontSize: 24, // Adjust the font size as needed
                 fontFamily: 'DMSans Bold',
               ),
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: cart.cartItems.isEmpty
-                  ? Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      'empty_cart.jpg',
-                      width: 500,
-                      height: 500,
-                    ),
-                    const Text(
-                      "Looks like you have not added any items to the cart\nGo ahead and add the items to the cart",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'DMSans Regular',
-                      ),
-                    ),
-                  ],
-                ),
-              )
-                  : Row(
+          ),
+          Text(
+            " ${cart.cartItems.length} items added to cart",
+            textAlign: TextAlign.left,
+            style: const TextStyle(
+              fontSize: 15,
+              fontFamily: 'DMSans Bold',
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: cart.cartItems.isEmpty
+                ? Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Image.asset(
+                    'empty_cart.jpg',
+                    width: 500,
+                    height: 300,
+                  ),
+                  const Text(
+                    "Looks like you have not added any items to the cart\nGo ahead and add the items to the cart",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'DMSans Regular',
+                    ),
+                  ),
+                ],
+              ),
+            )
+                : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  child: Row(
+              children: [
                   Flexible(
                     flex: 2,
                     child: ListView.builder(
@@ -168,11 +169,11 @@ class CartScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                ],
-              ),
+              ],
             ),
-          ],
-        ),
+                ),
+          ),
+        ],
       ),
     );
 

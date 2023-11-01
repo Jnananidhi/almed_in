@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import 'Screens/Home/cart_provider.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'DMSans Bold'
       ),
       home: const HomeScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }

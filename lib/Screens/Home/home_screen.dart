@@ -10,6 +10,7 @@ import 'package:almed_in/constants.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,10 +21,31 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String selectedMenuItem = 'Category';
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+
+    // Simulate a loading delay (e.g., loading data from an API)
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading
+        ? const Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: CircularProgressIndicator(
+          color: kPrimaryColor, //<-- SEE HERE
+          backgroundColor: lightColor,), // You can customize this loading indicator
+      ),
+    )
+        :  Scaffold(
       backgroundColor: kWhiteColor,
       //scrollable widget
       drawer: Drawer(
