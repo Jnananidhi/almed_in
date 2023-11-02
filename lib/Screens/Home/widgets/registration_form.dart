@@ -3,6 +3,12 @@ import 'package:almed_in/Screens/Home/widgets/file_upload.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../Authentication/login_screen.dart';
+import '../about_screen.dart';
+import '../faq_screen.dart';
+import '../products/product.dart';
+import 'menu.dart';
+
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
 
@@ -12,6 +18,7 @@ class RegistrationForm extends StatefulWidget {
 
 class _RegistrationFormState extends State<RegistrationForm> {
   bool obscureText = true;
+  String selectedMenuItem = 'Category';
 
   void togglePasswordVisibility() {
     setState(() {
@@ -20,7 +27,124 @@ class _RegistrationFormState extends State<RegistrationForm> {
   }
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        drawer: Drawer(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  isActive: true,
+                  title: 'Home',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'About Us',
+                  press: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Why Almed',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'FAQ',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FaqScreen()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                DropdownButton<String>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  value: selectedMenuItem,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        selectedMenuItem = newValue;
+                        // Add logic to navigate to the related page based on selectedMenuItem
+                        if (selectedMenuItem == 'Therapeutic') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                          );
+
+                        } else if (selectedMenuItem == 'Strength') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                        else if (selectedMenuItem == 'Company') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }else if (selectedMenuItem == 'Form') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                      });
+                    }
+                  },
+                  items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:  18 ,
+                          color: Colors.black,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  // Set the underline property to Container() to hide the underline.
+                  underline: Container(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Vendor?',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  LoginPage()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Contact Us',
+                  press: () {},
+                ),
+              ],
+            )),
+        body:Padding(
       padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 70),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -457,6 +581,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
             ),
         ],),
       ),
-    ));
+    )));
   }
 }

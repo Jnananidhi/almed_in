@@ -1,9 +1,18 @@
 import 'package:almed_in/Screens/Home/Map/address_selector_MAP.dart';
+import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/widgets/Checkoutscreen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'Authentication/login_screen.dart';
+import 'about_screen.dart';
+import 'faq_screen.dart';
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({super.key});
+  final String? userInput,Address,RName,Pnumber;
+
+  AddressScreen({this.userInput,this.Address,this.RName,this.Pnumber});
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -11,6 +20,7 @@ class AddressScreen extends StatefulWidget {
 
 class _AddressScreenState extends State<AddressScreen> {
   bool isMapViewVisible = false;// Initially, the map view is invisible
+  String selectedMenuItem = 'Category';
 
   void toggleMapViewVisibility() {
     setState(() {
@@ -20,6 +30,122 @@ class _AddressScreenState extends State<AddressScreen> {
     @override
     Widget build(BuildContext context) {
       return Scaffold(
+        drawer: Drawer(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  isActive: true,
+                  title: 'Home',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'About Us',
+                  press: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Why Almed',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'FAQ',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FaqScreen()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                DropdownButton<String>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  value: selectedMenuItem,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        selectedMenuItem = newValue;
+                        // Add logic to navigate to the related page based on selectedMenuItem
+                        if (selectedMenuItem == 'Therapeutic') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                          );
+
+                        } else if (selectedMenuItem == 'Strength') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                        else if (selectedMenuItem == 'Company') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }else if (selectedMenuItem == 'Form') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                      });
+                    }
+                  },
+                  items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:  18 ,
+                          color: Colors.black,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  // Set the underline property to Container() to hide the underline.
+                  underline: Container(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Vendor?',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  LoginPage()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Contact Us',
+                  press: () {},
+                ),
+              ],
+            )),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 20),
           child: Row(
@@ -42,10 +168,48 @@ class _AddressScreenState extends State<AddressScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    Text(
+                      widget.RName ?? "",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: kPrimaryColor,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
+                    Text(
+                      widget.Pnumber ?? "",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: kPrimaryColor,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
+
+                    Text(
+                      widget.Address ?? "",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: kPrimaryColor,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
+                    Text(
+                      widget.userInput ?? "",
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: kPrimaryColor,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
                     SizedBox(
                       width: 250,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  CheckoutScreen(userInput: widget.userInput,Address: widget.Address,RName:widget.RName,Pnumber:widget.Pnumber)),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
                         child: Text(
                           "Continue Payment",

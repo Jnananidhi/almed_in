@@ -208,7 +208,7 @@ class _CategoryCardState extends State<CategoryCard> {
         child: Container(
 
           width: _size.width <= 770
-              ? _size.width
+              ? _size.width/2
               : _size.width >= 975
               ? 300
               : 200,

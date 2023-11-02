@@ -1,25 +1,155 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../Authentication/login_screen.dart';
+import '../about_screen.dart';
+import '../faq_screen.dart';
+import '../products/product.dart';
 import 'bottomnav.dart';
 import 'menu.dart';
 import 'order_success.dart';
 
 
 class CheckoutScreen extends StatefulWidget {
+  final String? userInput,Address,RName,Pnumber;
+
+  CheckoutScreen({this.userInput,this.Address,this.RName,this.Pnumber});
   @override
   CheckoutScreenState createState() => CheckoutScreenState();
   }
 
   class CheckoutScreenState extends State<CheckoutScreen> {
     int? selectedPaymentMethod;
+    String selectedMenuItem = 'Category';
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
+        drawer: Drawer(
+            child: ListView(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  isActive: true,
+                  title: 'Home',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'About Us',
+                  press: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Why Almed',
+                  press: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'FAQ',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FaqScreen()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                DropdownButton<String>(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  value: selectedMenuItem,
+                  onChanged: (String? newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        selectedMenuItem = newValue;
+                        // Add logic to navigate to the related page based on selectedMenuItem
+                        if (selectedMenuItem == 'Therapeutic') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                          );
+
+                        } else if (selectedMenuItem == 'Strength') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                        else if (selectedMenuItem == 'Company') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }else if (selectedMenuItem == 'Form') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                          );
+                        }
+                      });
+                    }
+                  },
+                  items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style:  TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize:  18 ,
+                          color: Colors.black,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  // Set the underline property to Container() to hide the underline.
+                  underline: Container(),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Vendor?',
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  LoginPage()),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                MenuItems(
+                  title: 'Contact Us',
+                  press: () {},
+                ),
+              ],
+            )),
         body: Column(
+          
         children: [
         Navigation(),
+          Divider(
+            thickness: 1,
+            height: 0.01, // Set the height of the divider line
+            color: kPrimaryColor, // Set the color of the divider line
+          ),
     Expanded(
     child: SingleChildScrollView(
     child:Column(
@@ -31,6 +161,7 @@ class CheckoutScreen extends StatefulWidget {
         children: [
 
       Container(
+        
       constraints: const BoxConstraints(
       maxWidth: kMaxWidth,
       ),
@@ -47,178 +178,46 @@ class CheckoutScreen extends StatefulWidget {
               flex: 4,
               child: Column(
                 children: [
-                  Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20), // Set the border radius as needed
-                        border: Border.all(
-                          color: kDarkblueColor, // Set the border color
-                          width: 2.0, // Set the border width
-                        ),
-                      ),
-                      child: Card(
-                        elevation: 0,
-                        child:
-                   Column(
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+                      borderRadius: BorderRadius.circular(12.0), // Set the border radius
+                    ),
+                    color: selectedPaymentMethod == 2 ? Color(0xFFEDEEF5) : Colors.white,
+                    child: Column(
                       children: [
                         ListTile(
-                          title: Row(
-                            children: [
-                              Text('Contact'),
-                              SizedBox(width: 10), // Add spacing between text and text field
-                              Expanded(
-                                child: TextField(
-                                  // Add your text field properties here
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          title: Text('Deliver To:'" "' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}'),
+
                         ),
                         ListTile(
-                          title: Row(
-                            children: [
-                              Text('Ship To'),
-                              SizedBox(width: 10), // Add spacing between text and text field
-                              Expanded(
-                                child: TextField(
-                                  // Add your text field properties here
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                          title: Text('Address :'" "'${widget.Address ?? ""}'" "'${widget.userInput ?? ""}'),
+
                         ),
-                        ListTile(
-                          title: Row(
-                            children: [
-                              Text('Method'),
-                              SizedBox(width: 10), // Add spacing between text and text field
-                              Expanded(
-                                child: TextField(
-                                  // Add your text field properties here
-                                  decoration: InputDecoration(
-                                    hintText: '',
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )],
+                      ],
                     ),
-                  )),
+                  ),
                   SizedBox(height: 16),
-                  
+
                   Text("Payment Method",style:TextStyle(
                     fontWeight:FontWeight.bold,
                     fontSize: _size.width >= 370 ? 18 : 14,
                     fontFamily: 'DMSans Bold',
                     color: Colors.black,
-                  ),),
+                  ),textAlign: TextAlign.left),
                   SizedBox(height: 16),// Add space between cards
-                 Container(
-                    decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(20), // Set the border radius as needed
-                         border: Border.all(
-                              color: kDarkblueColor, // Set the border color
-                            width: 2.0, // Set the border width
-                          ),
-                          ),
-                  child:
-                      Card(
-                        elevation: 0,
-                        child:Column(
-                                children: [
-                                  ListTile(
-                                  title: Text('Credit/Debit'),
-                                ),
-                                  ListTile(
-                                    title:TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Card Number',
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10), // Set the border radius
-                                          borderSide: BorderSide(
-                                            color: Colors.black, // Set the border color
-                                            width: 1.0, // Set the border width
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
 
-                                  ListTile(
-                                    title:TextField(
-                                      decoration: InputDecoration(
-                                        hintText: 'Holder Name',
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10), // Set the border radius
-                                          borderSide: BorderSide(
-                                            color: Colors.black, // Set the border color
-                                            width: 1.0, // Set the border width
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+      Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+          borderRadius: BorderRadius.circular(12.0), // Set the border radius
+        ),
+        color: selectedPaymentMethod == 1 ? Color(0xFFEDEEF5) : Colors.white,
 
-                                  ListTile(
-                                    title: Row(
-                                      children: [
-                                        Expanded(
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              hintText: 'Expiration',
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(10),
-                                                borderSide: BorderSide(
-                                                  color: Colors.black,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(width: 10), // Add spacing between text fields
-                                        Expanded(
-                                          child: TextField(
-                                            decoration: InputDecoration(
-                                              hintText: 'CVV',
-                                              border: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(10),
-                                                borderSide: BorderSide(
-                                                  color: Colors.black,
-                                                  width: 1.0,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                  ,]))
-                 ),
-                  
-                  
-                  SizedBox(height: 16),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: kDarkblueColor,
-              width: 2.0,
-            ),
-          ),
-          child: Card(
-            elevation: 0,
             child: Column(
-              children: [
+              children: <Widget>[
                 ListTile(
-                  title: Text('UPI'),
+                  title: Text('Credit Card'),
                   leading: Radio(
                     value: 1, // Unique value for UPI
                     groupValue: selectedPaymentMethod,
@@ -230,30 +229,140 @@ class CheckoutScreen extends StatefulWidget {
                   ),
                 ),
                 if (selectedPaymentMethod == 1)
-                  ListTile(
-                    title: Text('Additional Content Here'),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Text('Card Holder Name'),
+                        SizedBox(height: 10),
+                        Container(
+                          height: 40,
+                          alignment: Alignment.center,
+                          child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                filled: true, // This property is used to fill the background color
+                                fillColor: Colors.white,
+                                hintText: 'Card holder Name',
+                                hintStyle: TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 1.0,
+                                  ),
+                                ),
+                              )
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Text('Card Number'),
+                        SizedBox(height: 10),
+                        Container(
+                          height: 40,
+                          alignment: Alignment.center,
+                          child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                filled: true, // This property is used to fill the background color
+                                fillColor: Colors.white,
+                                hintText: 'Enter Card number',
+                                hintStyle: TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Colors.black,
+                                    width: 1.0,
+                                  ),
+                                ),
+                              )
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('Expiry Date',),
+                                  SizedBox(height: 10),
+                                  Container(
+                                    height: 40,
+                                    alignment: Alignment.center,// Set the height you desire
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.datetime,
+                                      decoration: InputDecoration(
+                                        filled: true, // This property is used to fill the background color
+                                        fillColor: Colors.white,
+                                        hintText: 'MM/YY',
+                                        hintStyle: TextStyle(fontSize: 12),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color: Colors.black,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('CVV'),
+                                  SizedBox(height: 10),
+                              Container(
+                                height: 40,
+                                alignment: Alignment.center,
+                                 child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        filled: true, // This property is used to fill the background color
+                                        fillColor: Colors.white,
+                                        hintText: 'CVV',
+                                        hintStyle: TextStyle(fontSize: 12),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(10),
+                                          borderSide: BorderSide(
+                                            color: Colors.black,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                      )
+                                 ), ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                      ],
+                    ),
                   ),
               ],
             ),
           ),
-        ),
-        SizedBox(height: 16),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: kDarkblueColor,
-              width: 2.0,
-            ),
-          ),
-          child: Card(
-            elevation: 0,
+                  SizedBox(height: 16),
+         Card(
+           shape: RoundedRectangleBorder(
+             side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+             borderRadius: BorderRadius.circular(12.0), // Set the border radius
+           ),
+           color: selectedPaymentMethod == 2 ? Color(0xFFEDEEF5) : Colors.white,
             child: Column(
               children: [
                 ListTile(
-                  title: Text('Net Banking'),
+                  title: Text('UPI'),
                   leading: Radio(
-                    value: 2, // Unique value for Net Banking
+                    value: 2, // Unique value for UPI
                     groupValue: selectedPaymentMethod,
                     onChanged: (int? value) {
                       setState(() {
@@ -269,24 +378,46 @@ class CheckoutScreen extends StatefulWidget {
               ],
             ),
           ),
-        ),
         SizedBox(height: 16),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: kDarkblueColor,
-              width: 2.0,
+        Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+            borderRadius: BorderRadius.circular(12.0), // Set the border radius
+          ),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text('Net Banking'),
+                  leading: Radio(
+                    value: 3, // Unique value for Net Banking
+                    groupValue: selectedPaymentMethod,
+                    onChanged: (int? value) {
+                      setState(() {
+                        selectedPaymentMethod = value;
+                      });
+                    },
+                  ),
+                ),
+                if (selectedPaymentMethod == 3)
+                  ListTile(
+                    title: Text('Additional Content Here'),
+                  ),
+              ],
             ),
           ),
-          child: Card(
-            elevation: 0,
+
+        SizedBox(height: 16),
+         Card(
+           shape: RoundedRectangleBorder(
+             side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+             borderRadius: BorderRadius.circular(12.0), // Set the border radius
+           ),
             child: Column(
               children: [
                 ListTile(
                   title: Text('Cash on Delivery'),
                   leading: Radio(
-                    value: 3, // Unique value for Cash on Delivery
+                    value: 4, // Unique value for Cash on Delivery
                     groupValue: selectedPaymentMethod,
                     onChanged: (int? value) {
                       setState(() {
@@ -299,7 +430,7 @@ class CheckoutScreen extends StatefulWidget {
               ],
             ),
           ),
-        ),
+
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
@@ -337,9 +468,6 @@ class CheckoutScreen extends StatefulWidget {
             Expanded(
               flex: 2,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end
-                  ,
                 children:[ Container(
                   alignment: Alignment.topRight,
                   child: Card(

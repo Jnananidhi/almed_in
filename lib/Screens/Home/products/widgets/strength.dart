@@ -57,7 +57,7 @@ class _StrengthCardState extends State<StrengthCard> {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
     return Column(
       children: [
-
+        if (!showAllItems)
         Container(
           padding: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
@@ -87,12 +87,12 @@ class _StrengthCardState extends State<StrengthCard> {
               height:  strength.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: (strength.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemCount:strength.length, // Calculate the number of rows
                 itemBuilder: (context, rowIndex) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                     children: [
-                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                      for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
                         if (i < strength.length)
                           Expanded(
                             child: Align(
@@ -120,12 +120,12 @@ class _StrengthCardState extends State<StrengthCard> {
               height:  strength.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: (strength.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemCount: strength.length, // Calculate the number of rows
                 itemBuilder: (context, rowIndex) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                     children: [
-                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                      for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
                         if (i < strength.length)
                           Expanded(
                             child: Align(
@@ -203,7 +203,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
             child: Container(
 
               width: _size.width <= 770
-                  ? _size.width
+                  ? _size.width/2
                   : _size.width >= 975
                   ? 300
                   : 200,

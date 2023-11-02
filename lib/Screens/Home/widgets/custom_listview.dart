@@ -7,52 +7,181 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
+import '../Authentication/login_screen.dart';
+import '../about_screen.dart';
+import '../faq_screen.dart';
+import '../products/product.dart';
 import 'Checkoutscreen.dart';
+import 'menu.dart';
 
-class ProductListItem extends StatelessWidget {
+class ProductListItem extends StatefulWidget {
   final Productt product;
 
   const ProductListItem(this.product, {super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
-      ),
+  State<ProductListItem> createState() => _ProductListItemState();
+}
 
-      child: ListTile(
-        contentPadding: EdgeInsets.all(10),
-        leading: Image.network(
-          product.imageUrl,
-          width: 200,
-          height: 200,
+class _ProductListItemState extends State<ProductListItem> {
+  String selectedMenuItem = 'Category';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(
+          child: ListView(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                isActive: true,
+                title: 'Home',
+                press: () {},
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                title: 'About Us',
+                press: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                title: 'Why Almed',
+                press: () {},
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                title: 'FAQ',
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const FaqScreen()),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              DropdownButton<String>(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                value: selectedMenuItem,
+                onChanged: (String? newValue) {
+                  if (newValue != null) {
+                    setState(() {
+                      selectedMenuItem = newValue;
+                      // Add logic to navigate to the related page based on selectedMenuItem
+                      if (selectedMenuItem == 'Therapeutic') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                        );
+
+                      } else if (selectedMenuItem == 'Strength') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                        );
+                      }
+                      else if (selectedMenuItem == 'Company') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                        );
+                      }else if (selectedMenuItem == 'Form') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                        );
+                      }
+                    });
+                  }
+                },
+                items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style:  TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize:  18 ,
+                        color: Colors.black,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                // Set the underline property to Container() to hide the underline.
+                underline: Container(),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                title: 'Vendor?',
+                press: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  LoginPage()),
+                  );
+                },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              MenuItems(
+                title: 'Contact Us',
+                press: () {},
+              ),
+            ],
+          )),
+      body: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
         ),
-        title: Text(
-          product.name,
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+
+        child: ListTile(
+          contentPadding: EdgeInsets.all(10),
+          leading: Image.network(
+            widget.product.imageUrl,
+            width: 200,
+            height: 200,
           ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Quantity: ${product.quantity}'),
-            Text(
-              'MRP: ${product.mrp}',
-              style: TextStyle(
-                color: Colors.grey,
-              ),
+          title: Text(
+            widget.product.name,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              'Discount: ${product.discount}',
-              style: TextStyle(
-                color: Colors.grey,
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Quantity: ${widget.product.quantity}'),
+              Text(
+                'MRP: ${widget.product.mrp}',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
               ),
-            ),
-          ],
+              Text(
+                'Discount: ${widget.product.discount}',
+                style: TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

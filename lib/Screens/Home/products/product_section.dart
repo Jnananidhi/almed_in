@@ -1,5 +1,6 @@
 import 'package:almed_in/Screens/Home/products/widgets/form.dart';
 import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
+import 'package:almed_in/Screens/Home/products/widgets/therapetic_new.dart';
 import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/author.dart';

@@ -7,6 +7,8 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:almed_in/constants.dart';
+import '../../responsive.dart';
+import 'Authentication/login_screen.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
@@ -97,6 +99,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     },
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
 
                   DropdownButton<String>(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -150,7 +155,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     // Set the underline property to Container() to hide the underline.
                     underline: Container(),
                   ),
-
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    title: 'Vendor?',
+                    press: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>  LoginPage()),
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   MenuItems(
                     title: 'Contact Us',
                     press: () {},
@@ -163,9 +182,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Stack(
         children: [
-          const Column(
+           Column(
             children: <Widget>[
               Navigation(),
+              if (Responsive.isDesktop(context))
               Divider(
                 thickness: 1,
                 height: 0.01, // Set the height of the divider line
@@ -178,6 +198,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
+                      if(MediaQuery.of(context).size.width < 600)
+                        const SizedBox(
+                          height: 30,
+                        ),
                       HeroBanner(),
                       ProductSection(),
                       BottomNav(),
@@ -191,7 +215,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           // Add the Search_bar here to make it overlap other elements
          Positioned(
-                top: 105,
+                top: MediaQuery.of(context).size.width < 600
+          ? 90// Adjust the value for mobile view
+              :105,
                 left: MediaQuery.of(context).size.width < 600
                     ? 0 // Adjust the value for mobile view
                     : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view

@@ -8,6 +8,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
+import '../address_screen.dart';
+
 bool isDetailsVisible = false;
 class MapView extends StatefulWidget {
   const MapView({super.key});
@@ -198,6 +200,10 @@ class AddressDetails extends StatefulWidget {
 }
 
 class _AddressDetailsState extends State<AddressDetails> {
+  String userInput = '';
+  String Address = '';
+  String RName = '';
+  String Pnumber = '';
   @override
   Widget build(BuildContext context) {
     return Visibility(
@@ -209,25 +215,52 @@ class _AddressDetailsState extends State<AddressDetails> {
           children: [
             TextField(
               decoration: InputDecoration(labelText: 'Pincode',labelStyle: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  userInput = text;
+                });
+              },
             ),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(labelText: 'House Number,Floor,Building Name,Locality',labelStyle: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  Address = text;
+                });
+              },
             ),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(labelText: "Recipient's Name",labelStyle: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  RName = text;
+                });
+              },
             ),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(labelText: 'Phone Number',labelStyle: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  Pnumber = text;
+                });
+              },
             ),
             SizedBox(height: 30),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber)),
+                  );
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
                 child: Text(
@@ -237,6 +270,7 @@ class _AddressDetailsState extends State<AddressDetails> {
                     color: lightColor,
                     fontFamily: 'DMSans Bold',
                   ),
+
                 ),
               ),
             ),

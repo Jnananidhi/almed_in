@@ -74,27 +74,51 @@ class _NavigationState extends State<Navigation> {
                             },
                             icon: Icon(Icons.menu)),
                       //title
-                      Container(
-                        color: kWhiteColor,
+                      if (Responsive.isDesktop(context))
+                        Container(
+                          color: kWhiteColor,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+                                );
+                              },
+
+                                child:
+                                Image.asset(
+                                  'logo_500w.png',  // Make sure the path is correct
+                                  fit: BoxFit.contain,
+                                  height: 120,
+                                )
+                            ),
+                        ),
+                      if (!Responsive.isDesktop(context))
+                        Container(
+                          color: kWhiteColor,
                           child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
-                              );
-                            },
-                              child: Image.asset(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+                                );
+                              },
+
+                              child:
+                              Image.asset(
                                 'logo_500w.png',  // Make sure the path is correct
                                 fit: BoxFit.contain,
-                                height: 120,
+                                height: 80,
+
                               )
                           ),
-                      ),
+                        ),
 
                       const Spacer(),
                       if (Responsive.isDesktop(context))  WebMenu(),
                       const Spacer(),
-                      MenuItems(
+                      if (Responsive.isDesktop(context))
+                        MenuItems(
                         title: 'Vendor?',
                         press: () {
                           Navigator.push(

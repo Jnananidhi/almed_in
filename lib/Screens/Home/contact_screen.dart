@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:almed_in/Screens/Home/products/product.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
@@ -8,11 +9,19 @@ import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+import 'Authentication/login_screen.dart';
+import 'about_screen.dart';
 
-class ContactUsApp extends StatelessWidget {
+
+class ContactUsApp extends StatefulWidget {
   const ContactUsApp({super.key});
 
+  @override
+  State<ContactUsApp> createState() => _ContactUsAppState();
+}
 
+class _ContactUsAppState extends State<ContactUsApp> {
+  String selectedMenuItem = 'Category';
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -35,21 +44,18 @@ class ContactUsApp extends StatelessWidget {
                        height: 10,
                      ),
                      MenuItems(
-                       isActive: false,
+                       isActive: true,
                        title: 'Home',
-                       press: () {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(builder: (context) => const HomeScreen()),
-                         );
-                       },
+                       press: () {},
                      ),
                      const SizedBox(
                        height: 10,
                      ),
                      MenuItems(
                        title: 'About Us',
-                       press: () {},
+                       press: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                       },
                      ),
                      const SizedBox(
                        height: 10,
@@ -62,7 +68,6 @@ class ContactUsApp extends StatelessWidget {
                        height: 10,
                      ),
                      MenuItems(
-
                        title: 'FAQ',
                        press: () {
                          Navigator.push(
@@ -74,15 +79,77 @@ class ContactUsApp extends StatelessWidget {
                      const SizedBox(
                        height: 10,
                      ),
+
+                     DropdownButton<String>(
+                       padding: const EdgeInsets.symmetric(horizontal: 10),
+                       value: selectedMenuItem,
+                       onChanged: (String? newValue) {
+                         if (newValue != null) {
+                           setState(() {
+                             selectedMenuItem = newValue;
+                             // Add logic to navigate to the related page based on selectedMenuItem
+                             if (selectedMenuItem == 'Therapeutic') {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+
+                               );
+
+                             } else if (selectedMenuItem == 'Strength') {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                               );
+                             }
+                             else if (selectedMenuItem == 'Company') {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                               );
+                             }else if (selectedMenuItem == 'Form') {
+                               Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                               );
+                             }
+                           });
+                         }
+                       },
+                       items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                           .map<DropdownMenuItem<String>>((String value) {
+                         return DropdownMenuItem<String>(
+                           value: value,
+                           child: Text(
+                             value,
+                             style:  TextStyle(
+                               fontWeight: FontWeight.bold,
+                               fontSize:  18 ,
+                               color: Colors.black,
+                             ),
+                           ),
+                         );
+                       }).toList(),
+                       // Set the underline property to Container() to hide the underline.
+                       underline: Container(),
+                     ),
+                     const SizedBox(
+                       height: 10,
+                     ),
                      MenuItems(
-                       isActive: true,
-                       title: 'Contact Us',
+                       title: 'Vendor?',
                        press: () {
                          Navigator.push(
                            context,
-                           MaterialPageRoute(builder: (context) => const HomeScreen()),
+                           MaterialPageRoute(builder: (context) =>  LoginPage()),
                          );
                        },
+                     ),
+                     const SizedBox(
+                       height: 10,
+                     ),
+                     MenuItems(
+                       title: 'Contact Us',
+                       press: () {},
                      ),
                    ],
                  ),

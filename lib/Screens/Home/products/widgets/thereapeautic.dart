@@ -57,8 +57,9 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
     return Column(
       children: [
-
+        if (!showAllItems)
         Container(
+          width: kMaxWidth,
           padding: EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
                 boxShadow: [if (isHover) kDefaultShadow]),
@@ -88,12 +89,12 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
               height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemCount: (therapeautic.length), // Calculate the number of rows
                 itemBuilder: (context, rowIndex) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                     children: [
-                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                      for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
                         if (i < therapeautic.length)
                           Expanded(
                             child: Align(
@@ -121,12 +122,12 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
               height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: (therapeautic.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                itemCount: therapeautic.length, // Calculate the number of rows
                 itemBuilder: (context, rowIndex) {
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                     children: [
-                      for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                      for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
                         if (i < therapeautic.length)
                           Expanded(
                             child: Align(
@@ -203,7 +204,7 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
             onTap: widget.press,
             child: Container(
               width: _size.width <= 770
-                  ? _size.width
+                  ? _size.width/2
                   : _size.width >= 975
                   ? 300
                   : 200,
