@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-
+bool showSuggestions = true;
 class AddressOverlay extends StatefulWidget {
   final BuildContext overlayContext;
   final OverlayEntry? overlayEntry;
@@ -23,7 +23,7 @@ class AddressOverlay extends StatefulWidget {
 class _AddressOverlayState extends State<AddressOverlay> {
   // Define a variable to track which screen is currently displayed.
   int currentScreen = 1;
-  late GoogleMapController googleMapController;
+   late GoogleMapController? googleMapController;
   Completer<GoogleMapController> _controllerCompleter = Completer();
   TextEditingController searchController = TextEditingController();
   List<PlaceSearch> searchResults = [];
@@ -69,9 +69,40 @@ class _AddressOverlayState extends State<AddressOverlay> {
         }
       });
     } else {
+      print(response);
       // Handle error or show a message to the user
     }
   }
+
+  void _onSuggestionTap(PlaceSearch suggestion) async {
+    if (googleMapController != null) {
+      final placeDetailsUrl = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=${suggestion.placeId}&key=$GMAP_API';
+      final response = await http.get(Uri.parse(placeDetailsUrl));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final result = data['result'];
+
+        final lat = result['geometry']['location']['lat'];
+        final lng = result['geometry']['location']['lng'];
+
+        final location = LatLng(lat, lng);
+
+        googleMapController!.animateCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(target: location, zoom: 15.0),
+          ),
+        );
+      }
+    }
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    setState(() {
+      googleMapController = controller;
+    });
+  }
+
 
   // ... your searchPlaces and other methods
 
@@ -168,25 +199,32 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   ),
                   markers: selectedLocationMarker != null ? {selectedLocationMarker!} : {},
                   onTap: _onMapTapped,
+                  onMapCreated: _onMapCreated,
                 ),
               ),
               // Display search results as suggestions
               if (searchResults.isNotEmpty)
-                Container(
-                  height: 150, // Adjust the height as needed
-                  width: double.infinity, // Expand to available width
-                  color: lightColor.withOpacity(0.7), // Set background color
-                  child: ListView.builder(
-                    itemCount: searchResults.length > 5 ? 5 : searchResults.length,
-                    itemBuilder: (context, index) {
-                      final suggestion = searchResults[index];
-                      return ListTile(
-                        title: Text(suggestion.description),
-                        onTap: () {
-
-                        },
-                      );
-                    },
+                Visibility(
+                  visible: showSuggestions,
+                  child: Container(
+                    height: 150, // Adjust the height as needed
+                    width: double.infinity, // Expand to available width
+                    color: lightColor.withOpacity(0.7), // Set background color
+                    child: ListView.builder(
+                      itemCount: searchResults.length > 5 ? 5 : searchResults.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = searchResults[index];
+                        return ListTile(
+                          title: Text(suggestion.description),
+                          onTap: () {
+                            _onSuggestionTap(suggestion);
+                            setState(() {
+                              showSuggestions = false;
+                            });
+                          },
+                        );
+                      },
+                    ),
                   ),
                 ),
             ],
