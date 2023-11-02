@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
+import '../contact_screen.dart';
 import '../faq_screen.dart';
 import '../products/product.dart';
 import 'menu.dart';
@@ -31,6 +32,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
         drawer: Drawer(
             child: ListView(
               children: [
+                const DrawerHeader(
+                  child: Center(
+                    child: Image(image: AssetImage('logo.png'),height: 80),
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -48,13 +54,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                   },
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'Why Almed',
-                  press: () {},
-                ),
+
                 const SizedBox(
                   height: 10,
                 ),
@@ -140,7 +140,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 ),
                 MenuItems(
                   title: 'Contact Us',
-                  press: () {},
+                  press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                 ),
               ],
             )),

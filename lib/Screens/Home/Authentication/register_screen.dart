@@ -7,6 +7,8 @@ import 'package:almed_in/Screens/Home/widgets/registration_form.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../contact_screen.dart';
+
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -28,7 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png')),
+                  child: Image(image: AssetImage('logo.png'),height: 80),
                 ),
               ),
               Padding(
@@ -56,13 +58,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       title: 'About Us',
                       press: () {},
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Why Almed',
-                      press: () {},
-                    ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -81,7 +77,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     ),
                     MenuItems(
                       title: 'Contact Us',
-                      press: () {},
+                      press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                     ),
                   ],
                 ),

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
+import 'contact_screen.dart';
 
 
 
@@ -28,7 +29,7 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png')),
+                  child: Image(image: AssetImage('logo.png'),height: 80),
                 ),
               ),
               Padding(
@@ -36,6 +37,11 @@ class _UserProfileState extends State<UserProfile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const DrawerHeader(
+                      child: Center(
+                        child: Image(image: AssetImage('logo.png')),
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -53,13 +59,7 @@ class _UserProfileState extends State<UserProfile> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                       },
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Why Almed',
-                      press: () {},
-                    ),
+
                     const SizedBox(
                       height: 10,
                     ),
@@ -145,7 +145,7 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                     MenuItems(
                       title: 'Contact Us',
-                      press: () {},
+                      press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                     ),
                   ],
                 ),

@@ -9,6 +9,7 @@ import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:almed_in/constants.dart';
 import '../../responsive.dart';
 import 'Authentication/login_screen.dart';
+import 'contact_screen.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
@@ -55,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const DrawerHeader(
               child: Center(
-                child: Image(image: AssetImage('logo.png')),
+                child: Image(image: AssetImage('logo.png'),height: 80),
               ),
             ),
             Padding(
@@ -79,13 +80,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     press: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                     },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MenuItems(
-                    title: 'Why Almed',
-                    press: () {},
                   ),
                   const SizedBox(
                     height: 10,
@@ -172,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   MenuItems(
                     title: 'Contact Us',
-                    press: () {},
+                    press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                   ),
                 ],
               ),

@@ -32,7 +32,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
              children: [
                const DrawerHeader(
                  child: Center(
-                   child: Image(image: AssetImage('logo.png')),
+                   child: Image(image: AssetImage('logo.png'),height: 80),
                  ),
                ),
                Padding(
@@ -57,13 +57,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
                          Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                        },
                      ),
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       title: 'Why Almed',
-                       press: () {},
-                     ),
+
                      const SizedBox(
                        height: 10,
                      ),
@@ -149,7 +143,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
                      ),
                      MenuItems(
                        title: 'Contact Us',
-                       press: () {},
+                       press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                      ),
                    ],
                  ),

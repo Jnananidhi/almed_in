@@ -8,6 +8,7 @@ import 'package:almed_in/Screens/Home/widgets/faq.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 
 import 'Authentication/login_screen.dart';
+import 'contact_screen.dart';
 
 
 class AboutScreen extends StatefulWidget {
@@ -24,9 +25,14 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
         backgroundColor: kWhiteColor,
         //scrollable widget
-        drawer: Drawer(
+      drawer: Drawer(
           child: ListView(
             children: [
+              const DrawerHeader(
+                child: Center(
+                  child: Image(image: AssetImage('logo.png'),height: 80),
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -44,13 +50,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                 },
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                title: 'Why Almed',
-                press: () {},
-              ),
+
               const SizedBox(
                 height: 10,
               ),
@@ -136,7 +136,7 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               MenuItems(
                 title: 'Contact Us',
-                press: () {},
+                press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
               ),
             ],
           )),

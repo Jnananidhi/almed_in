@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
+import 'contact_screen.dart';
 import 'faq_screen.dart';
 class AddressScreen extends StatefulWidget {
   final String? userInput,Address,RName,Pnumber;
@@ -33,6 +34,11 @@ class _AddressScreenState extends State<AddressScreen> {
         drawer: Drawer(
             child: ListView(
               children: [
+                const DrawerHeader(
+                  child: Center(
+                    child: Image(image: AssetImage('logo.png'),height: 80),
+                  ),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -49,13 +55,6 @@ class _AddressScreenState extends State<AddressScreen> {
                   press: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                   },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'Why Almed',
-                  press: () {},
                 ),
                 const SizedBox(
                   height: 10,
@@ -142,7 +141,7 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
                 MenuItems(
                   title: 'Contact Us',
-                  press: () {},
+                  press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
                 ),
               ],
             )),
