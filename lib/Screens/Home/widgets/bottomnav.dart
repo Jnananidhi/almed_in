@@ -1,6 +1,7 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 
@@ -84,7 +85,8 @@ class BottomNav extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
+                !Responsive.isMobile(context)
+                    ?Row(
                   children: [
                     InkWell(
                       onTap: () {},
@@ -96,10 +98,52 @@ class BottomNav extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Text("Designed with ❤️ by Linkable Technologies",
-                      style: TextStyle(
-                        fontSize: _size.width >= 370 ? 15 : 10,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:<Widget> [
+                        Text("Designed with ",
+                          style: TextStyle(
+                            fontSize:15,
+                          ),
+                        ),
+                        Image.asset(
+                            'heart_icon.png',height: 10,width: 10),
+                        Text(" by Linkable Technologies",
+                          style: TextStyle(
+                            fontSize:15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+                    :Column(
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Text(
+                        "Almed.in All Rights Reserved",
+                        style: TextStyle(
+                          fontSize: 12,
+                        ),
                       ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:<Widget> [
+                        Text("Designed with ",
+                          style: TextStyle(
+                            fontSize:12,
+                          ),
+                        ),
+                        Image.asset(
+                            'heart_icon.png',height: 25,width: 25),
+                        Text(" by Linkable Technologies",
+                          style: TextStyle(
+                            fontSize:12,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

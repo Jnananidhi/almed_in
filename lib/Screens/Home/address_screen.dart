@@ -1,9 +1,11 @@
 import 'package:almed_in/Screens/Home/Map/address_selector_MAP.dart';
 import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/address_overlay.dart';
 import 'package:almed_in/Screens/Home/widgets/Checkoutscreen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
+import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 
 import 'Authentication/login_screen.dart';
@@ -19,15 +21,17 @@ class AddressScreen extends StatefulWidget {
   State<AddressScreen> createState() => _AddressScreenState();
 }
 
-class _AddressScreenState extends State<AddressScreen> {
-  bool isMapViewVisible = false;// Initially, the map view is invisible
-  String selectedMenuItem = 'Category';
 
-  void toggleMapViewVisibility() {
-    setState(() {
-      isMapViewVisible = !isMapViewVisible;
+class _AddressScreenState extends State<AddressScreen> {
+  OverlayEntry? overlayEntry;
+  void showAddressOverlay(BuildContext context) {
+    OverlayState? overlayState = Overlay.of(context);
+     overlayEntry = OverlayEntry(builder: (context) {
+      return AddressOverlay(overlayContext:context,overlayEntry: overlayEntry);
     });
+    overlayState?.insert(overlayEntry!);
   }
+  String selectedMenuItem = 'Category';
     @override
     Widget build(BuildContext context) {
       return Scaffold(
@@ -156,7 +160,7 @@ class _AddressScreenState extends State<AddressScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextButton(
-                      onPressed: toggleMapViewVisibility,
+                      onPressed: (){showAddressOverlay(context);},
                       child: Text(
                         "+ Add delivery address",
                         style: TextStyle(
@@ -233,12 +237,6 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               ),
               // Right Section with Search and Map
-              Expanded(
-                flex: 2,
-                child: isMapViewVisible
-                    ? MapView(key: ValueKey('map_key'))
-                    : Container(), // Render the MapView only when isMapViewVisible is true
-              ),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Map/model_PlaceSearch.dart';
@@ -17,6 +18,7 @@ import '../products/product.dart';
 import '../widgets/menu.dart';
 
 bool isDetailsVisible = false;
+bool isCardVisible = false;
 class MapView extends StatefulWidget {
   const MapView({super.key});
 
@@ -27,6 +29,7 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
   String selectedMenuItem = 'Category';
   late GoogleMapController googleMapController;
+  Completer<GoogleMapController> _controllerCompleter = Completer();
   TextEditingController searchController = TextEditingController();
   List<PlaceSearch> searchResults = [];
   Marker? selectedLocationMarker;
@@ -305,7 +308,6 @@ class _MapViewState extends State<MapView> {
                     ),
                   ),],
                 )),//____________MAP CONTAINER END_________________________________________
-
               ],
             ),
           ),
