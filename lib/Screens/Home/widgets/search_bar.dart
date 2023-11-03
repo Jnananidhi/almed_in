@@ -292,7 +292,7 @@ class _Search_barState extends State<Search_bar> {
                     });
                   },
                   decoration: InputDecoration(
-                    hintText: "Search Content Here..",
+                    hintText: "Search Medicines Here..",
                     border: InputBorder.none,
                     // Remove the default border
                     prefixIcon: Icon(Icons.search),

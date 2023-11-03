@@ -52,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: kWhiteColor,
       //scrollable widget
       drawer: Drawer(
+        backgroundColor: Colors.white,
         child: ListView(
           children: [
             const DrawerHeader(

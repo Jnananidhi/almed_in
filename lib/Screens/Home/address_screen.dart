@@ -170,15 +170,31 @@ class _AddressScreenState extends State<AddressScreen> {
                         ),
                       ),
                     ),
+
                     SizedBox(height: 20),
                     Text(
-                      widget.RName ?? "",
+                      "Recent addresses",
                       style: TextStyle(
                         fontSize: 15,
-                        color: kPrimaryColor,
-                        fontFamily: 'DMSans Bold',
+                        color: Colors.black,
+                        fontFamily: 'DMSans Regular',
                       ),
                     ),
+                    SizedBox(height: 20),
+                    Container(
+
+                      child: Column(
+                        children:[ Text(
+                          widget.RName ?? "",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: kPrimaryColor,
+                            fontFamily: 'DMSans Bold',
+                            fontWeight: FontWeight.bold
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+
                     Text(
                       widget.Pnumber ?? "",
                       style: TextStyle(
@@ -186,6 +202,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         color: kPrimaryColor,
                         fontFamily: 'DMSans Bold',
                       ),
+                      textAlign: TextAlign.left,
                     ),
 
                     Text(
@@ -195,6 +212,7 @@ class _AddressScreenState extends State<AddressScreen> {
                         color: kPrimaryColor,
                         fontFamily: 'DMSans Bold',
                       ),
+                      textAlign: TextAlign.left,
                     ),
                     Text(
                       widget.userInput ?? "",
@@ -203,6 +221,8 @@ class _AddressScreenState extends State<AddressScreen> {
                         color: kPrimaryColor,
                         fontFamily: 'DMSans Bold',
                       ),
+                      textAlign: TextAlign.left,
+                    ), ] ),
                     ),
                     SizedBox(
                       width: 250,
@@ -222,15 +242,6 @@ class _AddressScreenState extends State<AddressScreen> {
                             fontFamily: 'DMSans Bold',
                           ),
                         ),
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      "Recent addresses",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontFamily: 'DMSans Regular',
                       ),
                     ),
                   ],

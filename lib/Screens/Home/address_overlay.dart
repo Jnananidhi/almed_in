@@ -22,6 +22,12 @@ class AddressOverlay extends StatefulWidget {
 
 class _AddressOverlayState extends State<AddressOverlay> {
   // Define a variable to track which screen is currently displayed.
+  final _formKey = GlobalKey<FormState>();
+  String userInput = '';
+  String Address = '';
+  String RName = '';
+  String Pnumber = '';
+
   int currentScreen = 1;
    late GoogleMapController? googleMapController;
   Completer<GoogleMapController> _controllerCompleter = Completer();
@@ -257,69 +263,123 @@ class _AddressOverlayState extends State<AddressOverlay> {
 
   // Second screen content
   Widget _buildScreen2(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Pincode',
-              labelStyle: TextStyle(
-                color: Colors.black,
-                fontFamily: 'DMSans Regular',
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Pincode',
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'DMSans Regular',
+                ),
               ),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'House Number, Floor, Building Name, Locality',
-              labelStyle: TextStyle(
-                color: Colors.black,
-                fontFamily: 'DMSans Regular',
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              labelText: "Recipient's Name",
-              labelStyle: TextStyle(
-                color: Colors.black,
-                fontFamily: 'DMSans Regular',
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Phone Number',
-              labelStyle: TextStyle(
-                color: Colors.black,
-                fontFamily: 'DMSans Regular',
-              ),
-            ),
-          ),
-          SizedBox(height: 30),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  userInput = text;
+                });
               },
-              style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
-              child: Text(
-                "Save",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: lightColor,
-                  fontFamily: 'DMSans Bold',
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                  return 'Please enter pincode';
+                  }
+                  return null;}
+              ),
+            SizedBox(height: 10),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'House Number, Floor, Building Name, Locality',
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'DMSans Regular',
+                ),
+              ),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  Address = text;
+                });
+              },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Locality';
+                  }
+                  return null;}
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: "Recipient's Name",
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'DMSans Regular',
+                ),
+              ),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  RName = text;
+                });
+              },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter Recipient's Name";
+                  }
+                  return null;}
+            ),
+            SizedBox(height: 10),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Phone Number',
+                labelStyle: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'DMSans Regular',
+                ),
+              ),
+              onChanged: (text) {
+                // Update the userInput variable when the text changes
+                setState(() {
+                  Pnumber = text;
+                });
+              },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter Phone Number';
+                  }
+                  return null;}
+            ),
+
+            SizedBox(height: 30),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    widget.overlayEntry?.remove();
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber)),
+                  );
+                  }},
+                style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
+                child: Text(
+                  "Save",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: lightColor,
+                    fontFamily: 'DMSans Bold',
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

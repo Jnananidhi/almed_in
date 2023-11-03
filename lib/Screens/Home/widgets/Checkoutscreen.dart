@@ -185,7 +185,7 @@ child:SingleChildScrollView(
                     end: Alignment.bottomRight,
                     colors: [
                       lightColor, // Start color
-                      kPrimaryColor, // End color (same color for a solid effect)
+                      kSecondaryColor, // End color (same color for a solid effect)
                     ],
                   ),
                 ),
@@ -240,7 +240,7 @@ child:SingleChildScrollView(
                         end: Alignment.bottomRight,
                         colors: [
                           lightColor, // Start color
-                         kPrimaryColor, // End color (same color for a solid effect)
+                          kSecondaryColor, // End color (same color for a solid effect)
                         ],
                       ),
                     ),
@@ -408,7 +408,7 @@ child:SingleChildScrollView(
              end: Alignment.bottomRight,
              colors: [
                lightColor, // Start color
-               kPrimaryColor, // End color (same color for a solid effect)
+               kSecondaryColor, // End color (same color for a solid effect)
              ],
            ),
          ),
@@ -449,7 +449,7 @@ child:SingleChildScrollView(
             end: Alignment.bottomRight,
             colors: [
               lightColor, // Start color
-              kPrimaryColor, // End color (same color for a solid effect)
+              kSecondaryColor, // End color (same color for a solid effect)
             ],
           ),
         ),
@@ -491,7 +491,7 @@ child:SingleChildScrollView(
                      end: Alignment.bottomRight,
                      colors: [
                        lightColor, // Start color
-                       kPrimaryColor, // End color (same color for a solid effect)
+                       kSecondaryColor, // End color (same color for a solid effect)
                      ],
                    ),
                  ),
@@ -515,7 +515,7 @@ child:SingleChildScrollView(
           ),
 
                   Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.center,
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: ElevatedButton(
