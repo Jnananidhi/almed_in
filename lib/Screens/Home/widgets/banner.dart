@@ -51,7 +51,7 @@ class _HeroBannerState extends State<HeroBanner> {
                   press: () {}),
             ],
             options: CarouselOptions(
-                height: _size.width == 300
+                height: _size.width <500
                     ? 250
                     : _size.width >= 500
                         ? 500

@@ -13,7 +13,7 @@ import 'contact_screen.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:marquee/marquee.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -180,11 +180,70 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               Navigation(),
               if (Responsive.isDesktop(context))
+              const SizedBox(
+                height: 30,
+              ),
+              if (Responsive.isDesktop(context))
+              Container(
+                //width: double.infinity,
+                width: kMaxWidth,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius:  BorderRadius.circular(15.0),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      lightColor, // Start color
+                      kSecondaryColor, // End color (same color for a solid effect)
+                    ],
+                  ),
+                ),
+
+                child: Marquee(
+                  text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              if (!Responsive.isDesktop(context))
+                const SizedBox(
+                  height: 45,
+                ),
+              if (!Responsive.isDesktop(context))
+              Container(
+                //width: double.infinity,
+                width: kMaxWidth,
+                height: 40,
+                decoration: BoxDecoration(
+                  borderRadius:  BorderRadius.circular(15.0),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      lightColor, // Start color
+                      kSecondaryColor, // End color (same color for a solid effect)
+                    ],
+                  ),
+                ),
+
+                child: Marquee(
+                  text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              if (Responsive.isDesktop(context))
               Divider(
                 thickness: 1,
                 height: 0.01, // Set the height of the divider line
                 color: kPrimaryColor, // Set the color of the divider line
               ),
+
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -192,13 +251,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      if(MediaQuery.of(context).size.width < 600)
-                        const SizedBox(
-                          height: 30,
-                        ),
                       HeroBanner(),
                       ProductSection(),
                       BottomNav(),
+
                       // Add other elements here
                     ],
                   ),
@@ -220,6 +276,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     : MediaQuery.of(context).size.width * 0.25,
                 child: Search_bar(),
               ),
+
+          // Marquee(
+          //   text: 'Your marquee text goes here',
+          //   style: TextStyle(
+          //     fontSize: 20,
+          //     color: Colors.black,
+          //   ),
+          // ),
+
             ]),
           );
 

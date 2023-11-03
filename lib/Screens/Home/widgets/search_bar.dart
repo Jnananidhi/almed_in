@@ -263,7 +263,6 @@ class _Search_barState extends State<Search_bar> {
     child: Column(
           children: [
             Container(
-
               padding: EdgeInsets.symmetric(horizontal: 8),
               decoration: BoxDecoration(
                 color: Colors.white,
