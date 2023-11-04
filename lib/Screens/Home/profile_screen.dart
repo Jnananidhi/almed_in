@@ -5,6 +5,7 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
@@ -161,8 +162,32 @@ class _UserProfileState extends State<UserProfile> {
                     children: [
                       //now we create menu and header
                       const Navigation(),
+                      Container(
+                        //width: double.infinity,
+                        width: kMaxWidth,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          borderRadius:  BorderRadius.circular(15.0),
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              lightColor, // Start color
+                              kSecondaryColor, // End color (same color for a solid effect)
+                            ],
+                          ),
+                        ),
+
+                        child: Marquee(
+                          text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                       UserProfilePage(),
-                      const BottomNav()
+                       BottomNav()
                       //now we will make our site responsive
                     ],
                   ),
@@ -172,125 +197,150 @@ class _UserProfileState extends State<UserProfile> {
 }
 
 
-class UserProfilePage extends StatelessWidget {
+class UserProfilePage extends StatefulWidget {
+  @override
+  State<UserProfilePage> createState() => _UserProfilePageState();
+}
+
+class _UserProfilePageState extends State<UserProfilePage> {
+  bool isHovered = false;
+
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            isHovered = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isHovered = false;
+          });
+        },
+    child:  Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding:  EdgeInsets.only(left: 0,top:30,right: 30,bottom:10),
-          child: Column(
-
-              children: <Widget>[
-                SizedBox(height: 20),
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: AssetImage('assets/products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'John Doe', // Replace with the user's name
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'john.doe@example.com', // Replace with the user's email
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 20),
-                Card(
-                  // Set card margin
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0), // Set the curved border radius
-                  ),
-                  elevation: 10,
-                  child: Container(
-                    padding: EdgeInsets.all(20.0),
-                    child:  Column(
-                        children: <Widget>[
-                          TextButton(
-                            onPressed:  () {
-
-                            },
-                            child: Text(
-                              'My Orders',textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontFamily: "DMSans Regular",
-                                color: Colors.black,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                          Divider(
-                            thickness: 1,
-                            indent : 0,
-                            endIndent : 10,
-                          ),
-                          TextButton(
-                            onPressed:  () {
-
-                            },
-                            child: Text(
-                              'Logout',textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontFamily: "DMSans Regular",
-                                color: Colors.black,
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),                    ],
+         Container(
+           padding: EdgeInsets.all(20.0),
+           child: Card(
+             shape: RoundedRectangleBorder(
+               borderRadius: BorderRadius.circular(20.0), // Set the border radius here
+             ),
+            elevation: 20,
+            color: lightColor,
+            child: Padding(
+            padding: EdgeInsets.all(30.0),
+              child: Column(
+                  children: <Widget>[
+                    SizedBox(height: 20),
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage('assets/products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
                     ),
-                  ),
+                    SizedBox(height: 10),
+                    Text(
+                      'John Doe', // Replace with the user's name
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'john.doe@example.com', // Replace with the user's email
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    SizedBox(height: 20),
+                    TextButton(
+                      onPressed:  () {
+
+                      },
+                      child: Text(
+                        'My Orders',textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: isHovered ?kPrimaryColor:Colors.black,fontSize: 18
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
+                    TextButton(
+                      onPressed:  () {
+
+                      },
+                      child: Text(
+                        'Logout',textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: isHovered ?kPrimaryColor:Colors.black,fontSize: 18
+                        ),
+                      ),
+                    ),
+                        ],
                 ),
-                    ],
             ),
         ),
-        Card(
-           // Set card margin
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0), // Set the curved border radius
-          ),
-          elevation: 10,
-          child: Container(
+         ),
+
+         Container(
             padding: EdgeInsets.all(20.0),
             width: kMaxWidth/1.5,
-            child: const Column(
+            child:  Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("Personal Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                SizedBox(height: 10,),
+                //Text("Personal Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
+               // SizedBox(height: 10,),
                 Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0), // Set the border radius here
+                  ),
+
                   elevation: 20,
                   color: lightColor,
                   child: Padding(
                     padding: EdgeInsets.all(30.0),
                   child: Column(
-
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Phone :  +91 8088888688",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
+                      //Text("Personal Information",textAlign: TextAlign.center,style: TextStyle(color: kPrimaryColor)),
+                      ListTile(
+                        leading: Icon(Icons.person_2_rounded),
+                        title: Text('Personal Information'),
+                      ),
                       Divider(
                         thickness: 1,
-                        indent : 0,
-                        endIndent : 10,
+                        height: 0.01, // Set the height of the divider line
+                        color: kPrimaryColor, // Set the color of the divider line
                       ),
-                      Text("Email :   yourmail@gmail.com",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                      Divider(
-                        thickness: 1,
-                        indent : 0,
-                        endIndent : 10,
+                      ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text('Contact'),
+                        subtitle: Text('123-456-7890'),
                       ),
-                      Text("Shipping Address :   your full address",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
+                      ListTile(
+                        leading: Icon(Icons.email),
+                        title: Text('Email'),
+                        subtitle: Text('john.doe@example.com'),
+                      ),
+                      // Shipping Address
+                      ListTile(
+                        leading: Icon(Icons.home),
+                        title: Text('Shipping Address'),
+                        subtitle: Text('123 Main St, City, Country'),
+                      ),
 
                     ],
                   ),
                   ),
                 ),
-                Text("Payments Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
+
                 SizedBox(height: 10,),
                 Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0), // Set the border radius here
+                  ),
                   elevation: 20,
                   color: lightColor,
                   child: Padding(
@@ -300,22 +350,26 @@ class UserProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Saved Cards",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                        Text("+91 8088888688",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+                        //Text("Payments Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor)),
+                        ListTile(
+                          leading: Icon(Icons.payments_rounded),
+                          title: Text('Payments Information')
+                        ),
                         Divider(
                           thickness: 1,
-                          indent : 0,
-                          endIndent : 10,
+                          height: 0.01, // Set the height of the divider line
+                          color: kPrimaryColor, // Set the color of the divider line
                         ),
-                        Text("Saved UPI",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                        Text("yourmail@gmail.com",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
-                        Divider(
-                          thickness: 1,
-                          indent : 0,
-                          endIndent : 10,
+                        ListTile(
+                          leading: Icon(Icons.payment),
+                          title: Text('Saved UPI'),
+                          subtitle: Text('john.doe@upi'),
                         ),
-                        Text("Shipping Address",textAlign: TextAlign.start,style: TextStyle(color: kPrimaryColor,fontFamily: 'DMSans Regular')),
-                        Text("your full address",textAlign: TextAlign.start,style: TextStyle(color: Colors.black,fontFamily: 'DMSans Regular')),
+                        ListTile(
+                          leading: Icon(Icons.payment),
+                          title: Text('Saved Cards'),
+                          subtitle: Text('**** **** **** 1234'),
+                        ),
                       ],
                     ),
                   ),
@@ -323,9 +377,8 @@ class UserProfilePage extends StatelessWidget {
               ],
             ),
           ),
-        ),
       ],
-    );
+    ));
   }
 }
 
@@ -353,3 +406,4 @@ class OrderHistoryItem extends StatelessWidget {
     );
   }
 }
+
