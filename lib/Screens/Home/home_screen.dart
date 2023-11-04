@@ -180,70 +180,70 @@ class _HomeScreenState extends State<HomeScreen> {
            Column(
             children: <Widget>[
               Navigation(),
-              if (Responsive.isDesktop(context))
-              const SizedBox(
-                height: 30,
-              ),
-              if (Responsive.isDesktop(context))
-              Container(
-                //width: double.infinity,
-                width: kMaxWidth,
-                height: 50,
-                decoration: BoxDecoration(
-                  borderRadius:  BorderRadius.circular(15.0),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      lightColor, // Start color
-                      kSecondaryColor, // End color (same color for a solid effect)
-                    ],
-                  ),
-                ),
-
-                child: Marquee(
-                  text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+              //if (Responsive.isDesktop(context))
+              // const SizedBox(
+              //   height: 30,
+              // ),
+              // if (Responsive.isDesktop(context))
+              // Container(
+              //   //width: double.infinity,
+              //   width: kMaxWidth,
+              //   height: 50,
+              //   decoration: BoxDecoration(
+              //     borderRadius:  BorderRadius.circular(15.0),
+              //     gradient: LinearGradient(
+              //       begin: Alignment.topLeft,
+              //       end: Alignment.bottomRight,
+              //       colors: [
+              //         lightColor, // Start color
+              //         kSecondaryColor, // End color (same color for a solid effect)
+              //       ],
+              //     ),
+              //   ),
+              //
+              //   child: Marquee(
+              //     text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
+              //     style: TextStyle(
+              //       fontSize: 20,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              // ),
               if (!Responsive.isDesktop(context))
                 const SizedBox(
                   height: 45,
                 ),
-              if (!Responsive.isDesktop(context))
-              Container(
-                //width: double.infinity,
-                width: kMaxWidth,
-                height: 40,
-                decoration: BoxDecoration(
-                  borderRadius:  BorderRadius.circular(15.0),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      lightColor, // Start color
-                      kSecondaryColor, // End color (same color for a solid effect)
-                    ],
-                  ),
-                ),
-
-                child: Marquee(
-                  text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-              if (Responsive.isDesktop(context))
-              Divider(
-                thickness: 1,
-                height: 0.01, // Set the height of the divider line
-                color: kPrimaryColor, // Set the color of the divider line
-              ),
+              // if (!Responsive.isDesktop(context))
+              // Container(
+              //   //width: double.infinity,
+              //   width: kMaxWidth,
+              //   height: 40,
+              //   decoration: BoxDecoration(
+              //     borderRadius:  BorderRadius.circular(15.0),
+              //     gradient: LinearGradient(
+              //       begin: Alignment.topLeft,
+              //       end: Alignment.bottomRight,
+              //       colors: [
+              //         lightColor, // Start color
+              //         kSecondaryColor, // End color (same color for a solid effect)
+              //       ],
+              //     ),
+              //   ),
+              //
+              //   child: Marquee(
+              //     text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
+              //     style: TextStyle(
+              //       fontSize: 15,
+              //       color: Colors.black,
+              //     ),
+              //   ),
+              // ),
+              // if (Responsive.isDesktop(context))
+              // Divider(
+              //   thickness: 1,
+              //   height: 0.01, // Set the height of the divider line
+              //   color: kPrimaryColor, // Set the color of the divider line
+              // ),
 
               Expanded(
                 child: SingleChildScrollView(
@@ -268,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
          Positioned(
                 top: MediaQuery.of(context).size.width < 600
           ? 90// Adjust the value for mobile view
-              :105,
+              :50,
                 left: MediaQuery.of(context).size.width < 600
                     ? 0 // Adjust the value for mobile view
                     : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view

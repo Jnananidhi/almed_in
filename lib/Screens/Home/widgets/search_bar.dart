@@ -50,7 +50,6 @@ class _Search_barState extends State<Search_bar> {
     // Filter the contacts based on the search term
     for (var item in contact) {
       String name = item['pname'].toString().toLowerCase();
-
       // Check for matches with each individual word
       for (var word in searchWords) {
         if (name.contains(word)) {
@@ -61,12 +60,14 @@ class _Search_barState extends State<Search_bar> {
     }
 
     // Filter the 'strength' list based on the search term
+
     for (var item in strength) {
       String name = item['STRENGTH'].toString().toLowerCase();
 
       // Check for matches with each individual word
       for (var word in searchWords) {
         if (name.contains(word)) {
+          searchSuggestions.add("Strength".toString());
           searchSuggestions.add(item['STRENGTH'].toString());
           break; // Break the loop if a match is found for this item
         }
@@ -347,7 +348,8 @@ class _Search_barState extends State<Search_bar> {
 
         child: SingleChildScrollView( // Wrap with a SingleChildScrollView
             child: Column(
-                children: searchSuggestions.map((suggestion) {
+                children:
+                searchSuggestions.map((suggestion) {
                     return ListTile(
                     title: Text(suggestion),
                     onTap: () {

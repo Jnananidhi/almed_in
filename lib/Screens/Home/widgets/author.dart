@@ -95,7 +95,7 @@ class _CategoryCardState extends State<CategoryCard> {
           width: _size.width <= 770
               ? _size.width
               : _size.width >= 975
-                  ? 300
+                  ?kMaxWidth/3.5
                   : 200,
           decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
@@ -104,18 +104,6 @@ class _CategoryCardState extends State<CategoryCard> {
               ),
           child: Column(
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Image.asset(
-                  widget.image,
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
               Text(
                 widget.title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -123,8 +111,18 @@ class _CategoryCardState extends State<CategoryCard> {
               const SizedBox(
                 height: 15,
               ),
+              Padding(
+                padding:  const EdgeInsets.only(left: 20.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(
+                    Icons.format_quote_rounded,
+                    color: kSecondaryColor,
+                  ),
+                ),
+              ),
                Padding(
-                 padding: const EdgeInsets.all(8.0),
+                 padding: const EdgeInsets.all(20.0),
                  child: Text(
                     widget.description,textAlign: TextAlign.justify,
                     style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular'),

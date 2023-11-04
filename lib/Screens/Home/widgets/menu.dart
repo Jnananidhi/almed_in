@@ -1,12 +1,8 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
-import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
-import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
-import 'package:almed_in/Screens/Home/contact_screen.dart';
-import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
@@ -55,127 +51,137 @@ class _NavigationState extends State<Navigation> {
       width: double.infinity,
       child: Column(
         children: [
-          
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: kMaxWidth,
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Row(
-                    children: [
-                      if (!Responsive.isDesktop(context))
-                        IconButton(
-                            onPressed: () {
-                              Scaffold.of(context).openDrawer();
-                            },
-                            icon: Icon(Icons.menu)),
-                      //title
-                      if (Responsive.isDesktop(context))
-                        Container(
-                          color: kWhiteColor,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>  const HomeScreen()),
-                                );
-                              },
-
-                                child:
-                                Image.asset(
-                                  'assets/logo_500w.png',  // Make sure the path is correct
-                                  fit: BoxFit.contain,
-                                  height: 120,
-                                )
-                            ),
-                        ),
-                      if (!Responsive.isDesktop(context))
-                        Container(
-                          color: kWhiteColor,
+          Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Row(
+                  children: [
+                    if (!Responsive.isDesktop(context))
+                      IconButton(
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          icon: Icon(Icons.menu)),
+                    //title
+                    if (Responsive.isDesktop(context))
+                      Container(
+                        color: kWhiteColor,
                           child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>  const HomeScreen()),
-                                );
-                              },
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+                              );
+                            },
 
                               child:
                               Image.asset(
                                 'assets/logo_500w.png',  // Make sure the path is correct
                                 fit: BoxFit.contain,
-                                height: 80,
-
+                                height: 120,
                               )
                           ),
-                        ),
+                      ),
+                    if (!Responsive.isDesktop(context))
+                      Container(
+                        color: kWhiteColor,
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
+                              );
+                            },
 
-                      const Spacer(),
-                      if (Responsive.isDesktop(context))  WebMenu(),
-                      const Spacer(),
-                      if (Responsive.isDesktop(context))
-                        MenuItems(
-                        title: 'Vendor?',
-                        press: () {
+                            child:
+                            Image.asset(
+                              'assets/logo_500w.png',  // Make sure the path is correct
+                              fit: BoxFit.contain,
+                              height: 80,
+
+                            )
+                        ),
+                      ),
+
+                    const Spacer(),
+                    //if (Responsive.isDesktop(context))  WebMenu(),
+                    const Spacer(),
+                    if (Responsive.isDesktop(context))
+                      MenuItems(
+                      title: 'Vendor?',
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) =>  LoginPage()),
+                        );
+                      },
+                    ),
+
+                  // shoppic_cart icn badge
+                    Consumer<CartProvider>(
+                      builder: (context, cart, child) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return CartScreen();
+                            }));
+                          },
+                          child: badges.Badge(
+                            badgeContent: Text(cart.cartItemCount.toString()),
+                            child: Icon(Icons.shopping_cart),
+                          ),
+                        );
+                      },
+                    ),
+
+                  Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child:
+                    IconButton(
+                      onPressed: () {
+                        if({Usermanagement.isLoggedIn} == false)
+                        {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>  LoginPage()),
                           );
-                        },
-                      ),
-
-                    // shoppic_cart icn badge
-                      Consumer<CartProvider>(
-                        builder: (context, cart, child) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return CartScreen();
-                              }));
-                            },
-                            child: badges.Badge(
-                              badgeContent: Text(cart.cartItemCount.toString()),
-                              child: Icon(Icons.shopping_cart),
-                            ),
+                        }
+                        else{
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>  LoginPage()),
                           );
-                        },
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.person_outline,
+                        color: Colors.black,
+                        size: 25,
                       ),
-
-                    Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child:
-                      IconButton(
-                        onPressed: () {
-                          if({Usermanagement.isLoggedIn} == false)
-                          {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  LoginPage()),
-                            );
-                          }
-                          else{
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) =>  LoginPage()),
-                            );
-                          }
-                        },
-                        icon: const Icon(
-                          Icons.person_outline,
-                          color: Colors.black,
-                          size: 25,
-                        ),
-                      ),),
-                    ],
-                  ),
+                    ),),
+                  ],
                 ),
+              ),
+              if (Responsive.isDesktop(context))
+              Container(
+                color: kSecondaryColor,
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                            HoverText("All Medicines"),
+                            HoverText("Therapeutic"),
+                            HoverText("Strength"),
+                            HoverText("Form"),
+                            HoverText("Company"),
+                            ],
+                  ),
+              )])]));
 
 
-        ]))]));}
+        }
 
   }
 
@@ -368,6 +374,47 @@ class _MenuItemsState extends State<MenuItems> {
                       ? kPrimaryColor
                       : Colors.black,
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+class HoverText extends StatefulWidget {
+  final String text;
+
+  HoverText(this.text);
+
+  @override
+  _HoverTextState createState() => _HoverTextState();
+}
+
+class _HoverTextState extends State<HoverText> {
+  bool isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          widget.text,
+          style: TextStyle(
+            color: isHovered ? kPrimaryColor : Colors.white,fontWeight:FontWeight.bold,fontSize: 18
           ),
         ),
       ),

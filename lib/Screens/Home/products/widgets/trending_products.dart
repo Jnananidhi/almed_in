@@ -1,4 +1,5 @@
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/products/widgets/profile_new.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/model/trending_model.dart';
@@ -136,7 +137,9 @@ class _TrendingProductsState extends State<TrendingProducts> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             height: 40,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) =>  ProfileScreen()));
+                            },
                             child: const Text(
                               "Quick View",
                               style: TextStyle(color: kWhiteColor),
