@@ -575,6 +575,6 @@ child:SingleChildScrollView(
       ]),
     )]))])),
           BottomNav(), ])))]));
-  }
+  }//updated
 }
 
