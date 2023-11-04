@@ -87,7 +87,7 @@ class _NavigationState extends State<Navigation> {
 
                                 child:
                                 Image.asset(
-                                  'logo_500w.png',  // Make sure the path is correct
+                                  'assets/logo_500w.png',  // Make sure the path is correct
                                   fit: BoxFit.contain,
                                   height: 120,
                                 )
@@ -106,7 +106,7 @@ class _NavigationState extends State<Navigation> {
 
                               child:
                               Image.asset(
-                                'logo_500w.png',  // Make sure the path is correct
+                                'assets/logo_500w.png',  // Make sure the path is correct
                                 fit: BoxFit.contain,
                                 height: 80,
 
@@ -207,29 +207,32 @@ class _WebMenuState extends State<WebMenu> {
         MenuItems(
           title: 'About US',
           press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const AboutScreen()),
-            );
+            Navigator.pushNamed(context, '/aboutAlmed.in');
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const AboutScreen()),
+            // );
           },
         ),
 
         MenuItems(
           title: 'FAQ',
           press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const FaqScreen()),
-            );
+            Navigator.pushNamed(context, '/faq');
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => const FaqScreen()),
+            // );
           },
         ),
         MenuItems(
           title: 'Contact Us',
           press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>  ContactUsApp()),
-            );
+            Navigator.pushNamed(context, '/contactUs');
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) =>  ContactUsApp()),
+            // );
           },
         ),
         // Add DropdownButton for additional menu items

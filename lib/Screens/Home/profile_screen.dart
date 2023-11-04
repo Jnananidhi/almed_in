@@ -29,7 +29,7 @@ class _UserProfileState extends State<UserProfile> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png'),height: 80),
+                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
                 ),
               ),
               Padding(
@@ -39,7 +39,7 @@ class _UserProfileState extends State<UserProfile> {
                   children: [
                     const DrawerHeader(
                       child: Center(
-                        child: Image(image: AssetImage('logo.png')),
+                        child: Image(image: AssetImage('assets/logo.png')),
                       ),
                     ),
                     const SizedBox(
@@ -186,7 +186,7 @@ class UserProfilePage extends StatelessWidget {
                 SizedBox(height: 20),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: AssetImage('products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
+                  backgroundImage: AssetImage('assets/products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
                 ),
                 SizedBox(height: 10),
                 Text(

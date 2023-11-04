@@ -55,7 +55,7 @@ class ProductScreenState extends State<ProductScreen> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png'),height: 80),
+                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
                 ),
               ),
               const SizedBox(

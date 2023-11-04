@@ -1,9 +1,13 @@
 
+import 'package:almed_in/Routes/app_route_config.dart';
+import 'package:almed_in/Screens/Home/about_screen.dart';
+import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
+import 'package:almed_in/Screens/Home/contact_screen.dart';
+import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-
 import 'Screens/Home/cart_provider.dart';
 
 void main() {
@@ -23,7 +27,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: "India's first All Medicine Distributor" ,
       //removing debug banner
       debugShowCheckedModeBanner: false,
@@ -31,8 +34,16 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'DMSans Bold'
       ),
-      home: const HomeScreen(),
+     // home: const HomeScreen(),
       builder: EasyLoading.init(),
+      initialRoute: '/',  // Initial route when the app is first launched
+      routes: {
+        '/': (context) => HomeScreen(),  // Home page
+        '/cart': (context) => CartScreen(),  // Shopping cart page
+        '/aboutAlmed.in': (context) => AboutScreen(),
+        '/faq': (context) => FaqScreen(),
+        '/contactUs': (context) => ContactUsApp(),// Checkout page
+      },
     );
   }
 }

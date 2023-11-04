@@ -31,7 +31,7 @@ class _FaqScreenState extends State<FaqScreen> {
     children: [
     const DrawerHeader(
     child: Center(
-    child: Image(image: AssetImage('logo.png')),
+    child: Image(image: AssetImage('assets/logo.png')),
     ),
     ),
     Padding(
@@ -41,7 +41,7 @@ class _FaqScreenState extends State<FaqScreen> {
       children: [
         const DrawerHeader(
           child: Center(
-            child: Image(image: AssetImage('logo.png'),height: 80),
+            child: Image(image: AssetImage('assets/logo.png'),height: 80),
           ),
         ),
         const SizedBox(

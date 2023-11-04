@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              Image.asset('mail_icon.png'),
+                              Image.asset('assets/mail_icon.png'),
                               const Text('''You'll get an email to the registered mail address\nopen the mail and find the verification code''',textAlign: TextAlign.center,),
                               const SizedBox(height: 20),
                               Row(

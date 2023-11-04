@@ -25,7 +25,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png'),height: 80),
+                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
                 ),
               ),
               const SizedBox(
@@ -139,7 +139,7 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset("success_animation.json",repeat: false,height: 200),
+          Lottie.asset("assets/success_animation.json",repeat: false,height: 200),
           const Text("Order Successful",textAlign: TextAlign.center,style: TextStyle(color: Colors.teal,fontSize: 18,fontFamily: 'DMSans Bold',fontWeight: FontWeight.bold)),
           const Text("Your Order id 0000000 has been successfully confirmed\nThanks for buying at Almed..",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 16,fontFamily: 'DMSans Light',fontWeight: FontWeight.bold)),
         ],

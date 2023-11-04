@@ -137,7 +137,7 @@ class BottomNav extends StatelessWidget {
                           ),
                         ),
                         Image.asset(
-                            'heart_icon.png',height: 25,width: 25),
+                            'assets/heart_icon.png',height: 25,width: 25),
                         Text(" by Linkable Technologies",
                           style: TextStyle(
                             fontSize:12,

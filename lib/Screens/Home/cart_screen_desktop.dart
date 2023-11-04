@@ -33,7 +33,7 @@ class _CartScreenState extends State<CartScreen> {
             children: [
               const DrawerHeader(
                 child: Center(
-                  child: Image(image: AssetImage('logo.png'),height: 80),
+                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
                 ),
               ),
               const SizedBox(
@@ -178,7 +178,8 @@ class _CartScreenState extends State<CartScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    'empty_cart.jpg',
+
+                    'assets/empty_cart.jpg',
                     width: 500,
                     height: 300,
                   ),

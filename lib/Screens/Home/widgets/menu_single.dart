@@ -47,7 +47,7 @@ class _Menu2State extends State<Menu2> {
                                       );
                                     },
                                     child: Image.asset(
-                                      'logo_500w.png',  // Make sure the path is correct
+                                      'assets/logo_500w.png',  // Make sure the path is correct
                                       fit: BoxFit.contain,
                                       height: 120,
                                     )

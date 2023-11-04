@@ -31,7 +31,7 @@ class CheckoutScreen extends StatefulWidget {
               children: [
                 const DrawerHeader(
                   child: Center(
-                    child: Image(image: AssetImage('logo.png'),height: 80),
+                    child: Image(image: AssetImage('assets/logo.png'),height: 80),
                   ),
                 ),
                 const SizedBox(
@@ -141,7 +141,6 @@ class CheckoutScreen extends StatefulWidget {
               ],
             )),
         body: Column(
-          
         children: [
         Navigation(),
           Divider(
@@ -255,7 +254,7 @@ child:SingleChildScrollView(
                           selectedPaymentMethod = value;
                         });
                       },
-                    ),
+                    ),trailing: Image.asset('assets/cards1.png'),
                   ),),
                   if (selectedPaymentMethod == 1)
                     Padding(
@@ -380,16 +379,8 @@ child:SingleChildScrollView(
                 ],
               ),
             ),
-            if (selectedPaymentMethod == 1)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Image.asset(
-                  'visa.png',
-                  width: 80,
-                  height: 90,
-                ),
-              ),
+
+
       ]),
                   SizedBox(height: 16),
          Card(
@@ -549,7 +540,7 @@ child:SingleChildScrollView(
             ),
 
             Expanded(
-              flex: 1,
+              flex:1,
               child: Column(
                 children:[ Container(
                   alignment: Alignment.topRight,

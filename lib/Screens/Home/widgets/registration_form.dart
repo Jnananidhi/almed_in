@@ -28,123 +28,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        drawer: Drawer(
-            child: ListView(
-              children: [
-                const DrawerHeader(
-                  child: Center(
-                    child: Image(image: AssetImage('logo.png'),height: 80),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  isActive: true,
-                  title: 'Home',
-                  press: () {},
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'About Us',
-                  press: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                  },
-                ),
-
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'FAQ',
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const FaqScreen()),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                DropdownButton<String>(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  value: selectedMenuItem,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      setState(() {
-                        selectedMenuItem = newValue;
-                        // Add logic to navigate to the related page based on selectedMenuItem
-                        if (selectedMenuItem == 'Therapeutic') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                          );
-
-                        } else if (selectedMenuItem == 'Strength') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                          );
-                        }
-                        else if (selectedMenuItem == 'Company') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                          );
-                        }else if (selectedMenuItem == 'Form') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                          );
-                        }
-                      });
-                    }
-                  },
-                  items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style:  TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize:  18 ,
-                          color: Colors.black,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  // Set the underline property to Container() to hide the underline.
-                  underline: Container(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'Vendor?',
-                  press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  LoginPage()),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                MenuItems(
-                  title: 'Contact Us',
-                  press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
-                ),
-              ],
-            )),
-        body:Padding(
+    return Container(
+        child:Padding(
       padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 70),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -568,14 +453,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
               ),
             Center(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-               Container(
-              margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0,bottom: 10.0),
+                    Container(
+              margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: kgreyColor,
+                  borderRadius: BorderRadius.circular(15),
+                  color: kgreyColor,
               ),
-              child: CustomButton(label: 'Submit', onPressed: () {  }))
+              child: CustomButton(
+                label: 'Submit',
+                  onPressed: (){},
+              ),
+               ),
              ],
           ),
             ),
