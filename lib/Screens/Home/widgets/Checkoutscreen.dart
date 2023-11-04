@@ -171,6 +171,8 @@ child:SingleChildScrollView(
       child: Column(
         children:[
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               flex: 2,
@@ -392,17 +394,17 @@ child:SingleChildScrollView(
             child: Column(
               children: [
             Container(
-            decoration: BoxDecoration(
-            borderRadius:  BorderRadius.circular(15.0),
-           gradient: LinearGradient(
-             begin: Alignment.topLeft,
-             end: Alignment.bottomRight,
-             colors: [
-               lightColor, // Start color
-               kSecondaryColor, // End color (same color for a solid effect)
-             ],
-           ),
-         ),
+                    decoration: BoxDecoration(
+                    borderRadius:  BorderRadius.circular(15.0),
+                   gradient: LinearGradient(
+                     begin: Alignment.topLeft,
+                     end: Alignment.bottomRight,
+                     colors: [
+                       lightColor, // Start color
+                       kSecondaryColor, // End color (same color for a solid effect)
+                     ],
+                   ),
+                 ),
                   //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                   child:
                 ListTile(
