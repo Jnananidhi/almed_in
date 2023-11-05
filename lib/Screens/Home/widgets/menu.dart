@@ -110,7 +110,7 @@ class _NavigationState extends State<Navigation> {
                     const Spacer(),
                     if (Responsive.isDesktop(context))
                       MenuItems(
-                      title: 'Vendor?',
+                      title: 'Seller?',
                       press: () {
                         Navigator.push(
                           context,

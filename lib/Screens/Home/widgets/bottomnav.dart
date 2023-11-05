@@ -31,7 +31,7 @@ class BottomNav extends StatelessWidget {
                     Text(
                         "Not finding the medicines?",
                     style: TextStyle(
-                      fontFamily: 'DMSans Bold' ,
+                      fontFamily: 'DMSans Light' ,
                       fontSize: _size.width >= 370 ? 20 : 10,
                     ),
                     ),
@@ -55,34 +55,34 @@ class BottomNav extends StatelessWidget {
                       height: 10,
                     ),
 
-                    Text(
-                      "Disclaimer",
-                      style: TextStyle(
-                        fontFamily: 'DMSans Bold' ,
-                        fontSize: _size.width >= 370 ? 20 : 10,
-                      ),
-                    ),
-
-            Text(
-              "The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                height:2,
-                color: Colors.black,
-                fontFamily: 'DMSans Regular' ,
-                fontSize: _size.width >= 370 ? 15 : 10,
-              ),
-            ),
+            //         Text(
+            //           "Disclaimer",
+            //           style: TextStyle(
+            //             fontFamily: 'DMSans Bold' ,
+            //             fontSize: _size.width >= 370 ? 20 : 10,
+            //           ),
+            //         ),
+            //
+            // Text(
+            //   "The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.",
+            //   textAlign: TextAlign.center,
+            //   style: TextStyle(
+            //     height:2,
+            //     color: Colors.black,
+            //     fontFamily: 'DMSans Regular' ,
+            //     fontSize: _size.width >= 370 ? 15 : 10,
+            //   ),
+            // ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const Divider(
-                      thickness: 1,
-                      color: Colors.black,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    // const Divider(
+                    //   thickness: 1,
+                    //   color: Colors.black,
+                    // ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                   ],
                 ),
                 !Responsive.isMobile(context)
@@ -93,6 +93,7 @@ class BottomNav extends StatelessWidget {
                       child: Text(
                         "Almed.in All Rights Reserved",
                         style: TextStyle(
+                          fontFamily: 'DMSans Light',
                           fontSize: _size.width >= 370 ? 15 : 10,
                         ),
                       ),
@@ -103,6 +104,7 @@ class BottomNav extends StatelessWidget {
                       children:<Widget> [
                         Text("Designed with ",
                           style: TextStyle(
+                            fontFamily: 'DMSans Light',
                             fontSize:15,
                           ),
                         ),
@@ -110,6 +112,7 @@ class BottomNav extends StatelessWidget {
                             'heart_icon.png',height: 10,width: 10),
                         Text(" by Linkable Technologies",
                           style: TextStyle(
+                            fontFamily: 'DMSans Light',
                             fontSize:15,
                           ),
                         ),
