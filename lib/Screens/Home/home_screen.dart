@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
               :50,
                 left: MediaQuery.of(context).size.width < 600
                     ? 0 // Adjust the value for mobile view
-                    : MediaQuery.of(context).size.width * 0.25, // Adjust the value for desktop view
+                    : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
                 right: MediaQuery.of(context).size.width < 600
                     ? 0 // Adjust the value for mobile view
                     : MediaQuery.of(context).size.width * 0.25,

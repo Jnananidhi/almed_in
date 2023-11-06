@@ -38,7 +38,7 @@ class BillSummary extends StatelessWidget {
             SizedBox(height: 10),
             Divider(thickness: 2,),
             BillItem(label: 'Total Bill (MRP) ' ,value:cart.calculateTotalMRP().toString()),
-            BillItem(label: 'Total Discount ',value:cart.calculateTotalDiscount().toString()),
+            BillItem(label: 'Total Discount ',value:'-'+cart.calculateTotalDiscount().toString()),
             BillItem(label: 'Shipping Fee ' ,value: '50'),
             Divider(thickness: 2,),
             BillItem(label: 'To Be Paid ',value:cart.calculateTotalAmount(shippingCost=50.00).toString(), isTotal: true),

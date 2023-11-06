@@ -2,6 +2,7 @@ import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
+import 'package:almed_in/Screens/Home/cart_screen_mobile.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
@@ -10,11 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 
 import '../products/product.dart';
-
-
-
-
-
 
 
 class Navigation extends StatefulWidget    {
@@ -109,57 +105,82 @@ class _NavigationState extends State<Navigation> {
                     //if (Responsive.isDesktop(context))  WebMenu(),
                     const Spacer(),
                     if (Responsive.isDesktop(context))
-                      MenuItems(
-                      title: 'Seller?',
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  LoginPage()),
-                        );
-                      },
-                    ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, "/login");
+                        },
+                        child:  Row(
+                          children: [
+                            Icon(Icons.warehouse),
+                            Padding(
+                              padding: const EdgeInsets.only(left:8.0),
+                              child: Text("Seller?",style: TextStyle(fontFamily: 'DMSans Bold'),),
+                            ),
+                          ],
+                        ),
+                      ),
 
                   // shoppic_cart icn badge
-                    Consumer<CartProvider>(
-                      builder: (context, cart, child) {
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
-                              return CartScreen();
-                            }));
-                          },
-                          child: badges.Badge(
-                            badgeContent: Text(cart.cartItemCount.toString()),
-                            child: Icon(Icons.shopping_cart),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Row(
+                        children: [
+                          Consumer<CartProvider>(
+                            builder: (context, cart, child) {
+                              return GestureDetector(
+                                onTap: () {
+                                  if(Responsive.isMobile(context)) {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return CartScreenMobile();
+                                        }));
+                                  }else{
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return CartScreen();
+                                        }));}
+                                },
+                                child: badges.Badge(
+                                  badgeContent: Text(cart.cartItemCount.toString()),
+                                  child: Icon(Icons.shopping_cart),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
+                          SizedBox(width: 9,),
+                          Text("Cart",style: TextStyle(fontFamily:'DMSans Bold' ),),
+                        ],
+                      ),
                     ),
 
                   Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                     child:
-                    IconButton(
-                      onPressed: () {
-                        if({Usermanagement.isLoggedIn} == false)
-                        {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  LoginPage()),
-                          );
-                        }
-                        else{
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  LoginPage()),
-                          );
-                        }
-                      },
-                      icon: const Icon(
-                        Icons.person_outline,
-                        color: Colors.black,
-                        size: 25,
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            if({Usermanagement.isLoggedIn} == false)
+                            {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  LoginPage()),
+                              );
+                            }
+                            else{
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  LoginPage()),
+                              );
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.person_outline,
+                            color: Colors.black,
+                            size: 25,
+                          ),
+                        ),Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),),
+                      ],
                     ),),
                   ],
                 ),

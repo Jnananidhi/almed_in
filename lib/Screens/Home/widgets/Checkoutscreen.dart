@@ -256,7 +256,7 @@ child:SingleChildScrollView(
                           selectedPaymentMethod = value;
                         });
                       },
-                    ),trailing: Image.asset('assets/cards1.png'),
+                    ),trailing: Image.asset('assets/card_icon.png',height:20),
                   ),),
                   if (selectedPaymentMethod == 1)
                     Padding(
@@ -417,8 +417,9 @@ child:SingleChildScrollView(
                         selectedPaymentMethod = value;
                       });
                     },
-                  ),
-                )),
+                  ),trailing: Image.asset('assets/upi_icon.png',height:20),
+                ),
+              ),
                 if (selectedPaymentMethod == 2)
                   ListTile(
                     title: Text('Additional Content Here'),
@@ -458,7 +459,7 @@ child:SingleChildScrollView(
                         selectedPaymentMethod = value;
                       });
                     },
-                  ),
+                  ),trailing: Image.asset('assets/Netbanking_icon.png',height:20),
                 ),),
                 if (selectedPaymentMethod == 3)
                   ListTile(

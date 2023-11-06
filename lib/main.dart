@@ -1,5 +1,6 @@
 
 import 'package:almed_in/Routes/app_route_config.dart';
+import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
@@ -42,7 +43,8 @@ class MyApp extends StatelessWidget {
         '/cart': (context) => CartScreen(),  // Shopping cart page
         '/aboutAlmed.in': (context) => AboutScreen(),
         '/faq': (context) => FaqScreen(),
-        '/contactUs': (context) => ContactUsApp(),// Checkout page
+        '/contactUs': (context) => ContactUsApp(), // Checkout page
+        '/login': (context) => LoginPage(),
       },
     );
   }

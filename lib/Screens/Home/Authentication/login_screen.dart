@@ -50,7 +50,7 @@ import '../products/product.dart';
     }
 
     Future login() async {
-      var url = "http://localhost/login.php";
+      var url = "http://localhost:8080/almed/login.php";
       var response = await http.post(Uri.parse(url), body: {
         "username": nameController.text,
         "password": passwordController.text,

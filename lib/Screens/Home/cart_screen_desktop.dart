@@ -178,7 +178,6 @@ class _CartScreenState extends State<CartScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-
                     'assets/empty_cart.jpg',
                     width: 500,
                     height: 300,
