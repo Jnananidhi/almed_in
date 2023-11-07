@@ -368,6 +368,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.4+2"
+  hover_menu:
+    dependency: "direct main"
+    description:
+      name: hover_menu
+      sha256: "4a28a3fe6de92b4cefbfd0935c5442441125291760ae4a7b568628554c6c0237"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1+3"
   html:
     dependency: transitive
     description:
@@ -798,5 +806,5 @@ packages:
     source: hosted
     version: "6.3.0"
 sdks:
-  dart: ">=3.1.1 <4.0.0"
+  dart: ">=3.1.1 <=3.7.12"
   flutter: ">=3.13.0"

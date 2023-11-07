@@ -104,6 +104,9 @@ class _CategoryCardState extends State<CategoryCard> {
               ),
           child: Column(
             children: [
+              const SizedBox(
+                height: 15,
+              ),
               Text(
                 widget.title,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -124,8 +127,8 @@ class _CategoryCardState extends State<CategoryCard> {
                Padding(
                  padding: const EdgeInsets.all(20.0),
                  child: Text(
-                    widget.description,textAlign: TextAlign.justify,
-                    style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular'),
+                    widget.description,textAlign: TextAlign.left,
+                    style: const TextStyle(fontSize: 18,fontFamily: 'DMSans Regular'),
                   ),
                ),
               const SizedBox(

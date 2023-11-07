@@ -9,8 +9,10 @@ import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../products/product.dart';
+import '../profile_screen.dart';
 
 
 class Navigation extends StatefulWidget    {
@@ -106,9 +108,18 @@ class _NavigationState extends State<Navigation> {
                     const Spacer(),
                     if (Responsive.isDesktop(context))
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/login");
-                        },
+                            onTap: () async {
+                              SharedPreferences preferences = await SharedPreferences
+                                  .getInstance();
+                              String? username = preferences.getString(
+                                  'username');
+                              if (username != null) {
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) => UserProfile()));
+                              } else {
+                                Navigator.pushNamed(context, "/login");
+                              }
+                            },
                         child:  Row(
                           children: [
                             Icon(Icons.warehouse),

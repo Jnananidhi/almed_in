@@ -50,7 +50,7 @@ import '../products/product.dart';
     }
 
     Future login() async {
-      var url = "http://localhost:8080/almed/login.php";
+      var url = "${api}login.php";
       var response = await http.post(Uri.parse(url), body: {
         "username": nameController.text,
         "password": passwordController.text,
@@ -212,171 +212,168 @@ import '../products/product.dart';
               child: Align(
                 alignment: Alignment.center,
                 child: Container(
+                  margin: EdgeInsets.only(top: 15),
                   width: 380,
-
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Card(
-                      elevation: 20,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min, // Set the mainAxisSize to min
-                        children: [
-                          Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 45,
-                              fontFamily: 'DMSans Bold',
-                            ),
+                  child: Card(
+                    elevation: 20,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min, // Set the mainAxisSize to min
+                      children: [
+                        Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 45,
+                            fontFamily: 'DMSans Bold',
                           ),
-                          Container(
-                            width: 320,
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Enter email or Phone number',
-                                      filled: true,
-                                      fillColor: Colors.blueGrey[50],
-                                      labelStyle: const TextStyle(fontSize: 12),
-                                      contentPadding: const EdgeInsets.only(left: 30),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(color: kDarkgreyColor),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(color: kDarkgreyColor),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
+                        ),
+                        Container(
+                          width: 320,
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Enter email or Phone number',
+                                    filled: true,
+                                    fillColor: Colors.blueGrey[50],
+                                    labelStyle: const TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
-                                    controller: nameController,
-                                    // The validator receives the text that the user has entered.
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter username';
-                                      } else if (value.length < 2) {
-                                        return 'at least enter 4 characters';
-                                      } else if (value.length > 13) {
-                                        return 'maximum character is 13';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 20),
-                                  TextFormField(
-                                    obscureText: obscureText,
-                                    decoration: InputDecoration(
-                                      hintText: 'Password',
-                                      suffixIcon: InkWell(
-                                        onTap: togglePasswordVisibility,
-                                        child: Icon(
-                                          obscureText
-                                              ? Icons.visibility_off_outlined
-                                              : Icons.visibility,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                      filled: true,
-                                      fillColor: Colors.blueGrey[50],
-                                      labelStyle: const TextStyle(fontSize: 12),
-                                      contentPadding: const EdgeInsets.only(left: 30),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(color: kDarkgreyColor),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(color: kDarkgreyColor),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                    ),
-                                    controller: passwordController,
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter some text';
-                                      } else if (value.length < 2) {
-                                        return 'at least enter 6 characters';
-                                      } else if (value.length > 13) {
-                                        return 'maximum character is 13';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  const SizedBox(height: 10),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => forgot1()),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Forgot Password?',textAlign: TextAlign.right,
-                                      style: TextStyle(
-                                        color: Colors.blue,
-                                        decoration: TextDecoration.underline,
-                                      ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
                                     ),
                                   ),
-                                  const SizedBox(height: 10),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                    child: ElevatedButton(
-                                      child: Container(
-                                          width: double.infinity,
-                                          height: 50,
-                                          child: const Center(child: Text("Sign In"))),
-                                      onPressed: (){
-                                        if (_formKey.currentState!.validate()) {
-                                          login();
-                                        }
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Don't have an account?",
-                                style: TextStyle(fontSize: 15,
-                                  color: Colors.black54,
-                                  fontFamily: 'DMSans Bold',
+                                  controller: nameController,
+                                  // The validator receives the text that the user has entered.
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter username';
+                                    } else if (value.length < 2) {
+                                      return 'at least enter 4 characters';
+                                    } else if (value.length > 13) {
+                                      return 'maximum character is 13';
+                                    }
+                                    return null;
+                                  },
                                 ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => RegistrationScreen()),
-                                  );
-                                },
-                                child: Text(
-                                  'Register',textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    decoration: TextDecoration.underline,
+                                const SizedBox(height: 20),
+                                TextFormField(
+                                  obscureText: obscureText,
+                                  decoration: InputDecoration(
+                                    hintText: 'Password',
+                                    suffixIcon: InkWell(
+                                      onTap: togglePasswordVisibility,
+                                      child: Icon(
+                                        obscureText
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.blueGrey[50],
+                                    labelStyle: const TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: passwordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter some text';
+                                    } else if (value.length < 2) {
+                                      return 'at least enter 6 characters';
+                                    } else if (value.length > 13) {
+                                      return 'maximum character is 13';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                const SizedBox(height: 10),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => forgot1()),
+                                    );
+                                  },
+                                  child: Text(
+                                    'Forgot Password?',textAlign: TextAlign.right,
+                                    style: TextStyle(
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(height: 10),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  child: ElevatedButton(
+                                    child: Container(
+                                        width: double.infinity,
+                                        height: 50,
+                                        child: const Center(child: Text("Sign In"))),
+                                    onPressed: (){
+                                      if (_formKey.currentState!.validate()) {
+                                        login();
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: 20),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account?",
+                              style: TextStyle(fontSize: 15,
+                                color: Colors.black54,
+                                fontFamily: 'DMSans Bold',
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RegistrationScreen()),
+                                );
+                              },
+                              child: Text(
+                                'Register',textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
                   ),
                 ),

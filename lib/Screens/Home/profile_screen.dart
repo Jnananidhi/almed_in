@@ -5,7 +5,9 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marquee/marquee.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
@@ -203,7 +205,33 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  String username = "";
+  Future getusername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      username = preferences.getString('username')!;
+    });
+  }
   bool isHovered = false;
+
+  Future logout(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('username');
+    Fluttertoast.showToast(
+      msg: "Logout!!",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER_LEFT,
+      fontSize: 16,
+      backgroundColor: Color.fromARGB(255, 211, 199, 242),
+      textColor: Colors.black,
+    );
+    Navigator.pushNamed(context, "/login");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getusername();}
 
   @override
   Widget build(BuildContext context) {
@@ -267,7 +295,8 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       endIndent : 10,
                     ),
                     TextButton(
-                      onPressed:  () {
+                      onPressed: () async {
+                        logout(context);
 
                       },
                       child: Text(
