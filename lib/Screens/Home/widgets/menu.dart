@@ -10,9 +10,11 @@ import 'package:almed_in/responsive.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:hover_menu/hover_menu.dart';
 import '../products/product.dart';
 import '../profile_screen.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 class Navigation extends StatefulWidget    {
@@ -29,6 +31,29 @@ class _NavigationState extends State<Navigation> {
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
    final Usermanagement = UserManagement();
+  List therapeautic = [];
+  Future getAllcategory() async {
+    var url = "${api}therapeautic.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        therapeautic = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return therapeautic;
+  }
+  @override
+  void initState() {
+    getAllcategory();
+    super.initState();
+  }
 
   void searchContacts(String searchTerm) {
     // Clear the previous search suggestions
@@ -44,6 +69,7 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> menuItems = therapeautic.map((item) => ListTile(title: Text(item["therapeautic"]))).toList();
     return Container(
       color: kWhiteColor,
       width: double.infinity,
@@ -203,7 +229,11 @@ class _NavigationState extends State<Navigation> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                            HoverText("All Medicines"),
+                        HoverMenu(
+                          title: Text('Menu Title',style: TextStyle(color: Colors.white),),
+                          items:menuItems,
+                          width: 2500,
+                        ),
                             HoverText("Therapeutic"),
                             HoverText("Strength"),
                             HoverText("Form"),
