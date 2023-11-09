@@ -15,6 +15,7 @@ import '../products/product.dart';
 import '../profile_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:hovering/hovering.dart';
 
 
 class Navigation extends StatefulWidget    {
@@ -32,6 +33,9 @@ class _NavigationState extends State<Navigation> {
   List<String> searchSuggestions = [];
    final Usermanagement = UserManagement();
   List therapeautic = [];
+  List strength = [];
+  List form = [];
+  List company = [];
   Future getAllcategory() async {
     var url = "${api}therapeautic.php";
     var response = await http.post(Uri.parse(url));
@@ -49,9 +53,63 @@ class _NavigationState extends State<Navigation> {
 
     return therapeautic;
   }
+  Future getstrength() async {
+    var url = "${api}STRENGTH.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        strength = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return strength;
+  }
+  Future getform() async {
+    var url = "${api}FORM.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        form = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return form;
+  }
+  Future getcompany() async {
+    var url = "${api}product_name.php";
+    var response = await http.post(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        company = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return company;
+  }
   @override
   void initState() {
     getAllcategory();
+    getstrength();
+    getform();
+    getcompany();
     super.initState();
   }
 
@@ -69,6 +127,7 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    bool isTherapeuticMenuVisible = false;
     List<Widget> menuItems = therapeautic.map((item) => ListTile(title: Text(item["therapeautic"]))).toList();
     return Container(
       color: kWhiteColor,
@@ -229,23 +288,160 @@ class _NavigationState extends State<Navigation> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
+                        HoverText("Search Medicines"),
                         HoverMenu(
-                          title: Text('Menu Title',style: TextStyle(color: Colors.white),),
-                          items:menuItems,
-                          width: 2500,
+                          title:  HoverText("Theurepeautic"),
+                          items: buildTherapeuticMenuItems(),
+                          width: 500,
                         ),
-                            HoverText("Therapeutic"),
-                            HoverText("Strength"),
-                            HoverText("Form"),
-                            HoverText("Company"),
+                        HoverMenu(
+                          title:  HoverText("Form"),
+                          items: buildFormMenuItems(),
+                          width: 500,
+                          ),
+                        HoverMenu(
+                          title:  HoverText("Strength"),
+                          items: buildStrengthMenuItems(),
+                          width: 500,
+                        ),
+                        HoverMenu(
+                          title:  HoverText("Company"),
+                          items: buildCompanyMenuItems(),
+                          width: 500,
+                        ),
                             ],
                   ),
               )])]));
 
 
         }
+  List<Widget> buildTherapeuticMenuItems() {
+    List<Widget> items = [];
 
+    for (int i = 0; i < therapeautic.length; i += 3) {
+      // Create a row with two items
+      List<Widget> rowItems = [];
+
+      for (int j = 0; j < 3; j++) {
+        if (i + j < therapeautic.length) {
+          rowItems.add(
+            Expanded(
+              child: Container(
+                color: Colors.white, // Set the background color to white
+                child: ListTile(
+                  title: Text(therapeautic[i + j]["therapeautic"]),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+      // Add the row to the menu
+      items.add(
+        Row(
+          children: rowItems,
+        ),
+      );
+    }
+    return items;
   }
+  //form
+  List<Widget> buildFormMenuItems() {
+    List<Widget> items = [];
+
+    for (int i = 0; i < form.length; i += 3) {
+      // Create a row with two items
+      List<Widget> rowItems = [];
+
+      for (int j = 0; j < 3; j++) {
+        if (i + j < form.length) {
+          rowItems.add(
+            Expanded(
+              child: Container(
+                color: Colors.white, // Set the background color to white
+                child: ListTile(
+                  title: Text(form[i + j]["FORM"]),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+      // Add the row to the menu
+      items.add(
+        Row(
+          children: rowItems,
+        ),
+      );
+    }
+    return items;
+  }
+  //strength list
+  List<Widget> buildStrengthMenuItems() {
+    List<Widget> items = [];
+
+    for (int i = 0; i < strength.length; i += 3) {
+      // Create a row with two items
+      List<Widget> rowItems = [];
+
+      for (int j = 0; j < 3; j++) {
+        if (i + j < strength.length) {
+          rowItems.add(
+            Expanded(
+              child: Container(
+                color: Colors.white, // Set the background color to white
+                child: ListTile(
+                  title: Text(strength[i + j]["STRENGTH"]),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+      // Add the row to the menu
+      items.add(
+        Row(
+          children: rowItems,
+        ),
+      );
+    }
+    return items;
+  }
+  //company
+  List<Widget> buildCompanyMenuItems() {
+    List<Widget> items = [];
+
+    for (int i = 0; i < company.length; i += 3) {
+      // Create a row with two items
+      List<Widget> rowItems = [];
+
+      for (int j = 0; j < 3; j++) {
+        if (i + j < company.length) {
+          rowItems.add(
+            Expanded(
+              child: Container(
+                color: Colors.white, // Set the background color to white
+                child: ListTile(
+                  title: Text(company[i + j]["Company"]),
+                ),
+              ),
+            ),
+          );
+        }
+      }
+      // Add the row to the menu
+      items.add(
+        Row(
+          children: rowItems,
+        ),
+      );
+    }
+    return items;
+  }
+
+
+
+}
 
 
 
