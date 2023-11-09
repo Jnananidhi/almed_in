@@ -12,6 +12,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hover_menu/hover_menu.dart';
 import '../products/product.dart';
+import '../products/widgets/hover_menu1.dart';
 import '../profile_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -304,7 +305,7 @@ class _NavigationState extends State<Navigation> {
                           items: buildStrengthMenuItems(),
                           width: 500,
                         ),
-                        HoverMenu(
+                        HoverMenu1(
                           title:  HoverText("Company"),
                           items: buildCompanyMenuItems(),
                           width: 500,
@@ -329,7 +330,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: ListTile(
-                  title: Text(therapeautic[i + j]["therapeautic"]),
+                  title: Text(therapeautic[i + j]["therapeautic"],style: TextStyle(fontFamily: 'DMSans Regular'),),
                 ),
               ),
             ),
@@ -360,7 +361,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: ListTile(
-                  title: Text(form[i + j]["FORM"]),
+                  title: Text(form[i + j]["FORM"],style: TextStyle(fontFamily: 'DMSans Regular'),),
                 ),
               ),
             ),
@@ -391,7 +392,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: ListTile(
-                  title: Text(strength[i + j]["STRENGTH"]),
+                  title: Text(strength[i + j]["STRENGTH"],style: TextStyle(fontFamily: 'DMSans Regular'),),
                 ),
               ),
             ),
@@ -422,7 +423,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: ListTile(
-                  title: Text(company[i + j]["Company"]),
+                  title: Text(company[i + j]["Company"],style: TextStyle(fontFamily: 'DMSans Regular'),),
                 ),
               ),
             ),
