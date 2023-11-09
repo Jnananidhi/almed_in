@@ -71,6 +71,7 @@ class _FormCardState extends State<FormCard> {
                   Padding(
                     padding:EdgeInsets.only(left: 3),
                     child: FormDataItem(
+                      image: item['image'],
                       title:  item['FORM'],
                       press: (){},
 
@@ -102,9 +103,10 @@ class _FormCardState extends State<FormCard> {
                               child: Padding(
                                 padding:EdgeInsets.only(bottom: 7),
                                 child: FormDataItem(
+                                  image: form[i]['image'],
                                   title: form[i]['FORM'],
-                                  press: (){},
-
+                                  press: (){
+                                  },
                                 ),
                               ),
                             ),
@@ -134,6 +136,7 @@ class _FormCardState extends State<FormCard> {
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
                               child: FormDataItem(
+                                image: form[i]['image'],
                                 title: form[i]['FORM'],
                                 press: (){},
                               ),
@@ -165,9 +168,10 @@ class _FormCardState extends State<FormCard> {
 
 class FormDataItem extends StatefulWidget {
   final String title;
+  final String image;
   final Function() press;
 
-  FormDataItem({required this.title, required this.press});
+  FormDataItem({required this.title, required this.image,required this.press});
 
   @override
   _FormDataItemState createState() => _FormDataItemState();
@@ -209,7 +213,7 @@ class _FormDataItemState extends State<FormDataItem> {
                   : _size.width >= 975
                   ? 300
                   : 200,
-              height: 100,
+              height: 160,
               padding: const EdgeInsets.symmetric(
                 vertical: 10
               ),
@@ -223,25 +227,35 @@ class _FormDataItemState extends State<FormDataItem> {
                   width: 3.0,       // Set the border width
                 ),
               ),
-              child: Column(
-                children: [
-                  // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,textAlign: TextAlign.center,),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Icon(
-                        Icons.local_hospital, // You can use any medical icon here
-                        color: Colors.blue,
-                        size: 24,
+                child: Column(
+                  children: [
+                    // Add any widgets you want to display within the card, e.g., Text
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(40), // Adjust the radius as needed
+                      child: Image.network(
+                        widget.image,
+                        width: 80,
+                        height: 80,
+                        fit: BoxFit.cover, // Use "cover" to fill the circular area
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                    Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),
+                    Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Icon(
+                          Icons.local_hospital, // You can use any medical icon here
+                          color: Colors.blue,
+                          size: 24,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ));
+        );
   }
 }

@@ -32,9 +32,11 @@ class _AddressScreenState extends State<AddressScreen> {
     overlayState?.insert(overlayEntry!);
   }
   String selectedMenuItem = 'Category';
+  bool textHovered = false;
     @override
     Widget build(BuildContext context) {
       return Scaffold(
+        backgroundColor: kWhiteColor,
         drawer: Drawer(
             child: ListView(
               children: [
@@ -152,6 +154,7 @@ class _AddressScreenState extends State<AddressScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 20),
           child: Row(
+
             children: [
               // Left Section with Buttons
               Expanded(
@@ -159,17 +162,30 @@ class _AddressScreenState extends State<AddressScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextButton(
-                      onPressed: (){showAddressOverlay(context);},
-                      child: Text(
-                        "+ Add delivery address",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: kPrimaryColor,
-                          fontFamily: 'DMSans Bold',
-                        ),
+                    MouseRegion(
+                      onEnter: (event) {
+                        setState(() {
+                          // Change the color when hovered
+                          textHovered = true;
+                        });
+                      },
+                      onExit: (event) {
+                        setState(() {
+                          // Reset the color when the hover ends
+                          textHovered = false;
+                        });
+                      },
+                      child: GestureDetector(
+                        onTap:(){showAddressOverlay(context);},
+                        child:Text("+ Add delivery address",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: !textHovered?kPrimaryColor:kSecondaryColor,
+                            fontFamily: 'DMSans Bold',
+                          ),)
                       ),
                     ),
+
 
                     SizedBox(height: 20),
                     Text(

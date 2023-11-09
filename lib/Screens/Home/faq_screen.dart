@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/products/product.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/faq.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -155,30 +156,44 @@ class _FaqScreenState extends State<FaqScreen> {
     ],
     ),
     ),
-        body:const Column(
-            children: <Widget>[
-              Navigation(),
-              const Divider(
-                thickness: 1,
-                height: 0.01, // Set the height of the divider line
-                color: kPrimaryColor, // Set the color of the divider line
-              ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  //now we create menu and header
+        body: Stack(
+          children:[ Column(
+              children: <Widget>[
+                Navigation(),
+                const Divider(
+                  thickness: 1,
+                  height: 0.01, // Set the height of the divider line
+                  color: kPrimaryColor, // Set the color of the divider line
+                ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    //now we create menu and header
 
 
-                  Faq(),
-                  //now we create banner
-                  //for this import packages
-                  BottomNav()
-                  //now we will make our site responsive
-                ],
+                    Faq(),
+                    //now we create banner
+                    //for this import packages
+                    BottomNav()
+                    //now we will make our site responsive
+                  ],
+                ),
               ),
+            )]),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
             ),
-          )]));
+        ]));
 
   }
 }

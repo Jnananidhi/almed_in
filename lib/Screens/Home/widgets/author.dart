@@ -21,7 +21,7 @@ class Author extends StatelessWidget {
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'M.S.R Pharma',
-                  description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you won't find anywhere else, you'll find on Almed.in\n''',
+                  description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you people won't find anywhere else, you'll find on Almed.in''',
                  ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
@@ -42,7 +42,7 @@ class Author extends StatelessWidget {
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'M.S.R Pharma',
-                  description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you won't find anywhere else, you'll find on Almed.in''',
+                  description: '''Almed in is perhaps the only pharmaceutical distributor to stock up every available variety of Quality generic drugs currently on offer in the market. What makes Almed in an absolute favorite is the availability of an exhaustive range of medicines at best price. What you people won't find anywhere else, you'll find on Almed.in''',
                   ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",

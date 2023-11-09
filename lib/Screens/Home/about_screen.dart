@@ -1,5 +1,6 @@
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -141,68 +142,82 @@ class _AboutScreenState extends State<AboutScreen> {
             ],
           )),
 
-        body: Column(
-            children: <Widget>[
-              const Navigation(),
-              const Divider(
-                thickness: 1,
-                height: 0.01, // Set the height of the divider line
-                color: kPrimaryColor, // Set the color of the divider line
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //now we create menu and header
-                        Container(
-                          padding: const EdgeInsets.all(20),
-                          child: const Column(
+        body: Stack(
+          children:[ Column(
+              children: <Widget>[
+                const Navigation(),
+                const Divider(
+                  thickness: 1,
+                  height: 0.01, // Set the height of the divider line
+                  color: kPrimaryColor, // Set the color of the divider line
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        //now we create menu and header
+                          Container(
+                            padding: const EdgeInsets.all(20),
+                            child: const Column(
 
-                            children: <Widget>[
-                              SizedBox(height: 20),
-                              Text(
-                                'About Us',
-                                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                aboutus,textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: 16, height: 2,),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                'Contact Us:',
-                                textAlign: TextAlign.right,
-                                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                textAlign: TextAlign.right,
-                                'Email: contact@example.com',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              SizedBox(height: 20),
-                              Text(
-                                textAlign: TextAlign.right,
-                                'Phone: +1 (123) 456-7890',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
+                              children: <Widget>[
+                                SizedBox(height: 20),
+                                Text(
+                                  'About Us',
+                                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  aboutus,textAlign: TextAlign.justify,
+                                  style: TextStyle(fontSize: 16, height: 2,),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  'Contact Us:',
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  textAlign: TextAlign.right,
+                                  'Email: contact@example.com',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(height: 20),
+                                Text(
+                                  textAlign: TextAlign.right,
+                                  'Phone: +1 (123) 456-7890',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      const BottomNav()
-                    ],
-                      //now we create banner
-                      //for this import packages
+                        const BottomNav()
+                      ],
+                        //now we create banner
+                        //for this import packages
 
-                      //now we will make our site responsive
+                        //now we will make our site responsive
 
+                    ),
                   ),
                 ),
-              ),
 
-            ],
-        ),
+              ],
+          ),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
+            ),
+        ]),
     );
 
   }

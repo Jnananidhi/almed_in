@@ -30,7 +30,6 @@ class _AddressOverlayState extends State<AddressOverlay> {
 
   int currentScreen = 1;
    late GoogleMapController? googleMapController;
-  Completer<GoogleMapController> _controllerCompleter = Completer();
   TextEditingController searchController = TextEditingController();
   List<PlaceSearch> searchResults = [];
   Marker? selectedLocationMarker;

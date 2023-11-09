@@ -55,6 +55,14 @@ class BottomNav extends StatelessWidget {
                       height: 10,
                     ),
 
+                    Row(
+                      children: [
+                        Spacer(),
+                        WebMenu(),
+                        Spacer(),
+                      ],
+                    ),
+
             //         Text(
             //           "Disclaimer",
             //           style: TextStyle(
@@ -73,7 +81,14 @@ class BottomNav extends StatelessWidget {
             //     fontSize: _size.width >= 370 ? 15 : 10,
             //   ),
             // ),
-                    const SizedBox(
+
+
+
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.black,
+                    ),
+                  const SizedBox(
                       height: 10,
                     ),
                     // const Divider(

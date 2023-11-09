@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:almed_in/Screens/Home/products/product.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -151,27 +152,41 @@ class _ContactUsAppState extends State<ContactUsApp> {
              ],
            ),
          ),
-         body: Column(
-             children: <Widget>[
-               const Navigation(),
-               const Divider(
-                 thickness: 1,
-                 height: 0.01, // Set the height of the divider line
-                 color: kPrimaryColor, // Set the color of the divider line
-               ),
-               Expanded(
-                 child: SingleChildScrollView(
-                   child: Column(
-                     children: [
-                       //now we create menu and header
-
-                       ContactUsScreen(),
-                       const BottomNav()
-                       //now we will make our site responsive
-                     ],
-                   ),
+         body: Stack(
+           children:[ Column(
+               children: <Widget>[
+                 const Navigation(),
+                 const Divider(
+                   thickness: 1,
+                   height: 0.01, // Set the height of the divider line
+                   color: kPrimaryColor, // Set the color of the divider line
                  ),
-               )]));
+                 Expanded(
+                   child: SingleChildScrollView(
+                     child: Column(
+                       children: [
+                         //now we create menu and header
+
+                         ContactUsScreen(),
+                         const BottomNav()
+                         //now we will make our site responsive
+                       ],
+                     ),
+                   ),
+                 )]),
+             Positioned(
+               top: MediaQuery.of(context).size.width < 600
+                   ? 90// Adjust the value for mobile view
+                   :50,
+               left: MediaQuery.of(context).size.width < 600
+                   ? 0 // Adjust the value for mobile view
+                   : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+               right: MediaQuery.of(context).size.width < 600
+                   ? 0 // Adjust the value for mobile view
+                   : MediaQuery.of(context).size.width * 0.25,
+               child: Search_bar(),
+             ),
+         ],));
   }
 }
 
