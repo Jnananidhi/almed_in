@@ -18,6 +18,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:hovering/hovering.dart';
 
+import 'alphabetic_search.dart';
+
 
 class Navigation extends StatefulWidget    {
   const Navigation({
@@ -289,7 +291,13 @@ class _NavigationState extends State<Navigation> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        HoverText("Search Medicines"),
+                        InkWell(child: HoverText("Search Medicines"),
+                        onTap:(){
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return LetterRow();
+                              }));
+                        }),
                         HoverMenu(
                           title:  HoverText("Theurepeautic"),
                           items: buildTherapeuticMenuItems(),
@@ -329,8 +337,9 @@ class _NavigationState extends State<Navigation> {
             Expanded(
               child: Container(
                 color: Colors.white, // Set the background color to white
-                child: ListTile(
-                  title: Text(therapeautic[i + j]["therapeautic"],style: TextStyle(fontFamily: 'DMSans Regular'),),
+                child: Hoverdata(
+                  title:therapeautic[i + j]["therapeautic"],
+                  press: (){},
                 ),
               ),
             ),
@@ -360,8 +369,12 @@ class _NavigationState extends State<Navigation> {
             Expanded(
               child: Container(
                 color: Colors.white, // Set the background color to white
-                child: ListTile(
-                  title: Text(form[i + j]["FORM"],style: TextStyle(fontFamily: 'DMSans Regular'),),
+                // child: ListTile(
+                //   title: Text(form[i + j]["FORM"],style: TextStyle(fontFamily: 'DMSans Regular'),),
+                // ),
+                child: Hoverdata(
+                  title: form[i + j]["FORM"],
+                  press: (){},
                 ),
               ),
             ),
@@ -391,8 +404,9 @@ class _NavigationState extends State<Navigation> {
             Expanded(
               child: Container(
                 color: Colors.white, // Set the background color to white
-                child: ListTile(
-                  title: Text(strength[i + j]["STRENGTH"],style: TextStyle(fontFamily: 'DMSans Regular'),),
+                child: Hoverdata(
+                  title: strength[i + j]["STRENGTH"],
+                  press: (){},
                 ),
               ),
             ),
@@ -422,8 +436,9 @@ class _NavigationState extends State<Navigation> {
             Expanded(
               child: Container(
                 color: Colors.white, // Set the background color to white
-                child: ListTile(
-                  title: Text(company[i + j]["Company"],style: TextStyle(fontFamily: 'DMSans Regular'),),
+                child: Hoverdata(
+                  title: company[i + j]["Company"],
+                  press: (){},
                 ),
               ),
             ),
@@ -439,6 +454,7 @@ class _NavigationState extends State<Navigation> {
     }
     return items;
   }
+
 
 
 
@@ -678,5 +694,59 @@ class _HoverTextState extends State<HoverText> {
         ),
       ),
     );
+  }
+}
+
+
+class Hoverdata extends StatefulWidget {
+  final String title;
+  final Function() press;
+
+  Hoverdata({required this.title, required this.press});
+
+  @override
+  HoverdataState createState() => HoverdataState();
+}
+class HoverdataState extends State<Hoverdata> {
+
+  bool isHovered = false;
+
+
+  @override
+
+  Widget build(BuildContext context) {
+
+    return MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            isHovered = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isHovered = false;
+          });
+        },
+        child:  AnimatedDefaultTextStyle(
+          duration: Duration(milliseconds: 300),
+          style: TextStyle(
+            fontSize: 16.0,
+            fontFamily: 'DMSans Regular',
+            fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+            color: isHovered ? kPrimaryColor : Colors.black,),
+
+          child: InkWell(
+            onTap: widget.press,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  // Add any widgets you want to display within the card, e.g., Text
+                  Text(widget.title,textAlign: TextAlign.center,)
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }
