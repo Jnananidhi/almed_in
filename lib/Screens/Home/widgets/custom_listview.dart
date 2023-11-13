@@ -177,7 +177,7 @@ class _ProductListItemState extends State<ProductListItem> {
               Text(
                 'Discount: ${widget.product.discount}',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: Colors.green,
                 ),
               ),
             ],
@@ -211,7 +211,7 @@ class ProductItemState extends State<ProductItem> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     final widthPercentage = 0.3; // 30% of the screen width
-    final heightPercentage = 0.4; // 20% of the screen height
+    final heightPercentage = 0.5; // 20% of the screen height
 
     final containerWidth = screenWidth * widthPercentage;
     final containerHeight = screenHeight * heightPercentage;
@@ -240,12 +240,12 @@ class ProductItemState extends State<ProductItem> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-              Center(
+              Align(
+                alignment: Alignment.topCenter,
                 child: Image.network(
                 product.imageUrl,
-                //width: 80,
-                height: 80,
                 fit: BoxFit.fitWidth,
             ),
               ),
@@ -256,15 +256,15 @@ class ProductItemState extends State<ProductItem> {
             Text(
               product.name,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 15,
                   color: Colors.black,
-                  fontFamily: 'DMSans Bold'
+                  fontFamily: 'DMSans Regular'
               ),
             ),
 
                 Text('Quantity: ${product.quantity}',style: TextStyle(
                     color: Colors.grey,
-                    fontFamily: 'DMSans Regular'
+                    fontFamily: 'DMSans Light'
                 ),),
                 const SizedBox(
                   height: 10,
@@ -272,7 +272,7 @@ class ProductItemState extends State<ProductItem> {
                 Text(
                   'Price: ${product.mrp}',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 15,
                     color: Colors.black,
                     fontFamily: 'DMSans Regular'
                   ),
@@ -280,8 +280,8 @@ class ProductItemState extends State<ProductItem> {
                 Text(
                   'Discount: ${product.discount}',
                   style: TextStyle(
-                    color: Colors.grey,
-                      fontFamily: 'DMSans Regular'
+                    color: Colors.green,
+                      fontFamily: 'DMSans Light'
                   ),
                 ),
               ],

@@ -1,5 +1,5 @@
 
-import 'package:almed_in/Routes/app_route_config.dart';
+
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
