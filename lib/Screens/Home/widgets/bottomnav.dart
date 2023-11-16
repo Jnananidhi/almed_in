@@ -5,6 +5,9 @@ import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 
+import '../about_screen.dart';
+import '../faq_screen.dart';
+import '../home_screen.dart';
 import 'menu.dart';
 
 class BottomNav extends StatelessWidget {
@@ -16,7 +19,17 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      color: lightColor,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.white,
+            Color(0xFFABE0E1) // Your color code
+             // You can add more colors for the gradient
+          ],
+        ),
+      ),
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
@@ -35,6 +48,9 @@ class BottomNav extends StatelessWidget {
                       fontSize: _size.width >= 370 ? 20 : 10,
                     ),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     CustomButton(
                       onPressed: () {
                         Navigator.push(
@@ -48,7 +64,7 @@ class BottomNav extends StatelessWidget {
                       height: 10,
                     ),
                     const Divider(
-                      thickness: 1,
+                      thickness: 0.5,
                       color: Colors.black,
                     ),
                     const SizedBox(
@@ -56,10 +72,47 @@ class BottomNav extends StatelessWidget {
                     ),
 
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Spacer(),
-                        WebMenu(),
-                        Spacer(),
+                        MenuItems(
+                          title: 'Home',
+                          press: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const HomeScreen()),
+                            );
+                          },
+                        ),
+                        MenuItems(
+                          title: 'About US',
+                          press: () {
+                            Navigator.pushNamed(context, '/aboutAlmed.in');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const AboutScreen()),
+                            );
+                          },
+                        ),
+                        MenuItems(
+                          title: 'FAQ',
+                          press: () {
+                            Navigator.pushNamed(context, '/faq');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const FaqScreen()),
+                            );
+                          },
+                        ),
+                        MenuItems(
+                          title: 'Contact Us',
+                          press: () {
+                            Navigator.pushNamed(context, '/contactUs');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>  ContactUsApp()),
+                            );
+                          },
+                        ),
                       ],
                     ),
 
@@ -85,7 +138,7 @@ class BottomNav extends StatelessWidget {
 
 
                     const Divider(
-                      thickness: 1,
+                      thickness: 0.5,
                       color: Colors.black,
                     ),
                   const SizedBox(

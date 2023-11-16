@@ -11,6 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hover_menu/hover_menu.dart';
+import '../about_screen.dart';
+import '../contact_screen.dart';
+import '../faq_screen.dart';
 import '../products/product.dart';
 import '../products/widgets/hover_menu1.dart';
 import '../profile_screen.dart';
@@ -210,7 +213,7 @@ class _NavigationState extends State<Navigation> {
                             },
                         child:  Row(
                           children: [
-                            Icon(Icons.warehouse),
+                            Icon(Icons.store),
                             Padding(
                               padding: const EdgeInsets.only(left:8.0),
                               child: Text("Seller?",style: TextStyle(fontFamily: 'DMSans Bold'),),
@@ -258,19 +261,16 @@ class _NavigationState extends State<Navigation> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {
-                            if({Usermanagement.isLoggedIn} == false)
-                            {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  LoginPage()),
-                              );
-                            }
-                            else{
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  LoginPage()),
-                              );
+                          onPressed: () async {
+                            SharedPreferences preferences = await SharedPreferences
+                                .getInstance();
+                            String? username = preferences.getString(
+                                'username');
+                            if (username != null) {
+                              Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) => UserProfile()));
+                            } else {
+                              Navigator.pushNamed(context, "/login");
                             }
                           },
                           icon: const Icon(
@@ -474,108 +474,111 @@ class _WebMenuState extends State<WebMenu> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    return Row(
-      children: [
-        MenuItems(
-          title: 'Home',
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-        ),
-        MenuItems(
-          title: 'About US',
-          press: () {
-            Navigator.pushNamed(context, '/aboutAlmed.in');
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const AboutScreen()),
-            // );
-          },
-        ),
-
-        MenuItems(
-          title: 'FAQ',
-          press: () {
-            Navigator.pushNamed(context, '/faq');
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => const FaqScreen()),
-            // );
-          },
-        ),
-        MenuItems(
-          title: 'Contact Us',
-          press: () {
-            Navigator.pushNamed(context, '/contactUs');
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) =>  ContactUsApp()),
-            // );
-          },
-        ),
-        // Add DropdownButton for additional menu items
-        DropdownButton<String>(
-          padding: const EdgeInsets.symmetric(horizontal: 10,),
-          value: selectedMenuItem,
-          onChanged: (String? newValue) {
-            if (newValue != null) {
-              setState(() {
-                selectedMenuItem = newValue;
-                // Add logic to navigate to the related page based on selectedMenuItem
-
-                  // Navigate to the Therapeutic page
-                if (selectedMenuItem == 'Therapeutic') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                  );
-
-                } else if (selectedMenuItem == 'Strength') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                  );
-                }
-                else if (selectedMenuItem == 'Company') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                  );
-                }else if (selectedMenuItem == 'Form') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                  );
-                }
-
+    return Center(
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          MenuItems(
+            title: 'Home',
+            press: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
             },
-              );}
-              },
-          items: ['Categories','Therapeutic', 'Company', 'Form', 'Strength']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
+          ),
+          MenuItems(
+            title: 'About US',
+            press: () {
+              Navigator.pushNamed(context, '/aboutAlmed.in');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutScreen()),
+              );
+            },
+          ),
 
-                style:  TextStyle(
-              fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
-                  fontSize: _size.width >= 370 ? 18 : 14,
-                fontFamily: 'DMSans Bold',
-                color: isHover ? kPrimaryColor : Colors.black,
-              ),
-              ),
-            );
-          }).toList(),
-          // Set the underline property to Container() to hide the underline.
-          underline: Container(),
-        ),
-      ],
+          MenuItems(
+            title: 'FAQ',
+            press: () {
+              Navigator.pushNamed(context, '/faq');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FaqScreen()),
+              );
+            },
+          ),
+          MenuItems(
+            title: 'Contact Us',
+            press: () {
+              Navigator.pushNamed(context, '/contactUs');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  ContactUsApp()),
+              );
+            },
+          ),
+          // Add DropdownButton for additional menu items
+          // DropdownButton<String>(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10,),
+          //   value: selectedMenuItem,
+          //   onChanged: (String? newValue) {
+          //     if (newValue != null) {
+          //       setState(() {
+          //         selectedMenuItem = newValue;
+          //         // Add logic to navigate to the related page based on selectedMenuItem
+          //
+          //           // Navigate to the Therapeutic page
+          //         if (selectedMenuItem == 'Therapeutic') {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+          //
+          //           );
+          //
+          //         } else if (selectedMenuItem == 'Strength') {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+          //           );
+          //         }
+          //         else if (selectedMenuItem == 'Company') {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+          //           );
+          //         }else if (selectedMenuItem == 'Form') {
+          //           Navigator.push(
+          //             context,
+          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+          //           );
+          //         }
+          //
+          //     },
+          //       );}
+          //       },
+          //   items: ['Categories','Therapeutic', 'Company', 'Form', 'Strength']
+          //       .map<DropdownMenuItem<String>>((String value) {
+          //     return DropdownMenuItem<String>(
+          //       value: value,
+          //       child: Text(
+          //         value,
+          //
+          //         style:  TextStyle(
+          //       fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
+          //           fontSize: _size.width >= 370 ? 18 : 14,
+          //         fontFamily: 'DMSans Bold',
+          //         color: isHover ? kPrimaryColor : Colors.black,
+          //       ),
+          //       ),
+          //     );
+          //   }).toList(),
+          //   // Set the underline property to Container() to hide the underline.
+          //   underline: Container(),
+          // ),
+        ],
 
+      ),
     );
   }
 
@@ -642,7 +645,7 @@ class _MenuItemsState extends State<MenuItems> {
                   : isHover
                       ? FontWeight.bold
                       : FontWeight.normal,
-              fontSize: _size.width >= 370 ? 18 : 14,
+              fontSize: _size.width >= 370 ? 15 : 10,
               color: widget.isActive == true
                   ? kPrimaryColor
                   : isHover

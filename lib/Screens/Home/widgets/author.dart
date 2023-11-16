@@ -109,27 +109,48 @@ class _CategoryCardState extends State<CategoryCard> {
               ),
               Text(
                 widget.title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
               ),
               const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding:  const EdgeInsets.only(left: 20.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Icon(
-                    Icons.format_quote_rounded,
-                    color: kSecondaryColor,
-                  ),
-                ),
-              ),
+
                Padding(
                  padding: const EdgeInsets.all(20.0),
-                 child: Text(
-                    widget.description,textAlign: TextAlign.left,
-                    style: const TextStyle(fontSize: 18,fontFamily: 'DMSans Regular'),
-                  ),
+                 child:RichText(
+                   textAlign: TextAlign.left,
+                   text: TextSpan(
+                     style: TextStyle(
+                       fontFamily: 'DMSans Regular',
+
+                       color: Colors.black, // Default text color
+                     ),
+                     children: <TextSpan>[
+                       TextSpan(
+                         text: '"',
+                         style: TextStyle(
+                           color: Colors.black,
+                             fontWeight: FontWeight.bold,
+                           fontSize: _size.width >= 370 ? 20: 11,// Highlight color for the quotation mark
+                         ),
+                       ),
+                       TextSpan(
+                         text: widget.description,
+                         style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10,)
+                       ),
+                       TextSpan(
+                         text: '"',
+                         style: TextStyle(
+                           color: Colors.black,
+                           fontWeight: FontWeight.bold,
+                           fontSize: _size.width >= 370 ? 20 : 11,// Highlight color for the quotation mark
+                         ),
+                       ),
+                     ],
+                   ),
+                 ),
+
+
                ),
               const SizedBox(
                 height: 15,

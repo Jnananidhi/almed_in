@@ -3,6 +3,7 @@ import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/products/product.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -156,45 +157,36 @@ class _UserProfileState extends State<UserProfile> {
             ],
           ),
         ),
-        body: Column(
-            children: <Widget>[
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      //now we create menu and header
-                      const Navigation(),
-                      Container(
-                        //width: double.infinity,
-                        width: kMaxWidth,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          borderRadius:  BorderRadius.circular(15.0),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              lightColor, // Start color
-                              kSecondaryColor, // End color (same color for a solid effect)
-                            ],
-                          ),
-                        ),
+        body: Stack(
+          children:[ Column(
+              children: <Widget>[
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        //now we create menu and header
+                        const Navigation(),
 
-                        child: Marquee(
-                          text: "             India's First All Medicine Distributor          Faster Services          Latest easy e-com buying",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      UserProfilePage(),
-                       BottomNav()
-                      //now we will make our site responsive
-                    ],
+                        UserProfilePage(),
+                         BottomNav()
+                        //now we will make our site responsive
+                      ],
+                    ),
                   ),
-                ),
-              )]));
+                )]),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
+            ),],
+        ));
   }
 }
 
