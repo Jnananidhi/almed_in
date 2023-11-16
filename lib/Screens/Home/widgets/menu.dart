@@ -21,7 +21,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:hovering/hovering.dart';
 
-import 'alphabetic_search.dart';
+//import 'alphabetic_search.dart';
 
 
 class Navigation extends StatefulWidget    {
@@ -293,10 +293,10 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return LetterRow();
-                              }));
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (context) {
+                          //     //  return LetterRow();
+                          //     }));
                         }),
                         HoverMenu(
                           title:  HoverText("Theurepeautic"),

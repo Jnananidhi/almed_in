@@ -83,7 +83,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
-  //for total MRP
+  //for total MRP in bill summary
   double calculateTotalMRP() {
     double totalMRP = 0;
     for (Productt product in _cartItems) {
