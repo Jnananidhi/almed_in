@@ -19,7 +19,8 @@ import '../products/widgets/hover_menu1.dart';
 import '../profile_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:hovering/hovering.dart';
+
+import 'alphabetic_search.dart';
 
 //import 'alphabetic_search.dart';
 
@@ -293,10 +294,10 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (context) {
-                          //     //  return LetterRow();
-                          //     }));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                               return LetterRow();
+                              }));
                         }),
                         HoverMenu(
                           title:  HoverText("Theurepeautic"),
@@ -640,6 +641,7 @@ class _MenuItemsState extends State<MenuItems> {
           child: Text(
             widget.title,
             style: TextStyle(
+              fontFamily: 'DMSans Regular',
               fontWeight: widget.isActive == true
                   ? FontWeight.bold
                   : isHover
