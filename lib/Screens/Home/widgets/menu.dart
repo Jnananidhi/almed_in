@@ -294,10 +294,7 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                               return LetterRow();
-                              }));
+                          Navigator.pushNamed(context, '/alphabeticSearch');
                         }),
                         HoverMenu(
                           title:  HoverText("Theurepeautic"),

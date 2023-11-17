@@ -5,6 +5,7 @@ import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -37,14 +38,15 @@ class MyApp extends StatelessWidget {
       ),
      // home: const HomeScreen(),
       builder: EasyLoading.init(),
-      initialRoute: '/',  // Initial route when the app is first launched
+      initialRoute: '/home',  // Initial route when the app is first launched
       routes: {
-        '/': (context) => HomeScreen(),  // Home page
+        '/home': (context) => HomeScreen(),  // Home page
         '/cart': (context) => CartScreen(),  // Shopping cart page
         '/aboutAlmed.in': (context) => AboutScreen(),
         '/faq': (context) => FaqScreen(),
         '/contactUs': (context) => ContactUsApp(), // Checkout page
         '/login': (context) => LoginPage(),
+        '/alphabeticSearch': (context) => LetterRow(),
       },
     );
   }
