@@ -402,10 +402,13 @@ class _LetterRowState extends State<LetterRow> {
   @override
   void initState() {
     super.initState();
+    isLetterEnabled = List.generate(26, (_) => false);
+    groupedItems = {};
     Future.wait([gettherapeautic(), getform(),getcompany()]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
       _groupItems();
     });
+
   }
 
   void _groupItems() {
