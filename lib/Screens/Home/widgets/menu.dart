@@ -479,20 +479,14 @@ class _WebMenuState extends State<WebMenu> {
           MenuItems(
             title: 'Home',
             press: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
+              Navigator.pushNamed(context, '/home');
             },
           ),
           MenuItems(
             title: 'About US',
             press: () {
               Navigator.pushNamed(context, '/aboutAlmed.in');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AboutScreen()),
-              );
+
             },
           ),
 
@@ -500,20 +494,14 @@ class _WebMenuState extends State<WebMenu> {
             title: 'FAQ',
             press: () {
               Navigator.pushNamed(context, '/faq');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const FaqScreen()),
-              );
+
             },
           ),
           MenuItems(
             title: 'Contact Us',
             press: () {
               Navigator.pushNamed(context, '/contactUs');
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>  ContactUsApp()),
-              );
+
             },
           ),
           // Add DropdownButton for additional menu items
