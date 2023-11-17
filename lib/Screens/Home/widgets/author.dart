@@ -26,7 +26,7 @@ class Author extends StatelessWidget {
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
                   title: 'Sridhar Medicals',
-                  description: ''' As an online medicine distribution platform, Almed in is our most preferred choice, especially since the delivery process is so fast and easy. It has the fastest delivery of medicines we have experienced. This is important for us since this ensures that even the most uncommon of generic drug components are delivered within a short span of time.''',
+                  description: '''As an online medicine distribution platform, Almed in is our most preferred choice, especially since the delivery process is so fast and easy. It has the fastest delivery of medicines we have experienced. This is important for us since this ensures that even the most uncommon of generic drug components are delivered within a short span of time.''',
                  ),
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
@@ -115,43 +115,22 @@ class _CategoryCardState extends State<CategoryCard> {
                 height: 15,
               ),
 
-               Padding(
-                 padding: const EdgeInsets.all(20.0),
-                 child:RichText(
-                   textAlign: TextAlign.left,
-                   text: TextSpan(
-                     style: TextStyle(
-                       fontFamily: 'DMSans Regular',
-
-                       color: Colors.black, // Default text color
-                     ),
-                     children: <TextSpan>[
-                       TextSpan(
-                         text: '"',
-                         style: TextStyle(
-                           color: Colors.black,
-                             fontWeight: FontWeight.bold,
-                           fontSize: _size.width >= 370 ? 20: 11,// Highlight color for the quotation mark
-                         ),
-                       ),
-                       TextSpan(
-                         text: widget.description,
-                         style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10,)
-                       ),
-                       TextSpan(
-                         text: '"',
-                         style: TextStyle(
-                           color: Colors.black,
-                           fontWeight: FontWeight.bold,
-                           fontSize: _size.width >= 370 ? 20 : 11,// Highlight color for the quotation mark
-                         ),
-                       ),
-                     ],
-                   ),
-                 ),
-
-
-               ),
+          Padding(
+            padding:  const EdgeInsets.only(left: 20.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Icon(
+                Icons.format_quote_rounded,
+                color: kSecondaryColor,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              widget.description,textAlign: TextAlign.left,
+              style: const TextStyle(fontSize: 18,fontFamily: 'DMSans Regular'),
+            ),),
               const SizedBox(
                 height: 15,
               ),

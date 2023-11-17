@@ -17,15 +17,21 @@ class BillSummary extends StatelessWidget {
         borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
       ),
       child: Container(
-        height: 300,
-        padding: EdgeInsets.all(16),
+        height: 280,
+        padding: EdgeInsets.only(top: 50,right: 16,left: 16),
         decoration: BoxDecoration(
-          color: lightColor,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              lightColor, // Start color
+              kSecondaryColor, // End color (same color for a solid effect)
+            ],
+          ),
           border: Border.all(color: kPrimaryColor,width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Bill Summary',

@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -181,21 +182,13 @@ child:SingleChildScrollView(
               Container(
                   decoration: BoxDecoration(
                   borderRadius:  BorderRadius.circular(15.0),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      lightColor, // Start color
-                      kSecondaryColor, // End color (same color for a solid effect)
-                    ],
-                  ),
+                  
                 ),
                  //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                  child:
                   Card(
-                   
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
+                   elevation: 10,
+                    shape: RoundedRectangleBorder(// Set the border color and width
                       borderRadius: BorderRadius.circular(15.0), // Set the border radius
                     ),
                    
@@ -236,14 +229,7 @@ child:SingleChildScrollView(
                   Container(
                     decoration: BoxDecoration(
                       borderRadius:  BorderRadius.circular(15.0),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          lightColor, // Start color
-                          kSecondaryColor, // End color (same color for a solid effect)
-                        ],
-                      ),
+
                     ),
                       //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                       child: ListTile(
@@ -396,14 +382,7 @@ child:SingleChildScrollView(
             Container(
                     decoration: BoxDecoration(
                     borderRadius:  BorderRadius.circular(15.0),
-                   gradient: LinearGradient(
-                     begin: Alignment.topLeft,
-                     end: Alignment.bottomRight,
-                     colors: [
-                       lightColor, // Start color
-                       kSecondaryColor, // End color (same color for a solid effect)
-                     ],
-                   ),
+
                  ),
                   //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                   child:
@@ -438,14 +417,7 @@ child:SingleChildScrollView(
             Container(
             decoration: BoxDecoration(
             borderRadius:  BorderRadius.circular(15.0),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              lightColor, // Start color
-              kSecondaryColor, // End color (same color for a solid effect)
-            ],
-          ),
+
         ),
                   //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                   child:
@@ -480,14 +452,14 @@ child:SingleChildScrollView(
                     Container(
                     decoration: BoxDecoration(
                     borderRadius:  BorderRadius.circular(15.0),
-                   gradient: LinearGradient(
-                     begin: Alignment.topLeft,
-                     end: Alignment.bottomRight,
-                     colors: [
-                       lightColor, // Start color
-                       kSecondaryColor, // End color (same color for a solid effect)
-                     ],
-                   ),
+                   // gradient: LinearGradient(
+                   //   begin: Alignment.topLeft,
+                   //   end: Alignment.bottomRight,
+                   //   colors: [
+                   //     lightColor, // Start color
+                   //     kSecondaryColor, // End color (same color for a solid effect)
+                   //   ],
+                   // ),
                  ),
                   //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                   child:
@@ -545,27 +517,10 @@ child:SingleChildScrollView(
             Expanded(
               flex:1,
               child: Column(
-                children:[ Container(
+                children:[
+                  Container(
                   alignment: Alignment.topRight,
-                  child: Card(
-                    elevation: 0,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text('Price Details'),
-                        ),
-                        ListTile(
-                          title: Text('Subtotal: \$100.00'),
-                        ),
-                        ListTile(
-                          title: Text('Total: \$120.00'),
-                        ),
-                        ListTile(
-                          title: Text('Price: \$100.00'),
-                        ),
-                      ],
-                    ),
-                  ),
+                  child: BillSummary(),
                 ),
             ]  ),
             ),

@@ -160,10 +160,7 @@ class _NavigationState extends State<Navigation> {
                         color: kWhiteColor,
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
-                              );
+                              Navigator.pushNamed(context, '/home');
                             },
 
                               child:
@@ -179,10 +176,7 @@ class _NavigationState extends State<Navigation> {
                         color: kWhiteColor,
                         child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  const HomeScreen()),
-                              );
+                              Navigator.pushNamed(context, '/home');
                             },
 
                             child:

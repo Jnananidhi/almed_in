@@ -288,10 +288,7 @@ class _CartScreenState extends State<CartScreen> {
                             child: CustomButton(
                               label: 'Select Delivery Address',
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) =>  AddressScreen()),
-                                );
+                                Navigator.pushNamed(context, '/address-page');
                               },
                             ),
                           ),

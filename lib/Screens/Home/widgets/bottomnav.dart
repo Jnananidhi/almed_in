@@ -53,10 +53,7 @@ class BottomNav extends StatelessWidget {
                     ),
                     CustomButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>   ContactUsApp()),
-                        );
+                        Navigator.pushNamed(context, '/contactUs');
                       },
                       label: 'Let us Know',
                     ),

@@ -2,6 +2,7 @@
 
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
+import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         '/contactUs': (context) => ContactUsApp(), // Checkout page
         '/login': (context) => LoginPage(),
         '/alphabeticSearch': (context) => LetterRow(),
+        '/address-page':(context) => AddressScreen(),
       },
     );
   }

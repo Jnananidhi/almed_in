@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/address_overlay.dart';
 import 'package:almed_in/Screens/Home/widgets/Checkoutscreen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
@@ -151,122 +152,143 @@ class _AddressScreenState extends State<AddressScreen> {
                 ),
               ],
             )),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 100,vertical: 20),
-          child: Row(
-
+        body: Stack(
+          children:[
+            Column(
             children: [
+              Navigation(),
+              SizedBox(height: 50,),
               // Left Section with Buttons
-              Expanded(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MouseRegion(
-                      onEnter: (event) {
-                        setState(() {
-                          // Change the color when hovered
-                          textHovered = true;
-                        });
-                      },
-                      onExit: (event) {
-                        setState(() {
-                          // Reset the color when the hover ends
-                          textHovered = false;
-                        });
-                      },
-                      child: GestureDetector(
-                        onTap:(){showAddressOverlay(context);},
-                        child:Text("+ Add delivery address",
+              Container(
+                width: kMaxWidth,
+                child: Expanded(
+
+                  flex: 1,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MouseRegion(
+                          onEnter: (event) {
+                            setState(() {
+                              // Change the color when hovered
+                              textHovered = true;
+                            });
+                          },
+                          onExit: (event) {
+                            setState(() {
+                              // Reset the color when the hover ends
+                              textHovered = false;
+                            });
+                          },
+                          child: GestureDetector(
+                            onTap:(){showAddressOverlay(context);},
+                            child:Text("+ Add delivery address",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: !textHovered?kPrimaryColor:kSecondaryColor,
+                                fontFamily: 'DMSans Bold',
+                              ),)
+                          ),
+                        ),
+
+
+                        SizedBox(height: 20),
+                        Text(
+                          "Recent addresses",
                           style: TextStyle(
                             fontSize: 15,
-                            color: !textHovered?kPrimaryColor:kSecondaryColor,
-                            fontFamily: 'DMSans Bold',
-                          ),)
-                      ),
-                    ),
+                            color: Colors.black,
+                            fontFamily: 'DMSans Regular',
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
 
+                          child: Column(
+                            children:[ Text(
+                              widget.RName ?? "",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: kPrimaryColor,
+                                fontFamily: 'DMSans Bold',
+                                fontWeight: FontWeight.bold
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
 
-                    SizedBox(height: 20),
-                    Text(
-                      "Recent addresses",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
-                        fontFamily: 'DMSans Regular',
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Container(
-
-                      child: Column(
-                        children:[ Text(
-                          widget.RName ?? "",
+                        Text(
+                          widget.Pnumber ?? "",
                           style: TextStyle(
                             fontSize: 15,
                             color: kPrimaryColor,
                             fontFamily: 'DMSans Bold',
-                            fontWeight: FontWeight.bold
                           ),
                           textAlign: TextAlign.left,
                         ),
 
-                    Text(
-                      widget.Pnumber ?? "",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: kPrimaryColor,
-                        fontFamily: 'DMSans Bold',
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-
-                    Text(
-                      widget.Address ?? "",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: kPrimaryColor,
-                        fontFamily: 'DMSans Bold',
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                    Text(
-                      widget.userInput ?? "",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: kPrimaryColor,
-                        fontFamily: 'DMSans Bold',
-                      ),
-                      textAlign: TextAlign.left,
-                    ), ] ),
-                    ),
-                    SizedBox(
-                      width: 250,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>  CheckoutScreen(userInput: widget.userInput,Address: widget.Address,RName:widget.RName,Pnumber:widget.Pnumber)),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
-                        child: Text(
-                          "Continue Payment",
+                        Text(
+                          widget.Address ?? "",
                           style: TextStyle(
                             fontSize: 15,
-                            color: lightColor,
+                            color: kPrimaryColor,
                             fontFamily: 'DMSans Bold',
                           ),
+                          textAlign: TextAlign.left,
                         ),
-                      ),
+                        Text(
+                          widget.userInput ?? "",
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: kPrimaryColor,
+                            fontFamily: 'DMSans Bold',
+                          ),
+                          textAlign: TextAlign.left,
+                        ), ] ),
+                        ),
+                        SizedBox(
+                          width: 250,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  CheckoutScreen(userInput: widget.userInput,Address: widget.Address,RName:widget.RName,Pnumber:widget.Pnumber)),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
+                            child: Text(
+                              "Continue Payment",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: lightColor,
+                                fontFamily: 'DMSans Bold',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               // Right Section with Search and Map
             ],
           ),
-        ),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
+            ),
+        ],),
       );
     }
   }
