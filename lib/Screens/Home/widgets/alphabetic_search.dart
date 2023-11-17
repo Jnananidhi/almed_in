@@ -431,10 +431,7 @@ class _LetterRowState extends State<LetterRow> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-
+    return  Scaffold(
         body: Stack(
             children:[ Column(
               children: [
@@ -481,7 +478,7 @@ class _LetterRowState extends State<LetterRow> {
                     // Adjust spacing between buttons
                     SizedBox(
                       height: 40,
-                      width: 50,
+                      width: 70,
                       child: ElevatedButton(
                         onPressed: () {
                           setState(() {
@@ -521,8 +518,7 @@ class _LetterRowState extends State<LetterRow> {
               ),
 
             ]),
-      ),
-    );
+      );
   }
 
   // Function to build sectioned items by alphabet
