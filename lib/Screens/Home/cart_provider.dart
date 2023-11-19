@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'products/product_listing.dart';
 class CartProvider with ChangeNotifier {
@@ -7,9 +8,28 @@ class CartProvider with ChangeNotifier {
   List<Productt> get cartItems => _cartItems;
 
   void addToCart(Productt product) {
+
     _cartItems.add(product);
     notifyListeners();
   }
+
+  // void addToCart(Productt product) {
+  //   final existingProductIndex = _cartItems.indexWhere((p) => p.id == product.id);
+  //
+  //   if (existingProductIndex != -1) {
+  //     Fluttertoast.showToast(
+  //       msg: "Item already in the cart",
+  //       toastLength: Toast.LENGTH_LONG,
+  //       gravity: ToastGravity.CENTER,
+  //       fontSize: 16,
+  //       backgroundColor: Colors.black,
+  //       textColor: Colors.white,
+  //     );
+  //   } else {
+  //     _cartItems.add(product);
+  //   }
+  //   notifyListeners();
+  // }
 
   void removeFromCart(Productt product) {
     _cartItems.remove(product);
@@ -110,5 +130,9 @@ class CartProvider with ChangeNotifier {
 
   int get cartItemCount => _cartItems.length;
 
+  // to check whether product is in the cart or not it works in custom_listview.dart while add to cart button working
+  bool isProductInCart(Productt product) {
+    return _cartItems.contains(product);
+  }
 
 }

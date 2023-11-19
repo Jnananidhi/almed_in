@@ -14,7 +14,7 @@ import '../about_screen.dart';
 import '../address_screen.dart';
 import '../contact_screen.dart';
 import '../faq_screen.dart';
-import '../products/product.dart';
+import '../products/products_screen.dart';
 import '../widgets/menu.dart';
 
 bool isDetailsVisible = false;

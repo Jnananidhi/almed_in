@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';

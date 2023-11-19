@@ -53,8 +53,6 @@ class ProductScreenState extends State<ProductScreen> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return isLoading
@@ -204,27 +202,12 @@ class ProductScreenState extends State<ProductScreen> {
             ),
             // Display the custom Navigation widget if needed
             Expanded(
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return OrientationBuilder(
-                    builder: (context, orientation) {
-                      final crossAxisCount = orientation == Orientation.portrait ? 2 : 4;
-                      return StaggeredGridView.countBuilder(
-                        shrinkWrap: true,
-                        physics: ScrollPhysics(),
-                        crossAxisCount: crossAxisCount,
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          final product = products[index];
-                          return ProductItem(product);
-                        },
-                        staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
-                        mainAxisSpacing: 10.0,
-                        crossAxisSpacing: 10.0,
-                      );
+              child: ListView.builder(
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return ProductItem(product);
                     },
-                  );
-                },
               ),
             ),
           ],

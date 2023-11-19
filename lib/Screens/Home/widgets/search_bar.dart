@@ -298,7 +298,6 @@ class _Search_barState extends State<Search_bar> {
                     // Remove the default border
                     prefixIcon: Icon(Icons.search),
                     suffixIcon: InkWell(
-
                       child:ElevatedButton(
                         child: Container(
                             width:  MediaQuery.of(context).size.width < 600
@@ -318,7 +317,7 @@ class _Search_barState extends State<Search_bar> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: kWhiteColor, backgroundColor: Color(0xFF00AFBB),
+                          foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
@@ -337,7 +336,7 @@ class _Search_barState extends State<Search_bar> {
         color: kgreyColor,
         borderRadius: BorderRadius.circular(20.0), // Adjust the value as needed
         border: Border.all(
-          color: Color(0xFF00AFBB),
+          color: kPrimaryColor,
         ),
       ),
         constraints: const BoxConstraints(

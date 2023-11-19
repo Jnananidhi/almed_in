@@ -1,6 +1,6 @@
 import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
-import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
@@ -240,7 +240,7 @@ class _CartScreenState extends State<CartScreen> {
                                         child: Row(
                                           children: [
                                             IconButton(
-                                              icon: const Icon(Icons.remove),
+                                              icon: const Icon(Icons.remove,color: kPrimaryColor,),
                                               onPressed: () {
                                                 context
                                                     .read<CartProvider>()
@@ -249,7 +249,7 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                             Text('${product.quantity}'),
                                             IconButton(
-                                              icon: const Icon(Icons.add),
+                                              icon: const Icon(Icons.add,color: kPrimaryColor),
                                               onPressed: () {
                                                 context
                                                     .read<CartProvider>()
@@ -265,6 +265,7 @@ class _CartScreenState extends State<CartScreen> {
                                           context
                                               .read<CartProvider>()
                                               .removeFromCart(product);
+
                                         },
                                         icon: const Icon(Icons.delete_outline_rounded,
                                             color: Colors.red),

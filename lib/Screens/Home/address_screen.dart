@@ -1,5 +1,5 @@
 import 'package:almed_in/Screens/Home/Map/address_selector_MAP.dart';
-import 'package:almed_in/Screens/Home/products/product.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/address_overlay.dart';
 import 'package:almed_in/Screens/Home/widgets/Checkoutscreen.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';

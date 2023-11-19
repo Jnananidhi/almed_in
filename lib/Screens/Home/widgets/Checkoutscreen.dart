@@ -6,7 +6,7 @@ import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
 import '../contact_screen.dart';
 import '../faq_screen.dart';
-import '../products/product.dart';
+import '../products/products_screen.dart';
 import 'bottomnav.dart';
 import 'menu.dart';
 import 'order_success.dart';
