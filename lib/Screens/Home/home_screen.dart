@@ -185,11 +185,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 45,
                 ),
-              Expanded(
+              const Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         height: 10,
                       ),
                       HeroBanner(),

@@ -119,70 +119,75 @@ class _LetterRowState extends State<LetterRow> {
                 Navigation(),
                 // List of letters as buttons
                 SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Generate 26 buttons
-                    ...List.generate(26, (index) {
-                      final isEnabled = isLetterEnabled[index];
-                      final letter = String.fromCharCode('A'.codeUnitAt(0) + index);
-                      return IgnorePointer(
-                        ignoring: !isEnabled,
-                        child: SizedBox(
-                          height: 40,
-                          width: 40,
-                          child: ElevatedButton(
-                            onPressed: isEnabled
-                                ? () {
-                              setState(() {
-                                selectedLetter = letter;
-                                activeButtonIndex = index; // Set active button index
-                              });
-                            }
-                                : null,
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                activeButtonIndex == index ? Colors.green : Colors.white, // Change colors based on the active state
-                              ),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.zero, // Set border radius to zero
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children:[ Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Generate 26 buttons
+                          ...List.generate(26, (index) {
+                            final isEnabled = isLetterEnabled[index];
+                            final letter = String.fromCharCode('A'.codeUnitAt(0) + index);
+                            return IgnorePointer(
+                              ignoring: !isEnabled,
+                              child: SizedBox(
+                                height: 40,
+                                width: 40,
+                                child: ElevatedButton(
+                                  onPressed: isEnabled
+                                      ? () {
+                                    setState(() {
+                                      selectedLetter = letter;
+                                      activeButtonIndex = index; // Set active button index
+                                    });
+                                  }
+                                      : null,
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(
+                                      activeButtonIndex == index ? Colors.green : Colors.white, // Change colors based on the active state
+                                    ),
+                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.zero, // Set border radius to zero
+                                      ),
+                                    ),
+                                    elevation: MaterialStateProperty.all<double>(0),
+                                  ),
+                                  child: Text(letter, style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10,color: !isEnabled ? Colors.grey : Colors.black,)),
                                 ),
                               ),
-                              elevation: MaterialStateProperty.all<double>(0),
+                            );
+                          }),
+                          // Adjust spacing between buttons
+                          SizedBox(
+                            height: 40,
+                            width: 70,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedLetter = '';
+                                });
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor), // Change to the desired color
+                              ),
+
+                              child: Text('All',style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10)),
                             ),
-                            child: Text(letter, style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10,color: !isEnabled ? Colors.grey : Colors.black,)),
                           ),
-                        ),
-                      );
-                    }),
-                    // Adjust spacing between buttons
-                    SizedBox(
-                      height: 40,
-                      width: 70,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedLetter = '';
-                          });
-                        },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(kSecondaryColor), // Change to the desired color
-                        ),
-
-                        child: Text('All',style: TextStyle(fontSize: _size.width >= 370 ? 15 : 10)),
+                        ],
                       ),
-                    ),
-                  ],
+                        _buildSectionedItems(),
+                         SizedBox(
+                          height: 20,
+                        ),
+                        BottomNav(),
+                    ],),
+                  ),
                 ),
 
 
-                SizedBox(height: 20),
-                // Display items below letter buttons
-                Expanded(
-                  child: _buildSectionedItems(),
-                ),
-                BottomNav(),
               ],
             ),
               Positioned(
@@ -204,41 +209,47 @@ class _LetterRowState extends State<LetterRow> {
 
   // Function to build sectioned items by alphabet
   Widget _buildSectionedItems() {
-    return Container(
-      width: kMaxWidth,
-      child: ListView.builder(
-        itemCount: 26,
-        itemBuilder: (context, index) {
-          String key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
-          List<String>? sectionItems = groupedItems[key];
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if ((selectedLetter.isNotEmpty && key == selectedLetter) || selectedLetter.isEmpty)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    key,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
-              if ((selectedLetter.isNotEmpty && key == selectedLetter) || selectedLetter.isEmpty)
-                if (sectionItems != null && sectionItems.isNotEmpty)
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: sectionItems.length,
-                    itemBuilder: (context, idx) {
-                      return ListTile(
-                        title: Text(sectionItems[idx]),
-                      );
-                    },
-                  ),
-            ],
-          );
-        },
+    return SingleChildScrollView(
+      child: Container(
+        width: kMaxWidth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            for (int index = 0; index < 26; index++)
+              ..._buildSection(index),
+          ],
+        ),
       ),
     );
+  }
+
+  List<Widget> _buildSection(int index) {
+    String key = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[index];
+    List<String>? sectionItems = groupedItems[key];
+
+    List<Widget> widgets = [];
+
+    if ((selectedLetter.isNotEmpty && key == selectedLetter) || selectedLetter.isEmpty) {
+      widgets.add(
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            key,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+        ),
+      );
+
+      if (sectionItems != null && sectionItems.isNotEmpty) {
+        widgets.addAll(
+          sectionItems.map((item) {
+            return ListTile(
+              title: Text(item),
+            );
+          }),
+        );
+      }
+    }
+    return widgets;
   }
 }
