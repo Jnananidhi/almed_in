@@ -1,15 +1,12 @@
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/file_upload.dart';
 import 'package:almed_in/constants.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import '../Authentication/login_screen.dart';
-import '../about_screen.dart';
-import '../contact_screen.dart';
-import '../faq_screen.dart';
-import '../products/products_screen.dart';
-import 'menu.dart';
+import 'dart:io';
+
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
@@ -39,7 +36,39 @@ class _RegistrationFormState extends State<RegistrationForm> {
       obscureText = !obscureText;
     });
   }
+  PlatformFile? _file;
 
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      setState(() {
+        _file = result.files.first;
+      });
+    }
+  }
+
+  Future<void> _uploadFile() async {
+    if (_file != null) {
+      var url1 = "${api}file_upload.php";
+      var url = Uri.parse(url1);
+
+      var request = http.MultipartRequest('POST', url);
+      request.files.add(http.MultipartFile.fromBytes(
+        'file',
+        _file!.bytes!,
+        filename: _file!.name,
+      ));
+
+      var response = await request.send();
+      if (response.statusCode == 200) {
+        // File uploaded successfully
+        print('File uploaded!');
+      } else {
+        // Handle error
+        print('Failed to upload file');
+      }
+    }
+  }
 
   Future login() async {
     var url = Uri.parse("$api/register.php");
@@ -95,520 +124,532 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 decoration: const BoxDecoration(color: kWhiteColor),
                 child:  Form(
                   key: _formKey,
-                  child: Column(
-                    children: [
-                      Text(
-                        "Register Here",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'DMSans Bold',
-                          fontSize: 45,
+                  child: Padding(
+                    padding: EdgeInsets.all(50),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Register Here",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'DMSans Bold',
+                            fontSize: 45,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Please fill all the details correctly",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black54,
-                          fontFamily: 'DMSans Bold',
-                          fontSize: 20,
+                        Text(
+                          "Please fill all the details correctly",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontFamily: 'DMSans Bold',
+                            fontSize: 20,
+                          ),
                         ),
-                      ),
 
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Shop name as in DL/ Hospital / Clinic name',
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: shopController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Shop/Hospital/Clinic Name';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Owner/ In charge/ Doctor Name',
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: ownerController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Owner/In charge/Doctor Name';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'GST No',
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: GSTController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter GST No';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'KMC / DL No 1',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: DLController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter KMC/Dl No 1';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'KMC / DL No 2',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-
-                                ),
-                                controller: DL2Controller,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter KMC/DL No 2';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Address as in DL',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: adressController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Adress';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Town/City',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: cityController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Town/City';
-                                  }
-                                  return null;
-                                },
-                              ),
-
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Postcode/ZIP',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: postcodeController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Post Code';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:8.0,left: 4.0,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Phone',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: phoneController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Mobile Number';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  hintText: 'Email',
-
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: emailController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter Email';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top:10,right: 4.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: TextFormField(
-                                obscureText: obscureText,
-                                decoration: InputDecoration(
-                                  hintText: 'Password',
-                                  suffixIcon: InkWell(
-                                    onTap: togglePasswordVisibility,
-                                    child: Icon(
-                                      obscureText
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  filled: true,
-                                  fillColor: kgreyColor,
-                                  labelStyle: TextStyle(fontSize: 12),
-                                  contentPadding: const EdgeInsets.only(left: 30),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(color: kDarkgreyColor),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                controller: passwordController,
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter password';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0,bottom: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child:
-                              Column(
-                                children: [
-                                  Text("Upload GST File"),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: kgreyColor,
-                                    ),
-                                    child: UploadFilePage(),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: Column(
-                                children: [
-                                  Text("Upload KMC/DL Document 1"),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: kgreyColor,
-                                    ),
-                                    child: UploadFilePage(),
-                                  ),
-                                ],
-                              ),),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
-                              ),
-                              child: Column(
-                                children: [
-                                  Text("Upload KMC/DL Document 1"),
-                                  Container(
-                                    margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: kgreyColor,
-                                    ),
-                                    child: UploadFilePage(),
-                                  ),
-                                ],
-                              ),),
-                          ),
-                        ],
-                      ),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        Row(
                           children: [
-                            Container(
-                              margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: kgreyColor,
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Shop name as in DL/ Hospital / Clinic name',
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: shopController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Shop/Hospital/Clinic Name';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
-                              child: CustomButton(
-                                label: 'Submit',
-                                onPressed: (){
-                                  if (_formKey.currentState!.validate()) {
-                                    login();
-                                  }
-                                },
+                            ),
+
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Owner/ In charge/ Doctor Name',
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: ownerController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Owner/In charge/Doctor Name';
+                                    }
+                                    return null;
+                                  },
+                                ),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                    ],),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'GST No',
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: GSTController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter GST No';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'KMC / DL No 1',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: DLController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter KMC/Dl No 1';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'KMC / DL No 2',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+
+                                  ),
+                                  controller: DL2Controller,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter KMC/DL No 2';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Address as in DL',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: adressController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Adress';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Town/City',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: cityController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Town/City';
+                                    }
+                                    return null;
+                                  },
+                                ),
+
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Postcode/ZIP',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: postcodeController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Post Code';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:8.0,left: 4.0,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Phone',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: phoneController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Mobile Number';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Email',
+
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: emailController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter Email';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: TextFormField(
+                                  obscureText: obscureText,
+                                  decoration: InputDecoration(
+                                    hintText: 'Password',
+                                    suffixIcon: InkWell(
+                                      onTap: togglePasswordVisibility,
+                                      child: Icon(
+                                        obscureText
+                                            ? Icons.visibility_off_outlined
+                                            : Icons.visibility,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    filled: true,
+                                    fillColor: kgreyColor,
+                                    labelStyle: TextStyle(fontSize: 12),
+                                    contentPadding: const EdgeInsets.only(left: 30),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(color: kDarkgreyColor),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  controller: passwordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'Please enter password';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0,bottom: 10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child:
+                                Column(
+                                  children: [
+                                    // Text("Upload GST File"),
+                                    // Container(
+                                    //   margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(15),
+                                    //     color: kgreyColor,
+                                    //   ),
+                                    //   child: UploadFilePage(),
+                                    // ),
+                                    ElevatedButton(
+                                      onPressed: _pickFile,
+                                      child: Text('Pick File'),
+                                    ),
+                                    SizedBox(height: 20),
+                                    ElevatedButton(
+                                      onPressed: _uploadFile,
+                                      child: Text('Upload File'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text("Upload KMC/DL Document 1"),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: kgreyColor,
+                                      ),
+                                      child: UploadFilePage(),
+                                    ),
+                                  ],
+                                ),),
+                            ),
+                            Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text("Upload KMC/DL Document 1"),
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: kgreyColor,
+                                      ),
+                                      child: UploadFilePage(),
+                                    ),
+                                  ],
+                                ),),
+                            ),
+                          ],
+                        ),
+                        Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  color: kgreyColor,
+                                ),
+                                child: CustomButton(
+                                  label: 'Submit',
+                                  onPressed: (){
+                                    if (_formKey.currentState!.validate()) {
+                                      login();
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],),
+                  ),
                 ),
               ),
             )));
