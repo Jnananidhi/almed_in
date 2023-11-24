@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -24,23 +23,35 @@ class _HeroBannerState extends State<HeroBanner> {
             items: [
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_1.png',
+                  image: 'assets/products/banner/Banner1.png',
                   press: () {}),
               SliderCard(
                   title: 'Mobile',
-                  image: 'assets/products/banner/banner_2.png',
+                  image: 'assets/products/banner/Banner2.png',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_3.png',
+                  image: 'assets/products/banner/Banner3.png',
                   press: () {}),
               SliderCard(
                   title: 'Headphone',
-                  image: 'assets/products/banner/banner_4.png',
+                  image: 'assets/products/banner/Banner4.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner5.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner6.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner7.png',
                   press: () {}),
             ],
             options: CarouselOptions(
-                height: _size.width == 300
+                height: _size.width <500
                     ? 250
                     : _size.width >= 500
                         ? 500
@@ -51,7 +62,7 @@ class _HeroBannerState extends State<HeroBanner> {
                 enableInfiniteScroll: true,
                 reverse: false,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 3),
+                autoPlayInterval: Duration(seconds: 2),
                 autoPlayAnimationDuration: Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enlargeCenterPage: true,
@@ -62,7 +73,7 @@ class _HeroBannerState extends State<HeroBanner> {
                   });
                 })),
         DotsIndicator(
-          dotsCount: 4,
+          dotsCount: 7,
           position: index.toDouble(),
           decorator: DotsDecorator(
             activeColor: kPrimaryColor.withOpacity(0.5),
@@ -90,61 +101,35 @@ class SliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      color: kgreyColor,
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      color: kWhiteColor,
+      width: kMaxWidth,
       child: Row(
         children: [
           Expanded(
               child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AutoSizeText(
-                "$title Made For You",
-                textAlign: TextAlign.center,
-                minFontSize: 16,
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: _size.width >= 500 ? 28 : 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              InkWell(
-                onTap: press,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                  ),
-                  child: Text(
-                    "Shop Now",
-                    style: TextStyle(
-                      fontSize: _size.width >= 500 ? 18 : 12,
-                      color: kWhiteColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          )),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
+              Container(
+              decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+            border: Border.all(
+              color: Color(0xFF00AFBB), // Border color
+              width: 1.0, // Border width
+            ),
+          ),
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(20), // Same radius as the border
+              child: Image.asset(
                 image,
                 height: _size.width >= 500 ? 400 : 200,
-                width: _size.width >= 500 ? 400 : 200,
-                fit: BoxFit.contain,
-              ),
-            ],
+                width: _size.width >= 500 ? 1200 : 600,
+                fit: BoxFit.fill,
+              )),
+              )],
           )),
         ],
       ),
     );
   }
 }
+

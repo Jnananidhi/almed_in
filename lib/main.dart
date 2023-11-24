@@ -1,8 +1,26 @@
+
+
+import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
+import 'package:almed_in/Screens/Home/about_screen.dart';
+import 'package:almed_in/Screens/Home/address_screen.dart';
+import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
+import 'package:almed_in/Screens/Home/contact_screen.dart';
+import 'package:almed_in/Screens/Home/faq_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'Screens/Home/cart_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+      MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => CartProvider()),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +37,20 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'DMSans Bold'
       ),
-      home: const HomeScreen(),
-    );//nbhbbghhj
+     // home: const HomeScreen(),
+      builder: EasyLoading.init(),
+      initialRoute: '/home',  // Initial route when the app is first launched
+      routes: {
+        '/home': (context) => HomeScreen(),  // Home page
+        '/cart': (context) => CartScreen(),  // Shopping cart page
+        '/aboutAlmed.in': (context) => AboutScreen(),
+        '/faq': (context) => FaqScreen(),
+        '/contactUs': (context) => ContactUsApp(), // Checkout page
+        '/login': (context) => LoginPage(),
+        '/alphabeticSearch': (context) => LetterRow(),
+        '/address-page':(context) => AddressScreen(),
+      },
+    );
   }
 }
+

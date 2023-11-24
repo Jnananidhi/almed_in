@@ -1,3 +1,6 @@
+import 'package:almed_in/Screens/Home/products/widgets/form.dart';
+import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
+import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
@@ -24,71 +27,57 @@ class _AllBrandsProductState extends State<AllBrandsProduct> {
         child: Column(
           children: [
             TabBar(
-                indicatorColor: kPrimaryColor,
-                unselectedLabelColor: Colors.black,
-                labelColor: kPrimaryColor,
-                indicatorWeight: 2.0,
-                unselectedLabelStyle: TextStyle(
-                  fontSize: _size.width >= 414 ? 18 : 12,
+              indicatorColor: kPrimaryColor,
+              unselectedLabelColor: Colors.black,
+              labelColor: kPrimaryColor,
+              indicatorWeight: 2.0,
+              unselectedLabelStyle: TextStyle(
+                fontFamily: 'DMSans Regular',
+                fontSize: _size.width >= 414 ? 18 : 12,
+              ),
+              labelStyle: TextStyle(
+                fontFamily: 'DMSans Regular',
+                fontSize: _size.width >= 414 ? 18 : 12,
+                fontWeight: FontWeight.bold,
+              ),
+              tabs: const [
+                Tab(
+                  text: "Therapeautic",
                 ),
-                labelStyle: TextStyle(
-                  fontSize: _size.width >= 414 ? 18 : 12,
-                  fontWeight: FontWeight.bold,
+                Tab(
+                  text: "Strength",
                 ),
-                tabs: [
-                  Tab(
-                    text: "iPhone",
-                  ),
-                  Tab(
-                    text: "Samsung",
-                  ),
-                  Tab(
-                    text: "Headphone",
-                  ),
-                ]),
-            if (Responsive.isDesktop(context))
-              Container(
-                height: 350,
-                child: const TabBarView(
+                Tab(
+                  text: "Form",
+                ),
+              ],
+            ),
+
+            Container(
+              height: 500,
+              child: Expanded( // Use Expanded to allow TabBarView to take available space
+                child: TabBarView(
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: iPhoneProductCard(),
+                      child: DatabaseDataCard(),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: SamsungProductCard(),
+                      child: StrengthCard(),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(vertical: 30),
-                      child: HeadPhoneProductCard(),
+                      child: FormCard(),
                     ),
                   ],
                 ),
               ),
-            if (!Responsive.isDesktop(context))
-              Container(
-                height: 600,
-                child: const TabBarView(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30),
-                      child: MobiPhoneProductCard(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30),
-                      child: MobSamsungProductCard(),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 30),
-                      child: MobHeadPhoneProductCard(),
-                    ),
-                  ],
-                ),
-              )
+            ),
           ],
         ),
       ),
     );
   }
 }
+

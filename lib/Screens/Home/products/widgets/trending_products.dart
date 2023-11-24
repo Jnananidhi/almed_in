@@ -1,7 +1,10 @@
+import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/model/trending_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import '../products_screen.dart';
 
 class TrendingProductCard extends StatelessWidget {
   const TrendingProductCard({
@@ -133,7 +136,9 @@ class _TrendingProductsState extends State<TrendingProducts> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50)),
                             height: 40,
-                            onPressed: () {},
+                            onPressed: () {
+                            //  Navigator.push(context, MaterialPageRoute(builder: (context) =>  ProfileScreen()));
+                            },
                             child: const Text(
                               "Quick View",
                               style: TextStyle(color: kWhiteColor),
@@ -147,7 +152,12 @@ class _TrendingProductsState extends State<TrendingProducts> {
                                 borderRadius: BorderRadius.circular(50)),
                             color: kSecondaryColor,
                             height: 40,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>  ProductScreen()),
+                              );
+                            },
                             child: const Text(
                               "Shop Now",
                               style: TextStyle(color: kWhiteColor),
