@@ -36,39 +36,72 @@ class _RegistrationFormState extends State<RegistrationForm> {
       obscureText = !obscureText;
     });
   }
-  PlatformFile? _file;
+  PlatformFile? _fileButton1;
+  PlatformFile? _fileButton2;
+  PlatformFile? _fileButton3;
 
-  Future<void> _pickFile() async {
+  Future<void> _pickFileButton1() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
-    if (result != null) {
+    if (result != null && result.files.isNotEmpty) {
       setState(() {
-        _file = result.files.first;
+        _fileButton1 = result.files.first;
       });
     }
   }
 
-  Future<void> _uploadFile() async {
-    if (_file != null) {
+  Future<void> _pickFileButton2() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        _fileButton2 = result.files.first;
+      });
+    }
+  }
+
+  Future<void> _pickFileButton3() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null && result.files.isNotEmpty) {
+      setState(() {
+        _fileButton3 = result.files.first;
+      });
+    }
+  }
+  void _handleSubmit() async {
+    if (_fileButton1 != null || _fileButton2 != null || _fileButton3 != null) {
+      await _uploadFiles();
+    } else {
+      // Handle case where no files are selected
+      print('Please select at least one file.');
+    }
+  }
+  Future<void> _uploadFiles() async {
+    await _uploadFile(_fileButton1);
+    await _uploadFile(_fileButton2);
+    await _uploadFile(_fileButton3);
+  }
+
+  Future<void> _uploadFile(PlatformFile? file) async {
+    if (file != null) {
       var url1 = "${api}file_upload.php";
       var url = Uri.parse(url1);
 
       var request = http.MultipartRequest('POST', url);
       request.files.add(http.MultipartFile.fromBytes(
         'file',
-        _file!.bytes!,
-        filename: _file!.name,
+        file.bytes!,
+        filename: file.name,
       ));
-
       var response = await request.send();
       if (response.statusCode == 200) {
         // File uploaded successfully
-        print('File uploaded!');
+        print('File uploaded: ${file.name}');
       } else {
         // Handle error
-        print('Failed to upload file');
+        print('Failed to upload ${file.name}');
       }
     }
   }
+
 
   Future login() async {
     var url = Uri.parse("$api/register.php");
@@ -570,14 +603,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   child: UploadFilePage(),
                                     // ),
                                     ElevatedButton(
-                                      onPressed: _pickFile,
+                                      onPressed: _pickFileButton1,
                                       child: Text('Pick File'),
                                     ),
-                                    SizedBox(height: 20),
-                                    ElevatedButton(
-                                      onPressed: _uploadFile,
-                                      child: Text('Upload File'),
-                                    ),
+                                    // SizedBox(height: 20),
+                                    // ElevatedButton(
+                                    //   onPressed: _uploadFile,
+                                    //   child: Text('Upload File'),
+                                    // ),
                                   ],
                                 ),
                               ),
@@ -591,14 +624,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text("Upload KMC/DL Document 1"),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: kgreyColor,
-                                      ),
-                                      child: UploadFilePage(),
+                                    // Text("Upload KMC/DL Document 1"),
+                                    // Container(
+                                    //   margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(15),
+                                    //     color: kgreyColor,
+                                    //   ),
+                                    //   child: UploadFilePage(),
+                                    // ),
+                                    ElevatedButton(
+                                      onPressed: _pickFileButton2,
+                                      child: Text('Pick File'),
                                     ),
                                   ],
                                 ),),
@@ -612,14 +649,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text("Upload KMC/DL Document 1"),
-                                    Container(
-                                      margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        color: kgreyColor,
-                                      ),
-                                      child: UploadFilePage(),
+                                    // Text("Upload KMC/DL Document 1"),
+                                    // Container(
+                                    //   margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0),
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(15),
+                                    //     color: kgreyColor,
+                                    //   ),
+                                    //   child: UploadFilePage(),
+                                    // ),
+                                    ElevatedButton(
+                                      onPressed: _pickFileButton3,
+                                      child: Text('Pick File'),
                                     ),
                                   ],
                                 ),),
@@ -630,6 +671,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              ElevatedButton(
+                                onPressed: _handleSubmit,
+                                child: Text('Pick File'),
+                              ),
                               Container(
                                 margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
                                 decoration: BoxDecoration(
