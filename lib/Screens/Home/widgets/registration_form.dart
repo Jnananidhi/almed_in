@@ -75,19 +75,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
     }
   }
   Future<void> _uploadFiles() async {
-    await _uploadFile(_fileButton1);
-    await _uploadFile(_fileButton2);
-    await _uploadFile(_fileButton3);
+    await _uploadFile(_fileButton1, 'file1');
+    await _uploadFile(_fileButton2, 'file2');
+    await _uploadFile(_fileButton3, 'file3');
   }
 
-  Future<void> _uploadFile(PlatformFile? file) async {
+  Future<void> _uploadFile(PlatformFile? file, String fileKey) async {
     if (file != null) {
       var url1 = "${api}file_upload.php";
       var url = Uri.parse(url1);
 
       var request = http.MultipartRequest('POST', url);
       request.files.add(http.MultipartFile.fromBytes(
-        'file',
+        fileKey,
         file.bytes!,
         filename: file.name,
       ));
@@ -101,6 +101,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
       }
     }
   }
+
 
 
   Future login() async {
