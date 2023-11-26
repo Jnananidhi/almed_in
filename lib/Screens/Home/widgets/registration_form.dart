@@ -66,19 +66,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
       });
     }
   }
-  void _handleSubmit() async {
-    if (_fileButton1 != null || _fileButton2 != null || _fileButton3 != null) {
-      await _uploadFiles();
-    } else {
-      // Handle case where no files are selected
-      print('Please select at least one file.');
-    }
-  }
-  Future<void> _uploadFiles() async {
-    await _uploadFile(_fileButton1, 'file1');
-    await _uploadFile(_fileButton2, 'file2');
-    await _uploadFile(_fileButton3, 'file3');
-  }
+  // void _handleSubmit() async {
+  //   if (_fileButton1 != null || _fileButton2 != null || _fileButton3 != null) {
+  //     await _uploadFiles();
+  //   } else {
+  //     // Handle case where no files are selected
+  //     print('Please select at least one file.');
+  //   }
+  // }
+  // Future<void> _uploadFiles() async {
+  //   await _uploadFile(_fileButton1, 'file1');
+  //   await _uploadFile(_fileButton2, 'file2');
+  //   await _uploadFile(_fileButton3, 'file3');
+  // }
 
   Future<void> _uploadFile(PlatformFile? file, String fileKey) async {
     if (file != null) {
@@ -99,6 +99,65 @@ class _RegistrationFormState extends State<RegistrationForm> {
         // Handle error
         print('Failed to upload ${file.name}');
       }
+    }
+  }
+  Future<void> _uploadFiles() async {
+    var url1 = "${api}file_upload.php";
+    var url = Uri.parse(url1);
+
+    var request = http.MultipartRequest('POST', url);
+
+    // Add file from first button
+    if (_fileButton1 != null) {
+      request.files.add(http.MultipartFile.fromBytes(
+        'file1',
+        _fileButton1!.bytes!,
+        filename: _fileButton1!.name,
+      ));
+    }
+
+    // Add file from second button
+    if (_fileButton2 != null) {
+      request.files.add(http.MultipartFile.fromBytes(
+        'file2',
+        _fileButton2!.bytes!,
+        filename: _fileButton2!.name,
+      ));
+    }
+    if (_fileButton3 != null) {
+      request.files.add(http.MultipartFile.fromBytes(
+        'file3',
+        _fileButton3!.bytes!,
+        filename: _fileButton3!.name,
+      ));
+    }
+
+    // Add other form data if needed
+    request.fields['shop'] = shopController.text;
+    request.fields['owner'] = ownerController.text;
+    request.fields['GST'] = GSTController.text;
+    request.fields['DL'] = DLController.text;
+    request.fields['DL2'] = DL2Controller.text;
+    request.fields['address'] = adressController.text;
+    request.fields['city'] = cityController.text;
+    request.fields['phone'] = phoneController.text;
+    request.fields['email'] = emailController.text;
+    request.fields['postcode'] = postcodeController.text;
+    request.fields['password'] = passwordController.text;
+
+    try {
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        // Handle successful upload
+        print('Files uploaded successfully');
+      } else {
+        // Handle error
+        print('Failed to upload files');
+      }
+    } catch (error) {
+      // Handle exceptions or errors that occur during the HTTP request
+      print('Error during file upload: $error');
     }
   }
 
@@ -605,8 +664,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     // ),
                                     ElevatedButton(
                                       onPressed: _pickFileButton1,
-                                      child: Text('Pick File'),
+                                      child: Text('Select File for Button 1'),
                                     ),
+                                    SizedBox(height: 20),
+                                    _fileButton1 != null
+                                        ? Text('Selected File 1: ${_fileButton1!.name}')
+                                        : Text('No file selected for Button 1'),
+                                    SizedBox(height: 20),
+                                    // ElevatedButton(
+                                    //   onPressed: _pickFileButton1,
+                                    //   child: Text('Pick File'),
+                                    // ),
                                     // SizedBox(height: 20),
                                     // ElevatedButton(
                                     //   onPressed: _uploadFile,
@@ -634,10 +702,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   ),
                                     //   child: UploadFilePage(),
                                     // ),
+                                    // ElevatedButton(
+                                    //   onPressed: _pickFileButton2,
+                                    //   child: Text('Pick File'),
+                                    // ),
                                     ElevatedButton(
                                       onPressed: _pickFileButton2,
-                                      child: Text('Pick File'),
+                                      child: Text('Select File for Button 1'),
                                     ),
+                                    SizedBox(height: 20),
+                                    _fileButton2 != null
+                                        ? Text('Selected File 2: ${_fileButton2!.name}')
+                                        : Text('No file selected for Button 2'),
+                                    SizedBox(height: 20),
                                   ],
                                 ),),
                             ),
@@ -659,10 +736,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   ),
                                     //   child: UploadFilePage(),
                                     // ),
+                                    // ElevatedButton(
+                                    //   onPressed: _pickFileButton3,
+                                    //   child: Text('Pick File'),
+                                    // ),
                                     ElevatedButton(
                                       onPressed: _pickFileButton3,
-                                      child: Text('Pick File'),
+                                      child: Text('Select File for Button 1'),
                                     ),
+                                    SizedBox(height: 20),
+                                    _fileButton3 != null
+                                        ? Text('Selected File 3: ${_fileButton3!.name}')
+                                        : Text('No file selected for Button 3'),
+                                    SizedBox(height: 20),
                                   ],
                                 ),),
                             ),
@@ -672,10 +758,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ElevatedButton(
-                                onPressed: _handleSubmit,
-                                child: Text('Pick File'),
-                              ),
+                              // ElevatedButton(
+                              //   onPressed: _handleSubmit,
+                              //   child: Text('Pick File'),
+                              // ),
                               Container(
                                 margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
                                 decoration: BoxDecoration(
@@ -686,7 +772,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                   label: 'Submit',
                                   onPressed: (){
                                     if (_formKey.currentState!.validate()) {
-                                      login();
+                                      _uploadFiles();
                                     }
                                   },
                                 ),
