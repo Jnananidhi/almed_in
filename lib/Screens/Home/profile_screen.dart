@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
@@ -198,10 +199,12 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   String username = "";
+
   Future getusername() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       username = preferences.getString('username')!;
+
     });
   }
   bool isHovered = false;

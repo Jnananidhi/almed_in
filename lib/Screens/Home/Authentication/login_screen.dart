@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Authentication/forgot1.dart';
+import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/Authentication/register_screen.dart';
 import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
@@ -13,6 +14,7 @@ import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../about_screen.dart';
@@ -58,6 +60,7 @@ import '../products/products_screen.dart';
       var data = json.decode(response.body);
       print(data);
       if (data == "Success") {
+        Provider.of<AuthProvider>(context, listen: false).login();
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString("username", nameController.text);
         Navigator.push(

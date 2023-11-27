@@ -38,7 +38,6 @@ class _NavigationState extends State<Navigation> {
   List contact = [];
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
-   final Usermanagement = UserManagement();
   List therapeautic = [];
   List strength = [];
   List form = [];

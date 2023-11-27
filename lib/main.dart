@@ -1,6 +1,7 @@
 
 
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
+import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
@@ -11,13 +12,16 @@ import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Home/cart_provider.dart';
 
-void main() {
+void main() async {
   runApp(
       MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (_) => CartProvider()),
+      ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
+      ChangeNotifierProvider<CartProvider>(create: (context) => CartProvider()),
+
     ],
     child: MyApp(),
   ));

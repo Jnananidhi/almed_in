@@ -97,7 +97,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-
                     RegistrationForm(),
                     BottomNav(),
                     // Add more widgets here as needed

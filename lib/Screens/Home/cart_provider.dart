@@ -1,50 +1,90 @@
+import 'dart:convert';
+
+import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'package:http/http.dart'as http;
 import 'products/product_listing.dart';
 class CartProvider with ChangeNotifier {
   List<Productt> _cartItems = [];
 
   List<Productt> get cartItems => _cartItems;
 
-  void addToCart(Productt product) {
-
-    _cartItems.add(product);
-    notifyListeners();
-  }
 
   // void addToCart(Productt product) {
-  //   final existingProductIndex = _cartItems.indexWhere((p) => p.id == product.id);
   //
-  //   if (existingProductIndex != -1) {
-  //     Fluttertoast.showToast(
-  //       msg: "Item already in the cart",
-  //       toastLength: Toast.LENGTH_LONG,
-  //       gravity: ToastGravity.CENTER,
-  //       fontSize: 16,
-  //       backgroundColor: Colors.black,
-  //       textColor: Colors.white,
-  //     );
-  //   } else {
-  //     _cartItems.add(product);
-  //   }
+  //   _cartItems.add(product);
   //   notifyListeners();
   // }
-
-  void removeFromCart(Productt product) {
-    _cartItems.remove(product);
+  static const String addUrl = '${api}add_to_cart.php';
+  static const String removeUrl = '${api}remove_from_cart.php';
+  Future<void> addToCart(Productt product) async {
+    _cartItems.add(product);
     notifyListeners();
+
+    // Convert cart data to JSON
+    List<Map<String, dynamic>> cartData = _cartItems.map((item) => productToMap(item)).toList();
+    try {
+      // Send cart data to the API for database storage
+      final response = await http.post(
+        Uri.parse(addUrl),
+        body: jsonEncode({'cartItems': cartData}),
+      );
+
+      if (response.statusCode != 200) {
+        // Handle the case where the server didn't return a 200 OK response
+        removeFromCart(product); // Roll back the local state change
+        Fluttertoast.showToast(msg: 'Failed to add item to cart');
+      }
+    } catch (error) {
+      // Handle network or other errors
+      removeFromCart(product); // Roll back the local state change
+      Fluttertoast.showToast(msg: 'Error adding item to cart');
+    }
   }
 
-  // void incrementQuantity(Productt product) {
-  //   final index = _cartItems.indexOf(product);
-  //   if (index != -1) {
-  //     int quantity = int.tryParse(_cartItems[index].quantity) ?? 1;
-  //     quantity++; // Increment the quantity as an integer
-  //     _cartItems[index].quantity = quantity.toString(); // Convert back to String
-  //     notifyListeners();
-  //   }
+  // Convert Productt to a map
+  Map<String, dynamic> productToMap(Productt product) {
+    return {
+      'id': product.id,
+      'name': product.name,
+      'quantity': product.quantity,
+      // Add other properties as needed
+    };
+  }
+
+  // void removeFromCart(Productt product) {
+  //   _cartItems.remove(product);
+  //   notifyListeners();
   // }
+  Future<void> removeFromCart(Productt product) async {
+    _cartItems.remove(product);
+    notifyListeners();
+
+    // Convert cart data to JSON
+    List<Map<String, dynamic>> cartData = _cartItems.map((item) => productToMap(item)).toList();
+
+    try {
+      // Send cart data to the API for database storage
+      final response = await http.post(
+        Uri.parse(removeUrl),
+        body: jsonEncode({'cartItems': cartData}),
+      );
+
+      if (response.statusCode != 200) {
+        // Handle the case where the server didn't return a 200 OK response
+        addToCart(product); // Roll back the local state change
+        Fluttertoast.showToast(msg: 'Failed to remove item from cart');
+      }
+    } catch (error) {
+      // Handle network or other errors
+      addToCart(product); // Roll back the local state change
+      Fluttertoast.showToast(msg: 'Error removing item from cart');
+    }
+  }
+
+
+
   void incrementQuantity(Productt product) {
     final index = _cartItems.indexOf(product);
     if (index != -1) {
@@ -65,20 +105,7 @@ class CartProvider with ChangeNotifier {
     }
   }
 
-  //
-  // void decrementQuantity(Productt product) {
-  //   final index = _cartItems.indexOf(product);
-  //   if (index != -1) {
-  //     int quantity = int.tryParse(_cartItems[index].quantity) ?? 0;
-  //     if (quantity > 1) {
-  //       quantity--; // Decrement the quantity as an integer
-  //       _cartItems[index].quantity = quantity.toString(); // Convert back to String
-  //       notifyListeners();
-  //     } else {
-  //       removeFromCart(product);
-  //     }
-  //   }
-  // }
+
 
   void decrementQuantity(Productt product) {
     final index = _cartItems.indexOf(product);

@@ -46,6 +46,9 @@ class UploadFilePage extends StatelessWidget {
                 print(pickedFile?.files.first.name);
               },
               child: Text('Upload File'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kPrimaryColor // Set your desired background color here
+              ),
             ),
           ],
         ),

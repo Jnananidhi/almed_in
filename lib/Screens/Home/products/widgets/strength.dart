@@ -227,7 +227,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
               child: Column(
                 children: [
                   // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,textAlign: TextAlign.center,),
+                  Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular'),),
                   Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

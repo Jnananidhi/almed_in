@@ -1,4 +1,5 @@
 //this is product showing page
+import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/order_success.dart';
@@ -381,54 +382,67 @@ class _ProductItemState extends State<ProductItem> {
                 ),
               ),
 
-               Container(
-                 width: MediaQuery.of(context).size.width/2,
-                 margin: EdgeInsets.all(10),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.product.name,
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Colors.black,
-                          fontFamily: 'DMSans Bold',
-                        ),
-                      ),
-                      Text(
-                        'Quantity: ${widget.product.quantity}',
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontFamily: 'DMSans Light',
-                        ),
-                      ),
-
-                    ],
-                  ),
-               ),
               Container(
-                width: MediaQuery.of(context).size.width/8,
+                width: MediaQuery.of(context).size.width/2,
+                margin: EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Price: ${widget.product.mrp}',
+                      widget.product.name,
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
-                        fontFamily: 'DMSans Regular',
+                        fontFamily: 'DMSans Bold',
                       ),
                     ),
                     Text(
-                      'Discount: ${widget.product.discount}',
+                      'Quantity: ${widget.product.quantity}',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.grey,
                         fontFamily: 'DMSans Light',
                       ),
                     ),
+
                   ],
                 ),
               ),
+              Consumer<AuthProvider>(
+                  builder: (context, authProvider, child) {
+                    if (authProvider.isLoggedIn) {
+                      // User is logged in, display the Container with prices
+                      return Container(
+                        width: MediaQuery.of(context).size.width/8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Price: ${widget.product.mrp}',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontFamily: 'DMSans Regular',
+                              ),
+                            ),
+                            Text(
+                              'Discount: ${widget.product.discount}',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontFamily: 'DMSans Light',
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      // User is not logged in, show login button or other content
+                      return ElevatedButton(
+                        onPressed: () {
+                          // Navigate to the login screen
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: Text('Login to view prices'),
+                      );}}),
 
               Column(
                 children: [
@@ -495,5 +509,3 @@ class _ProductItemState extends State<ProductItem> {
     );
   }
 }
-
-
