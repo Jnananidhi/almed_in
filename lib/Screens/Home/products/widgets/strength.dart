@@ -54,7 +54,7 @@ class _StrengthCardState extends State<StrengthCard> {
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
+    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
     return Column(
       children: [
         if (!showAllItems)

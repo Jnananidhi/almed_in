@@ -95,7 +95,7 @@ class _CategoryCardState extends State<CategoryCard> {
           width: _size.width <= 770
               ? _size.width
               : _size.width >= 975
-                  ?kMaxWidth/3.5
+                  ?kMaxWidth/3
                   : 200,
           decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),

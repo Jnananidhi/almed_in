@@ -634,7 +634,7 @@ class _MenuItemsState extends State<MenuItems> {
             ),
           ),
         ),
-      ),
+      ), 
     );
   }
 }

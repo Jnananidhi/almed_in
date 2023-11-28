@@ -54,12 +54,11 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
 
   @override
   Widget build(BuildContext context) {
-    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
+    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
     return Column(
       children: [
         if (!showAllItems)
         Container(
-          width: kMaxWidth,
           padding: EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
                 boxShadow: [if (isHover) kDefaultShadow]),
