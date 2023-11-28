@@ -227,6 +227,7 @@ import '../products/products_screen.dart';
                               fontFamily: 'DMSans Bold',
                             ),
                           ),
+                          const SizedBox(height: 20),
                           Container(
                             width: 320,
                             child: Form(

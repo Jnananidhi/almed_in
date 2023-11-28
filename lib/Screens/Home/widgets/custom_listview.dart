@@ -2,6 +2,7 @@
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/order_success.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -360,17 +361,17 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width, // Set the width to the desired size
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(color: kgreyColor, width: 3),
-          boxShadow: [kDefaultShadow],
+
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -381,7 +382,7 @@ class _ProductItemState extends State<ProductItem> {
                   fit: BoxFit.fitWidth,
                 ),
               ),
-
+              SizedBox(width: 20,),
               Container(
                 width: MediaQuery.of(context).size.width/2,
                 margin: EdgeInsets.all(10),
@@ -436,50 +437,49 @@ class _ProductItemState extends State<ProductItem> {
                       );
                     } else {
                       // User is not logged in, show login button or other content
-                      return ElevatedButton(
-                        onPressed: () {
-                          // Navigate to the login screen
-                          Navigator.pushNamed(context, '/login');
-                        },
-                        child: Text('Login to view prices'),
-                      );}}),
+                      return Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Regular',color: Colors.red),);
+                    }
+                  }),
 
-              Column(
+              Row(
                 children: [
-                  MaterialButton(
-                    color: kPrimaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50)),
-                    height: 40,
-                    onPressed: () {
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: MaterialButton(
+                      color: kPrimaryColor,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      height: 40,
+                      onPressed: () {
 
-                      final cartProvider = context.read<CartProvider>();
-                      final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
+                        final cartProvider = context.read<CartProvider>();
+                        final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
 
-                      if (isAlreadyInCart) {
-                        Fluttertoast.showToast(
-                          msg: "Item is already in the cart!",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          fontSize: 16,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                        );
-                      } else {
-                        cartProvider.addToCart(widget.product);
-                        Fluttertoast.showToast(
-                          msg: "Item Added to Cart",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          fontSize: 16,
-                          backgroundColor: Colors.black,
-                          textColor: Colors.white,
-                        );
-                      }
-                    },
-                    child: const Text(
-                      "Add to Cart",
-                      style: TextStyle(color: kWhiteColor),
+                        if (isAlreadyInCart) {
+                          Fluttertoast.showToast(
+                            msg: "Item is already in the cart!",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white,
+                          );
+                        } else {
+                          cartProvider.addToCart(widget.product);
+                          Fluttertoast.showToast(
+                            msg: "Item Added to Cart",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            fontSize: 16,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.white,
+                          );
+                        }
+                      },
+                      child: const Text(
+                        "Add to Cart",
+                        style: TextStyle(color: kWhiteColor),
+                      ),
                     ),
                   ),
                   SizedBox(height: 5,),

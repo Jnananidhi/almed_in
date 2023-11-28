@@ -190,7 +190,7 @@ class ProductScreenState extends State<ProductScreen> {
               color: kPrimaryColor, // Set the color of the divider line
             ),
             Padding(
-              padding: const EdgeInsets.all(10.20), // Adjust the padding as needed
+              padding: const EdgeInsets.symmetric(horizontal: 20), // Adjust the padding as needed
               child: Text(
                 widget.selectedMenuItem ?? "",
                 style: TextStyle(

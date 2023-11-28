@@ -90,7 +90,7 @@ class _CategoryCardState extends State<CategoryCard> {
           });
         },
         child: Container(
-
+          height: 390,
           padding: const EdgeInsets.symmetric(vertical: 10),
           width: _size.width <= 770
               ? _size.width

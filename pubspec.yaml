@@ -111,16 +111,16 @@ flutter:
   fonts:
     - family: DMSans Light
       fonts:
-        - asset: assets/font/DMSans-ExtraLight.ttf
+        - asset: assets/font/Roboto-Light.ttf
           weight: 200
     - family: DMSans Regular
       fonts:
-        - asset: assets/font/DMSans-Regular.ttf
-          weight: 400
+        - asset: assets/font/Roboto-Regular.ttf
+          weight: 300
     - family: DMSans Bold
       fonts:
-        - asset: assets/font/DMSans-SemiBold.ttf
-          weight: 600
+        - asset: assets/font/Roboto-Bold.ttf
+          weight: 400
 
   #   - family: Trajan Pro
   #     fonts:

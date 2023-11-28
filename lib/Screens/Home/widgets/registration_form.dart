@@ -243,7 +243,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -277,8 +277,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -314,7 +313,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -348,8 +347,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -382,8 +380,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -421,7 +418,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10.0,left: 4.0,right: 4.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -456,8 +453,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -491,8 +487,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -529,7 +524,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:8.0,left: 4.0,right: 4.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -564,7 +559,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
+                                margin: const EdgeInsets.only(top:20,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -598,8 +593,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:10,right: 4.0),
-                                decoration: BoxDecoration(
+                                margin: const EdgeInsets.only(top:20,right: 15.0),                                decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
@@ -645,7 +639,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0,bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0,bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -662,14 +656,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   ),
                                     //   child: UploadFilePage(),
                                     // ),
-                                    ElevatedButton(
+                                    CustomButton(
                                       onPressed: _pickFileButton1,
-                                      child: Text('Select File for Button 1'),
+                                      label: 'Select File for DL 1',
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton1 != null
                                         ? Text('Selected File 1: ${_fileButton1!.name}')
-                                        : Text('No file selected for Button 1'),
+                                        : Text('No file selected for DL 1'),
                                     SizedBox(height: 20),
                                     // ElevatedButton(
                                     //   onPressed: _pickFileButton1,
@@ -686,7 +680,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0, bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -706,21 +700,21 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   onPressed: _pickFileButton2,
                                     //   child: Text('Pick File'),
                                     // ),
-                                    ElevatedButton(
+                                    CustomButton(
                                       onPressed: _pickFileButton2,
-                                      child: Text('Select File for Button 1'),
+                                      label: 'Select File for DL 2',
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton2 != null
                                         ? Text('Selected File 2: ${_fileButton2!.name}')
-                                        : Text('No file selected for Button 2'),
+                                        : Text('No file selected for DL 2'),
                                     SizedBox(height: 20),
                                   ],
                                 ),),
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 8.0, left: 4.0, right: 4.0, bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0, bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -740,14 +734,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   onPressed: _pickFileButton3,
                                     //   child: Text('Pick File'),
                                     // ),
-                                    ElevatedButton(
+                                    CustomButton(
                                       onPressed: _pickFileButton3,
-                                      child: Text('Select File for Button 1'),
+                                      label: 'Select File for GST',
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton3 != null
                                         ? Text('Selected File 3: ${_fileButton3!.name}')
-                                        : Text('No file selected for Button 3'),
+                                        : Text('No file selected for GST'),
                                     SizedBox(height: 20),
                                   ],
                                 ),),
@@ -763,7 +757,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               //   child: Text('Pick File'),
                               // ),
                               Container(
-                                margin: const EdgeInsets.only(top: 8.0, bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
