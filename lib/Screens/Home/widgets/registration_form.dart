@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
+import '../home_screen.dart';
+
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({super.key});
@@ -80,27 +82,27 @@ class _RegistrationFormState extends State<RegistrationForm> {
   //   await _uploadFile(_fileButton3, 'file3');
   // }
 
-  Future<void> _uploadFile(PlatformFile? file, String fileKey) async {
-    if (file != null) {
-      var url1 = "${api}file_upload.php";
-      var url = Uri.parse(url1);
-
-      var request = http.MultipartRequest('POST', url);
-      request.files.add(http.MultipartFile.fromBytes(
-        fileKey,
-        file.bytes!,
-        filename: file.name,
-      ));
-      var response = await request.send();
-      if (response.statusCode == 200) {
-        // File uploaded successfully
-        print('File uploaded: ${file.name}');
-      } else {
-        // Handle error
-        print('Failed to upload ${file.name}');
-      }
-    }
-  }
+  // Future<void> _uploadFile(PlatformFile? file, String fileKey) async {
+  //   if (file != null) {
+  //     var url1 = "${api}file_upload.php";
+  //     var url = Uri.parse(url1);
+  //
+  //     var request = http.MultipartRequest('POST', url);
+  //     request.files.add(http.MultipartFile.fromBytes(
+  //       fileKey,
+  //       file.bytes!,
+  //       filename: file.name,
+  //     ));
+  //     var response = await request.send();
+  //     if (response.statusCode == 200) {
+  //       // File uploaded successfully
+  //       print('File uploaded: ${file.name}');
+  //     } else {
+  //       // Handle error
+  //       print('Failed to upload ${file.name}');
+  //     }
+  //   }
+  // }
   Future<void> _uploadFiles() async {
     var url1 = "${api}file_upload.php";
     var url = Uri.parse(url1);
@@ -162,46 +164,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
   }
 
 
-
-  Future login() async {
-    var url = Uri.parse("$api/register.php");
-
-    try {
-      var response = await http.post(url, body: {
-        "shop": shopController.text,
-        "owner": ownerController.text,
-        "GST": GSTController.text,
-        "DL": DLController.text,
-        "DL2": DL2Controller.text,
-        "address": adressController.text,
-        "city": cityController.text,
-        "phone": phoneController.text,
-        "email": emailController.text,
-        "postcode": postcodeController.text,
-        "password": passwordController.text,
-      });
-
-      if (response.statusCode == 200) {
-        // Handle successful login - parse response data if needed
-        var responseData = response.body;
-        Fluttertoast.showToast(
-            msg: "Registered Sucessfully",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity:ToastGravity.CENTER,
-            fontSize: 16,
-            backgroundColor: Colors.black,
-            textColor: Colors.white);
-
-      } else {
-        // Handle errors or unsuccessful login
-        print("Login failed with status code: ${response.statusCode}");
-        // Handle other status codes or errors
-      }
-    } catch (error) {
-      // Handle exceptions or errors that occur during the HTTP request
-      print("Error during login: $error");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -767,6 +729,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                   onPressed: (){
                                     if (_formKey.currentState!.validate()) {
                                       _uploadFiles();
+                                      Fluttertoast.showToast(
+                                        msg: 'Registration Completed successfully',
+                                        toastLength: Toast.LENGTH_LONG, // Duration for which the toast should be displayed
+                                        gravity: ToastGravity.CENTER, // Position of the toast message
+                                        timeInSecForIosWeb: 5, // Duration in seconds for iOS (ignored on Android)
+                                        backgroundColor: Colors.black87,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0,
+                                      );
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                                      );
                                     }
                                   },
                                 ),

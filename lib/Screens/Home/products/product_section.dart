@@ -19,138 +19,141 @@ class ProductSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          constraints: BoxConstraints(maxWidth: kMaxWidth),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Company",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: Container(
+            constraints: BoxConstraints(maxWidth: double.infinity,),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Cateegory(),
-              //trending product section
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Theaureapatic",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Company",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const DatabaseDataCard(),
-              //trending product section
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Form",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const FormCard(),
-              //trending product section
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Strength",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                const Cateegory(),
+                //trending product section
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const StrengthCard(),
-              //trending product section
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Trending Products",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Theaureapatic",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              if (Responsive.isDesktop(context)) const TrendingProductCard(),
-              if (!Responsive.isDesktop(context)) const MobTrendingProduct(),
+                const SizedBox(
+                  height: 20,
+                ),
+                const DatabaseDataCard(),
+                //trending product section
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Form",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const FormCard(),
+                //trending product section
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Strength",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const StrengthCard(),
+                //trending product section
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Trending Products",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                if (Responsive.isDesktop(context)) const TrendingProductCard(),
+                if (!Responsive.isDesktop(context)) const MobTrendingProduct(),
 
-              //now we create trending Product model
-              const SizedBox(
-                height: 20,
-              ),
-
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                child: const Text(
-                  "Testimonials",
-                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                //now we create trending Product model
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Author(),
-              ),
-              // now add all brands data
-              //first of all we create model
 
-              const SizedBox(
-                height: 100,
-              ),
-              //bottom Navigation menu
-            ],
+                Container(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: const BoxDecoration(
+                      border: Border(
+                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                  child: const Text(
+                    "Testimonials",
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Author(),
+                ),
+                // now add all brands data
+                //first of all we create model
+
+                const SizedBox(
+                  height: 100,
+                ),
+                //bottom Navigation menu
+              ],
+            ),
           ),
         ),
       ],

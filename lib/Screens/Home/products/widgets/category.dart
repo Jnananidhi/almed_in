@@ -52,7 +52,7 @@ class _CateegoryState extends State<Cateegory> {
 
   @override
     Widget build(BuildContext context) {
-    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 4;
+    final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
     return Column(
     children: [
       if (!showAllItems)
@@ -65,16 +65,14 @@ class _CateegoryState extends State<Cateegory> {
           SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                     for (var item in contact.take(crossAxisCount))
-                    Padding(
-                      padding:EdgeInsets.only(left: 3),
-                      child: CategoryCard(
-                      title: item['Company'],
-                      press: () {
-                      // Handle card tap action here
-                      },
-                      ),
+                    CategoryCard(
+                    title: item['Company'],
+                    press: () {
+                    // Handle card tap action here
+                    },
                     ),
                  ],
               ),
@@ -229,7 +227,7 @@ class _CategoryCardState extends State<CategoryCard> {
           child: Column(
             children: [
               // Add any widgets you want to display within the card, e.g., Text
-              Text(widget.title,textAlign: TextAlign.center,),
+              Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular'),),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
