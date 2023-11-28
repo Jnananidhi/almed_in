@@ -4,7 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 
-//change the name of class
+//change the name of clas
 class HeroBanner extends StatefulWidget {
   const HeroBanner({Key? key}) : super(key: key);
 
