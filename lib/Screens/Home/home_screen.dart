@@ -1,11 +1,10 @@
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/products/widgets/allproducts.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:almed_in/constants.dart';
 import '../../responsive.dart';
 import 'Authentication/login_screen.dart';
@@ -185,14 +184,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 45,
                 ),
-              const Expanded(
+               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       SizedBox(
                         height: 10,
                       ),
-                      HeroBanner(),
+                       HeroBanner(),
+
                       ProductSection(),
                       BottomNav(),
 

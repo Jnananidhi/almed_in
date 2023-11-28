@@ -497,64 +497,7 @@ class _WebMenuState extends State<WebMenu> {
 
             },
           ),
-          // Add DropdownButton for additional menu items
-          // DropdownButton<String>(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10,),
-          //   value: selectedMenuItem,
-          //   onChanged: (String? newValue) {
-          //     if (newValue != null) {
-          //       setState(() {
-          //         selectedMenuItem = newValue;
-          //         // Add logic to navigate to the related page based on selectedMenuItem
-          //
-          //           // Navigate to the Therapeutic page
-          //         if (selectedMenuItem == 'Therapeutic') {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-          //
-          //           );
-          //
-          //         } else if (selectedMenuItem == 'Strength') {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-          //           );
-          //         }
-          //         else if (selectedMenuItem == 'Company') {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-          //           );
-          //         }else if (selectedMenuItem == 'Form') {
-          //           Navigator.push(
-          //             context,
-          //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-          //           );
-          //         }
-          //
-          //     },
-          //       );}
-          //       },
-          //   items: ['Categories','Therapeutic', 'Company', 'Form', 'Strength']
-          //       .map<DropdownMenuItem<String>>((String value) {
-          //     return DropdownMenuItem<String>(
-          //       value: value,
-          //       child: Text(
-          //         value,
-          //
-          //         style:  TextStyle(
-          //       fontWeight: isHover ? FontWeight.bold : FontWeight.normal,
-          //           fontSize: _size.width >= 370 ? 18 : 14,
-          //         fontFamily: 'DMSans Bold',
-          //         color: isHover ? kPrimaryColor : Colors.black,
-          //       ),
-          //       ),
-          //     );
-          //   }).toList(),
-          //   // Set the underline property to Container() to hide the underline.
-          //   underline: Container(),
-          // ),
+        
         ],
 
       ),

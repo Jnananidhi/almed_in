@@ -257,7 +257,7 @@ import '../products/products_screen.dart';
                                         return 'Please enter username';
                                       } else if (value.length < 2) {
                                         return 'at least enter 4 characters';
-                                      } else if (value.length > 13) {
+                                      } else if (value.length > 20) {
                                         return 'maximum character is 13';
                                       }
                                       return null;
@@ -296,7 +296,7 @@ import '../products/products_screen.dart';
                                         return 'Please enter some text';
                                       } else if (value.length < 2) {
                                         return 'at least enter 6 characters';
-                                      } else if (value.length > 13) {
+                                      } else if (value.length > 10) {
                                         return 'maximum character is 13';
                                       }
                                       return null;

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -8,9 +10,8 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:http/http.dart' as http;
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
 import 'contact_screen.dart';
@@ -23,6 +24,7 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+
   String selectedMenuItem = 'Category';
   @override
   Widget build(BuildContext context) {
@@ -161,12 +163,12 @@ class _UserProfileState extends State<UserProfile> {
         body: Stack(
           children:[ Column(
               children: <Widget>[
+                const Navigation(),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         //now we create menu and header
-                        const Navigation(),
 
                         UserProfilePage(),
                          BottomNav()
@@ -199,13 +201,43 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   String username = "";
-
+  List<Map<String, dynamic>> details = [];
   Future getusername() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       username = preferences.getString('username')!;
-
     });
+  }
+
+  Future getprofiledata() async {
+    var url = "${api}profile.php";
+    var response = await http.post(Uri.parse(url),body: {
+      "username": username,
+    }
+    );
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        details =List<Map<String, dynamic>>.from(jsonData);
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    print("profile_details");
+    print(details);
+    return details;
+  }
+
+  @override
+  void initState() {
+    Future.wait([ getusername()]).then((_) {
+      // After both therapeautic and form data are fetched, proceed to group items
+      getprofiledata();
+    });
+    super.initState();
   }
   bool isHovered = false;
 
@@ -222,11 +254,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
     );
     Navigator.pushNamed(context, "/login");
   }
-
-  @override
-  void initState() {
-    super.initState();
-    getusername();}
 
   @override
   Widget build(BuildContext context) {
@@ -264,12 +291,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'John Doe', // Replace with the user's name
+                      details.isNotEmpty ? details[0]['shop_name'] ?? 'No name available' : 'No data available',// Replace with the user's name
                       style: TextStyle(fontSize: 24),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      'john.doe@example.com', // Replace with the user's email
+                      details.isNotEmpty ? details[0]['email'] ?? 'No name available' : 'No data available', // Replace with the user's email
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 20),
@@ -341,18 +368,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       ListTile(
                         leading: Icon(Icons.phone),
                         title: Text('Contact'),
-                        subtitle: Text('123-456-7890'),
+                        subtitle: Text(details.isNotEmpty ? details[0]['phone'] ?? 'No name available' : 'No data available'),
                       ),
                       ListTile(
                         leading: Icon(Icons.email),
                         title: Text('Email'),
-                        subtitle: Text('john.doe@example.com'),
+                        subtitle: Text(details.isNotEmpty ? details[0]['email'] ?? 'No name available' : 'No data available'),
                       ),
                       // Shipping Address
                       ListTile(
                         leading: Icon(Icons.home),
                         title: Text('Shipping Address'),
-                        subtitle: Text('123 Main St, City, Country'),
+                        subtitle: Text(details.isNotEmpty ? details[0]['adress'] ?? 'No name available' : 'No data available'),
                       ),
 
                     ],

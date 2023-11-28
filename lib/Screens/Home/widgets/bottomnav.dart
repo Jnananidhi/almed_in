@@ -36,7 +36,7 @@ class BottomNav extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            constraints: const BoxConstraints(maxWidth: kMaxWidth),
+            constraints: const BoxConstraints(maxWidth: double.infinity),
             child: Column(
               children: [
                 Column(
