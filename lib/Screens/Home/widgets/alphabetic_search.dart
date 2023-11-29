@@ -199,6 +199,9 @@ class _LetterRowState extends State<LetterRow> {
                         ),
                       ],
                     ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       _buildSectionedItems(),
                       SizedBox(
                         height: 20,
@@ -245,6 +248,8 @@ class _LetterRowState extends State<LetterRow> {
 
   // Function to build sectioned items by alphabet
   Widget _buildSectionedItems() {
+    double screenHeight = MediaQuery.of(context).size.height;
+
     List<String> filteredItems = [];
 
     // Check if a letter is selected
@@ -263,6 +268,7 @@ class _LetterRowState extends State<LetterRow> {
     return SingleChildScrollView(
       child: Container(
         width: kMaxWidth,
+        constraints: BoxConstraints(minHeight: screenHeight/2.5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: _buildColumnsForItems(filteredItems),
@@ -302,7 +308,7 @@ class _LetterRowState extends State<LetterRow> {
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Text(
                           String.fromCharCode('A'.codeUnitAt(0) + k),
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 16, fontFamily: 'DMSans Bold',),
                         ),
                       ),
                       ...columnItems
@@ -310,7 +316,7 @@ class _LetterRowState extends State<LetterRow> {
                           .map(
                             (item) => Padding(
                           padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Text(item),
+                          child: Text(item,style: TextStyle(fontSize: 14, fontFamily: 'DMSans Regular'),),
                         ),
                       )
                           .toList(),
