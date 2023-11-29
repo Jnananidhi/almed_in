@@ -21,6 +21,7 @@ class AddressOverlay extends StatefulWidget {
 }
 
 class _AddressOverlayState extends State<AddressOverlay> {
+  bool displayContainer = false;
   // Define a variable to track which screen is currently displayed.
   final _formKey = GlobalKey<FormState>();
   String userInput = '';
@@ -363,7 +364,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
                     widget.overlayEntry?.remove();
                   Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber)),
+                  MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,)),
                   );
                   }},
                 style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),

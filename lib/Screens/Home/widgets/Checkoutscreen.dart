@@ -23,6 +23,11 @@ class CheckoutScreen extends StatefulWidget {
   class CheckoutScreenState extends State<CheckoutScreen> {
     int? selectedPaymentMethod;
     String selectedMenuItem = 'Category';
+    @override
+    void initState() {
+     print(widget.userInput);
+      super.initState();
+    }
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;

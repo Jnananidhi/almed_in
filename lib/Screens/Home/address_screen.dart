@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:almed_in/Screens/Home/Map/address_selector_MAP.dart';
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/address_overlay.dart';
@@ -8,12 +10,15 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
 import 'contact_screen.dart';
 import 'faq_screen.dart';
 class AddressScreen extends StatefulWidget {
+
   final String? userInput,Address,RName,Pnumber;
 
   AddressScreen({this.userInput,this.Address,this.RName,this.Pnumber});
@@ -24,6 +29,46 @@ class AddressScreen extends StatefulWidget {
 
 
 class _AddressScreenState extends State<AddressScreen> {
+  bool displayContainer = false;
+  String username = "";
+  List<Map<String, dynamic>> details = [];
+  Future getusername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      username = preferences.getString('username')!;
+    });
+  }
+
+  Future getprofiledata() async {
+    var url = "${api}profile.php";
+    var response = await http.post(Uri.parse(url),body: {
+      "username": username,
+    }
+    );
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        details =List<Map<String, dynamic>>.from(jsonData);
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    print("profile_details");
+    print(details);
+    return details;
+  }
+
+  @override
+  void initState() {
+    Future.wait([ getusername()]).then((_) {
+      // After both therapeautic and form data are fetched, proceed to group items
+      getprofiledata();
+    });
+    super.initState();
+  }
   OverlayEntry? overlayEntry;
   void showAddressOverlay(BuildContext context) {
     OverlayState? overlayState = Overlay.of(context);
@@ -32,6 +77,7 @@ class _AddressScreenState extends State<AddressScreen> {
     });
     overlayState?.insert(overlayEntry!);
   }
+  int? selectedPaymentMethod;
   String selectedMenuItem = 'Category';
   bool textHovered = false;
     @override
@@ -206,56 +252,86 @@ class _AddressScreenState extends State<AddressScreen> {
                         ),
                         SizedBox(height: 20),
                         Container(
-
-                          child: Column(
-                            children:[ Text(
-                              widget.RName ?? "",
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: kPrimaryColor,
-                                fontFamily: 'DMSans Bold',
-                                fontWeight: FontWeight.bold
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-
-                        Text(
-                          widget.Pnumber ?? "",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: kPrimaryColor,
-                            fontFamily: 'DMSans Bold',
+                          width: kMaxWidth/2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            border: selectedPaymentMethod == 1 ? Border.all(color: kSecondaryColor, width: 1.0) : null,
                           ),
-                          textAlign: TextAlign.left,
-                        ),
+                          //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
+                          child: ListTile(
+                            title: Text(details.isNotEmpty ? details[0]['adress'] ?? 'No data available' : 'No data available'),
+                            leading: Radio(
+                              value: 1, // Unique value for UPI
+                              groupValue: selectedPaymentMethod,
+                              onChanged: (int? value) {
+                                setState(() {
+                                  selectedPaymentMethod = value;
+                                });
+                              },
+                            )
+                          ),),
 
-                        Text(
-                          widget.Address ?? "",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: kPrimaryColor,
-                            fontFamily: 'DMSans Bold',
+                        SizedBox(height: 20),
+                        if(widget.Address!=null)
+                        Container(
+                          width: kMaxWidth/2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                            border: selectedPaymentMethod == 2 ? Border.all(color: kSecondaryColor, width: 1.0) : null,
                           ),
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          widget.userInput ?? "",
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: kPrimaryColor,
-                            fontFamily: 'DMSans Bold',
-                          ),
-                          textAlign: TextAlign.left,
-                        ), ] ),
-                        ),
+                          //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
+                          child: ListTile(
+                              title: Text('${widget.RName ?? ""} ${widget.Pnumber ?? ""} ${ widget.Address ?? ""} ${widget.userInput ?? ""}'),
+                              leading: Radio(
+                                value: 2, // Unique value for UPI
+                                groupValue: selectedPaymentMethod,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    selectedPaymentMethod = value;
+                                  });
+                                },
+                              )
+                          ),),
+                        SizedBox(height: 20),
                         SizedBox(
                           width: 250,
                           child: ElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  CheckoutScreen(userInput: widget.userInput,Address: widget.Address,RName:widget.RName,Pnumber:widget.Pnumber)),
-                              );
+                              if (selectedPaymentMethod == 1) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CheckoutScreen(
+                                      RName:  details[0]['shop_name'],
+                                      Pnumber:details[0]['phone'],
+                                      Address:details[0]['adress'] ,
+                                      // Use details[0]['address'] for payment method 1
+                                    ),
+                                  ),
+                                );
+                              }  else if (selectedPaymentMethod == 2) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => CheckoutScreen(
+                                      userInput: widget.userInput,
+                                      Address: widget.Address, // Use widget.Address for other payment methods
+                                      RName: widget.RName,
+                                      Pnumber: widget.Pnumber,
+                                    ),
+                                  ),
+                                );
+                              }
+                              else {
+                                Fluttertoast.showToast(
+                                  msg: 'Please select an address', // Your toast message
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  backgroundColor: Colors.red,
+                                  textColor: Colors.white,
+                                );
+                              }
+
                             },
                             style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
                             child: Text(
