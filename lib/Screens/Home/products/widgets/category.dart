@@ -56,68 +56,59 @@ class _CateegoryState extends State<Cateegory> {
     return Column(
     children: [
       if (!showAllItems)
-    Container(
-        decoration: BoxDecoration(
-             boxShadow: [if (isHover) kDefaultShadow]),
-      child: Padding(
-      padding: EdgeInsets.all(8.0), // Add space between cards
-      child:
-          SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-                    for (var item in contact.take(crossAxisCount))
-                    CategoryCard(
-                    title: item['Company'],
-                    press: () {
-                    // Handle card tap action here
-                    },
-                    ),
-                 ],
-              ),
-            ),
-          )
-    ),
+        Container(
+          padding: EdgeInsets.all(8.0),
 
+          child: Row(
+            children: [
+              for (var i = 0; i < crossAxisCount && i < contact.length; i++)
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 7),
+                    child: CategoryCard(
+                      title: contact[i]['Company'],
+                      press: () {},
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
     if (showAllItems)
     if( MediaQuery.of(context).size.width > 600)
-    Container(
-      padding: EdgeInsets.all(8.0),
-          height:contact.length*100/crossAxisCount, // Fixed height for the additional items grid
-          child: ListView.builder(
-                scrollDirection: Axis.vertical, // Display items vertically
-                itemCount: contact.length, // Calculate the number of rows
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < contact.length)
-                            Expanded(
-                              child: Align(
-                                  alignment: Alignment.topCenter, // Align each card to the top
-                                  child: Padding(
-                                    padding:EdgeInsets.only(bottom: 7),
-                                    child: CategoryCard(
-                                      title: contact[i]['Company'],
-                                      press: () {
-                                        // Handle card tap action here
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ),
+      Container(
+        height: contact.length*107/crossAxisCount, // Fixed height for the additional items grid
+        child: ListView.builder(
+          scrollDirection: Axis.vertical, // Display items vertically
+          itemCount: (contact.length), // Calculate the number of rows
+          itemBuilder: (context, rowIndex) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+              children: [
+                for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                  if (i < contact.length)
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topCenter, // Align each card to the top
+                        child: Padding(
+                          padding:EdgeInsets.only(bottom: 7,left: 7),
+                          child: CategoryCard(
+                            title: contact[i]['Company'],
+                            press: (){},
 
-                      ],
-                );
-              },
-            ),
-          ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+              ],
+            );
+          },
+        ),
+      ),
       if (showAllItems)
       if( MediaQuery.of(context).size.width < 600)
         Container(
-          padding: EdgeInsets.all(8.0),
           height: contact.length*100/crossAxisCount, // Fixed height for the additional items grid
           child: ListView.builder(
             scrollDirection: Axis.vertical, // Display items vertically

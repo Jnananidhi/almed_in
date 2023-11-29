@@ -58,29 +58,24 @@ class _FormCardState extends State<FormCard> {
     return Column(
       children: [
         if (!showAllItems)
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-              boxShadow: [if (isHover) kDefaultShadow]),
-          child:
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+          Container(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
-                for (var item in form.take(crossAxisCount))
-                  Padding(
-                    padding:EdgeInsets.only(left: 3),
-                    child: FormDataItem(
-                      image: item['image'],
-                      title:  item['FORM'],
-                      press: (){},
-
+                for (var i = 0; i < crossAxisCount && i < form.length; i++)
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 7),
+                      child: FormDataItem(
+                        image: form[i]['image'],
+                        title: form[i]['FORM'],
+                        press: () {},
+                      ),
                     ),
                   ),
               ],
             ),
           ),
-        ),
 
         if (showAllItems)
           if( MediaQuery.of(context).size.width > 600)

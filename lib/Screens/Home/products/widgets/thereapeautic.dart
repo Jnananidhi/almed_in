@@ -58,34 +58,27 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
     return Column(
       children: [
         if (!showAllItems)
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-            decoration: BoxDecoration(
-                boxShadow: [if (isHover) kDefaultShadow]),
-            child:
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (var item in therapeautic.take(crossAxisCount))
-                      Padding(
-                        padding:EdgeInsets.only(left: 3),
-                        child: DatabaseDataItem(
-                          title:  item['therapeautic'],
-                          press: (){},
-
-                        ),
+          Container(
+            padding: EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                for (var i = 0; i < crossAxisCount && i < therapeautic.length; i++)
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 7),
+                      child: DatabaseDataItem(
+                        title: therapeautic[i]['therapeautic'],
+                        press: () {},
                       ),
-                  ],
-                ),
-              ),
+                    ),
+                  ),
+              ],
             ),
-
+          ),
         if (showAllItems)
           if( MediaQuery.of(context).size.width > 600)
             Container(
-              padding: EdgeInsets.all(8.0),
-              height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
+              height: therapeautic.length*107/crossAxisCount, // Fixed height for the additional items grid
               child: ListView.builder(
                 scrollDirection: Axis.vertical, // Display items vertically
                 itemCount: (therapeautic.length), // Calculate the number of rows
@@ -99,7 +92,7 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
                               child: Padding(
-                                padding:EdgeInsets.only(bottom: 7),
+                                padding:EdgeInsets.only(bottom: 7,left: 7),
                                 child: DatabaseDataItem(
                                   title: therapeautic[i]['therapeautic'],
                                   press: (){},

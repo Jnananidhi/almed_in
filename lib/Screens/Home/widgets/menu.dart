@@ -208,6 +208,7 @@ class _NavigationState extends State<Navigation> {
                         child:  Row(
                           children: [
                             Icon(Icons.store),
+                            if (Responsive.isDesktop(context))
                             Padding(
                               padding: const EdgeInsets.only(left:8.0),
                               child: Text("Seller?",style: TextStyle(fontFamily: 'DMSans Bold'),),
@@ -244,6 +245,7 @@ class _NavigationState extends State<Navigation> {
                             },
                           ),
                           SizedBox(width: 9,),
+                          if (Responsive.isDesktop(context))
                           Text("Cart",style: TextStyle(fontFamily:'DMSans Bold' ),),
                         ],
                       ),
@@ -272,7 +274,9 @@ class _NavigationState extends State<Navigation> {
                             color: Colors.black,
                             size: 25,
                           ),
-                        ),Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),),
+                        ),
+                        if (Responsive.isDesktop(context))
+                          Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),),
                       ],
                     ),),
                   ],

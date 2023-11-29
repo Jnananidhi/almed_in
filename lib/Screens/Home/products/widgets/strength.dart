@@ -58,27 +58,23 @@ class _StrengthCardState extends State<StrengthCard> {
     return Column(
       children: [
         if (!showAllItems)
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-              boxShadow: [if (isHover) kDefaultShadow]),
-          child:
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
+          Container(
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
-                for (var item in strength.take(crossAxisCount))
-                  Padding(
-                    padding:EdgeInsets.only(left: 3),
-                    child: strengthDataItem(
-                      title:  item['STRENGTH'],
-                      press: (){},
+                for (var i = 0; i < crossAxisCount && i < strength.length; i++)
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 7,left: 7),
+                      child: strengthDataItem(
+                        title: strength[i]['STRENGTH'],
+                        press: () {},
+                      ),
                     ),
                   ),
               ],
             ),
           ),
-        ),
 
         if (showAllItems)
           if( MediaQuery.of(context).size.width > 600)
