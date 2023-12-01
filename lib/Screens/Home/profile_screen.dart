@@ -240,6 +240,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     super.initState();
   }
   bool isHovered = false;
+  bool isHovered1=false;
 
   Future logout(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -257,18 +258,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-        onEnter: (_) {
-          setState(() {
-            isHovered = true;
-          });
-        },
-        onExit: (_) {
-          setState(() {
-            isHovered = false;
-          });
-        },
-    child:  Row(
+    return  Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -279,7 +269,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                borderRadius: BorderRadius.circular(20.0), // Set the border radius here
              ),
             elevation: 20,
-            color: lightColor,
+
             child: Padding(
             padding: EdgeInsets.all(30.0),
               child: Column(
@@ -301,16 +291,42 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                     SizedBox(height: 20),
                     TextButton(
-                      onPressed:  () {
-
+                      onPressed: () {
+                        // Add your onPressed functionality here
                       },
-                      child: Text(
-                        'My Orders',textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: isHovered ?kPrimaryColor:Colors.black,fontSize: 18
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start, // Align icon to the start
+                        children: [
+                          Icon(
+                            Icons.shopping_bag_rounded, // Replace with your desired icon
+                            color: kSecondaryColor, // Set the color to the secondary color
+                          ),
+                          SizedBox(width: 8),
+                          MouseRegion(
+                            onEnter: (_) {
+                              setState(() {
+                                isHovered = true; // Set hover state to true when the mouse enters
+                              });
+                            },
+                            onExit: (_) {
+                              setState(() {
+                                isHovered = false; // Set hover state to false when the mouse exits
+                              });
+                            },
+                            child: Text(
+                              'Orders',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: isHovered ? kPrimaryColor : Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),// Add some space between the icon and text
+
+                        ],
                       ),
                     ),
+
                     Divider(
                       thickness: 1,
                       indent : 0,
@@ -321,11 +337,36 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         logout(context);
 
                       },
-                      child: Text(
-                        'Logout',textAlign: TextAlign.right,
-                        style: TextStyle(
-                          color: isHovered ?kPrimaryColor:Colors.black,fontSize: 18
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start, // Align icon to the start
+                        children: [
+                          Icon(
+                            Icons.logout_rounded, // Replace with your desired icon
+                            color: kSecondaryColor, // Set the color to the secondary color
+                          ),
+                          SizedBox(width: 8),
+                          MouseRegion(
+                            onEnter: (_) {
+                              setState(() {
+                                isHovered1 = true; // Set hover state to true when the mouse enters
+                              });
+                            },
+                            onExit: (_) {
+                              setState(() {
+                                isHovered1 = false; // Set hover state to false when the mouse exits
+                              });
+                            },
+                            child: Text(
+                              'Logout',
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                color: isHovered1 ? kPrimaryColor : Colors.black,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),// Add some space between the icon and text
+
+                        ],
                       ),
                     ),
                         ],
@@ -348,7 +389,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   ),
 
                   elevation: 20,
-                  color: lightColor,
                   child: Padding(
                     padding: EdgeInsets.all(30.0),
                   child: Column(
@@ -357,31 +397,223 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     children: [
                       //Text("Personal Information",textAlign: TextAlign.center,style: TextStyle(color: kPrimaryColor)),
                       ListTile(
-                        leading: Icon(Icons.person_2_rounded),
-                        title: Text('Personal Information'),
+                        leading: Icon(Icons.person,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Profile ',
+                                style: TextStyle(fontFamily: 'DMSans Bold'),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Divider(
                         thickness: 1,
                         height: 0.01, // Set the height of the divider line
                         color: kPrimaryColor, // Set the color of the divider line
                       ),
+
                       ListTile(
-                        leading: Icon(Icons.phone),
-                        title: Text('Contact'),
-                        subtitle: Text(details.isNotEmpty ? details[0]['phone'] ?? 'No name available' : 'No data available'),
+                        leading: Icon(Icons.health_and_safety,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Owner: ',
+                                style: TextStyle(fontFamily: 'DMSans Bold'),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['owner'] ?? 'No name available'
+                                    : 'No data available',
+                                style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       ListTile(
-                        leading: Icon(Icons.email),
-                        title: Text('Email'),
-                        subtitle: Text(details.isNotEmpty ? details[0]['email'] ?? 'No name available' : 'No data available'),
-                      ),
-                      // Shipping Address
-                      ListTile(
-                        leading: Icon(Icons.home),
-                        title: Text('Shipping Address'),
-                        subtitle: Text(details.isNotEmpty ? details[0]['adress'] ?? 'No name available' : 'No data available'),
+                        leading: Icon(Icons.confirmation_num_rounded,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'GST No: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['gst_no'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
 
+                      ListTile(
+                        leading: Icon(Icons.dataset_linked,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'KMC/DL No 1: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['dl1'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.dataset_linked,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'KMC/DL No 2: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['dl2'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+
+                      ListTile(
+                        leading: Icon(Icons.location_city,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Town/City: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['city'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.post_add,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Postcode/Zip: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['postcode'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.contact_phone,color: kSecondaryColor),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Phone: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['phone'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.email,color: kSecondaryColor,),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          children: [
+                            SizedBox(
+                              width: 120, // Fixed width for the title
+                              child: Text(
+                                'Email: ',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.start,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                details.isNotEmpty
+                                    ? details[0]['email'] ?? 'No name available'
+                                    : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   ),
@@ -393,34 +625,53 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     borderRadius: BorderRadius.circular(20.0), // Set the border radius here
                   ),
                   elevation: 20,
-                  color: lightColor,
                   child: Padding(
-                    padding: EdgeInsets.all(30.0),
+                    padding: EdgeInsets.all(10.0),
                     child: Column(
 
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         //Text("Payments Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor)),
                         ListTile(
-                          leading: Icon(Icons.payments_rounded),
-                          title: Text('Payments Information')
+
+                          contentPadding: EdgeInsets.zero,
+                          title: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 80, // Width for your custom icon
+                                child: Icon(Icons.pin_drop_rounded,color: kSecondaryColor,), // Your custom icon
+                              ),
+                              SizedBox(
+                                width: 120, // Fixed width for the title
+                                child: Text(
+                                  'Address: ',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      details.isNotEmpty
+                                          ? details[0]['adress'] ?? 'No name available'
+                                          : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 5,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Divider(
-                          thickness: 1,
-                          height: 0.01, // Set the height of the divider line
-                          color: kPrimaryColor, // Set the color of the divider line
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.payment),
-                          title: Text('Saved UPI'),
-                          subtitle: Text('john.doe@upi'),
-                        ),
-                        ListTile(
-                          leading: Icon(Icons.payment),
-                          title: Text('Saved Cards'),
-                          subtitle: Text('**** **** **** 1234'),
-                        ),
+// Other ListTile elements...
+
+// Other ListTile elements...
+
                       ],
                     ),
                   ),
@@ -429,7 +680,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
             ),
           ),
       ],
-    ));
+    );
   }
 }
 

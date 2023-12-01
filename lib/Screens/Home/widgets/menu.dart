@@ -190,7 +190,7 @@ class _NavigationState extends State<Navigation> {
 
                     const Spacer(),
                     //if (Responsive.isDesktop(context))  WebMenu(),
-                    const Spacer(),
+
                     if (Responsive.isDesktop(context))
                       GestureDetector(
                             onTap: () async {

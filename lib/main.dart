@@ -14,6 +14,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Home/cart_provider.dart';
+import 'Screens/Home/products/widgets/test.dart';
 
 void main() async {
   runApp(
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/alphabeticSearch': (context) => LetterRow(),
         '/address-page':(context) => AddressScreen(),
+        '/profile-page':(context) => profile_test(),
       },
     );
   }

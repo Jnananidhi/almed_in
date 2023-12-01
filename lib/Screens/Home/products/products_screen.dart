@@ -206,7 +206,7 @@ class ProductScreenState extends State<ProductScreen> {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       final product = products[index];
-                      return ProductItem(product);
+                      return Container(height: 120, child: ProductItem(product));
                     },
               ),
             ),

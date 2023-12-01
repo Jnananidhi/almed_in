@@ -137,7 +137,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                                 borderRadius: BorderRadius.circular(50)),
                             height: 40,
                             onPressed: () {
-                            //  Navigator.push(context, MaterialPageRoute(builder: (context) =>  ProfileScreen()));
+                              Navigator.pushNamed(context, "/profile-page");
                             },
                             child: const Text(
                               "Quick View",
