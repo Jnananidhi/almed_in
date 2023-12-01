@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import '../../responsive.dart';
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
 import 'contact_screen.dart';
@@ -34,11 +35,6 @@ class _UserProfileState extends State<UserProfile> {
         drawer: Drawer(
           child: ListView(
             children: [
-              const DrawerHeader(
-                child: Center(
-                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
@@ -53,98 +49,82 @@ class _UserProfileState extends State<UserProfile> {
                       height: 10,
                     ),
                     MenuItems(
-                      isActive: true,
                       title: 'Home',
-                      press: () {},
+                      press: () {Navigator.pushNamed(context, "/home");},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+
+
+                    // DropdownButton<String>(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                    //   value: selectedMenuItem,
+                    //   onChanged: (String? newValue) {
+                    //     if (newValue != null) {
+                    //       setState(() {
+                    //         selectedMenuItem = newValue;
+                    //         // Add logic to navigate to the related page based on selectedMenuItem
+                    //         if (selectedMenuItem == 'Therapeutic') {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                    //
+                    //           );
+                    //
+                    //         } else if (selectedMenuItem == 'Strength') {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                    //           );
+                    //         }
+                    //         else if (selectedMenuItem == 'Company') {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                    //           );
+                    //         }else if (selectedMenuItem == 'Form') {
+                    //           Navigator.push(
+                    //             context,
+                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
+                    //           );
+                    //         }
+                    //       });
+                    //     }
+                    //   },
+                    //   items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
+                    //       .map<DropdownMenuItem<String>>((String value) {
+                    //     return DropdownMenuItem<String>(
+                    //       value: value,
+                    //       child: Text(
+                    //         value,
+                    //         style:  TextStyle(
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize:  18 ,
+                    //           color: Colors.black,
+                    //         ),
+                    //       ),
+                    //     );
+                    //   }).toList(),
+                    //   // Set the underline property to Container() to hide the underline.
+                    //   underline: Container(),
+                    // ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
+                    MenuItems(
+                      title: 'Orders',
+                      press: () {
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                      },
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     MenuItems(
-                      title: 'About Us',
+                      title: 'Logout',
                       press: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                      },
-                    ),
-
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'FAQ',
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const FaqScreen()),
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-
-                    DropdownButton<String>(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      value: selectedMenuItem,
-                      onChanged: (String? newValue) {
-                        if (newValue != null) {
-                          setState(() {
-                            selectedMenuItem = newValue;
-                            // Add logic to navigate to the related page based on selectedMenuItem
-                            if (selectedMenuItem == 'Therapeutic') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                              );
-
-                            } else if (selectedMenuItem == 'Strength') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                              );
-                            }
-                            else if (selectedMenuItem == 'Company') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                              );
-                            }else if (selectedMenuItem == 'Form') {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                              );
-                            }
-                          });
-                        }
-                      },
-                      items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style:  TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize:  18 ,
-                              color: Colors.black,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                      // Set the underline property to Container() to hide the underline.
-                      underline: Container(),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Vendor?',
-                      press: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) =>  LoginPage()),
-                        );
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
                       },
                     ),
                     const SizedBox(
@@ -168,9 +148,15 @@ class _UserProfileState extends State<UserProfile> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        if (!Responsive.isDesktop(context))
+                          SizedBox(
+                            height: 20,
+                          ),
                         //now we create menu and header
-
+                        if (Responsive.isDesktop(context))
                         UserProfilePage(),
+                        if (!Responsive.isDesktop(context))
+                          user_profle_mobile(),
                          BottomNav()
                         //now we will make our site responsive
                       ],
@@ -702,7 +688,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 10,),
+                        SizedBox(height: 20,),
 // Other ListTile elements...
 
 // Other ListTile elements...
@@ -744,3 +730,328 @@ class OrderHistoryItem extends StatelessWidget {
   }
 }
 
+class user_profle_mobile extends StatefulWidget{
+  @override
+  State<user_profle_mobile> createState() =>user_profle_mobileState();
+}
+class user_profle_mobileState extends State<user_profle_mobile> {
+  String username = "";
+  List<Map<String, dynamic>> details = [];
+  Future getusername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      username = preferences.getString('username')!;
+    });
+  }
+
+  Future getprofiledata() async {
+    var url = "${api}profile.php";
+    var response = await http.post(Uri.parse(url),body: {
+      "username": username,
+    }
+    );
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        details =List<Map<String, dynamic>>.from(jsonData);
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+    print("profile_details");
+    print(details);
+    return details;
+  }
+
+  @override
+  void initState() {
+    Future.wait([ getusername()]).then((_) {
+      // After both therapeautic and form data are fetched, proceed to group items
+      getprofiledata();
+    });
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(height: 20),
+        CircleAvatar(
+          radius: 60,
+          backgroundImage: AssetImage('assets/products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
+        ),
+       SizedBox(
+         height: 10,
+       ),
+        Text(
+          details.isNotEmpty ? details[0]['shop_name'] ?? 'No name available' : 'No data available',// Replace with the user's name
+          style: TextStyle(fontSize: 24),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+
+        Text(
+          details.isNotEmpty ? details[0]['email'] ?? 'No name available' : 'No data available', // Replace with the user's email
+          style: TextStyle(fontSize: 18),
+        ),
+
+        SizedBox(
+          height: 10,
+        ),
+        ListTile(
+          leading: Icon(Icons.health_and_safety,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'Owner: ',
+                  style: TextStyle(fontFamily: 'DMSans Bold'),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['owner'] ?? 'No name available'
+                      : 'No data available',
+                  style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.confirmation_num_rounded,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'GST No: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['gst_no'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.dataset_linked,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'KMC/DL No 1: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['dl1'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.dataset_linked,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'KMC/DL No 2: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['dl2'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+
+
+        ListTile(
+          leading: Icon(Icons.location_city,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'Town/City: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['city'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.post_add,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'Postcode/Zip: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['postcode'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.contact_phone,color: kSecondaryColor),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'Phone: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['phone'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        ListTile(
+          leading: Icon(Icons.email,color: kSecondaryColor,),
+          contentPadding: EdgeInsets.zero,
+          title: Row(
+            children: [
+              SizedBox(
+                width: 120, // Fixed width for the title
+                child: Text(
+                  'Email: ',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              Flexible(
+                child: Text(
+                  details.isNotEmpty
+                      ? details[0]['email'] ?? 'No name available'
+                      : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: kSecondaryColor, width: 2),
+            borderRadius: BorderRadius.circular(20.0),
+            // Set the border radius here
+          ),
+
+          elevation: 20,
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(height: 10,),
+                ListTile(
+                  leading:  Icon(Icons.pin_drop_rounded,color: kSecondaryColor),
+
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              details.isNotEmpty
+                                  ? details[0]['adress'] ?? 'No name available'
+                                  : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular',color: Colors.grey),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 5,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10,),
+// Other ListTile elements...
+
+// Other ListTile elements...
+
+              ],
+            ),
+          ),
+        ),
+
+
+
+
+            ],
+          );
+
+}}
