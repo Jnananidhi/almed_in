@@ -218,15 +218,17 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
                 ),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Add any widgets you want to display within the card, e.g., Text
                   Text(widget.title,textAlign: TextAlign.center,),
                   Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Icon(
-                        Icons.local_hospital, // You can use any medical icon here
+                        Icons.health_and_safety, // You can use any medical icon here
                         color: Colors.blue,
                         size: 24,
                       ),

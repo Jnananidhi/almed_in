@@ -200,6 +200,7 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  var w1 = kMaxWidth/1.5;
   String username = "";
   List<Map<String, dynamic>> details = [];
   Future getusername() async {
@@ -279,17 +280,51 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       radius: 60,
                       backgroundImage: AssetImage('assets/products/users/profile_image.jpg'), // Replace with the path to the user's profile picture
                     ),
-                    SizedBox(height: 10),
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
+
+
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
                     Text(
                       details.isNotEmpty ? details[0]['shop_name'] ?? 'No name available' : 'No data available',// Replace with the user's name
                       style: TextStyle(fontSize: 24),
                     ),
-                    SizedBox(height: 10),
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
+
+
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
                     Text(
                       details.isNotEmpty ? details[0]['email'] ?? 'No name available' : 'No data available', // Replace with the user's email
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 20),
+
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
+
+
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
                     TextButton(
                       onPressed: () {
                         // Add your onPressed functionality here
@@ -315,7 +350,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             },
                             child: Text(
                               'Orders',
-                              textAlign: TextAlign.right,
+                              textAlign: TextAlign.start,
                               style: TextStyle(
                                 color: isHovered ? kPrimaryColor : Colors.black,
                                 fontSize: 18,
@@ -326,6 +361,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         ],
                       ),
                     ),
+                    Divider(
+                      thickness: 1,
+                      indent : 0,
+                      endIndent : 10,
+                    ),
+
 
                     Divider(
                       thickness: 1,
@@ -358,7 +399,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             },
                             child: Text(
                               'Logout',
-                              textAlign: TextAlign.right,
+                              textAlign: TextAlign.start,
                               style: TextStyle(
                                 color: isHovered1 ? kPrimaryColor : Colors.black,
                                 fontSize: 18,
@@ -402,9 +443,9 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         title: Row(
                           children: [
                             SizedBox(
-                              width: 120, // Fixed width for the title
+                              // Fixed width for the title
                               child: Text(
-                                'Profile ',
+                                'Account Information ',
                                 style: TextStyle(fontFamily: 'DMSans Bold'),
                                 textAlign: TextAlign.start,
                               ),
@@ -417,6 +458,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         height: 0.01, // Set the height of the divider line
                         color: kPrimaryColor, // Set the color of the divider line
                       ),
+
 
                       ListTile(
                         leading: Icon(Icons.health_and_safety,color: kSecondaryColor),
@@ -620,37 +662,29 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 ),
 
                 SizedBox(height: 10,),
+
                 Card(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0), // Set the border radius here
+                    side: BorderSide(color: kSecondaryColor, width: 2),
+                    borderRadius: BorderRadius.circular(20.0),
+                    // Set the border radius here
                   ),
+
                   elevation: 20,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Column(
-
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        //Text("Payments Information",textAlign: TextAlign.left,style: TextStyle(color: kPrimaryColor)),
+                        SizedBox(height: 10,),
                         ListTile(
+                          leading:  Icon(Icons.pin_drop_rounded,color: kSecondaryColor),
 
-                          contentPadding: EdgeInsets.zero,
                           title: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                width: 80, // Width for your custom icon
-                                child: Icon(Icons.pin_drop_rounded,color: kSecondaryColor,), // Your custom icon
-                              ),
-                              SizedBox(
-                                width: 120, // Fixed width for the title
-                                child: Text(
-                                  'Address: ',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ),
+
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -658,7 +692,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                     Text(
                                       details.isNotEmpty
                                           ? details[0]['adress'] ?? 'No name available'
-                                          : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular'),
+                                          : 'No data available',style: TextStyle(fontFamily: 'DMSans Regular',color: Colors.grey),
                                       overflow: TextOverflow.ellipsis,
                                       maxLines: 5,
                                     ),
@@ -668,6 +702,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                             ],
                           ),
                         ),
+                        SizedBox(height: 10,),
 // Other ListTile elements...
 
 // Other ListTile elements...
