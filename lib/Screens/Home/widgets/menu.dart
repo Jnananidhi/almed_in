@@ -246,7 +246,19 @@ class _NavigationState extends State<Navigation> {
                           ),
                           SizedBox(width: 9,),
                           if (Responsive.isDesktop(context))
-                          Text("Cart",style: TextStyle(fontFamily:'DMSans Bold' ),),
+                          GestureDetector(onTap:(){
+                            if(Responsive.isMobile(context)) {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return CartScreenMobile();
+                                  }));
+                            }else{
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return CartScreen();
+                                  }));}
+                          },
+                              child: Text("Cart",style: TextStyle(fontFamily:'DMSans Bold' ),)),
                         ],
                       ),
                     ),

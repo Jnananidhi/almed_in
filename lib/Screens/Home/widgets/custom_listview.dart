@@ -474,7 +474,7 @@ class _ProductItemState extends State<ProductItem> {
                             borderRadius: BorderRadius.circular(50)),
                         height: 40,
                         onPressed: () {
-
+                      if (username != "") {
                           final cartProvider = context.read<CartProvider>();
                           final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
                           
@@ -498,7 +498,16 @@ class _ProductItemState extends State<ProductItem> {
                               textColor: Colors.white,
                             );
                           }
-                        },
+                        }
+                      else{
+                        Fluttertoast.showToast(
+                          msg: "Please login to add items to your cart", // Your toast message
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                      }},
                         child: const Text(
                           "Add to Cart",
                           style: TextStyle(color: kWhiteColor),
@@ -665,7 +674,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                             borderRadius: BorderRadius.circular(50)),
                         height: 40,
                         onPressed: () {
-
+                        if (username != "") {
                           final cartProvider = context.read<CartProvider>();
                           final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
 
@@ -689,7 +698,16 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                               textColor: Colors.white,
                             );
                           }
-                        },
+                        }
+                        else{
+                          Fluttertoast.showToast(
+                            msg: "Please login to add items to your cart",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
+                        }},
                         child: const Text(
                           "Add to Cart",
                           style: TextStyle(color: kWhiteColor),
