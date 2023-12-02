@@ -477,7 +477,7 @@ class _ProductItemState extends State<ProductItem> {
 
                           final cartProvider = context.read<CartProvider>();
                           final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
-
+                          
                           if (isAlreadyInCart) {
                             Fluttertoast.showToast(
                               msg: "Item is already in the cart!",
@@ -530,6 +530,196 @@ class _ProductItemState extends State<ProductItem> {
                 ],
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+class ProductItem_mobile extends StatefulWidget {
+  final Productt product;
+
+  ProductItem_mobile(this.product, {Key? key}) : super(key: key);
+
+  @override
+  State<ProductItem_mobile> createState() => ProductItem_mobileState(product);
+}
+
+class ProductItem_mobileState extends State<ProductItem_mobile> {
+  String username = "";
+  Future getusername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      username = preferences.getString('username')!;
+    });
+  }
+  @override
+  void initState() {
+    getusername();
+    super.initState();
+  }
+  ProductItem_mobileState(Productt product);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10),
+      child: Container(
+        width: MediaQuery.of(context).size.width, // Set the width to the desired size
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(color: kgreyColor, width: 3),
+
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: Column(
+            children: [Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    widget.product.imageUrl,
+                    width: 30,
+                    height: 70,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 20,),
+                Column(
+                  children:[ Container(
+                    width: MediaQuery.of(context).size.width/3,
+                    margin: EdgeInsets.all(10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.product.name,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.black,
+                            fontFamily: 'DMSans Bold',
+                          ),
+                        ),
+                        SizedBox(height: 20,),
+                        Text(
+                          'Quantity: ${widget.product.quantity}',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'DMSans Regular',
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ),
+                    Consumer<AuthProvider>(
+                        builder: (context, authProvider, child) {
+                          if (username != "") {
+                            // User is logged in, display the Container with prices
+                            return Container(
+                              width: MediaQuery.of(context).size.width/3,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Price: ${widget.product.mrp}',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontFamily: 'DMSans Bold',
+                                    ),
+                                  ),
+                                  SizedBox(height: 20,),
+                                  Text(
+                                    'Discount: ${widget.product.discount}',
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      fontFamily: 'DMSans Regular',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          } else {
+                            // User is not logged in, show login button or other content
+                            return Container(margin: EdgeInsets.all(10),child: Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Bold',color: Colors.red),));
+                          }
+                        }),]
+                ),
+              ],
+            ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: MaterialButton(
+                        color: kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        height: 40,
+                        onPressed: () {
+
+                          final cartProvider = context.read<CartProvider>();
+                          final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
+
+                          if (isAlreadyInCart) {
+                            Fluttertoast.showToast(
+                              msg: "Item is already in the cart!",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white,
+                            );
+                          } else {
+                            cartProvider.addToCart(widget.product);
+                            Fluttertoast.showToast(
+                              msg: "Item Added to Cart",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              fontSize: 16,
+                              backgroundColor: Colors.black,
+                              textColor: Colors.white,
+                            );
+                          }
+                        },
+                        child: const Text(
+                          "Add to Cart",
+                          style: TextStyle(color: kWhiteColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50)),
+                      color: kPrimaryColor,
+                      height: 40,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CheckoutScreen()),
+                        );
+                      },
+                      child: const Text(
+                        "Buy Now",
+                        style: TextStyle(color: kWhiteColor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),]
           ),
         ),
       ),

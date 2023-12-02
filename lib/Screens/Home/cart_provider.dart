@@ -62,25 +62,7 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
 
     // Convert cart data to JSON
-    List<Map<String, dynamic>> cartData = _cartItems.map((item) => productToMap(item)).toList();
 
-    try {
-      // Send cart data to the API for database storage
-      final response = await http.post(
-        Uri.parse(removeUrl),
-        body: jsonEncode({'cartItems': cartData}),
-      );
-
-      if (response.statusCode != 200) {
-        // Handle the case where the server didn't return a 200 OK response
-        addToCart(product); // Roll back the local state change
-        Fluttertoast.showToast(msg: 'Failed to remove item from cart');
-      }
-    } catch (error) {
-      // Handle network or other errors
-      addToCart(product); // Roll back the local state change
-      Fluttertoast.showToast(msg: 'Error removing item from cart');
-    }
   }
 
 

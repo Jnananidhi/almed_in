@@ -7,6 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../../../responsive.dart';
 import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
 import '../contact_screen.dart';
@@ -206,7 +207,9 @@ class ProductScreenState extends State<ProductScreen> {
                     itemCount: products.length,
                     itemBuilder: (context, index) {
                       final product = products[index];
-                      return Container(height: 120, child: ProductItem(product));
+                      return Container(height:Responsive.isDesktop(context)? 120:200, child: Responsive.isDesktop(context)
+                          ? ProductItem(product) // Display the desktop version
+                          : ProductItem_mobile(product),);
                     },
               ),
             ),

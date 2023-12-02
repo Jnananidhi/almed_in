@@ -259,7 +259,11 @@ class _AddressScreenState extends State<AddressScreen> {
                           ),
                           //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                           child: ListTile(
-                            title: Text(details.isNotEmpty ? details[0]['adress'] ?? 'No data available' : 'No data available'),
+                            title: Text(details.isNotEmpty ? details[0]['adress'] ?? 'No data available' : 'No data available',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'DMSans Regular',
+                              ),),
                             leading: Radio(
                               value: 1, // Unique value for UPI
                               groupValue: selectedPaymentMethod,
@@ -281,7 +285,10 @@ class _AddressScreenState extends State<AddressScreen> {
                           ),
                           //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                           child: ListTile(
-                              title: Text('${widget.RName ?? ""} ${widget.Pnumber ?? ""} ${ widget.Address ?? ""} ${widget.userInput ?? ""}'),
+                              title: Text('${widget.RName ?? ""} ${widget.Pnumber ?? ""} ${ widget.Address ?? ""} ${widget.userInput ?? ""}',style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'DMSans Regular',
+                              ),),
                               leading: Radio(
                                 value: 2, // Unique value for UPI
                                 groupValue: selectedPaymentMethod,

@@ -14,7 +14,7 @@ class CartScreenMobile extends StatelessWidget {
 
     return Scaffold(
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // Align children to the left
+        crossAxisAlignment: CrossAxisAlignment.center, // Align children to the left
         children: [
           MobileNavigation(),
           Divider(
@@ -27,7 +27,7 @@ class CartScreenMobile extends StatelessWidget {
             child: Text(
               "Your Cart",
               style: TextStyle(
-                fontSize: 24, // Adjust the font size as needed
+                fontSize: 20, // Adjust the font size as needed
                 fontFamily: 'DMSans Bold',
               ),
             ),
@@ -87,11 +87,12 @@ class CartScreenMobile extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          title: Text(product.name),
-                          subtitle: Text('\$${product.mrp}'),
-                          trailing: Row(
+                          title: Column(
                             mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(product.name),
+                              Text('\$${product.mrp}'),
                               Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -101,6 +102,7 @@ class CartScreenMobile extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     IconButton(
                                       icon: const Icon(Icons.remove),
@@ -119,24 +121,25 @@ class CartScreenMobile extends StatelessWidget {
                                             .incrementQuantity(product);
                                       },
                                     ),
+                                    IconButton(
+                                      onPressed: () {
+                                        context
+                                            .read<CartProvider>()
+                                            .removeFromCart(product);
+                                      },
+                                      icon: const Icon(Icons.delete_outline_rounded,
+                                          color: Colors.red),
+                                    ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 10), // Reduce the spacing
-                              IconButton(
-                                onPressed: () {
-                                  context
-                                      .read<CartProvider>()
-                                      .removeFromCart(product);
-                                },
-                                icon: const Icon(Icons.delete_outline_rounded,
-                                    color: Colors.red),
-                              ),
+                              // Reduce the spacing
+
                             ],
                           ),
-                        ),
-                      );
-                    },
+
+                      )
+                      );},
                   ),
                 ),
                 BillSummary(), // Display the bill summary widget
@@ -151,6 +154,7 @@ class CartScreenMobile extends StatelessWidget {
                     },
                   ),
                 ),
+
               ],
             ),
           ),

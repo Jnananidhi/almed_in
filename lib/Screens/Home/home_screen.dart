@@ -96,58 +96,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-
-                  DropdownButton<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    value: selectedMenuItem,
-                    onChanged: (String? newValue) {
-                      if (newValue != null) {
-                        setState(() {
-                          selectedMenuItem = newValue;
-                          // Add logic to navigate to the related page based on selectedMenuItem
-                          if (selectedMenuItem == 'Therapeutic') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                            );
-
-                          } else if (selectedMenuItem == 'Strength') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                            );
-                          }
-                          else if (selectedMenuItem == 'Company') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                            );
-                          }else if (selectedMenuItem == 'Form') {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                            );
-                          }
-                        });
-                      }
+                  MenuItems(
+                    isActive: true,
+                    title: 'Search Medicines',
+                    press: () {
+                      Navigator.pushNamed(context, "/alphabeticSearch");
                     },
-                    items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style:  TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize:  18 ,
-                            color: Colors.black,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                    // Set the underline property to Container() to hide the underline.
-                    underline: Container(),
                   ),
                   const SizedBox(
                     height: 10,

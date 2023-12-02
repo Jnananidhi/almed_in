@@ -114,6 +114,7 @@ class _LetterRowState extends State<LetterRow> {
 
   @override
   Widget build(BuildContext context) {
+
     Size _size = MediaQuery
         .of(context)
         .size;

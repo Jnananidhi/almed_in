@@ -200,11 +200,17 @@ child:SingleChildScrollView(
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text('Deliver To:'" "' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}'),
+                          title: Text('Deliver To:'" "' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}',style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'DMSans Regular',
+                          ),),
 
                         ),
                         ListTile(
-                          title: Text('Address :'" "'${widget.Address ?? ""}'" "'${widget.userInput ?? ""}'),
+                          title: Text('Address :'" "'${widget.Address ?? ""}'" "'${widget.userInput ?? ""}',style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'DMSans Regular',
+                          ),),
 
                         ),
                       ],
