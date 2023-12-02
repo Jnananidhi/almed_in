@@ -288,7 +288,18 @@ class _NavigationState extends State<Navigation> {
                           ),
                         ),
                         if (Responsive.isDesktop(context))
-                          Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),),
+                            GestureDetector(onTap:()async{
+                            SharedPreferences preferences = await SharedPreferences
+                                .getInstance();
+                            String? username = preferences.getString(
+                            'username');
+                            if (username != null) {
+                            Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => UserProfile()));}
+                                else{
+                              Navigator.pushNamed(context, "/login");}
+                                },
+                          child:Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),)),
                       ],
                     ),),
                   ],
