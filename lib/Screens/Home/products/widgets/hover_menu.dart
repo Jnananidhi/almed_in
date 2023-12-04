@@ -1,13 +1,11 @@
-library hover_menu;
-
 import 'package:flutter/material.dart';
 
-class HoverMenu1 extends StatefulWidget {
+class Hover_Menu extends StatefulWidget {
   final Widget title;
   final double? width;
   final List<Widget> items;
 
-  const HoverMenu1({
+  const Hover_Menu({
     Key? key,
     required this.title,
     this.items = const [],
@@ -15,10 +13,10 @@ class HoverMenu1 extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  HoverMenu1State createState() => HoverMenu1State();
+  _HoverMenuState createState() => _HoverMenuState();
 }
 
-class HoverMenu1State extends State<HoverMenu1> {
+class _HoverMenuState extends State<Hover_Menu> {
   OverlayEntry? _overlayEntry;
   final _titleFocusNode = FocusNode();
   final _overlayFocusNode = FocusNode();
@@ -108,7 +106,7 @@ class HoverMenu1State extends State<HoverMenu1> {
     return OverlayEntry(
       maintainState: true,
       builder: (context) => Positioned(
-        right: offset.dy-size.width,
+        left: offset.dx,
         top: offset.dy + size.height,
         width: widget.width ?? 200,
         child: MouseRegion(

@@ -15,6 +15,7 @@ import '../about_screen.dart';
 import '../contact_screen.dart';
 import '../faq_screen.dart';
 import '../products/products_screen.dart';
+import '../products/widgets/hover_menu.dart';
 import '../products/widgets/hover_menu1.dart';
 import '../profile_screen.dart';
 import 'package:http/http.dart' as http;
@@ -324,7 +325,7 @@ class _NavigationState extends State<Navigation> {
                           items: buildFormMenuItems(),
                           width: 500,
                           ),
-                        HoverMenu(
+                        Hover_Menu(
                           title:  HoverText("Strength"),
                           items: buildStrengthMenuItems(),
                           width: 500,
