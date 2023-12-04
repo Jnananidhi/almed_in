@@ -36,6 +36,8 @@ import '../products/products_screen.dart';
     bool obscureText = true;
     TextEditingController nameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    FocusNode _focusNode1 = FocusNode();
+    FocusNode _focusNode2 = FocusNode();
 
     void togglePasswordVisibility() {
       setState(() {
@@ -48,6 +50,9 @@ import '../products/products_screen.dart';
     void dispose() {
       nameController.dispose();
       passwordController.dispose();
+      _focusNode1.dispose();
+      _focusNode2.dispose();
+      // Dispose other FocusNodes if created
       super.dispose();
     }
 
@@ -262,6 +267,12 @@ import '../products/products_screen.dart';
                                       }
                                       return null;
                                     },
+                                    focusNode: _focusNode1,
+                                    textInputAction: TextInputAction.next,
+                                    // Your text form field properties
+                                    onFieldSubmitted: (_) {
+                                      _focusNode2.requestFocus();
+                                    },
                                   ),
                                   const SizedBox(height: 20),
                                   TextFormField(
@@ -300,6 +311,12 @@ import '../products/products_screen.dart';
                                         return 'maximum character is 13';
                                       }
                                       return null;
+                                    },
+                                    focusNode: _focusNode2,
+                                    onFieldSubmitted: (_) {
+                                      if (_formKey.currentState!.validate()) {
+                                        login();
+                                      }
                                     },
                                   ),
                                   const SizedBox(height: 10),
