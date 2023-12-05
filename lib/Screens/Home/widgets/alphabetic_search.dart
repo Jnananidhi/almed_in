@@ -101,15 +101,23 @@ class _LetterRowState extends State<LetterRow> {
       groupedItems[key] = groupedItems[key] ?? [];
       groupedItems[key]!.add(item);
     }
+
+    // Print the contents of groupedItems for debugging
+    print('Grouped Items: $groupedItems');
+
     _setLetterAvailability();
   }
 
   void _setLetterAvailability() {
     isLetterEnabled = List.generate(26, (index) {
       String letter = String.fromCharCode('A'.codeUnitAt(0) + index);
-      return groupedItems.containsKey(letter);
+      bool isEnabled = groupedItems.containsKey(letter);
+      print('Letter $letter is enabled: $isEnabled');
+      return isEnabled;
     });
   }
+
+
 
 
   @override
@@ -129,7 +137,8 @@ class _LetterRowState extends State<LetterRow> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [ Row(
+                    children: [
+                      Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Generate 26 buttons
@@ -249,6 +258,7 @@ class _LetterRowState extends State<LetterRow> {
 
   // Function to build sectioned items by alphabet
   Widget _buildSectionedItems() {
+
     double screenHeight = MediaQuery.of(context).size.height;
 
     List<String> filteredItems = [];

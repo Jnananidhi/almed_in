@@ -18,6 +18,8 @@ class ProductScreen extends StatefulWidget {
   final String? selectedMenuItem,selectedProductName;
 
   ProductScreen({this.selectedMenuItem,this.selectedProductName});
+
+
   @override
   ProductScreenState createState() => ProductScreenState();
 }
