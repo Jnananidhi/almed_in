@@ -15,20 +15,24 @@ import '../faq_screen.dart';
 import '../widgets/menu.dart';
 
 class ProductScreen extends StatefulWidget {
-  final String? selectedMenuItem;
+  final String? selectedMenuItem,selectedProductName;
 
-  ProductScreen({this.selectedMenuItem});
+  ProductScreen({this.selectedMenuItem,this.selectedProductName});
   @override
   ProductScreenState createState() => ProductScreenState();
 }
 class ProductScreenState extends State<ProductScreen> {
   String selectedMenuItem = 'Category';
+  String? get selectedProductName => widget.selectedProductName;
   List<Productt> products = [];
   bool isLoading = true;
+
+  //get selectedProductName => selectedProductName;
   @override
   void initState() {
     super.initState();
     fetchProducts();
+    print("nidhiiii$selectedProductName");
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
@@ -39,21 +43,23 @@ class ProductScreenState extends State<ProductScreen> {
 
   Future<void> fetchProducts() async {
     final response = await http.get(Uri.parse('${api}getProducts.php'));
-    isLoading = true;
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
-      print(productsData);
+      if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
+        // Filter the products list based on the selected product name
+        productsData = productsData.where((product) =>
+        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
+        ).toList();
+      }
       setState(() {
         products = productsData;
       });
-      isLoading = false;
     } else {
       // Handle the error when the HTTP request fails
       print('Failed to load products');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return isLoading

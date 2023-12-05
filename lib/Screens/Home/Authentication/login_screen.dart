@@ -68,7 +68,7 @@ import '../products/products_screen.dart';
         Provider.of<AuthProvider>(context, listen: false).login();
         SharedPreferences preferences = await SharedPreferences.getInstance();
         preferences.setString("username", nameController.text);
-        Navigator.pop(context);
+        Navigator.pop(context,true);
       } else {
         Fluttertoast.showToast(
             msg: "The Username and Password doesn't matches",

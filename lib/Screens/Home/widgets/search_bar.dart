@@ -8,6 +8,8 @@ import 'package:http/http.dart' as http;
 import '../products/product_listing.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../products/products_screen.dart';
+
 class Search_bar extends StatefulWidget  {
   const Search_bar({
     Key? key,
@@ -277,18 +279,21 @@ class _Search_barState extends State<Search_bar> {
                 child: TextField(
                   controller: searchcontroller,
                   onSubmitted: (searchTerm) {
+
                     // Perform navigation to the product screen with the search term
                     if (searchTerm.isNotEmpty) {
+                      print("sunad$searchTerm");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                          builder: (context) =>ProductScreen(selectedProductName: searchTerm),
                         ),
                       );
                     }
                   },
                   onChanged: (searchTerm) {
                     setState(() {
+                      String searchTerm = searchcontroller.text;
                       searchContacts(searchTerm);
                     });
                   },
@@ -308,10 +313,11 @@ class _Search_barState extends State<Search_bar> {
                           // Perform navigation to the product screen with the search term
                           String searchTerm = searchcontroller.text;
                           if (searchTerm.isNotEmpty) {
+                            print("manu$searchTerm");
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductListScreen(selectedProductName: searchTerm),
+                                builder: (context) => ProductScreen(selectedProductName: searchTerm),
                               ),
                             );
                           }
@@ -356,10 +362,11 @@ class _Search_barState extends State<Search_bar> {
                         // For example, fill the search input with the suggestion
                         searchcontroller.text = suggestion;
                         String selectedProductName = suggestion;
+                        print("anu$selectedProductName");
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) =>  ProductListScreen(selectedProductName: selectedProductName),),
-                        );
+                          MaterialPageRoute(builder: (context) =>  ProductScreen(selectedProductName: selectedProductName),
+                        ));
                     },
                     );
                 }).toList(),
