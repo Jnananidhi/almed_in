@@ -501,12 +501,21 @@ class _ProductItemState extends State<ProductItem> {
                           }
                         }
                       else{
-                        Fluttertoast.showToast(
-                          msg: "Please login to add items to your cart", // Your toast message
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: const Text('Please login to add item in your cart'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       }},
                         child: const Text(
