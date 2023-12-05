@@ -458,7 +458,8 @@ class _ProductItemState extends State<ProductItem> {
                       );
                     } else {
                       // User is not logged in, show login button or other content
-                      return Container(margin: EdgeInsets.all(10),child: Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Bold',color: Colors.red),));
+                      return Container(margin: EdgeInsets.all(10),
+                          child: TextButton( onPressed: () { Navigator.pushNamed(context, "/login"); }, child: Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Bold',color: Colors.red),),));
                     }
                   }),
               SizedBox(width: 20,),

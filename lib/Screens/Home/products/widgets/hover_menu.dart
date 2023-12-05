@@ -51,15 +51,16 @@ class _HoverMenuState extends State<Hover_Menu> {
 
   void _onOverlayFocusChanged() {
     setState(() {
-      _isOverlayHovered = _overlayFocusNode.hasFocus;
+      _isOverlayHovered = _overlayFocusNode.hasFocus || _isTitleHovered;
     });
 
-    if (_overlayFocusNode.hasFocus) {
-      _showOverlay();
-    } else if (!_titleFocusNode.hasFocus) {
+    if (!_isOverlayHovered) {
       _hideOverlay();
+    } else {
+      _showOverlay();
     }
   }
+
 
   void _showOverlay() {
     if (_overlayEntry == null) {
@@ -72,6 +73,12 @@ class _HoverMenuState extends State<Hover_Menu> {
     _overlayEntry?.remove();
     _overlayEntry = null;
   }
+  void _hideOverlayIfNotHovered() {
+    if (!_isTitleHovered && !_isOverlayHovered) {
+      _hideOverlay();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -120,19 +127,23 @@ class _HoverMenuState extends State<Hover_Menu> {
             setState(() {
               _isOverlayHovered = false;
             });
-            if (!_isTitleHovered) {
-              _overlayFocusNode.unfocus();
-            }
+            _hideOverlayIfNotHovered();
           },
-          child: Container(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: widget.items,
+          child: GestureDetector(
+            onTap: () {
+              _hideOverlay();
+            },
+            child: Container(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                children: widget.items,
+              ),
             ),
           ),
         ),
       ),
     );
+
   }
 }

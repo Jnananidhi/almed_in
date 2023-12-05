@@ -153,10 +153,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                             color: kSecondaryColor,
                             height: 40,
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>  ProductScreen()),
-                              );
+                              Navigator.pushNamed(context, "/product-screen");
                             },
                             child: const Text(
                               "Shop Now",

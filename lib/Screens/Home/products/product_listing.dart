@@ -52,6 +52,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
   void initState() {
     super.initState();
     fetchProducts();
+    print("manu");
   }
 
 
