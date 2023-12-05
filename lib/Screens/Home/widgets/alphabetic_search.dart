@@ -60,7 +60,7 @@ class _LetterRowState extends State<LetterRow> {
   }
 
   Future getcompany() async {
-    var url = "${api}product_name.php";
+    var url = "${api}almed_company.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -88,7 +88,7 @@ class _LetterRowState extends State<LetterRow> {
     super.initState();
     isLetterEnabled = List.generate(26, (_) => false);
     groupedItems = {};
-    Future.wait([gettherapeautic(), getform(), getcompany()]).then((_) {
+    Future.wait([gettherapeautic(),getcompany(), getform(), ]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
       _groupItems();
     });
