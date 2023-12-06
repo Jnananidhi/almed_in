@@ -18,17 +18,18 @@ class BillSummary extends StatelessWidget {
       ),
       child: Container(
         height: 280,
-        padding: EdgeInsets.only(top: 50,right: 16,left: 16),
+        padding: EdgeInsets.only(top: 30,right: 16,left: 16),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              lightColor, // Start color
-              kSecondaryColor, // End color (same color for a solid effect)
-            ],
-          ),
-          border: Border.all(color: kPrimaryColor,width: 1),
+          // gradient: LinearGradient(
+          //   begin: Alignment.topCenter,
+          //   end: Alignment.bottomCenter,
+          //   colors: [
+          //     lightColor, // Start color
+          //     kSecondaryColor, // End color (same color for a solid effect)
+          //   ],
+          // ),
+          color: Colors.white,
+          //border: Border.all(color: kPrimaryColor,width: 1),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
@@ -41,12 +42,16 @@ class BillSummary extends StatelessWidget {
                 fontWeight: FontWeight.bold
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 5),
             Divider(thickness: 2,),
+            SizedBox(height: 5),
             BillItem(label: 'Total Bill (MRP) ' ,value:cart.calculateTotalMRP().toString()),
+            SizedBox(height: 5),
             BillItem(label: 'Total Discount ',value:'-'+cart.calculateTotalDiscount().toString()),
+            SizedBox(height: 5),
             BillItem(label: 'Shipping Fee ' ,value: '50'),
             Divider(thickness: 2,),
+            SizedBox(height: 5),
             BillItem(label: 'To Be Paid ',value:cart.calculateTotalAmount(shippingCost=50.00).toString(), isTotal: true),
           ],
         ),

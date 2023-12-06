@@ -192,7 +192,7 @@ child:SingleChildScrollView(
                  //color: selectedPaymentMethod == 1 ? lightColor : Colors.white,
                  child:
                   Card(
-                   elevation: 10,
+                    elevation:2,
                     shape: RoundedRectangleBorder(// Set the border color and width
                       borderRadius: BorderRadius.circular(15.0), // Set the border radius
                     ),
@@ -200,30 +200,44 @@ child:SingleChildScrollView(
                     child: Column(
                       children: [
                         ListTile(
-                          title: Text('Deliver To:'" "' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}',style: TextStyle(
+                          title: Text('DELIVERY ADDRESS',style: TextStyle(
+                            color: Colors.grey,
+                            fontFamily: 'DMSans Regular',
+                          ),),
+
+                        ),
+                        ListTile(
+                          title: Text(' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}',style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'DMSans Regular',
                           ),),
 
                         ),
                         ListTile(
-                          title: Text('Address :'" "'${widget.Address ?? ""}'" "'${widget.userInput ?? ""}',style: TextStyle(
+                          title: Text('${widget.Address ?? ""}'" "'${widget.userInput ?? ""}',style: TextStyle(
                             color: Colors.black,
                             fontFamily: 'DMSans Regular',
                           ),),
 
                         ),
+                        SizedBox(height: 16),
                       ],
                     ),
                   ),),
                   SizedBox(height: 16),
 
-                  Text("Payment Method",style:TextStyle(
-                    fontWeight:FontWeight.bold,
-                    fontSize: _size.width >= 370 ? 18 : 14,
-                    fontFamily: 'DMSans Bold',
-                    color: Colors.black,
-                  ),textAlign: TextAlign.left),
+                  Padding(
+                    padding:EdgeInsets.all(20),
+                    child: Align(
+                      alignment:Alignment.topLeft,
+                      child: Text("Payment Method",style:TextStyle(
+                        fontWeight:FontWeight.bold,
+                        fontSize: _size.width >= 370 ? 18 : 14,
+                        fontFamily: 'DMSans Bold',
+                        color: Colors.black,
+                      ),textAlign: TextAlign.left),
+                    ),
+                  ),
                   SizedBox(height: 16),// Add space between cards
 
       Stack(
@@ -524,7 +538,7 @@ child:SingleChildScrollView(
 
               ]),
             ),
-
+            SizedBox(width: 10),
             Expanded(
               flex:1,
               child: Column(
