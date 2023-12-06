@@ -210,7 +210,9 @@ class ProductScreenState extends State<ProductScreen> {
               ),
             ),
             // Display the custom Navigation widget if needed
-            Expanded(
+            products.isEmpty
+                ? Center(child: Text('No data available')) // Display 'No data available' text
+            :Expanded(
               child: ListView.builder(
                     itemCount: products.length,
                     itemBuilder: (context, index) {
