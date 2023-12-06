@@ -359,18 +359,6 @@ class _AddressScreenState extends State<AddressScreen> {
               // Right Section with Search and Map
             ],
           ),
-            Positioned(
-              top: MediaQuery.of(context).size.width < 600
-                  ? 90// Adjust the value for mobile view
-                  :50,
-              left: MediaQuery.of(context).size.width < 600
-                  ? 0 // Adjust the value for mobile view
-                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-              right: MediaQuery.of(context).size.width < 600
-                  ? 0 // Adjust the value for mobile view
-                  : MediaQuery.of(context).size.width * 0.25,
-              child: Search_bar(),
-            ),
         ],),
       );
     }

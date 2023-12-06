@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/cart_screen_mobile.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
@@ -137,7 +138,11 @@ class _NavigationState extends State<Navigation> {
     return Container(
       color: kWhiteColor,
       width: double.infinity,
-      child: Column(
+        height: MediaQuery.of(context).size.width < 600 ? 140: null,
+      child: Stack(
+          children: [
+      Column(
+      children: <Widget>[Column(
         children: [
           Column(
             children: [
@@ -337,7 +342,23 @@ class _NavigationState extends State<Navigation> {
                         ),
                             ],
                   ),
-              )])]));
+              )])])
+    ]
+      ),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
+            ),
+          ])
+    );
 
 
         }
