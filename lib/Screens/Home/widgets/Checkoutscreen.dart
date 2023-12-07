@@ -204,7 +204,6 @@ child:SingleChildScrollView(
                             color: Colors.grey,
                             fontFamily: 'DMSans Regular',
                           ),),
-
                         ),
                         ListTile(
                           title: Text(' ${widget.RName ?? ""}'" - "'${widget.Pnumber ?? ""}',style: TextStyle(
@@ -271,7 +270,7 @@ child:SingleChildScrollView(
                   ),),
                   if (selectedPaymentMethod == 1)
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
@@ -425,9 +424,77 @@ child:SingleChildScrollView(
                 ),
               ),
                 if (selectedPaymentMethod == 2)
-                  ListTile(
-                    title: Text('Additional Content Here'),
-                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('UPI ID',),
+                            SizedBox(height: 10),
+                            Container(
+                              height: 40,
+                              alignment: Alignment.center,// Set the height you desire
+                              child: TextFormField(
+                                keyboardType: TextInputType.text,
+                                decoration: InputDecoration(
+                                  filled: true, // This property is used to fill the background color
+                                  fillColor: Colors.white,
+                                  hintText: 'Enter your UPI ID',
+                                  hintStyle: TextStyle(fontSize: 12),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Colors.black,
+                                      width: 1.0,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                          ],
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text('',),
+                            SizedBox(height: 10),
+                            ElevatedButton(
+                              child: Container(
+                                width: MediaQuery.of(context).size.width < 600
+                                    ? kMaxWidth / 15.5 // Adjust the value for mobile view
+                                    : kMaxWidth / 10.5,
+                                height: 40,
+                                child: const Center(child: Text("PAY",style:TextStyle(color: Colors.white))),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const OrderSuccessScreen()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: kWhiteColor,
+                                backgroundColor: kPrimaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),]))
               ],
             ),
           ),

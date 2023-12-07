@@ -240,6 +240,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
           ),
           SizedBox(
             width: double.infinity,
+            height: 40,
             child: ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -277,6 +278,14 @@ class _AddressOverlayState extends State<AddressOverlay> {
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontFamily: 'DMSans Regular',
+
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
                 ),
               ),
               onChanged: (text) {
@@ -291,13 +300,22 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   }
                   return null;}
               ),
-            SizedBox(height: 10),
+
+
+            SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'House Number, Floor, Building Name, Locality',
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontFamily: 'DMSans Regular',
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
                 ),
               ),
               onChanged: (text) {
@@ -312,13 +330,20 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   }
                   return null;}
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
                 labelText: "Recipient's Name",
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontFamily: 'DMSans Regular',
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
                 ),
               ),
               onChanged: (text) {
@@ -333,13 +358,20 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   }
                   return null;}
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             TextFormField(
               decoration: InputDecoration(
                 labelText: 'Phone Number',
                 labelStyle: TextStyle(
                   color: Colors.black,
                   fontFamily: 'DMSans Regular',
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: Colors.black,
+                    width: 1.0,
+                  ),
                 ),
               ),
               onChanged: (text) {
@@ -357,6 +389,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
 
             SizedBox(height: 30),
             SizedBox(
+              height: 40,
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {

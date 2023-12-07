@@ -302,9 +302,11 @@ class _AddressScreenState extends State<AddressScreen> {
                         SizedBox(height: 20),
                         SizedBox(
                           width: 250,
+                          height: 40,
                           child: ElevatedButton(
                             onPressed: () {
                               if (selectedPaymentMethod == 1) {
+                                if(details[0]['adress']!="No Data available"){
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -316,7 +318,7 @@ class _AddressScreenState extends State<AddressScreen> {
                                     ),
                                   ),
                                 );
-                              }  else if (selectedPaymentMethod == 2) {
+                              }}else if (selectedPaymentMethod == 2) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
