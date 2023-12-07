@@ -220,14 +220,14 @@ import '../products/products_screen.dart';
                     margin: EdgeInsets.only(top: 15),
                     width: 380,
                     child: Card(
-                      elevation: 20,
+                      //elevation: 20,
                       child: Column(
                         mainAxisSize: MainAxisSize.min, // Set the mainAxisSize to min
                         children: [
                           Text(
                             'Login',
                             style: TextStyle(
-                              fontSize: 45,
+                              fontSize: 30,
                               fontFamily: 'DMSans Bold',
                             ),
                           ),

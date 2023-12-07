@@ -174,13 +174,13 @@ class _RegistrationFormState extends State<RegistrationForm> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
-              elevation: 10,
+              // elevation: 10,
               child: Container(
                 decoration: const BoxDecoration(color: kWhiteColor),
                 child:  Form(
                   key: _formKey,
                   child: Padding(
-                    padding: EdgeInsets.all(50),
+                    padding: EdgeInsets.all(10),
                     child: Column(
                       children: [
                         Text(
@@ -188,16 +188,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: 'DMSans Bold',
-                            fontSize: 45,
+                            fontSize: 30,
                           ),
                         ),
+                        SizedBox(height: 10,),
                         Text(
                           "Please fill all the details correctly",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black54,
                             fontFamily: 'DMSans Bold',
-                            fontSize: 20,
+                            fontSize: 18,
                           ),
                         ),
 
@@ -205,17 +206,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 8.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Shop name as in DL/ Hospital / Clinic name',
+                                    labelText: 'Shop name as in DL/ Hospital / Clinic name',
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -245,10 +246,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Owner/ In charge/ Doctor Name',
+                                    labelText: 'Owner/ In charge/ Doctor Name',
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -275,17 +276,17 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 8.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'GST No',
+                                    labelText: 'GST No',
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -315,11 +316,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'KMC / DL No 1',
+                                    labelText: 'KMC / DL No 1',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -348,11 +349,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'KMC / DL No 2',
+                                    labelText: 'KMC / DL No 2',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -380,18 +381,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 8.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Address as in DL',
+                                    labelText: 'Address as in DL',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -421,11 +422,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Town/City',
+                                    labelText: 'Town/City',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -455,11 +456,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Postcode/ZIP',
+                                    labelText: 'Postcode/ZIP',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -486,18 +487,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top:20.0,left: 4.0,right: 15.0),
+                                margin: const EdgeInsets.only(top:20.0,left: 8.0,right: 15.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Phone',
+                                    labelText: 'Phone',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -528,11 +529,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 ),
                                 child: TextFormField(
                                   decoration: InputDecoration(
-                                    hintText: 'Email',
+                                    labelText: 'Email',
 
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -562,7 +563,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 child: TextFormField(
                                   obscureText: obscureText,
                                   decoration: InputDecoration(
-                                    hintText: 'Password',
+                                    labelText: 'Password',
                                     suffixIcon: InkWell(
                                       onTap: togglePasswordVisibility,
                                       child: Icon(
@@ -574,7 +575,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     ),
                                     filled: true,
                                     fillColor: kgreyColor,
-                                    labelStyle: TextStyle(fontSize: 12),
+                                    labelStyle: TextStyle(fontSize: 16),
                                     contentPadding: const EdgeInsets.only(left: 30),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(color: kDarkgreyColor),
@@ -601,7 +602,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           children: [
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0,bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 8.0, right: 15.0,bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -618,9 +619,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   ),
                                     //   child: UploadFilePage(),
                                     // ),
-                                    CustomButton(
-                                      onPressed: _pickFileButton1,
-                                      label: 'Select File for DL 1',
+                                    SizedBox(
+                                      height: 40,
+                                      child: CustomButton(
+                                        onPressed: _pickFileButton1,
+                                        label: 'Select File for DL 1',
+                                      ),
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton1 != null
@@ -642,7 +646,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0, bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 8.0, right: 15.0, bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -662,9 +666,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   onPressed: _pickFileButton2,
                                     //   child: Text('Pick File'),
                                     // ),
-                                    CustomButton(
-                                      onPressed: _pickFileButton2,
-                                      label: 'Select File for DL 2',
+                                    SizedBox(
+                                      height: 40,
+                                      child: CustomButton(
+                                        onPressed: _pickFileButton2,
+                                        label: 'Select File for DL 2',
+                                      ),
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton2 != null
@@ -676,7 +683,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Expanded(
                               child: Container(
-                                margin: const EdgeInsets.only(top: 20.0, left: 4.0, right: 15.0, bottom: 10.0),
+                                margin: const EdgeInsets.only(top: 20.0, left: 8.0, right: 15.0, bottom: 10.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
@@ -696,9 +703,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     //   onPressed: _pickFileButton3,
                                     //   child: Text('Pick File'),
                                     // ),
-                                    CustomButton(
-                                      onPressed: _pickFileButton3,
-                                      label: 'Select File for GST',
+                                    SizedBox(
+                                      height: 40,
+                                      child: CustomButton(
+                                        onPressed: _pickFileButton3,
+                                        label: 'Select File for GST',
+                                      ),
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton3 != null
@@ -724,26 +734,30 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                   borderRadius: BorderRadius.circular(15),
                                   color: kgreyColor,
                                 ),
-                                child: CustomButton(
-                                  label: 'Submit',
-                                  onPressed: (){
-                                    if (_formKey.currentState!.validate()) {
-                                      _uploadFiles();
-                                      Fluttertoast.showToast(
-                                        msg: 'Registration Completed successfully',
-                                        toastLength: Toast.LENGTH_LONG, // Duration for which the toast should be displayed
-                                        gravity: ToastGravity.CENTER, // Position of the toast message
-                                        timeInSecForIosWeb: 5, // Duration in seconds for iOS (ignored on Android)
-                                        backgroundColor: Colors.black87,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0,
-                                      );
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                                      );
-                                    }
-                                  },
+                                child: SizedBox(
+                                  height: 40,
+                                  width: 150,
+                                  child: CustomButton(
+                                    label: 'Submit',
+                                    onPressed: (){
+                                      if (_formKey.currentState!.validate()) {
+                                        _uploadFiles();
+                                        Fluttertoast.showToast(
+                                          msg: 'Registration Completed successfully',
+                                          toastLength: Toast.LENGTH_LONG, // Duration for which the toast should be displayed
+                                          gravity: ToastGravity.CENTER, // Position of the toast message
+                                          timeInSecForIosWeb: 5, // Duration in seconds for iOS (ignored on Android)
+                                          backgroundColor: Colors.black87,
+                                          textColor: Colors.white,
+                                          fontSize: 16.0,
+                                        );
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
