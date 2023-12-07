@@ -54,25 +54,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
       children:[ Column(
         children:<Widget>[
           Navigation(),
-          // if (!showAllItems)
-          //   Container(
-          //     padding: EdgeInsets.all(8.0),
-          //     child: Row(
-          //       children: [
-          //         for (var i = 0; i < crossAxisCount && i < form.length; i++)
-          //           Expanded(
-          //             child: Padding(
-          //               padding: EdgeInsets.only(right: 7),
-          //               child: CompanyDataItem(
-          //                 image: form[i]['image'],
-          //                 title: form[i]['FORM'],
-          //                 press: () {},
-          //               ),
-          //             ),
-          //           ),
-          //       ],
-          //     ),
-          //   ),
+
 
           if (showAllItems)
             if( MediaQuery.of(context).size.width > 600)

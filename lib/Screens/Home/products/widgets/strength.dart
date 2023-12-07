@@ -65,7 +65,7 @@ class _StrengthCardState extends State<StrengthCard> {
                 for (var i = 0; i < crossAxisCount && i < strength.length; i++)
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 7,left: 7),
+                      padding: EdgeInsets.only(right: 7,),
                       child: strengthDataItem(
                         title: strength[i]['STRENGTH'],
                         press: () {},
@@ -94,7 +94,7 @@ class _StrengthCardState extends State<StrengthCard> {
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
                               child: Padding(
-                                padding:EdgeInsets.only(bottom: 7),
+                                padding:EdgeInsets.only(bottom: 7,left: 7),
                                 child: strengthDataItem(
                                   title: strength[i]['STRENGTH'],
                                   press: (){},

@@ -96,7 +96,7 @@ class _FormCardState extends State<FormCard> {
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
                               child: Padding(
-                                padding:EdgeInsets.only(bottom: 7),
+                                padding:EdgeInsets.only(bottom: 7,left: 7),
                                 child: FormDataItem(
                                   image: form[i]['image'],
                                   title: form[i]['FORM'],
