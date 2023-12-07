@@ -330,7 +330,7 @@ class _NavigationState extends State<Navigation> {
                           items: buildFormMenuItems(),
                           width: 500,
                           ),
-                        Hover_Menu(
+                        HoverMenu(
                           title:  HoverText("Strength"),
                           items: buildStrengthMenuItems(),
                           width: 500,
@@ -493,13 +493,7 @@ class _NavigationState extends State<Navigation> {
     return items;
   }
 
-
-
-
 }
-
-
-
 
 class WebMenu extends StatefulWidget {
   @override

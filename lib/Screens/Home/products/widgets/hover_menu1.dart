@@ -1,5 +1,6 @@
 library hover_menu;
 
+import 'package:almed_in/Screens/Home/company_list_screen.dart';
 import 'package:flutter/material.dart';
 
 class HoverMenu1 extends StatefulWidget {
@@ -94,7 +95,12 @@ class HoverMenu1State extends State<HoverMenu1> {
       },
       child: TextButton(
         focusNode: _titleFocusNode,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CompanyScreen()),
+          );
+        },
         child: widget.title,
       ),
     );
