@@ -95,7 +95,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
                               child: Align(
                                 alignment: Alignment.topCenter, // Align each card to the top
                                 child: Padding(
-                                  padding:EdgeInsets.only(bottom: 7),
+                                  padding:EdgeInsets.all(10),
                                   child: CompanyDataItem(
                                     image: form[i]['image'],
                                     title: form[i]['FORM'],
@@ -142,19 +142,6 @@ class _CompanyScreenState extends State<CompanyScreen> {
                   },
                 ),
               ),
-          Padding(
-            padding: EdgeInsets.only(top:10),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kPrimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              onPressed: toggleShowAllItems,
-              child: Text(showAllItems ? "Hide" : "View More"),
-            ),
-          ),
         ],
       ),],
     );
