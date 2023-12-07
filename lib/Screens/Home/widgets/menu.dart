@@ -324,18 +324,33 @@ class _NavigationState extends State<Navigation> {
                         HoverMenu(
                           title:  InkWell(child:HoverText("Theurepeautic"),
                               onTap:(){
-                            
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const ThereapeauticScreen()),
+                                );
                             }),
                           items: buildTherapeuticMenuItems(),
                           width: 500,
                         ),
                         HoverMenu(
-                          title:  InkWell(child:HoverText("Form"),onTap: (){}),
+                          title:  InkWell(child:HoverText("Form"),
+                              onTap: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const FormScreen()),
+                                );
+                              }),
                           items: buildFormMenuItems(),
                           width: 500,
                           ),
                         HoverMenu(
-                          title:  InkWell(child:HoverText("Strength"),onTap: (){},),
+                          title:  InkWell(child:HoverText("Strength"),
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const StrengthScreen()),
+                              );
+                            },),
                           items: buildStrengthMenuItems(),
                           width: 500,
                         ),
