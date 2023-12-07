@@ -220,20 +220,20 @@ class _CompanyDataItemState extends State<CompanyDataItem> {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 20,
                 ),
                 Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Icon(
-                      Icons.local_hospital, // You can use any medical icon here
-                      color: Colors.blue,
-                      size: 24,
-                    ),
-                  ],
-                )
+               // Spacer(),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.end,
+                //   children: <Widget>[
+                //     Icon(
+                //       Icons.local_hospital, // You can use any medical icon here
+                //       color: Colors.blue,
+                //       size: 24,
+                //     ),
+                //   ],
+                // )
               ],
             ),
           ),
