@@ -13,6 +13,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hover_menu/hover_menu.dart';
 import '../about_screen.dart';
+import '../company_list_screen.dart';
 import '../contact_screen.dart';
 import '../faq_screen.dart';
 import '../products/products_screen.dart';
@@ -321,22 +322,31 @@ class _NavigationState extends State<Navigation> {
                           Navigator.pushNamed(context, '/alphabeticSearch');
                         }),
                         HoverMenu(
-                          title:  HoverText("Theurepeautic"),
+                          title:  InkWell(child:HoverText("Theurepeautic"),
+                              onTap:(){
+                            
+                            }),
                           items: buildTherapeuticMenuItems(),
                           width: 500,
                         ),
                         HoverMenu(
-                          title:  HoverText("Form"),
+                          title:  InkWell(child:HoverText("Form"),onTap: (){}),
                           items: buildFormMenuItems(),
                           width: 500,
                           ),
                         HoverMenu(
-                          title:  HoverText("Strength"),
+                          title:  InkWell(child:HoverText("Strength"),onTap: (){},),
                           items: buildStrengthMenuItems(),
                           width: 500,
                         ),
                         HoverMenu1(
-                          title:  HoverText("Company"),
+                          title: InkWell(child: HoverText("Company"),
+                          onTap:(){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const CompanyScreen()),
+                            );
+                          }),
                           items: buildCompanyMenuItems(),
                           width: 500,
                         ),

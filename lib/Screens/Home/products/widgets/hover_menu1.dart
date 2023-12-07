@@ -96,10 +96,6 @@ class HoverMenu1State extends State<HoverMenu1> {
       child: TextButton(
         focusNode: _titleFocusNode,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CompanyScreen()),
-          );
         },
         child: widget.title,
       ),
