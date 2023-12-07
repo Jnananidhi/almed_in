@@ -219,6 +219,9 @@ class _CompanyDataItemState extends State<CompanyDataItem> {
                     fit: BoxFit.cover, // Use "cover" to fill the circular area
                   ),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),
                 Spacer(),
                 Row(
