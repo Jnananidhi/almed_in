@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Home/cart_provider.dart';
 import 'Screens/Home/products/products_screen.dart';
+import 'Screens/Home/products/widgets/test.dart';
+import 'Screens/Home/widgets/custom_listview.dart';
 
 void main() async {
   runApp(
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/alphabeticSearch': (context) => LetterRow(),
         '/address-page':(context) => AddressScreen(),
-       // '/profile-page':(context) => profile_test(),
+       '/ProductItem':(context) => ProductttItem(),
         '/product-screen':(context) => ProductScreen(),
 
       },

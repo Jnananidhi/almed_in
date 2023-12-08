@@ -264,7 +264,10 @@ class _AddressOverlayState extends State<AddressOverlay> {
 
   // Second screen content
   Widget _buildScreen2(BuildContext context) {
-
+    FocusNode _focusNode1 = FocusNode();
+    FocusNode _focusNode2 = FocusNode();
+    FocusNode _focusNode3 = FocusNode();
+    FocusNode _focusNode4 = FocusNode();
     return Container(
       padding: const EdgeInsets.all(16),
       child: Form(
@@ -288,12 +291,16 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   ),
                 ),
               ),
+                focusNode: _focusNode1,
               onChanged: (text) {
                 // Update the userInput variable when the text changes
                 setState(() {
                   userInput = text;
                 });
               },
+                onFieldSubmitted: (_) {
+                  _focusNode2.requestFocus();
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                   return 'Please enter pincode';
@@ -324,6 +331,10 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   Address = text;
                 });
               },
+              focusNode: _focusNode2,
+                onFieldSubmitted: (_) {
+                  _focusNode3.requestFocus();
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter Locality';
@@ -352,6 +363,10 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   RName = text;
                 });
               },
+                focusNode: _focusNode3,
+                onFieldSubmitted: (_) {
+                  _focusNode4.requestFocus();
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return "Please enter Recipient's Name";
@@ -380,6 +395,16 @@ class _AddressOverlayState extends State<AddressOverlay> {
                   Pnumber = text;
                 });
               },
+                focusNode: _focusNode4,
+                onFieldSubmitted: (_) {
+                  if (_formKey.currentState!.validate()) {
+                    widget.overlayEntry?.remove();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,)),
+                    );
+                  }
+                },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter Phone Number';
