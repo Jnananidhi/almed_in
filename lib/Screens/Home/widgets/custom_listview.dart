@@ -398,8 +398,9 @@ class _ProductItemState extends State<ProductItem> {
                 ),
               ),
               SizedBox(width: 20,),
+
               Container(
-                width: MediaQuery.of(context).size.width/2,
+                width: MediaQuery.of(context).size.width/4,
                 margin: EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -422,6 +423,33 @@ class _ProductItemState extends State<ProductItem> {
                       ),
                     ),
 
+                  ],
+                ),
+              ),
+              SizedBox(width: 20,),
+              Container(
+                margin: EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width/4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Content:',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Text(
+                      'Company:',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'DMSans Regular',
+                      ),
+                    ),
                   ],
                 ),
               ),
