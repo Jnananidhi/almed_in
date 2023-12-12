@@ -53,10 +53,13 @@ class _ExpandableCardState extends State<ExpandableCard> {
         ],
       ),
         children: <Widget>[
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 10),
-            child: Text(widget.description, textAlign: TextAlign.left,
-                style: const TextStyle(fontFamily:'DMSans Regular' ,fontSize: 16, color: Colors.black, )),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 10),
+              child: Text(widget.description, textAlign: TextAlign.left,
+                  style: const TextStyle(fontFamily:'DMSans Regular' ,fontSize: 16, color: Colors.black,height: 2 )),
+            ),
           )
         ],
       ),
