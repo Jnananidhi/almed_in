@@ -51,8 +51,10 @@ class ProductScreenState extends State<ProductScreen> {
       if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
         // Filter the products list based on the selected product name
         productsData = productsData.where((product) =>
-        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
+        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()||product.company.toLowerCase() == widget.selectedProductName?.toLowerCase()||
+            product.therapeautic.toLowerCase() == widget.selectedProductName?.toLowerCase()||product.form.toLowerCase() == widget.selectedProductName?.toLowerCase()||product.strength.toLowerCase() == widget.selectedProductName?.toLowerCase()
         ).toList();
+        print("productsData$productsData");
       }
       setState(() {
         products = productsData;

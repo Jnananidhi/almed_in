@@ -287,11 +287,19 @@ class _CartScreenState extends State<CartScreen> {
                           BillSummary(), // Display the bill summary widget
                           const SizedBox(height: 10),
                           Center(
-                            child: CustomButton(
-                              label: 'Select Delivery Address',
+                            child: ElevatedButton(
+                              child:Container(
+                                  height: 50,
+                                  child: const Center(child: Text("Select Delivery Address"))),
                               onPressed: () {
                                 Navigator.pushNamed(context, '/address-page');
                               },
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -315,11 +323,7 @@ class _CartScreenState extends State<CartScreen> {
                 : MediaQuery.of(context).size.width * 0.25,
             child: Search_bar(),
           ),
-
         ],),
     );
-
-
   }
 }
-//end

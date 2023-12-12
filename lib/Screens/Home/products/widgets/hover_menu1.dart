@@ -102,6 +102,43 @@ class HoverMenu1State extends State<HoverMenu1> {
     );
   }
 
+  // OverlayEntry _createOverlayEntry() {
+  //   final renderBox = context.findRenderObject() as RenderBox;
+  //   final size = renderBox.size;
+  //   final offset = renderBox.localToGlobal(Offset.zero);
+  //
+  //   return OverlayEntry(
+  //     maintainState: true,
+  //     builder: (context) => Positioned(
+  //       right: offset.dy-size.width,
+  //       top: offset.dy + size.height,
+  //       width: widget.width ?? 200,
+  //       child: MouseRegion(
+  //         onEnter: (_) {
+  //           setState(() {
+  //             _isOverlayHovered = true;
+  //           });
+  //           _overlayFocusNode.requestFocus();
+  //         },
+  //         onExit: (_) {
+  //           setState(() {
+  //             _isOverlayHovered = false;
+  //           });
+  //           if (!_isTitleHovered) {
+  //             _overlayFocusNode.unfocus();
+  //           }
+  //         },
+  //         child: Container(
+  //           child: ListView(
+  //             padding: EdgeInsets.zero,
+  //             shrinkWrap: true,
+  //             children: widget.items,
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
   OverlayEntry _createOverlayEntry() {
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
@@ -110,7 +147,7 @@ class HoverMenu1State extends State<HoverMenu1> {
     return OverlayEntry(
       maintainState: true,
       builder: (context) => Positioned(
-        right: offset.dy-size.width,
+        right: offset.dy - size.width,
         top: offset.dy + size.height,
         width: widget.width ?? 200,
         child: MouseRegion(
@@ -124,11 +161,16 @@ class HoverMenu1State extends State<HoverMenu1> {
             setState(() {
               _isOverlayHovered = false;
             });
-            if (!_isTitleHovered) {
+            if (!_isTitleHovered && !_isOverlayHovered) {
               _overlayFocusNode.unfocus();
+               _hideOverlay();
             }
           },
           child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey), // Example decoration, modify as needed
+              borderRadius: BorderRadius.circular(8.0), // Example border radius, modify as needed
+            ),
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
@@ -139,4 +181,5 @@ class HoverMenu1State extends State<HoverMenu1> {
       ),
     );
   }
+
 }

@@ -135,6 +135,13 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     bool isTherapeuticMenuVisible = false;
+    final screenWidth = MediaQuery.of(context).size.width;
+    EdgeInsets padding = EdgeInsets.symmetric(horizontal: 20.0);
+
+    // Check if the screen width is smaller than a certain breakpoint (for mobile view)
+    if (screenWidth < 600) {
+      padding = EdgeInsets.symmetric(horizontal: 10.0); // Adjust padding for mobile view
+    }
     List<Widget> menuItems = therapeautic.map((item) => ListTile(title: Text(item["therapeautic"]))).toList();
     return Container(
       color: kWhiteColor,
@@ -269,7 +276,7 @@ class _NavigationState extends State<Navigation> {
                     ),
 
                   Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: padding,
                     child:
                     Row(
                       children: [
@@ -391,7 +398,14 @@ class _NavigationState extends State<Navigation> {
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
                   title:therapeautic[i + j]["therapeautic"],
-                  press: (){},
+                  press: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(selectedProductName: therapeautic[i + j]["therapeautic"],),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -426,7 +440,14 @@ class _NavigationState extends State<Navigation> {
                 // ),
                 child: Hoverdata(
                   title: form[i + j]["FORM"],
-                  press: (){},
+                  press: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(selectedProductName: form[i + j]["FORM"]),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -458,7 +479,14 @@ class _NavigationState extends State<Navigation> {
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
                   title: strength[i + j]["STRENGTH"],
-                  press: (){},
+                  press: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(selectedProductName: strength[i + j]["STRENGTH"]),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -490,7 +518,14 @@ class _NavigationState extends State<Navigation> {
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
                   title: company[i + j]["Company"],
-                  press: (){},
+                  press: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(selectedProductName: company[i + j]["Company"],),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

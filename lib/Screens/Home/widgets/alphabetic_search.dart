@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../products/products_screen.dart';
 import 'bottomnav.dart';
 import 'menu.dart';
 
@@ -274,6 +275,55 @@ class _LetterRowState extends State<LetterRow> {
     );
   }
 
+  String? selectedText;
+ //int hoveredIndex = -1;
+
+
+  MouseRegion _buildSelectableItem(String item, int index) {
+    bool isSelected = item == selectedText;
+    //bool isHovered = index == hoveredIndex;
+
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+         // hoveredIndex = index;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+         // hoveredIndex = -1;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            selectedText = item;
+            print("selected item : $item");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductScreen(selectedProductName: item),
+              ),
+            );
+          });
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Text(
+            item,
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: 'DMSans Regular',
+              color: isSelected ? Colors.blue :  Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+
+
   List<Widget> _buildColumnsForItems(List<String> items) {
     List<Widget> columns = [];
     int itemsPerColumn = 8; // Set the minimum items per column
@@ -310,13 +360,13 @@ class _LetterRowState extends State<LetterRow> {
                       ),
                       ...columnItems
                           .where((item) => item.startsWith(String.fromCharCode('A'.codeUnitAt(0) + k)))
-                          .map(
-                            (item) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          child: Text(item,style: TextStyle(fontSize: 14, fontFamily: 'DMSans Regular'),),
-                        ),
-                      )
+                          .toList()
+                          .asMap()
+                          .entries
+                          .map((entry) => _buildSelectableItem(entry.value, entry.key))
                           .toList(),
+
+
                     ],
                   ),
             ],
