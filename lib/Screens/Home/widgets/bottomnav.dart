@@ -89,7 +89,6 @@ class BottomNav extends StatelessWidget {
                           title: 'FAQ',
                           press: () {
                             Navigator.pushNamed(context, '/faq');
-
                           },
                         ),
                         MenuItems(

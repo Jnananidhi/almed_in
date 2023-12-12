@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
         '/alphabeticSearch': (context) => LetterRow(),
         '/address-page':(context) => AddressScreen(),
         '/product-screen':(context) => ProductScreen(),
+        '/cart':(context)=>CartScreen(),
 
       },
     );
