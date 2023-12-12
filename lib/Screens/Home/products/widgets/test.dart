@@ -3,9 +3,6 @@ import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
-import 'package:almed_in/Screens/Home/products/product_listing.dart';
-import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
-import 'package:almed_in/Screens/Home/widgets/order_success.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +70,7 @@ class _ProductItemState extends State<ProductttItem> {
       });
     } else {
       // Handle the error when the HTTP request fails
-      print('Failed to load products');h
+      print('Failed to load products');
     }
   }
 

@@ -220,7 +220,7 @@ import '../products/products_screen.dart';
                     margin: EdgeInsets.only(top: 15),
                     width: 380,
                     child: Card(
-                      //elevation: 20,
+                      elevation: 10,
                       child: Column(
                         mainAxisSize: MainAxisSize.min, // Set the mainAxisSize to min
                         children: [
@@ -240,10 +240,10 @@ import '../products/products_screen.dart';
                                 children: [
                                   TextFormField(
                                     decoration: InputDecoration(
-                                      hintText: 'Enter email or Phone number',
+                                      labelText: 'Enter email or Phone number',
                                       filled: true,
                                       fillColor: Colors.blueGrey[50],
-                                      labelStyle: const TextStyle(fontSize: 12),
+                                      labelStyle: const TextStyle(fontSize: 15),
                                       contentPadding: const EdgeInsets.only(left: 30),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(color: kDarkgreyColor),
@@ -277,7 +277,7 @@ import '../products/products_screen.dart';
                                   TextFormField(
                                     obscureText: obscureText,
                                     decoration: InputDecoration(
-                                      hintText: 'Password',
+                                      labelText: 'Password',
                                       suffixIcon: InkWell(
                                         onTap: togglePasswordVisibility,
                                         child: Icon(
@@ -289,7 +289,7 @@ import '../products/products_screen.dart';
                                       ),
                                       filled: true,
                                       fillColor: Colors.blueGrey[50],
-                                      labelStyle: const TextStyle(fontSize: 12),
+                                      labelStyle: const TextStyle(fontSize: 15),
                                       contentPadding: const EdgeInsets.only(left: 30),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: const BorderSide(color: kDarkgreyColor),
@@ -400,7 +400,20 @@ import '../products/products_screen.dart';
               const SizedBox(height: 20),
           const BottomNav()
             ],),
-     ] ),
+          Positioned(
+            top: MediaQuery.of(context).size.width < 600
+                ? 90// Adjust the value for mobile view
+                :50,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar(),
+          ),
+
+        ] ),
       ],
       )]));
   }
