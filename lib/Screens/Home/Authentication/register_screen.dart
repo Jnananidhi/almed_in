@@ -8,6 +8,7 @@ import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../contact_screen.dart';
+import '../widgets/search_bar.dart';
 
 
 class RegistrationScreen extends StatefulWidget {
@@ -85,27 +86,42 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ],
           ),
         ),
-        body: const Column(
-          children: <Widget>[
-            Navigation(),
-            Divider(
-              thickness: 1,
-              height: 0.01, // Set the height of the divider line
-              color: kPrimaryColor, // Set the color of the divider line
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    RegistrationForm(),
-                    BottomNav(),
-                    // Add more widgets here as needed
-                  ],
+        body: Stack(
+          children: [ Column(
+            children: <Widget>[
+              Navigation(),
+              Divider(
+                thickness: 1,
+                height: 0.01, // Set the height of the divider line
+                color: kPrimaryColor, // Set the color of the divider line
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      RegistrationForm(),
+                      BottomNav(),
+                      // Add more widgets here as needed
+                    ],
+                  ),
                 ),
               ),
-            ),
 
-          ],
+            ],
+          ),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90// Adjust the value for mobile view
+                  :50,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar(),
+            ),
+          ]
         )
     );
 

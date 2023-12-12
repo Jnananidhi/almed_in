@@ -10,6 +10,12 @@ import '../widgets/menu.dart';
 class Productt {
   final String id;
   final String name;
+  final String content;
+  final String therapeautic;
+  final String strength;
+  final String form;
+  final String company;
+  final String gst;
   String quantity;
   final String imageUrl;
    String mrp;
@@ -19,6 +25,12 @@ class Productt {
     required this.id,
     required this.name,
     required this.quantity,
+    required this.content,
+    required this.therapeautic,
+    required this.strength,
+    required this.form,
+    required this.company,
+    required this.gst,
     required this.imageUrl,
     required this.mrp,
     required this.discount,
@@ -29,6 +41,12 @@ class Productt {
       id: json['id'],
       name: json['name'],
       quantity: json['quantity'],
+      content: json['content'],
+      therapeautic: json['therapeautic'],
+      strength: json['strength'],
+      form: json['form'],
+      company: json['company'],
+      gst: json['gst'],
       imageUrl: json['image_url'],
       mrp: json['mrp'],
       discount: json['discount'],

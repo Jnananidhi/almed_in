@@ -437,7 +437,7 @@ class _ProductItemState extends State<ProductItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Content:',
+                      'Content:${widget.product.content}',
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.black,
@@ -446,7 +446,7 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                     SizedBox(height: 20,),
                     Text(
-                      'Company:',
+                      'Company:${widget.product.company}',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'DMSans Regular',

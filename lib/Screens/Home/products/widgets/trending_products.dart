@@ -139,7 +139,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                                 borderRadius: BorderRadius.circular(50)),
                             height: 40,
                             onPressed: () {
-                              Navigator.pushNamed(context, "/ProductItem");
+                              // Navigator.pushNamed(context, "/ProductItem");
                             },
                             child: const Text(
                               "Quick View",
