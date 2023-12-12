@@ -163,9 +163,7 @@ child:SingleChildScrollView(
       width: double.infinity,
       child: Column(
         children: [
-
       Container(
-        
       constraints: const BoxConstraints(
       maxWidth: kMaxWidth,
       ),
@@ -599,8 +597,7 @@ child:SingleChildScrollView(
                         ),
                       ),
                     ),
-                  )
-                  ,// Add space between cards
+                  ),// Add space between cards
 
 
               ]),

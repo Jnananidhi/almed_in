@@ -2,8 +2,10 @@
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/widgets/Checkoutscreen_mobile.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/order_success.dart';
+import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -577,11 +579,19 @@ class _ProductItemState extends State<ProductItem> {
                       color: kPrimaryColor,
                       height: 40,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CheckoutScreen()),
-                        );
+                        if(Responsive.isDesktop(context)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckoutScreen()),
+                          );
+                        }else if(Responsive.isMobile(context)){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckoutScreenMobile()),
+                          );
+                        }
                       },
                       child: const Text(
                         "Buy Now",
@@ -777,11 +787,19 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                       color: kPrimaryColor,
                       height: 40,
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CheckoutScreen()),
-                        );
+                        if(Responsive.isDesktop(context)) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckoutScreen()),
+                          );
+                        }else if(Responsive.isMobile(context)){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CheckoutScreenMobile()),
+                          );
+                        }
                       },
                       child: const Text(
                         "Buy Now",
