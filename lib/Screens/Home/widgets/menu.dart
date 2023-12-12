@@ -244,10 +244,7 @@ class _NavigationState extends State<Navigation> {
                                           return CartScreenMobile();
                                         }));
                                   }else{
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return CartScreen();
-                                        }));}
+                                    Navigator.pushNamed(context, "/login");}
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(cart.cartItemCount.toString()),
