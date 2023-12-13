@@ -221,7 +221,7 @@ class _ProductItemState extends State<ProductItem> {
   }
   _ProductItemState(Productt product);
 
-  void addToCart(String username, String productId, int quantity, String productName) async {
+  void addToCart(String username, String productId, int quantity, String productName, String price) async {
     String url = '${api}Register.php'; // Replace with your actual backend API endpoint
 
     try {
@@ -232,6 +232,7 @@ class _ProductItemState extends State<ProductItem> {
           'product_id': productId,
           'quantity': quantity.toString(),
           'product_name': productName,
+          'price':price,
         },
       );
 
@@ -423,30 +424,8 @@ class _ProductItemState extends State<ProductItem> {
                         height: 40,
                         onPressed: () {
                       if (username != "") {
-                          // final cartProvider = context.read<CartProvider>();
-                          // final isAlreadyInCart = cartProvider.isProductInCart(widget.product);
-                          //
-                          // if (isAlreadyInCart) {
-                          //   Fluttertoast.showToast(
-                          //     msg: "Item is already in the cart!",
-                          //     toastLength: Toast.LENGTH_LONG,
-                          //     gravity: ToastGravity.CENTER,
-                          //     fontSize: 16,
-                          //     backgroundColor: Colors.black,
-                          //     textColor: Colors.white,
-                          //   );
-                          // } else {
-                          //   cartProvider.addToCart(widget.product);
-                          //   Fluttertoast.showToast(
-                          //     msg: "Item Added to Cart",
-                          //     toastLength: Toast.LENGTH_SHORT,
-                          //     gravity: ToastGravity.CENTER,
-                          //     fontSize: 16,
-                          //     backgroundColor: Colors.black,
-                          //     textColor: Colors.white,
-                          //   );
-                          // }
-                        addToCart(username,widget.product.id,1,widget.product.name);
+
+                        addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp);
                         }
                       else{
                         showDialog(

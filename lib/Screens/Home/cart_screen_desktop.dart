@@ -26,6 +26,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   String selectedMenuItem = 'Category';
+  int quantity = 1;
   List cart = [];
 
   String username = '';
@@ -59,13 +60,16 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-
     Future.wait([_loadUsername() ]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
       getcartitems();
     });
     super.initState();
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     //final cart = context.watch<CartProvider>();
@@ -268,10 +272,12 @@ class _CartScreenState extends State<CartScreen> {
                                   //   ),
                                   // ),
                                   title: Text(cart[index]['product_name']),
-                                 // subtitle: Text('\$${product.mrp}'),
+                                 // subtitle:
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
+                                      Text('\$${cart[index]['pprice']}'),
+                                      SizedBox(width: 20,),
                                       Container(
                                         decoration: BoxDecoration(
                                           border: Border.all(
@@ -285,18 +291,20 @@ class _CartScreenState extends State<CartScreen> {
                                             IconButton(
                                               icon: const Icon(Icons.remove,color: kPrimaryColor,),
                                               onPressed: () {
-                                                context
-                                                    .read<CartProvider>()
-                                                    .decrementQuantity(product);
+                                                if (quantity > 0) {
+                                                  setState(() {
+                                                    quantity--;
+                                                  });
+                                                }
                                               },
                                             ),
-                                            Text('${cart[0]['quantity']}'),
+                                            Text('${quantity}'),
                                             IconButton(
                                               icon: const Icon(Icons.add,color: kPrimaryColor),
                                               onPressed: () {
-                                                context
-                                                    .read<CartProvider>()
-                                                    .incrementQuantity(product);
+                                                setState(() {
+                                                  quantity++;
+                                                });
                                               },
                                             ),
                                           ],
