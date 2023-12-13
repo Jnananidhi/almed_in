@@ -199,7 +199,6 @@ class ContactUsScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
       margin: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-      elevation: 10,
       child: Container(
           decoration: const BoxDecoration(color: kWhiteColor ,borderRadius: BorderRadius.all(Radius.circular(50))),
         child: Column(
@@ -224,7 +223,7 @@ class ContactUsScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Please fill out the form to raise a query.'),
+            const Text('Please fill out the form to raise a query.',style: TextStyle(color: kSecondaryColor),),
             const SizedBox(height: 20),
             ContactForm(),
           ],
@@ -303,22 +302,72 @@ class _ContactFormState extends State<ContactForm> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          TextField(
+          TextFormField(
             controller: nameController,
-            decoration: const InputDecoration(labelText: 'Name'),
+            decoration: InputDecoration(
+              labelText: 'Name',
+              labelStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'DMSans Regular',
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+            ),
           ),
-          TextField(
+          SizedBox(height: 20,),
+          TextFormField(
             controller: emailController,
-            decoration: const InputDecoration(labelText: 'Email'),
+            decoration: InputDecoration(
+              labelText: 'Email',
+              labelStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'DMSans Regular',
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+            ),
           ),
-          TextField(
+          SizedBox(height: 20,),
+          TextFormField(
             controller: messageController,
-            decoration: const InputDecoration(labelText: 'Message'),
+            decoration: InputDecoration(
+              labelText: 'Message',
+              labelStyle: TextStyle(
+                color: Colors.black,
+                fontFamily: 'DMSans Regular',
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: Colors.black,
+                  width: 1.0,
+                ),
+              ),
+            ),
             maxLines: 5,
           ),
           const SizedBox(height: 20),
-              CustomButton(
-                label: 'Submit',
+          ElevatedButton(
+            child: Container(
+              width: 100,
+                height: 50,
+                child: const Center(child: Text("Submit"))),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                ),
                 onPressed: () {
                   if(nameController.text.isEmpty|| emailController.text.isEmpty || messageController.text.isEmpty){
                     showDialog(

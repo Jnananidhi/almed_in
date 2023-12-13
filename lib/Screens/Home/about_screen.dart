@@ -169,7 +169,7 @@ class _AboutScreenState extends State<AboutScreen> {
                                 SizedBox(height: 20),
                                 Text(
                                   aboutus,textAlign: TextAlign.justify,
-                                  style: TextStyle(fontSize: 16, height: 2,),
+                                  style: TextStyle(fontSize: 16, height: 2, fontFamily: 'DMSans Regular'),
                                 ),
                                 SizedBox(height: 20),
                                 Text(
@@ -189,6 +189,7 @@ class _AboutScreenState extends State<AboutScreen> {
                                   'Phone: +1 (123) 456-7890',
                                   style: TextStyle(fontSize: 16),
                                 ),
+                                SizedBox(height: 20),
                               ],
                             ),
                           ),
