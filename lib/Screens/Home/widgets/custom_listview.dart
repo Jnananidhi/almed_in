@@ -207,16 +207,17 @@ class ProductItem extends StatefulWidget {
 
 class _ProductItemState extends State<ProductItem> {
   String username = "";
-  Future getusername() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    setState(() {
-      username = preferences.getString('username')!;
-    });
-  }
-  @override
-  void initState() {
-    getusername();
-    super.initState();
+    Future getusername() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        username = preferences.getString('username')!;
+      });
+    }
+    @override
+    void initState() {
+      getusername();
+      print("username : $username");
+      super.initState();
   }
   _ProductItemState(Productt product);
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
@@ -9,7 +11,8 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Authentication/login_screen.dart';
 import 'about_screen.dart';
 import 'contact_screen.dart';
@@ -23,9 +26,49 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   String selectedMenuItem = 'Category';
+  List cart = [];
+
+  String username = '';
+
+
+  Future<void> _loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('username') ?? '';
+    });
+  }
+
+  Future getcartitems() async {
+    var url = "${api}fetch_cart_items.php";
+    var response = await http.post(Uri.parse(url), body: {
+    "username": username });
+
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      setState(() {
+        cart = jsonData;
+      });
+    }
+    else {
+      print('Failed to load data. Status code: ${response.statusCode}');
+      print('Response body: ${response.body}');
+    }
+
+    return cart;
+  }
+
+  @override
+  void initState() {
+
+    Future.wait([_loadUsername() ]).then((_) {
+      // After both therapeautic and form data are fetched, proceed to group items
+      getcartitems();
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<CartProvider>();
+    //final cart = context.watch<CartProvider>();
 
     return Scaffold(
       backgroundColor: kWhiteColor,
@@ -164,7 +207,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ),
             Text(
-              " ${cart.cartItems.length} items added to cart",
+              " ${cart.length} items added to cart",
               textAlign: TextAlign.left,
               style: const TextStyle(
                 fontSize: 15,
@@ -173,7 +216,7 @@ class _CartScreenState extends State<CartScreen> {
             ),
             const SizedBox(height: 10),
             Expanded(
-              child: cart.cartItems.isEmpty
+              child: cart.length==0
                   ? Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -202,9 +245,9 @@ class _CartScreenState extends State<CartScreen> {
                     Flexible(
                       flex: 2,
                       child: ListView.builder(
-                        itemCount: cart.cartItems.length,
+                        itemCount: cart.length,
                         itemBuilder: (context, index) {
-                          final product = cart.cartItems[index];
+                          final product = cart[index];
                           return Container( // Wrap the Card with a Container
                             height: 150, // Set the desired height
                             child: Card(
@@ -215,17 +258,17 @@ class _CartScreenState extends State<CartScreen> {
                               child: Align( // Use Align to center the contents vertically
                                 alignment: Alignment.center,
                                 child: ListTile(
-                                  leading: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Image.network(
-                                      product.imageUrl,
-                                      width: 80,
-                                      height: 100,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  title: Text(product.name),
-                                  subtitle: Text('\$${product.mrp}'),
+                                  // leading: ClipRRect(
+                                  //   borderRadius: BorderRadius.circular(12),
+                                  //   child: Image.network(
+                                  //     product.imageUrl,
+                                  //     width: 80,
+                                  //     height: 100,
+                                  //     fit: BoxFit.cover,
+                                  //   ),
+                                  // ),
+                                  title: Text(cart[index]['product_name']),
+                                 // subtitle: Text('\$${product.mrp}'),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -247,7 +290,7 @@ class _CartScreenState extends State<CartScreen> {
                                                     .decrementQuantity(product);
                                               },
                                             ),
-                                            Text('${product.quantity}'),
+                                            Text('${cart[0]['quantity']}'),
                                             IconButton(
                                               icon: const Icon(Icons.add,color: kPrimaryColor),
                                               onPressed: () {

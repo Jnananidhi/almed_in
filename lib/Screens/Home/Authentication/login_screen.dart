@@ -65,9 +65,9 @@ import '../products/products_screen.dart';
       var data = json.decode(response.body);
       print(data);
       if (data == "Success") {
+        // Store the username in SharedPreferences
+        await _saveUsername(nameController.text);
         Provider.of<AuthProvider>(context, listen: false).login();
-        SharedPreferences preferences = await SharedPreferences.getInstance();
-        preferences.setString("username", nameController.text);
         Navigator.pop(context,true);
 
 
@@ -420,5 +420,8 @@ import '../products/products_screen.dart';
 }
 
 
-
+Future<void> _saveUsername(String username) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('username', username);
+}
 

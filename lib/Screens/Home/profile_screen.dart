@@ -187,12 +187,16 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   var w1 = kMaxWidth/1.5;
-  String username = "";
   List<Map<String, dynamic>> details = [];
-  Future getusername() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+
+  String username = '';
+
+
+  Future<void> _loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      username = preferences.getString('username')!;
+      username = prefs.getString('username') ?? '';
     });
   }
 
@@ -220,11 +224,12 @@ class _UserProfilePageState extends State<UserProfilePage> {
 
   @override
   void initState() {
-    Future.wait([ getusername()]).then((_) {
+    Future.wait([ _loadUsername()]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
       getprofiledata();
     });
     super.initState();
+    print("username : $username");
   }
   bool isHovered = false;
   bool isHovered1=false;

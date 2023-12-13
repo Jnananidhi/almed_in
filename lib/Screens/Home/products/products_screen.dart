@@ -5,6 +5,7 @@ import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../../../responsive.dart';
@@ -29,11 +30,18 @@ class ProductScreenState extends State<ProductScreen> {
   List<Productt> products = [];
   bool isLoading = true;
 
+  Future<void> loadUsername() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String storedUsername = preferences.getString('username') ?? '';
+    print('Stored Username: $storedUsername');
+  }
+
   //get selectedProductName => selectedProductName;
   @override
   void initState() {
     super.initState();
     fetchProducts();
+    loadUsername();
     print("nidhiiii$selectedProductName");
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
