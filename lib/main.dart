@@ -17,50 +17,43 @@ import 'Screens/Home/cart_provider.dart';
 import 'Screens/Home/products/products_screen.dart';
 import 'Screens/Home/products/widgets/test.dart';
 import 'Screens/Home/widgets/custom_listview.dart';
-
 void main() async {
   runApp(
-      MultiProvider(
-    providers: [
-      ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
-      ChangeNotifierProvider<CartProvider>(create: (context) => CartProvider()),
-
-    ],
-    child: MyApp(),
-  ));
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
+        ChangeNotifierProvider.value(value: CartProvider()), // Keep only this line
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "India's first All Medicine Distributor" ,
-      //removing debug banner
+      title: "India's first All Medicine Distributor",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'DMSans Bold'
+        fontFamily: 'DMSans Bold',
       ),
-     // home: const HomeScreen(),
       builder: EasyLoading.init(),
-      initialRoute: '/home',  // Initial route when the app is first launched
+      initialRoute: '/home',
       routes: {
-        '/home': (context) => HomeScreen(),  // Home page
-        '/cart': (context) => CartScreen(),  // Shopping cart page
+        '/home': (context) => HomeScreen(),
+        '/cart': (context) => CartScreen(),
         '/aboutAlmed.in': (context) => AboutScreen(),
         '/faq': (context) => FaqScreen(),
-        '/contactUs': (context) => ContactUsApp(), // Checkout page
+        '/contactUs': (context) => ContactUsApp(),
         '/login': (context) => LoginPage(),
         '/alphabeticSearch': (context) => LetterRow(),
-        '/address-page':(context) => AddressScreen(),
-        '/product-screen':(context) => ProductScreen(),
-        '/cart':(context)=>CartScreen(),
-
+        '/address-page': (context) => AddressScreen(),
+        '/product-screen': (context) => ProductScreen(),
       },
     );
   }
 }
-

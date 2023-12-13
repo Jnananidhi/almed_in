@@ -244,7 +244,7 @@ class _NavigationState extends State<Navigation> {
                                           return CartScreenMobile();
                                         }));
                                   }else{
-                                    Navigator.pushNamed(context, "/login");}
+                                    Navigator.pushNamed(context, "/cart");}
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(cart.cartItemCount.toString()),

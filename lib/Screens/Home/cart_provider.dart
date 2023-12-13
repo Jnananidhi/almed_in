@@ -4,10 +4,10 @@ import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart'as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'products/product_listing.dart';
 class CartProvider with ChangeNotifier {
   List<Productt> _cartItems = [];
-
   List<Productt> get cartItems => _cartItems;
 
 
@@ -21,7 +21,6 @@ class CartProvider with ChangeNotifier {
   Future<void> addToCart(Productt product) async {
     _cartItems.add(product);
     notifyListeners();
-
     // Convert cart data to JSON
     List<Map<String, dynamic>> cartData = _cartItems.map((item) => productToMap(item)).toList();
     try {
@@ -143,5 +142,8 @@ class CartProvider with ChangeNotifier {
   bool isProductInCart(Productt product) {
     return _cartItems.contains(product);
   }
+
+
+
 
 }
