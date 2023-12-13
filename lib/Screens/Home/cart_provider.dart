@@ -66,50 +66,50 @@ class CartProvider with ChangeNotifier {
 
 
 
-  void incrementQuantity(Productt product) {
-    final index = _cartItems.indexOf(product);
-    if (index != -1) {
-      int quantity = int.tryParse(_cartItems[index].quantity) ?? 1;
-      double mrp = double.parse(_cartItems[index].mrp)/quantity;
-      quantity++; // Increment the quantity as an integer
-      _cartItems[index].quantity = quantity.toString(); // Convert back to String
+  // void incrementQuantity(Productt product) {
+  //   final index = _cartItems.indexOf(product);
+  //   if (index != -1) {
+  //     int quantity = (_cartItems[index].quantity) ?? 1;
+  //     double mrp = double.parse(_cartItems[index].mrp)/quantity;
+  //     quantity++; // Increment the quantity as an integer
+  //     _cartItems[index].quantity = quantity; // Convert back to String
+  //
+  //     // Recalculate the price based on the new quantity
+  //     double priceperitems = mrp*quantity;
+  //     double newPrice = priceperitems; // Calculate the new price
+  //
+  //     // Update the cart item price
+  //     _cartItems[index].mrp = newPrice.toString();
+  //
+  //     // Notify listeners after all updates
+  //     notifyListeners();
+  //   }
+  // }
 
-      // Recalculate the price based on the new quantity
-      double priceperitems = mrp*quantity;
-      double newPrice = priceperitems; // Calculate the new price
-
-      // Update the cart item price
-      _cartItems[index].mrp = newPrice.toString();
-
-      // Notify listeners after all updates
-      notifyListeners();
-    }
-  }
 
 
-
-  void decrementQuantity(Productt product) {
-    final index = _cartItems.indexOf(product);
-    if (index != -1) {
-      int quantity = int.tryParse(_cartItems[index].quantity) ?? 0;
-      if (quantity > 1) {
-        double mrp = double.parse(_cartItems[index].mrp)/quantity;
-        quantity--; // Decrement the quantity as an integer
-        _cartItems[index].quantity = quantity.toString(); // Convert back to String
-
-        // Recalculate the price based on the new quantity
-        double newPrice = mrp * quantity;  // Calculate the new price
-
-        // Update the cart item price
-        _cartItems[index].mrp = newPrice.toString();
-
-        // Notify listeners after all updates
-        notifyListeners();
-      } else {
-        removeFromCart(product);
-      }
-    }
-  }
+  // void decrementQuantity(Productt product) {
+  //   final index = _cartItems.indexOf(product);
+  //   if (index != -1) {
+  //     int quantity = _cartItems[index].quantity ?? 0;
+  //     if (quantity > 1) {
+  //       double mrp = double.parse(_cartItems[index].mrp)/quantity;
+  //       quantity--; // Decrement the quantity as an integer
+  //       _cartItems[index].quantity = quantity; // Convert back to String
+  //
+  //       // Recalculate the price based on the new quantity
+  //       double newPrice = mrp * quantity;  // Calculate the new price
+  //
+  //       // Update the cart item price
+  //       _cartItems[index].mrp = newPrice.toString();
+  //
+  //       // Notify listeners after all updates
+  //       notifyListeners();
+  //     } else {
+  //       removeFromCart(product);
+  //     }
+  //   }
+  // }
 
   //for total MRP in bill summary
   double calculateTotalMRP() {

@@ -251,28 +251,23 @@ class _CartScreenState extends State<CartScreen> {
                       child: ListView.builder(
                         itemCount: cart.length,
                         itemBuilder: (context, index) {
-                          final product = cart[index];
-                          return Container( // Wrap the Card with a Container
-                            height: 150, // Set the desired height
+                          // Retrieve the quantity for the current item from the cart list
+                          dynamic quantityData = cart[index]['quantity'] ?? '1';
+
+                          // Convert the quantity to an integer
+                          int quantity = quantityData is int ? quantityData : int.parse(quantityData);
+
+                          return Container(
+                            height: 150,
                             child: Card(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               elevation: 10,
-                              child: Align( // Use Align to center the contents vertically
+                              child: Align(
                                 alignment: Alignment.center,
                                 child: ListTile(
-                                  // leading: ClipRRect(
-                                  //   borderRadius: BorderRadius.circular(12),
-                                  //   child: Image.network(
-                                  //     product.imageUrl,
-                                  //     width: 80,
-                                  //     height: 100,
-                                  //     fit: BoxFit.cover,
-                                  //   ),
-                                  // ),
                                   title: Text(cart[index]['product_name']),
-                                 // subtitle:
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -289,21 +284,26 @@ class _CartScreenState extends State<CartScreen> {
                                         child: Row(
                                           children: [
                                             IconButton(
-                                              icon: const Icon(Icons.remove,color: kPrimaryColor,),
+                                              icon: const Icon(Icons.remove, color: kPrimaryColor,),
                                               onPressed: () {
-                                                if (quantity > 0) {
-                                                  setState(() {
+                                                setState(() {
+                                                  if (quantity > 0) {
                                                     quantity--;
-                                                  });
-                                                }
+                                                    // Update the quantity for the current item in the cart list
+                                                    cart[index]['quantity'] = quantity.toString();
+                                                  }
+                                                });
                                               },
                                             ),
-                                            Text('${quantity}'),
+                                            Text(quantity.toString()),
                                             IconButton(
-                                              icon: const Icon(Icons.add,color: kPrimaryColor),
+                                              icon: const Icon(Icons.add, color: kPrimaryColor),
                                               onPressed: () {
                                                 setState(() {
                                                   quantity++;
+                                                  // Update the quantity for the current item in the cart list
+                                                  cart[index]['quantity'] = quantity.toString();
+                                                  print(quantity.toString());
                                                 });
                                               },
                                             ),
@@ -313,13 +313,9 @@ class _CartScreenState extends State<CartScreen> {
                                       const SizedBox(width: 30),
                                       IconButton(
                                         onPressed: () {
-                                          context
-                                              .read<CartProvider>()
-                                              .removeFromCart(product);
-
+                                          // Handle delete operation
                                         },
-                                        icon: const Icon(Icons.delete_outline_rounded,
-                                            color: Colors.red),
+                                        icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
                                       ),
                                     ],
                                   ),
@@ -328,7 +324,9 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           );
                         },
-                      ),
+                      )
+
+
                     ),
                     SizedBox(width: 10,),
                     Expanded(

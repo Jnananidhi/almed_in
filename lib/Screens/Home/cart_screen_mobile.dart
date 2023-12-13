@@ -107,18 +107,18 @@ class CartScreenMobile extends StatelessWidget {
                                     IconButton(
                                       icon: const Icon(Icons.remove),
                                       onPressed: () {
-                                        context
-                                            .read<CartProvider>()
-                                            .decrementQuantity(product);
+                                        // context
+                                        //     .read<CartProvider>()
+                                        //     .decrementQuantity(product);
                                       },
                                     ),
                                     Text('${product.quantity}'),
                                     IconButton(
                                       icon: const Icon(Icons.add),
                                       onPressed: () {
-                                        context
-                                            .read<CartProvider>()
-                                            .incrementQuantity(product);
+                                        // context
+                                        //     .read<CartProvider>()
+                                        //     .incrementQuantity(product);
                                       },
                                     ),
                                     IconButton(
