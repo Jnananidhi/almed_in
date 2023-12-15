@@ -29,6 +29,8 @@ class _CartScreenState extends State<CartScreen> {
   String selectedMenuItem = 'Category';
   int quantity = 1;
   List cart = [];
+  double shippingCost = 0;
+  List dataa = [];
 
   String username = '';
 
@@ -164,13 +166,48 @@ class _CartScreenState extends State<CartScreen> {
       print('Error adding to cart: $error');
     }
   }
+  void fetchCartPrice(String username) async {
+    String url = '${api}fetch_cart_price.php';
+
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          'username': username,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        var jsonData = json.decode(response.body);
+
+        if (jsonData['status'] == 'success') {
+          // If 'status' is 'success', assume there is a 'data' field
+          var data = jsonData['data'];
+
+          // Handle 'data' as needed
+          setState(() {
+            dataa = data;
+          });
+          print(dataa);
+        } else {
+          // Handle other cases or show an error message
+          print('Failed to fetch cart price: ${jsonData['message']}');
+        }
+      } else {
+        // Handle other response status codes if needed
+        print('Failed to fetch cart price: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error fetching cart price: $error');
+    }
+  }
 
 
   @override
   void initState() {
     Future.wait([_loadUsername() ]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
-      getcartitems();
+      getcartitems();fetchCartPrice(username);
     });
     super.initState();
   }
@@ -435,12 +472,12 @@ class _CartScreenState extends State<CartScreen> {
                                                   parsedValue = parsedValue.clamp(1, 100);
 
                                                   cart[index]['quantity'] = parsedValue.toString();
-                                                  //print(cart[index]['quantity']);
-
-                                                  // Update the dynamically calculated total price
-                                                  // This will automatically reflect in the UI
-                                                  // as the widget is bound to the cart[index]['pprice'] * parsedValue
                                                 });
+                                                //to refresh the page...
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                                  builder: (context) => CartScreen(), // Replace with the actual class name of your page
+                                                ));
                                                 num calculatedValue = pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1);
                                                 print('calculatedValue$calculatedValue');
                                                 updatecart(username,cart[index]['product_id'],cart[index]['quantity'],calculatedValue.toString());
@@ -470,7 +507,52 @@ class _CartScreenState extends State<CartScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          BillSummary(), // Display the bill summary widget
+                        Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
+                        ),
+                        child: Container(
+                          height: 280,
+                          padding: EdgeInsets.only(top: 30,right: 16,left: 16),
+                          decoration: BoxDecoration(
+                            // gradient: LinearGradient(
+                            //   begin: Alignment.topCenter,
+                            //   end: Alignment.bottomCenter,
+                            //   colors: [
+                            //     lightColor, // Start color
+                            //     kSecondaryColor, // End color (same color for a solid effect)
+                            //   ],
+                            // ),
+                            color: Colors.white,
+                            //border: Border.all(color: kPrimaryColor,width: 1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Bill Summary',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontFamily: 'DMSans Bold',
+                                    fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              SizedBox(height: 5),
+                              Divider(thickness: 2,),
+                              SizedBox(height: 5),
+                              BillItem(label: 'Total Bill (MRP) ' ,value:dataa[0]['total']),
+                              SizedBox(height: 5),
+                              BillItem(label: 'Total Discount ',value:'-0'),
+                              SizedBox(height: 5),
+                              BillItem(label: 'Shipping Fee ' ,value: '50'),
+                              Divider(thickness: 2,),
+                              SizedBox(height: 5),
+                              BillItem(label: 'To Be Paid ',value:dataa[0]['total']),
+                            ],
+                          ),
+                        ),
+                      ), // Display the bill summary widget
                           const SizedBox(height: 10),
                           Center(
                             child: ElevatedButton(
