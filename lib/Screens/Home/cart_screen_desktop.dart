@@ -72,7 +72,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final cart = context.watch<CartProvider>();
+    int parsedValue = 1;
 
     return Scaffold(
       backgroundColor: kWhiteColor,
@@ -251,11 +251,8 @@ class _CartScreenState extends State<CartScreen> {
                       child: ListView.builder(
                         itemCount: cart.length,
                         itemBuilder: (context, index) {
-                          // Retrieve the quantity for the current item from the cart list
-                          dynamic quantityData = cart[index]['quantity'] ?? '1';
-
-                          // Convert the quantity to an integer
-                          int quantity = quantityData is int ? quantityData : int.parse(quantityData);
+                          TextEditingController quantityController = TextEditingController();
+                          num pprice = num.tryParse(cart[index]['pprice']) ?? 0;
 
                           return Container(
                             height: 150,
@@ -271,51 +268,70 @@ class _CartScreenState extends State<CartScreen> {
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text('\$${cart[index]['pprice']}'),
-                                      SizedBox(width: 20,),
+                                      // Display the dynamically calculated total price
+                                      Text('\$${(pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1))}'),
+                                      const SizedBox(width: 20,),
                                       Container(
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: kgreyColor,
-                                            width: 1,
                                           ),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                         child: Row(
                                           children: [
+
                                             IconButton(
-                                              icon: const Icon(Icons.remove, color: kPrimaryColor,),
+                                              onPressed: () {
+                                                // Handle delete operation
+                                              },
+                                              icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
+                                            ),
+                                            const SizedBox(width: 30),
+                                            Container(
+                                              width: 100,
+                                              child:Align(
+                                                child: TextField(
+                                                  controller: quantityController,
+                                                  decoration: InputDecoration(
+                                                    hintText: cart[index]['quantity'],
+                                                    border: OutlineInputBorder(),
+
+                                                  ),
+                                                  keyboardType: TextInputType.number,
+                                                  onChanged: (value) {
+                                                    // Ensure the value is between 1 and 100
+                                                    int parsedValue = int.tryParse(value) ?? 1;
+                                                    parsedValue = parsedValue.clamp(1, 100);
+
+                                                    // Update the quantity in the cart list
+                                                    cart[index]['quantity'] = parsedValue.toString();
+                                                  },
+                                                  onSubmitted: (value) {
+                                                    // Handle the submitted value if needed
+                                                  },
+                                                ),
+                                              ),
+
+                                            ),
+                                            IconButton(
                                               onPressed: () {
                                                 setState(() {
-                                                  if (quantity > 0) {
-                                                    quantity--;
-                                                    // Update the quantity for the current item in the cart list
-                                                    cart[index]['quantity'] = quantity.toString();
-                                                  }
+                                                  int parsedValue = int.tryParse(quantityController.text) ?? 1;
+                                                  parsedValue = parsedValue.clamp(1, 100);
+
+                                                  cart[index]['quantity'] = parsedValue.toString();
+
+                                                  // Update the dynamically calculated total price
+                                                  // This will automatically reflect in the UI
+                                                  // as the widget is bound to the cart[index]['pprice'] * parsedValue
                                                 });
                                               },
+                                              icon: const Icon(Icons.done, color: Colors.green),
                                             ),
-                                            Text(quantity.toString()),
-                                            IconButton(
-                                              icon: const Icon(Icons.add, color: kPrimaryColor),
-                                              onPressed: () {
-                                                setState(() {
-                                                  quantity++;
-                                                  // Update the quantity for the current item in the cart list
-                                                  cart[index]['quantity'] = quantity.toString();
-                                                  print(quantity.toString());
-                                                });
-                                              },
-                                            ),
+
                                           ],
                                         ),
-                                      ),
-                                      const SizedBox(width: 30),
-                                      IconButton(
-                                        onPressed: () {
-                                          // Handle delete operation
-                                        },
-                                        icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
                                       ),
                                     ],
                                   ),
@@ -324,7 +340,9 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           );
                         },
-                      )
+                      ),
+
+
 
 
                     ),

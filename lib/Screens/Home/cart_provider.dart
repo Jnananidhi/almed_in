@@ -112,29 +112,29 @@ class CartProvider with ChangeNotifier {
   // }
 
   //for total MRP in bill summary
-  double calculateTotalMRP() {
-    double totalMRP = 0;
-    for (Productt product in _cartItems) {
-      totalMRP += double.parse(product.mrp);
-    }
-    return totalMRP;
-  }
-
-  double calculateTotalDiscount() {
-    double totalDiscount = 0;
-    for (Productt product in _cartItems) {
-      double discount = double.parse(product.discount);
-      totalDiscount = discount;
-    }
-    return totalDiscount;
-  }
-
-  double calculateTotalAmount(double shippingCost) {
-    double totalMRP = calculateTotalMRP();
-    double totalDiscount = calculateTotalDiscount();
-    double totalAmount = totalMRP - totalDiscount + shippingCost;
-    return totalAmount;
-  }
+  // double calculateTotalMRP() {
+  //   double totalMRP = 0;
+  //   for (Productt product in _cartItems) {
+  //     totalMRP += double.parse(product.mrp);
+  //   }
+  //   return totalMRP;
+  // }
+  //
+  // double calculateTotalDiscount() {
+  //   double totalDiscount = 0;
+  //   for (Productt product in _cartItems) {
+  //     double discount = double.parse(product.discount);
+  //     totalDiscount = discount;
+  //   }
+  //   return totalDiscount;
+  // }
+  //
+  // double calculateTotalAmount(double shippingCost) {
+  //   double totalMRP = calculateTotalMRP();
+  //   double totalDiscount = calculateTotalDiscount();
+  //   double totalAmount = totalMRP - totalDiscount + shippingCost;
+  //   return totalAmount;
+  // }
 
   int get cartItemCount => _cartItems.length;
 

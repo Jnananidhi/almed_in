@@ -425,7 +425,7 @@ class _ProductItemState extends State<ProductItem> {
                         onPressed: () {
                       if (username != "") {
 
-                        addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp);
+                        addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp as String);
                         }
                       else{
                         showDialog(
