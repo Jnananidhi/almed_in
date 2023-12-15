@@ -10,6 +10,7 @@ import 'package:almed_in/Screens/Home/widgets/menu_single.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,6 +58,113 @@ class _CartScreenState extends State<CartScreen> {
 
     return cart;
   }
+
+  void deletecartitem(String username, String productId) async {
+    String url = '${api}delete_from_cart.php'; // Replace with your actual backend API endpoint
+
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          'username': username,
+          'product_id': productId,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        Map<String, dynamic> jsonResponse = json.decode(response.body);
+
+        if (jsonResponse['status'] == 'success') {
+          // Product successfully added to cart
+          print('Product added to cart!');
+          Fluttertoast.showToast(
+              msg: "Item removed from cart",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.TOP_RIGHT,
+              fontSize: 16,
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+        }
+        else if (jsonResponse['status'] == 'error')
+        {
+          print('error deleting cart');
+          Fluttertoast.showToast(
+              msg: "Failed to remove Item from your cart ",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.TOP_RIGHT,
+              fontSize: 16,
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+        }
+        else {
+          // Failed to add the product to cart
+          print('Failed to add product to cart: ${jsonResponse['message']}');
+
+        }
+      } else {
+        // Handle other response status codes if needed
+        print('Failed to add product to cart: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error adding to cart: $error');
+    }
+  }
+
+  void updatecart(String username, String productId, String quantity , String total_price) async {
+    String url = '${api}update_cart_item.php'; // Replace with your actual backend API endpoint
+
+    try {
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          'username': username,
+          'product_id': productId,
+          'quantity':quantity,
+          'total_price':total_price,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        Map<String, dynamic> jsonResponse = json.decode(response.body);
+
+        if (jsonResponse['status'] == 'success') {
+          // Product successfully added to cart
+          print('Product added to cart!');
+          Fluttertoast.showToast(
+              msg: "updated!!!",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.TOP_RIGHT,
+              fontSize: 16,
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+        }
+        else if (jsonResponse['status'] == 'error')
+        {
+          print('error deleting cart');
+          Fluttertoast.showToast(
+              msg: "Failed to update ",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.TOP_RIGHT,
+              fontSize: 16,
+              backgroundColor: Colors.black,
+              textColor: Colors.white);
+        }
+        else {
+          // Failed to add the product to cart
+          print('Failed to add product to cart: ${jsonResponse['message']}');
+
+        }
+      } else {
+        // Handle other response status codes if needed
+        print('Failed to add product to cart: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error adding to cart: $error');
+    }
+  }
+
 
   @override
   void initState() {
@@ -283,7 +391,13 @@ class _CartScreenState extends State<CartScreen> {
 
                                             IconButton(
                                               onPressed: () {
-                                                // Handle delete operation
+                                                deletecartitem(username,cart[index]['product_id']);
+                                                print(username);
+                                                print(cart[index]['product_id']);
+                                                Navigator.of(context).pop();
+                                                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                                  builder: (context) => CartScreen(), // Replace with the actual class name of your page
+                                                ));
                                               },
                                               icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
                                             ),
@@ -321,11 +435,16 @@ class _CartScreenState extends State<CartScreen> {
                                                   parsedValue = parsedValue.clamp(1, 100);
 
                                                   cart[index]['quantity'] = parsedValue.toString();
+                                                  //print(cart[index]['quantity']);
 
                                                   // Update the dynamically calculated total price
                                                   // This will automatically reflect in the UI
                                                   // as the widget is bound to the cart[index]['pprice'] * parsedValue
                                                 });
+                                                num calculatedValue = pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1);
+                                                print('calculatedValue$calculatedValue');
+                                                updatecart(username,cart[index]['product_id'],cart[index]['quantity'],calculatedValue.toString());
+
                                               },
                                               icon: const Icon(Icons.done, color: Colors.green),
                                             ),
