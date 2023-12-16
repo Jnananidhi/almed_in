@@ -222,8 +222,7 @@ class _ProductItemState extends State<ProductItem> {
   _ProductItemState(Productt product);
 
   void addToCart(String username, String productId, int quantity, String productName, String price) async {
-    String url = '${api}Register.php'; // Replace with your actual backend API endpoint
-
+    String url = '${api}add_to_cart.php'; // Replace with your actual backend API endpoint
     try {
       var response = await http.post(
         Uri.parse(url),
@@ -510,6 +509,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
   @override
   void initState() {
     getusername();
+    print("username : $username");
     super.initState();
   }
   ProductItem_mobileState(Productt product);

@@ -309,8 +309,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       indent : 0,
                       endIndent : 10,
                     ),
-
-
                     Divider(
                       thickness: 1,
                       indent : 0,

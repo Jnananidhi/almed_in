@@ -246,10 +246,11 @@ class _NavigationState extends State<Navigation> {
                                   }else{
                                     Navigator.pushNamed(context, "/cart");}
                                 },
-                                child: badges.Badge(
+                                child: cart.cartItemCount > 0 ? badges.Badge(
+                                  // Display badge only if there are items in the cart
                                   badgeContent: Text(cart.cartItemCount.toString()),
                                   child: Icon(Icons.shopping_cart),
-                                ),
+                                ) : Icon(Icons.shopping_cart),
                               );
                             },
                           ),
