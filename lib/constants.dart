@@ -22,9 +22,9 @@ final kDefaultShadow = BoxShadow(
   color: const Color(0xFF0700B1).withOpacity(0.15),
 );
 
-const String api = "http://localhost:8080/almed/";
+const String api = "http://localhost:/almed/";
 const String GMAP_API ="AIzaSyCOucQzY-nsUsDumyl8M1HjP-wGqTClB-M";
-
+ 
 const String aboutus = '''Almed.in is India's first online B28 marketplace for all content medicines. We have more than 800 molecule contents and about 3000 of their extensions.
 That means you can search product by its contents, we will suggest you alternative brands. These suggestions are carefully done by experienced 
 professionals, based on preference like quality, price, & MRP. Each content may have options to select as per your customer needs. At Almed.in you can 
