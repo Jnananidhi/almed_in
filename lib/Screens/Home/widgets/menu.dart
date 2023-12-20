@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:provider/provider.dart';
-import 'package:badges/badges.dart' as badges;
+import 'package:badges/badges.dart' as badges ;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hover_menu/hover_menu.dart';
 import '../about_screen.dart';
@@ -143,6 +143,14 @@ class _NavigationState extends State<Navigation> {
       padding = EdgeInsets.symmetric(horizontal: 10.0); // Adjust padding for mobile view
     }
     List<Widget> menuItems = therapeautic.map((item) => ListTile(title: Text(item["therapeautic"]))).toList();
+    var cartScreen = CartScreen.of(context);
+    if(cartScreen !=null){
+      print("CART LENGTH:${cartScreen?.cart.length}",);
+    }
+    else{
+     // print(cartScreen?.cart.length.toString(),);
+    }
+
     return Container(
       color: kWhiteColor,
       width: double.infinity,
@@ -189,7 +197,6 @@ class _NavigationState extends State<Navigation> {
                             onTap: () {
                               Navigator.pushNamed(context, '/home');
                             },
-
                             child:
                             Image.asset(
                               'assets/logo_500w.png',  // Make sure the path is correct
@@ -234,25 +241,39 @@ class _NavigationState extends State<Navigation> {
                       padding: const EdgeInsets.only(left: 25),
                       child: Row(
                         children: [
-                          Consumer<CartProvider>(
-                            builder: (context, cart, child) {
-                              return GestureDetector(
-                                onTap: () {
-                                  if(Responsive.isMobile(context)) {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return CartScreenMobile();
-                                        }));
-                                  }else{
-                                    Navigator.pushNamed(context, "/cart");}
-                                },
-                                child: cart.cartItemCount > 0 ? badges.Badge(
-                                  // Display badge only if there are items in the cart
-                                  badgeContent: Text(cart.cartItemCount.toString()),
-                                  child: Icon(Icons.shopping_cart),
-                                ) : Icon(Icons.shopping_cart),
-                              );
+                          GestureDetector(
+                            onTap:(){
+                              if(Responsive.isMobile(context)) {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return CartScreenMobile();
+                                    }));
+                              }else{
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return CartScreen();
+                                    }));}
                             },
+                            child: badges.Badge(
+                              position: badges.BadgePosition.topEnd(top: 0, end: 3),
+                              badgeContent:
+                              cartScreen != null
+                                  ? Text(
+                                cartScreen.cart.length.toString(),
+                                style: TextStyle(color: Colors.white),
+                              )
+                                  : Text(
+                                "0",
+                                style: TextStyle(color: Colors.white),
+                              ),
+
+                              child: IconButton(
+                                icon: Icon(Icons.shopping_cart),
+                                onPressed: () {
+                                  // Handle cart icon tap
+                                },
+                              ),
+                            ),
                           ),
                           SizedBox(width: 9,),
                           if (Responsive.isDesktop(context))
@@ -263,10 +284,8 @@ class _NavigationState extends State<Navigation> {
                                     return CartScreenMobile();
                                   }));
                             }else{
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return CartScreen();
-                                  }));}
+                              Navigator.pushNamed(context, "/cart");
+                            }
                           },
                               child: Text("Cart",style: TextStyle(fontFamily:'DMSans Bold' ),)),
                         ],
@@ -311,7 +330,8 @@ class _NavigationState extends State<Navigation> {
                                 },
                           child:Text("Profile",style: TextStyle(fontFamily: 'DMSans Bold'),)),
                       ],
-                    ),),
+                    ),
+                  ),
                   ],
                 ),
               ),
@@ -721,6 +741,7 @@ class Hoverdata extends StatefulWidget {
   @override
   HoverdataState createState() => HoverdataState();
 }
+
 class HoverdataState extends State<Hoverdata> {
 
   bool isHovered = false;

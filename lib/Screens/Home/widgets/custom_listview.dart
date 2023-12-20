@@ -435,7 +435,8 @@ class _ProductItemState extends State<ProductItem> {
                               actions: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    //Navigator.of(context).pop();
+                                    Navigator.pushNamed(context, "/login");
                                   },
                                   child: const Text('OK'),
                                 ),
