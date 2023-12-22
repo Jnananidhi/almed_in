@@ -427,13 +427,14 @@ class _CartScreenState extends State<CartScreen> {
                                           children: [
                                             IconButton(
                                               onPressed: () {
-                                                deletecartitem(username,cart[index]['product_id']);
-                                                print(username);
-                                                print(cart[index]['product_id']);
-                                                Navigator.of(context).pop();
+                                                //Navigator.of(context).pop();
                                                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                                                   builder: (context) => CartScreen(), // Replace with the actual class name of your page
                                                 ));
+                                                deletecartitem(username,cart[index]['product_id']);
+                                                print(username);
+                                                print(cart[index]['product_id']);
+
                                               },
                                               icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
                                             ),
@@ -445,7 +446,6 @@ class _CartScreenState extends State<CartScreen> {
                                                 decoration: InputDecoration(
                                                   hintText: cart[index]['quantity'],
                                                   border: OutlineInputBorder(),
-
                                                 ),
                                                 keyboardType: TextInputType.number,
                                                 onChanged: (value) {
@@ -471,7 +471,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   cart[index]['quantity'] = parsedValue.toString();
                                                 });
                                                 //to refresh the page...
-                                                Navigator.of(context).pop();
+                                                //Navigator.of(context).pop();
                                                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                                                   builder: (context) => CartScreen(), // Replace with the actual class name of your page
                                                 ));
