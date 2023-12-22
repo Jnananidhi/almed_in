@@ -109,6 +109,14 @@ class _AddressOverlayState extends State<AddressOverlay> {
     });
   }
 
+  bool isNumeric(String value) {
+    if (value == null) {
+      return false;
+    }
+    return double.tryParse(value) != null;
+  }
+
+
 
   // ... your searchPlaces and other methods
 
@@ -276,6 +284,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 labelText: 'Pincode',
                 labelStyle: TextStyle(
@@ -304,10 +313,8 @@ class _AddressOverlayState extends State<AddressOverlay> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                   return 'Please enter pincode';
-                  }else if (value.length < 6) {
-                    return 'Please enter valid Pincode';
-                  } else if (value.length > 6) {
-                    return 'Please enter valid Pincode';
+                  }else if (value.length != 6 || !isNumeric(value)) {
+                    return 'Please enter a valid Pincode';
                   }
                   return null;}
               ),
@@ -379,7 +386,8 @@ class _AddressOverlayState extends State<AddressOverlay> {
             ),
             SizedBox(height: 20),
             TextFormField(
-              decoration: InputDecoration(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
                 labelText: 'Phone Number',
                 labelStyle: TextStyle(
                   color: Colors.black,
@@ -412,10 +420,8 @@ class _AddressOverlayState extends State<AddressOverlay> {
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter Phone Number';
-                  }else if (value.length < 10) {
-                    return 'Please enter valid Numeber';
-                  } else if (value.length > 10) {
-                    return 'Please enter valid Numeber';
+                  } else if (value.length != 10 || !isNumeric(value)) {
+                    return 'Please enter a valid 10-digit Phone Number';
                   }
 
                   return null;}
