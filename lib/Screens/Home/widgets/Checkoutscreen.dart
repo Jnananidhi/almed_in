@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:flutter/material.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart'as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants.dart';
 import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
@@ -21,12 +25,74 @@ class CheckoutScreen extends StatefulWidget {
   }
 
   class CheckoutScreenState extends State<CheckoutScreen> {
-    int? selectedPaymentMethod;
+    String? selectedPaymentMethod;
     String selectedMenuItem = 'Category';
+    String username = "";
+    Future getusername() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        username = preferences.getString('username')!;
+      });
+    }
     @override
     void initState() {
+      getusername();
      print(widget.userInput);
       super.initState();
+    }
+
+    void placeOrder() async {
+      String url = '${api}add_to_orders.php'; // Replace with your actual backend API endpoint
+      try {
+        var response = await http.post(
+          Uri.parse(url),
+          body: {
+            'username': username,
+            'delivery_name': widget.RName,
+            'payment_method': selectedPaymentMethod,
+            'delivery_address': widget.userInput??widget.Address,
+            'original_address':widget.Address,
+            'phone':widget.Pnumber,
+          },
+        );
+
+        if (response.statusCode == 200) {
+          // Parse the JSON response
+          Map<String, dynamic> jsonResponse = json.decode(response.body);
+
+          if (jsonResponse['status'] == 'success') {
+            // Product successfully added to cart
+            print('Product added to cart!');
+            Fluttertoast.showToast(
+                msg: "Item added to cart",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP_RIGHT,
+                fontSize: 16,
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
+          }
+          else if (jsonResponse['status'] == 'error')
+          {
+            Fluttertoast.showToast(
+                msg: "Item is already in the cart",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP_RIGHT,
+                fontSize: 16,
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
+          }
+          else {
+            // Failed to add the product to cart
+            print('Failed to add product to cart: ${jsonResponse['message']}');
+
+          }
+        } else {
+          // Handle other response status codes if needed
+          print('Failed to add product to cart: ${response.statusCode}');
+        }
+      } catch (error) {
+        print('Error adding to cart: $error');
+      }
     }
   @override
   Widget build(BuildContext context) {
@@ -244,7 +310,7 @@ child:SingleChildScrollView(
             side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
             borderRadius: BorderRadius.circular(15.0), // Set the border radius
           ),
-          color: selectedPaymentMethod == 1 ? Color(0xFFEDEEF5) : Colors.white,
+          color: selectedPaymentMethod == "Card" ? Color(0xFFEDEEF5) : Colors.white,
 
               child: Column(
                 children: <Widget>[
@@ -257,16 +323,16 @@ child:SingleChildScrollView(
                       child: ListTile(
                     title: Text('Credit Card'),
                     leading: Radio(
-                      value: 1, // Unique value for UPI
+                      value: "Card", // Unique value for UPI
                       groupValue: selectedPaymentMethod,
-                      onChanged: (int? value) {
+                      onChanged: (String? value) {
                         setState(() {
                           selectedPaymentMethod = value;
                         });
                       },
                     ),trailing: Image.asset('assets/card_icon.png',height:20),
                   ),),
-                  if (selectedPaymentMethod == 1)
+                  if (selectedPaymentMethod == "Card")
                     Padding(
                       padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
                       child: Column(
@@ -398,7 +464,7 @@ child:SingleChildScrollView(
              side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
              borderRadius: BorderRadius.circular(15.0), // Set the border radius
            ),
-           color: selectedPaymentMethod == 2 ? Color(0xFFEDEEF5) : Colors.white,
+           color: selectedPaymentMethod == "UPI" ? Color(0xFFEDEEF5) : Colors.white,
             child: Column(
               children: [
             Container(
@@ -411,9 +477,9 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('UPI'),
                   leading: Radio(
-                    value: 2, // Unique value for UPI
+                    value: "UPI", // Unique value for UPI
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
@@ -421,7 +487,7 @@ child:SingleChildScrollView(
                   ),trailing: Image.asset('assets/upi_icon.png',height:20),
                 ),
               ),
-                if (selectedPaymentMethod == 2)
+                if (selectedPaymentMethod == "UPI")
                   Padding(
                       padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
                     child: Column(
@@ -514,16 +580,16 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('Net Banking'),
                   leading: Radio(
-                    value: 3, // Unique value for Net Banking
+                    value: "Net Banking", // Unique value for Net Banking
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
                     },
                   ),trailing: Image.asset('assets/Netbanking_icon.png',height:20),
                 ),),
-                if (selectedPaymentMethod == 3)
+                if (selectedPaymentMethod == "Net Banking")
                   ListTile(
                     title: Text('Additional Content Here'),
                   ),
@@ -556,9 +622,9 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('Cash on Delivery'),
                   leading: Radio(
-                    value: 4, // Unique value for Cash on Delivery
+                    value: 'Cash on Delivery', // Unique value for Cash on Delivery
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
@@ -583,6 +649,7 @@ child:SingleChildScrollView(
                           child: const Center(child: Text("Place Order",style:TextStyle(color: Colors.white))),
                         ),
                         onPressed: () {
+                          placeOrder();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const OrderSuccessScreen()),
