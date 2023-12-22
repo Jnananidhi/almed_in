@@ -326,7 +326,6 @@ class _ProductItemState extends State<ProductItem> {
                         fontFamily: 'DMSans Regular',
                       ),
                     ),
-
                   ],
                 ),
               ),

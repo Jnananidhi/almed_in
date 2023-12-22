@@ -53,12 +53,12 @@ class _CartScreenState extends State<CartScreen> {
       setState(() {
         cart = jsonData;
       });
+
     }
     else {
       print('Failed to load data. Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
     }
-
     return cart;
   }
 
@@ -208,7 +208,8 @@ class _CartScreenState extends State<CartScreen> {
   void initState() {
     Future.wait([_loadUsername() ]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
-      getcartitems();fetchCartPrice(username);
+      getcartitems();
+      fetchCartPrice(username);
     });
     super.initState();
   }
