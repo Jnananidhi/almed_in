@@ -89,7 +89,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
         child: AnimatedContainer(
           duration: kDefaultDuration,
           width: 300,
-          height: 250,
+          height: 280,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: kgreyColor, width: 3),

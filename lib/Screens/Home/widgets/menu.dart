@@ -289,7 +289,14 @@ class _NavigationState extends State<Navigation> {
                               child: IconButton(
                                 icon: Icon(Icons.shopping_cart),
                                 onPressed: () {
-                                  // Handle cart icon tap
+                                  if(Responsive.isMobile(context)) {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return CartScreenMobile();
+                                        }));
+                                  }else{
+                                    Navigator.pushNamed(context, "/cart");
+                                  }
                                 },
                               ),
                             ),

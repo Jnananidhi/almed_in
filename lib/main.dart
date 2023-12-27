@@ -22,7 +22,6 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
-        ChangeNotifierProvider.value(value: CartProvider()), // Keep only this line
       ],
       child: const MyApp(),
     ),
