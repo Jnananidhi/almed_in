@@ -424,6 +424,9 @@ class _ProductItemState extends State<ProductItem> {
                       if (username != "") {
 
                         addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp as String);
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => ProductScreen(), // Replace with the actual class name of your page
+                        ));
                         }
                       else{
                         showDialog(

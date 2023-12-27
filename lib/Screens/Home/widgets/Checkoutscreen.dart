@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart'as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../constants.dart';
@@ -18,8 +19,8 @@ import 'order_success.dart';
 
 class CheckoutScreen extends StatefulWidget {
   final String? userInput,Address,RName,Pnumber;
-
-  CheckoutScreen({this.userInput,this.Address,this.RName,this.Pnumber});
+  final LatLng? Location;
+  CheckoutScreen({this.userInput,this.Address,this.RName,this.Pnumber, this.Location});
   @override
   CheckoutScreenState createState() => CheckoutScreenState();
   }
@@ -28,16 +29,21 @@ class CheckoutScreen extends StatefulWidget {
     String? selectedPaymentMethod;
     String selectedMenuItem = 'Category';
     String username = "";
+
+
     Future getusername() async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       setState(() {
         username = preferences.getString('username')!;
       });
     }
+
+
     @override
     void initState() {
       getusername();
-     print(widget.userInput);
+      print("LOCATION IN CHECKOUT");
+      print(widget.Location);
       super.initState();
     }
 
@@ -53,6 +59,7 @@ class CheckoutScreen extends StatefulWidget {
             'delivery_address': widget.userInput??widget.Address,
             'original_address':widget.Address,
             'phone':widget.Pnumber,
+            'LatLng':widget.Location.toString()
           },
         );
 
@@ -62,7 +69,8 @@ class CheckoutScreen extends StatefulWidget {
 
           if (jsonResponse['status'] == 'success') {
             // Product successfully added to cart
-            print('Product added to cart!');
+            print(jsonResponse);
+           // print('Product added to cart!');
             Fluttertoast.showToast(
                 msg: "Item added to cart",
                 toastLength: Toast.LENGTH_SHORT,

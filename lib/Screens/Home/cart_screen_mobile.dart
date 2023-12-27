@@ -7,11 +7,20 @@ import 'package:almed_in/Screens/Home/widgets/mobile_topbar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-class CartScreenMobile extends StatelessWidget {
+class CartScreenMobile extends StatefulWidget {
+
+  @override
+  State<CartScreenMobile> createState() => _CartScreenMobileState();
+  static _CartScreenMobileState? of(BuildContext context) {
+    return context.findAncestorStateOfType<_CartScreenMobileState>();
+  }
+}
+
+class _CartScreenMobileState extends State<CartScreenMobile> {
   @override
   Widget build(BuildContext context) {
     final cart = context.watch<CartProvider>();
-
+   // List cart = [];
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center, // Align children to the left

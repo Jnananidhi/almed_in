@@ -1,4 +1,5 @@
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
@@ -200,56 +201,63 @@ class ProductScreenState extends State<ProductScreen> {
             ],
           )),
       body: Stack(
-        children:[ Column(
-          children: [
-            Navigation(),
-            Divider(
-              thickness: 1,
-              height: 0.01, // Set the height of the divider line
-              color: kPrimaryColor, // Set the color of the divider line
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20), // Adjust the padding as needed
-              child: Text(
-                widget.selectedMenuItem ?? "",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25,
-                  color: Colors.black,
+        children: [
+          Column(
+            children: <Widget>[
+              Navigation(),
+              Divider(
+                thickness: 1,
+                height: 0.01,
+                color: kPrimaryColor,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  widget.selectedMenuItem ?? "",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-            ),
-            // Display the custom Navigation widget if needed
-            products.isEmpty
-                ? Center(child: Text('No data available')) // Display 'No data available' text
-            :Expanded(
-              child: ListView.builder(
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return Container(height:Responsive.isDesktop(context)? 120:200, child: Responsive.isDesktop(context)
-                          ? ProductItem(product) // Display the desktop version
-                          : ProductItem_mobile(product),);
-                    },
+              // Display the custom Navigation widget if needed
+              products.isEmpty
+                  ? Center(child: Text('No data available'))
+                  : Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          final product = products[index];
+                          return Container(
+                            height: Responsive.isDesktop(context) ? 120 : 200,
+                            child: Responsive.isDesktop(context)
+                                ? ProductItem(product)
+                                : ProductItem_mobile(product),
+                          );
+                        },
+                      ),
+                      BottomNav(),
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ],
-        ),
-          Positioned(
-            top: MediaQuery.of(context).size.width < 600
-                ? 90// Adjust the value for mobile view
-                :50,
-            left: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-            right: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            ],
           ),
 
-
-        ], ),
+          Positioned(
+            top: MediaQuery.of(context).size.width < 600 ? 90 : 50,
+            left: MediaQuery.of(context).size.width < 600 ? 0 : MediaQuery.of(context).size.width * 0.22,
+            right: MediaQuery.of(context).size.width < 600 ? 0 : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar(),
+          ),
+        ],
+      ),
     );
   }
 
