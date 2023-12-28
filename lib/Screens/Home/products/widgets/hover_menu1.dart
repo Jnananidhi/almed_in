@@ -167,10 +167,7 @@ class HoverMenu1State extends State<HoverMenu1> {
             }
           },
           child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey), // Example decoration, modify as needed
-              borderRadius: BorderRadius.circular(8.0), // Example border radius, modify as needed
-            ),
+
             child: ListView(
               padding: EdgeInsets.zero,
               shrinkWrap: true,

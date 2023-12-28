@@ -443,6 +443,7 @@ class _NavigationState extends State<Navigation> {
                 child: Hoverdata(
                   title:therapeautic[i + j]["therapeautic"],
                   press: (){
+                    print(therapeautic[i + j]["therapeautic"]);
                     Navigator.push(
                       context,
                       MaterialPageRoute(

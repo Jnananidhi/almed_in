@@ -57,6 +57,7 @@ class ProductScreenState extends State<ProductScreen> {
     if (response.statusCode == 200) {
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
+      print("kp$productsData");
       if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
         // Filter the products list based on the selected product name
         productsData = productsData.where((product) =>
@@ -262,4 +263,3 @@ class ProductScreenState extends State<ProductScreen> {
   }
 
 }
-

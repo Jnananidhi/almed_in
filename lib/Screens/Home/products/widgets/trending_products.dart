@@ -133,35 +133,23 @@ class _TrendingProductsState extends State<TrendingProducts> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          MaterialButton(
-                            color: kSecondaryColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                            height: 40,
-                            onPressed: () {
-                              // Navigator.pushNamed(context, "/ProductItem");
-                            },
-                            child: const Text(
-                              "Quick View",
-                              style: TextStyle(color: kWhiteColor),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          MaterialButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50)),
-                            color: kSecondaryColor,
-                            height: 40,
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/product-screen");
-                            },
-                            child: const Text(
-                              "Shop Now",
-                              style: TextStyle(color: kWhiteColor),
-                            ),
-                          ),
+                          // MaterialButton(
+                          //   color: kSecondaryColor,
+                          //   shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(50)),
+                          //   height: 40,
+                          //   onPressed: () {
+                          //     // Navigator.pushNamed(context, "/ProductItem");
+                          //   },
+                          //   child: const Text(
+                          //     "Quick View",
+                          //     style: TextStyle(color: kWhiteColor),
+                          //   ),
+                          // ),
+                          // const SizedBox(
+                          //   height: 20,
+                          // ),
+
                         ],
                       ),
                     )
