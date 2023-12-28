@@ -429,7 +429,7 @@ class _NavigationState extends State<Navigation> {
             ),
           );
         }
-      }
+      }//menu
       // Add the row to the menu
       items.add(
         Row(
