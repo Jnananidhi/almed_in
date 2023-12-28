@@ -326,7 +326,6 @@ class _ProductItemState extends State<ProductItem> {
                         fontFamily: 'DMSans Regular',
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -425,6 +424,9 @@ class _ProductItemState extends State<ProductItem> {
                       if (username != "") {
 
                         addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp as String);
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => ProductScreen(), // Replace with the actual class name of your page
+                        ));
                         }
                       else{
                         showDialog(
@@ -518,7 +520,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10),
+      margin: EdgeInsets.only(left: 10, right: 10,bottom: 3),
       child: Container(
         width: MediaQuery.of(context).size.width, // Set the width to the desired size
         decoration: BoxDecoration(
@@ -559,7 +561,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                             fontFamily: 'DMSans Bold',
                           ),
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 10,),
                         Text(
                           'Quantity: ${widget.product.quantity}',
                           style: TextStyle(

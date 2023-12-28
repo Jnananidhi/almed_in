@@ -77,7 +77,7 @@ class _BillSummaryState extends State<BillSummary> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = context.watch<CartProvider>();
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:almed_in/Screens/Home/Map/address_selector_MAP.dart';
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/address_overlay.dart';
 import 'package:almed_in/Screens/Home/widgets/Checkoutscreen.dart';
@@ -11,6 +10,7 @@ import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'Authentication/login_screen.dart';
@@ -20,8 +20,9 @@ import 'faq_screen.dart';
 class AddressScreen extends StatefulWidget {
 
   final String? userInput,Address,RName,Pnumber;
+  final LatLng? Location;
 
-  AddressScreen({this.userInput,this.Address,this.RName,this.Pnumber});
+  AddressScreen({this.userInput,this.Address,this.RName,this.Pnumber, this.Location});
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -327,6 +328,7 @@ class _AddressScreenState extends State<AddressScreen> {
                                       Address: widget.Address, // Use widget.Address for other payment methods
                                       RName: widget.RName,
                                       Pnumber: widget.Pnumber,
+                                      Location: widget.Location,
                                     ),
                                   ),
                                 );

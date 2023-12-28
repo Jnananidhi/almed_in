@@ -135,15 +135,21 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
               ),
             ],
           )),
-      body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Lottie.asset("assets/success_animation.json",repeat: false,height: 200),
-          const Text("Order Successful",textAlign: TextAlign.center,style: TextStyle(color: Colors.teal,fontSize: 18,fontFamily: 'DMSans Bold',fontWeight: FontWeight.bold)),
-          const Text("Your Order id 0000000 has been successfully confirmed\nThanks for buying at Almed..",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 16,fontFamily: 'DMSans Light',fontWeight: FontWeight.bold)),
-        ],
+      body: WillPopScope(
+        onWillPop:() async{
+          Navigator.pushNamed(context, '/product-screen');
+          return true;
+        },
+        child: Center(
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset("assets/success_animation.json",repeat: false,height: 200),
+            const Text("Order Successful",textAlign: TextAlign.center,style: TextStyle(color: Colors.teal,fontSize: 18,fontFamily: 'DMSans Bold',fontWeight: FontWeight.bold)),
+            const Text("Your Order id 0000000 has been successfully confirmed\nThanks for buying at Almed..",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 16,fontFamily: 'DMSans Light',fontWeight: FontWeight.bold)),
+          ],
     ),
+        ),
       ),
     );
   }

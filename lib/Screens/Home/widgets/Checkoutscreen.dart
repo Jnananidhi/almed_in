@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart'as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../constants.dart';
 import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
@@ -13,102 +15,97 @@ import '../products/products_screen.dart';
 import 'bottomnav.dart';
 import 'menu.dart';
 import 'order_success.dart';
-import 'package:http/http.dart' as http;
 
 
 class CheckoutScreen extends StatefulWidget {
   final String? userInput,Address,RName,Pnumber;
-
-  CheckoutScreen({this.userInput,this.Address,this.RName,this.Pnumber});
+  final LatLng? Location;
+  CheckoutScreen({this.userInput,this.Address,this.RName,this.Pnumber, this.Location});
   @override
   CheckoutScreenState createState() => CheckoutScreenState();
   }
 
   class CheckoutScreenState extends State<CheckoutScreen> {
-    int? selectedPaymentMethod;
+    String? selectedPaymentMethod;
     String selectedMenuItem = 'Category';
-    double shippingCost = 0;
-    String username = '';
-    List dataa = [];
-    bool isLoading = true; // Track loading state
+    String username = "";
+
+
+    Future getusername() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      setState(() {
+        username = preferences.getString('username')!;
+      });
+    }
+
 
     @override
     void initState() {
+      getusername();
+      print("LOCATION IN CHECKOUT");
+      print(widget.Location);
       super.initState();
-      // Show loading indicator initially
-      _loadData();
     }
 
-    void _loadData() {
-      Future.wait([_loadUsername()]).then((_) {
-        // After both therapeutic and form data are fetched, proceed to group items
-        print("usernamenidhiii: $username");
-        fetchCartPrice(username).then((_) {
-          // Data loading is complete, set isLoading to false
-          setState(() {
-            isLoading = false;
-          });
-        });
-      });
-    }
-
-
-
-    Future<void> _loadUsername() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        username = prefs.getString('username') ?? '';
-      });
-    }
-
-
-     fetchCartPrice(String username) async {
-      String url = '${api}fetch_cart_price.php';
-
+    void placeOrder() async {
+      String url = '${api}add_to_orders.php'; // Replace with your actual backend API endpoint
       try {
         var response = await http.post(
           Uri.parse(url),
           body: {
             'username': username,
+            'delivery_name': widget.RName,
+            'payment_method': selectedPaymentMethod,
+            'delivery_address': widget.userInput??widget.Address,
+            'original_address':widget.Address,
+            'phone':widget.Pnumber,
+            'LatLng':widget.Location.toString()
           },
         );
 
         if (response.statusCode == 200) {
-          var jsonData = json.decode(response.body);
+          // Parse the JSON response
+          Map<String, dynamic> jsonResponse = json.decode(response.body);
 
-          if (jsonData['status'] == 'success') {
-            // If 'status' is 'success', assume there is a 'data' field
-            var data = jsonData['data'];
+          if (jsonResponse['status'] == 'success') {
+            // Product successfully added to cart
+            print(jsonResponse);
+           // print('Product added to cart!');
+            Fluttertoast.showToast(
+                msg: "Item added to cart",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP_RIGHT,
+                fontSize: 16,
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
+          }
+          else if (jsonResponse['status'] == 'error')
+          {
+            Fluttertoast.showToast(
+                msg: "Item is already in the cart",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.TOP_RIGHT,
+                fontSize: 16,
+                backgroundColor: Colors.black,
+                textColor: Colors.white);
+          }
+          else {
+            // Failed to add the product to cart
+            print('Failed to add product to cart: ${jsonResponse['message']}');
 
-            // Handle 'data' as needed
-            setState(() {
-              dataa = data;
-            });
-            print(dataa);
-          } else {
-            // Handle other cases or show an error message
-            print('Failed to fetch cart price: ${jsonData['message']}');
           }
         } else {
           // Handle other response status codes if needed
-          print('Failed to fetch cart price: ${response.statusCode}');
+          print('Failed to add product to cart: ${response.statusCode}');
         }
       } catch (error) {
-        print('Error fetching cart price: $error');
+        print('Error adding to cart: $error');
       }
     }
-
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    if (isLoading) {
-      return Center(
-        child: CircularProgressIndicator(), // Show a loading indicator
-      );
-    } else {
-      // Your actual widget tree once data is loaded
-      return
-     Scaffold(
+    return Scaffold(
         drawer: Drawer(
             child: ListView(
               children: [
@@ -321,7 +318,7 @@ child:SingleChildScrollView(
             side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
             borderRadius: BorderRadius.circular(15.0), // Set the border radius
           ),
-          color: selectedPaymentMethod == 1 ? Color(0xFFEDEEF5) : Colors.white,
+          color: selectedPaymentMethod == "Card" ? Color(0xFFEDEEF5) : Colors.white,
 
               child: Column(
                 children: <Widget>[
@@ -334,16 +331,16 @@ child:SingleChildScrollView(
                       child: ListTile(
                     title: Text('Credit Card'),
                     leading: Radio(
-                      value: 1, // Unique value for UPI
+                      value: "Card", // Unique value for UPI
                       groupValue: selectedPaymentMethod,
-                      onChanged: (int? value) {
+                      onChanged: (String? value) {
                         setState(() {
                           selectedPaymentMethod = value;
                         });
                       },
                     ),trailing: Image.asset('assets/card_icon.png',height:20),
                   ),),
-                  if (selectedPaymentMethod == 1)
+                  if (selectedPaymentMethod == "Card")
                     Padding(
                       padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
                       child: Column(
@@ -475,7 +472,7 @@ child:SingleChildScrollView(
              side: BorderSide(color:Color(0xFFF1F3F6), width: 2.0), // Set the border color and width
              borderRadius: BorderRadius.circular(15.0), // Set the border radius
            ),
-           color: selectedPaymentMethod == 2 ? Color(0xFFEDEEF5) : Colors.white,
+           color: selectedPaymentMethod == "UPI" ? Color(0xFFEDEEF5) : Colors.white,
             child: Column(
               children: [
             Container(
@@ -488,9 +485,9 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('UPI'),
                   leading: Radio(
-                    value: 2, // Unique value for UPI
+                    value: "UPI", // Unique value for UPI
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
@@ -498,7 +495,7 @@ child:SingleChildScrollView(
                   ),trailing: Image.asset('assets/upi_icon.png',height:20),
                 ),
               ),
-                if (selectedPaymentMethod == 2)
+                if (selectedPaymentMethod == "UPI")
                   Padding(
                       padding: const EdgeInsets.only(left:80,right:16.0,top:16.0,bottom:16.0),
                     child: Column(
@@ -591,16 +588,16 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('Net Banking'),
                   leading: Radio(
-                    value: 3, // Unique value for Net Banking
+                    value: "Net Banking", // Unique value for Net Banking
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
                     },
                   ),trailing: Image.asset('assets/Netbanking_icon.png',height:20),
                 ),),
-                if (selectedPaymentMethod == 3)
+                if (selectedPaymentMethod == "Net Banking")
                   ListTile(
                     title: Text('Additional Content Here'),
                   ),
@@ -633,9 +630,9 @@ child:SingleChildScrollView(
                 ListTile(
                   title: Text('Cash on Delivery'),
                   leading: Radio(
-                    value: 4, // Unique value for Cash on Delivery
+                    value: 'Cash on Delivery', // Unique value for Cash on Delivery
                     groupValue: selectedPaymentMethod,
-                    onChanged: (int? value) {
+                    onChanged: (String? value) {
                       setState(() {
                         selectedPaymentMethod = value;
                       });
@@ -660,6 +657,7 @@ child:SingleChildScrollView(
                           child: const Center(child: Text("Place Order",style:TextStyle(color: Colors.white))),
                         ),
                         onPressed: () {
+                          placeOrder();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const OrderSuccessScreen()),
@@ -686,52 +684,7 @@ child:SingleChildScrollView(
                 children:[
                   Container(
                   alignment: Alignment.topRight,
-                  child:  Card(
-                    elevation: 4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20), // Adjust the value for the desired border curvature
-                    ),
-                    child: Container(
-                      height: 280,
-                      padding: EdgeInsets.only(top: 30,right: 16,left: 16),
-                      decoration: BoxDecoration(
-                        // gradient: LinearGradient(
-                        //   begin: Alignment.topCenter,
-                        //   end: Alignment.bottomCenter,
-                        //   colors: [
-                        //     lightColor, // Start color
-                        //     kSecondaryColor, // End color (same color for a solid effect)
-                        //   ],
-                        // ),
-                        color: Colors.white,
-                        //border: Border.all(color: kPrimaryColor,width: 1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Bill Summary',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: 'DMSans Bold',
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          SizedBox(height: 5),
-                          Divider(thickness: 2,),
-                          SizedBox(height: 5),
-                          BillItem(label: 'Total Bill (MRP) ' ,value:dataa[0]['total']),
-                          SizedBox(height: 5),
-                          BillItem(label: 'Total Discount ',value:'-0'),
-                          SizedBox(height: 5),
-                          BillItem(label: 'Shipping Fee ' ,value: '50'),
-                          Divider(thickness: 2,),
-                          SizedBox(height: 5),
-                          BillItem(label: 'To Be Paid ',value:dataa[0]['total']),
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: BillSummary(),
                 ),
             ]  ),
             ),
@@ -741,7 +694,7 @@ child:SingleChildScrollView(
         ),
       ]),
     )]))])),
-          BottomNav(), ])))]));};
+          BottomNav(), ])))]));
   }//updated
 }
 

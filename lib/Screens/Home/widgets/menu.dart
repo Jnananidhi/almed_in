@@ -43,6 +43,7 @@ class _NavigationState extends State<Navigation> {
   List strength = [];
   List form = [];
   List company = [];
+  String cartCount="";
   Future getAllcategory() async {
     var url = "${api}therapeautic.php";
     var response = await http.post(Uri.parse(url));
@@ -57,8 +58,34 @@ class _NavigationState extends State<Navigation> {
       print('Failed to load data. Status code: ${response.statusCode}');
       print('Response body: ${response.body}');
     }
-
     return therapeautic;
+  }
+  String username = '';
+  Future<void> _loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('username') ?? '';
+    });
+  }
+  Future fetchCartCount() async {
+    final url = Uri.parse('${api}count_cart_items.php'); // Replace with your PHP script URL
+    final response = await http.post(
+      url,
+      body: {'username': username},
+    );
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+
+        // If 'status' is 'success', assume there is a 'data' field
+        var count = jsonData['cartCount'];
+
+        // Handle 'data' as needed
+        setState(() {
+          cartCount = count.toString();
+        });
+       // print("CART____$cartCount");
+    }
+    return cartCount;
   }
   Future getstrength() async {
     var url = "${api}STRENGTH.php";
@@ -117,6 +144,9 @@ class _NavigationState extends State<Navigation> {
     getstrength();
     getform();
     getcompany();
+    Future.wait([_loadUsername() ]).then((_) {
+      fetchCartCount();
+    });
     super.initState();
   }
 
@@ -143,13 +173,7 @@ class _NavigationState extends State<Navigation> {
       padding = EdgeInsets.symmetric(horizontal: 10.0); // Adjust padding for mobile view
     }
     List<Widget> menuItems = therapeautic.map((item) => ListTile(title: Text(item["therapeautic"]))).toList();
-    var cartScreen = CartScreen.of(context);
-    if(cartScreen !=null){
-      print("CART LENGTH:${cartScreen?.cart.length}",);
-    }
-    else{
-     // print(cartScreen?.cart.length.toString(),);
-    }
+
 
     return Container(
       color: kWhiteColor,
@@ -257,20 +281,22 @@ class _NavigationState extends State<Navigation> {
                             child: badges.Badge(
                               position: badges.BadgePosition.topEnd(top: 0, end: 3),
                               badgeContent:
-                              cartScreen != null
-                                  ? Text(
-                                cartScreen.cart.length.toString(),
-                                style: TextStyle(color: Colors.white),
-                              )
-                                  : Text(
-                                "0",
+                              Text(
+                                cartCount,
                                 style: TextStyle(color: Colors.white),
                               ),
 
                               child: IconButton(
                                 icon: Icon(Icons.shopping_cart),
                                 onPressed: () {
-                                  // Handle cart icon tap
+                                  if(Responsive.isMobile(context)) {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                          return CartScreenMobile();
+                                        }));
+                                  }else{
+                                    Navigator.pushNamed(context, "/cart");
+                                  }
                                 },
                               ),
                             ),

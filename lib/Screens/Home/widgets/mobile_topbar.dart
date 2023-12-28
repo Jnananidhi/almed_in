@@ -10,29 +10,42 @@ class MobileNavigation extends StatefulWidget {
 
   @override
   State<MobileNavigation> createState() => _MobileNavigationState();
+
 }
 
 class _MobileNavigationState extends State<MobileNavigation> {
   @override
   Widget build(BuildContext context) {
+    var cartScreen = CartScreenMobile.of(context);
+    if(cartScreen !=null){
+      //print("CART LENGTH:${cartScreen.ca}",);
+    }
+    else{
+      // print(cartScreen?.cart.length.toString(),);
+    }
     return Row(
       children: [
         IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back)),
         const Spacer(),
-        Consumer<CartProvider>(
-          builder: (context, cart, child) {
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return CartScreenMobile();
-                }));
-              },
-              child: badges.Badge(
-                badgeContent: Text(cart.cartItemCount.toString()),
-                child: Icon(Icons.shopping_cart),
-              ),
-            );
-          },
+        badges.Badge(
+          position: badges.BadgePosition.topEnd(top: 0, end: 3),
+          badgeContent:
+          cartScreen != null
+              ? Text(
+           "",
+            style: TextStyle(color: Colors.white),
+          )
+              : Text(
+            "0",
+            style: TextStyle(color: Colors.white),
+          ),
+
+          child: IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              // Handle cart icon tap
+            },
+          ),
         ),
       ],
     );

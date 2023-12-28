@@ -5,11 +5,10 @@ import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Map/model_PlaceSearch.dart';
 import 'package:almed_in/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
-bool showSuggestions = true;
+
 class AddressOverlay extends StatefulWidget {
   final BuildContext overlayContext;
   final OverlayEntry? overlayEntry;
@@ -22,12 +21,15 @@ class AddressOverlay extends StatefulWidget {
 
 class _AddressOverlayState extends State<AddressOverlay> {
   bool displayContainer = false;
+  bool showSuggestions = true;
   // Define a variable to track which screen is currently displayed.
   final _formKey = GlobalKey<FormState>();
   String userInput = '';
   String Address = '';
   String RName = '';
   String Pnumber = '';
+
+
 
   int currentScreen = 1;
    late GoogleMapController? googleMapController;
@@ -52,6 +54,9 @@ class _AddressOverlayState extends State<AddressOverlay> {
           // You can customize the marker's icon here
         );
       }
+      setState(() {
+        showSuggestions = true;
+      });
     });
     print(location);
   }
@@ -99,6 +104,10 @@ class _AddressOverlayState extends State<AddressOverlay> {
             CameraPosition(target: location, zoom: 15.0),
           ),
         );
+
+        setState(() {
+          showSuggestions = true;
+        });
       }
     }
   }
@@ -413,7 +422,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
                     widget.overlayEntry?.remove();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,)),
+                      MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,Location:tappedLocation)),
                     );
                   }
                 },
@@ -437,7 +446,7 @@ class _AddressOverlayState extends State<AddressOverlay> {
                     widget.overlayEntry?.remove();
                   Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,)),
+                  MaterialPageRoute(builder: (context) =>  AddressScreen(userInput: userInput,Address:Address,RName:RName,Pnumber:Pnumber,Location: tappedLocation,)),
                   );
                   }},
                 style: ElevatedButton.styleFrom(backgroundColor: kPrimaryColor),
