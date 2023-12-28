@@ -23,7 +23,7 @@ class ProductScreen extends StatefulWidget {
 
   @override
   ProductScreenState createState() => ProductScreenState();
-}
+}//product screen
 class ProductScreenState extends State<ProductScreen> {
   String selectedMenuItem = 'Category';
   String? get selectedProductName => widget.selectedProductName;
