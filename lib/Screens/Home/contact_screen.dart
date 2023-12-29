@@ -156,11 +156,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
            children:[ Column(
                children: <Widget>[
                  const Navigation(),
-                 const Divider(
-                   thickness: 1,
-                   height: 0.01, // Set the height of the divider line
-                   color: kPrimaryColor, // Set the color of the divider line
-                 ),
+
                  Expanded(
                    child: SingleChildScrollView(
                      child: Column(

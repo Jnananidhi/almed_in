@@ -51,11 +51,20 @@ class BottomNav extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomButton(
+                    ElevatedButton(
+                      child: Container(
+                          width: 100,
+                          height: 50,
+                          child: const Center(child: Text("Let us know"))),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/contactUs');
+                        Navigator.pushNamed(context, "/contactUs");
                       },
-                      label: 'Let us Know',
                     ),
                     const SizedBox(
                       height: 10,

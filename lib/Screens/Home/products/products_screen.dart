@@ -1,5 +1,6 @@
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
+import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
@@ -224,7 +225,15 @@ class ProductScreenState extends State<ProductScreen> {
               ),
               // Display the custom Navigation widget if needed
               products.isEmpty
-                  ? Center(child: Text('No data available'))
+                  ? Center(child: Column(
+                    children: [
+                      Image.asset("no_data.png",height: 350,width: 350),
+                      SizedBox(height: 10,),
+                      Text('No products to show you right now...',style: TextStyle(fontFamily: 'DMSans Bold'),),
+                      SizedBox(height: 10,),
+                      CustomButton(label: "Go Back", onPressed: (){Navigator.pushNamed(context, "/home");})
+                    ],
+                  ))
                   : Expanded(
                 child: SingleChildScrollView(
                   child: Column(

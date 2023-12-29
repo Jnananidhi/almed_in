@@ -337,13 +337,18 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 isHovered = false; // Set hover state to false when the mouse exits
                               });
                             },
-                            child: Text(
-                              'Orders',
-                              textAlign: TextAlign.start,
-                              style: TextStyle(
-                                color: isHovered ? kPrimaryColor : Colors.black,
-                                fontSize: 18,
+                            child: GestureDetector(
+                              child: Text(
+                                'My Orders',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: isHovered ? kPrimaryColor : Colors.black,
+                                  fontSize: 18,
+                                ),
                               ),
+                              onTap: (){
+                              //  Navigator.pushNamed(context, "/myOrders");
+                              },
                             ),
                           ),// Add some space between the icon and text
 
@@ -447,7 +452,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         height: 0.01, // Set the height of the divider line
                         color: kPrimaryColor, // Set the color of the divider line
                       ),
-
 
                       ListTile(
                         leading: Icon(Icons.health_and_safety,color: kSecondaryColor),

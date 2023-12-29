@@ -339,11 +339,7 @@ class _CartScreenState extends State<CartScreen> {
         children:[ Column(
           children: [
             Navigation(),
-            Divider(
-              thickness: 1,
-              height: 0.01, // Set the height of the divider line
-              color: kPrimaryColor, // Set the color of the divider line
-            ),
+
             const Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
