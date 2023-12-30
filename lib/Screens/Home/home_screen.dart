@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const DrawerHeader(
               child: Center(
-                child: Image(image: AssetImage('assets/logo.png'),height: 80),
+                child: Image(image: AssetImage('assets/logo_rmbck.png'),height: 80),
               ),
             ),
             Padding(
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   MenuItems(
                     title: 'About Us',
                     press: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
+                      Navigator.pushNamed(context, "/aboutAlmed.in");
                     },
                   ),
                   const SizedBox(
@@ -87,17 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   MenuItems(
                     title: 'FAQ',
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const FaqScreen()),
-                      );
+                      Navigator.pushNamed(context, "/faq");
+
                     },
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   MenuItems(
-                    isActive: true,
                     title: 'Search Medicines',
                     press: () {
                       Navigator.pushNamed(context, "/alphabeticSearch");
@@ -107,12 +104,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 10,
                   ),
                   MenuItems(
-                    title: 'Vendor?',
+                    title: 'Seller?',
                     press: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  LoginPage()),
-                      );
+                      Navigator.pushNamed(context, "/login");
                     },
                   ),
                   const SizedBox(
@@ -120,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   MenuItems(
                     title: 'Contact Us',
-                    press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
+                    press: () {Navigator.pushNamed(context, "contactUs");},
                   ),
                 ],
               ),

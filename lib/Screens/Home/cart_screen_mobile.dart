@@ -7,8 +7,8 @@ import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/mobile_topbar.dart';
 import 'package:almed_in/constants.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,25 +72,43 @@ class _CartScreenMobileState extends State<CartScreenMobile> {
 
         if (jsonResponse['status'] == 'success') {
           // Product successfully added to cart
-          print('Product added to cart!');
-          Fluttertoast.showToast(
-              msg: "Item removed from cart",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          //print('Product added to cart!');
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Item removed!',
+              message:
+              'Item removed from cart successfully..',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.success,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
         }
         else if (jsonResponse['status'] == 'error')
         {
           print('error deleting cart');
-          Fluttertoast.showToast(
-              msg: "Failed to remove Item from your cart ",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Error!',
+              message:
+              'There is some issue in removing the item from cart. Please try again',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.failure,
+            ),
+          );
         }
         else {
           // Failed to add the product to cart
@@ -126,25 +144,43 @@ class _CartScreenMobileState extends State<CartScreenMobile> {
 
         if (jsonResponse['status'] == 'success') {
           // Product successfully added to cart
-          print('Product added to cart!');
-          Fluttertoast.showToast(
-              msg: "updated!!!",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+         // print('Product added to cart!');
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Updated!',
+              message:
+              'Cart updated successfully',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.success,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
         }
         else if (jsonResponse['status'] == 'error')
         {
           print('error deleting cart');
-          Fluttertoast.showToast(
-              msg: "Failed to update ",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Failed',
+              message:
+              'Failed to update cart..',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.failure,
+            ),
+          );
         }
         else {
           // Failed to add the product to cart

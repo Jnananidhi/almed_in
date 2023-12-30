@@ -27,120 +27,78 @@ class _AboutScreenState extends State<AboutScreen> {
         backgroundColor: kWhiteColor,
         //scrollable widget
       drawer: Drawer(
-          child: ListView(
-            children: [
-              const DrawerHeader(
-                child: Center(
-                  child: Image(image: AssetImage('assets/logo.png'),height: 80),
-                ),
+        backgroundColor: Colors.white,
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              child: Center(
+                child: Image(image: AssetImage('assets/logo_rmbck.png'),height: 80),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                isActive: true,
-                title: 'Home',
-                press: () {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                title: 'About Us',
-                press: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                },
-              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
 
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                title: 'FAQ',
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const FaqScreen()),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+                    title: 'Home',
+                    press: () {},
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    isActive: true,
+                    title: 'About Us',
+                    press: () {
+                      Navigator.pushNamed(context, "/aboutAlmed.in");
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    title: 'FAQ',
+                    press: () {
+                      Navigator.pushNamed(context, "/faq");
 
-              DropdownButton<String>(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                value: selectedMenuItem,
-                onChanged: (String? newValue) {
-                  if (newValue != null) {
-                    setState(() {
-                      selectedMenuItem = newValue;
-                      // Add logic to navigate to the related page based on selectedMenuItem
-                      if (selectedMenuItem == 'Therapeutic') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                        );
-
-                      } else if (selectedMenuItem == 'Strength') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                        );
-                      }
-                      else if (selectedMenuItem == 'Company') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                        );
-                      }else if (selectedMenuItem == 'Form') {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                        );
-                      }
-                    });
-                  }
-                },
-                items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style:  TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize:  18 ,
-                        color: Colors.black,
-                      ),
-                    ),
-                  );
-                }).toList(),
-                // Set the underline property to Container() to hide the underline.
-                underline: Container(),
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    title: 'Search Medicines',
+                    press: () {
+                      Navigator.pushNamed(context, "/alphabeticSearch");
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    title: 'Seller?',
+                    press: () {
+                      Navigator.pushNamed(context, "/login");
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  MenuItems(
+                    title: 'Contact Us',
+                    press: () {Navigator.pushNamed(context, "contactUs");},
+                  ),
+                ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                title: 'Vendor?',
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  LoginPage()),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              MenuItems(
-                title: 'Contact Us',
-                press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
-              ),
-            ],
-          )),
+            )
+          ],
+        ),
+      ),
 
         body: Stack(
           children:[ Column(
@@ -176,13 +134,13 @@ class _AboutScreenState extends State<AboutScreen> {
                                 SizedBox(height: 20),
                                 Text(
                                   textAlign: TextAlign.right,
-                                  'Email: contact@example.com',
+                                  'Email: contact@almed.in',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 SizedBox(height: 20),
                                 Text(
                                   textAlign: TextAlign.right,
-                                  'Phone: +1 (123) 456-7890',
+                                  'Phone: 8088222201',
                                   style: TextStyle(fontSize: 16),
                                 ),
                                 SizedBox(height: 20),

@@ -11,8 +11,8 @@ import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,13 +72,24 @@ import '../products/products_screen.dart';
 
 
       } else {
-        Fluttertoast.showToast(
-            msg: "The Username and Password doesn't matches",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER_LEFT,
-            fontSize: 16,
-            backgroundColor: Colors.black,
-            textColor: Colors.white);
+        final snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Login unsuccessful',
+            message:
+            'Incorrect username or password. Please try again.',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.failure,
+          ),
+        );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
       }
     }
   @override
@@ -208,11 +219,7 @@ import '../products/products_screen.dart';
         children:[ Column(
             children: [
         const Navigation(),
-              const Divider(
-                thickness: 1,
-                height: 0.01, // Set the height of the divider line
-                color: kPrimaryColor, // Set the color of the divider line
-              ),
+
               Center(
                 child: Align(
                   alignment: Alignment.center,

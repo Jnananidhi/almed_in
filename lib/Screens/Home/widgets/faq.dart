@@ -46,11 +46,11 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "Where we serve?",
-                   description: ''' Our services are available in Bangalore city now and we will be extending soon other parts of Karnataka.''',
+                   description: '''Our services are available in Bangalore city now and we will be extending soon other parts of Karnataka.''',
                    press: () {}),
                ExpandableCard(
                    question: "Do you supply patient directly?",
-                   description: ''' No. We are supplying only to the licensed retailers & Doctors(MBBS). Almed.in vision is to help the chemist.''',
+                   description: '''No. We are supplying only to the licensed retailers & Doctors(MBBS). Almed.in vision is to help the chemist.''',
                    press: () {}),
                ExpandableCard(
                    question: "How almed in products are chosen to list?",
@@ -58,7 +58,7 @@ class _FaqState extends State<Faq> {
                    press: () {}),
                ExpandableCard(
                    question: "Do you refund for unsold or expiry products ?",
-                   description: '''Mostly No. But in some cases, if the company gives us a refund, we will refund as per norms.''',
+                   description: '''Mostly No. But in some cases, if the company gives us a refund, we  will refund as per norms.''',
                    press: () {}),
 
 

@@ -7,6 +7,7 @@ import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -28,130 +29,79 @@ class _ContactUsAppState extends State<ContactUsApp> {
       return Scaffold(
          backgroundColor: kWhiteColor,
          //scrollable widget
-         drawer: Drawer(
-           child: ListView(
-             children: [
-               const DrawerHeader(
-                 child: Center(
-                   child: Image(image: AssetImage('assets/logo.png'),height: 80),
-                 ),
-               ),
-               Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                 child: Column(
-                   crossAxisAlignment: CrossAxisAlignment.start,
-                   children: [
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       isActive: true,
-                       title: 'Home',
-                       press: () {},
-                     ),
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       title: 'About Us',
-                       press: () {
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                       },
-                     ),
+          drawer: Drawer(
+            backgroundColor: Colors.white,
+            child: ListView(
+              children: [
+                const DrawerHeader(
+                  child: Center(
+                    child: Image(image: AssetImage('assets/logo_rmbck.png'),height: 80),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
 
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       title: 'FAQ',
-                       press: () {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(builder: (context) => const FaqScreen()),
-                         );
-                       },
-                     ),
-                     const SizedBox(
-                       height: 10,
-                     ),
+                        title: 'Home',
+                        press: () {},
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
+                        title: 'About Us',
+                        press: () {
+                          Navigator.pushNamed(context, "/aboutAlmed.in");
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
+                        title: 'FAQ',
+                        press: () {
+                          Navigator.pushNamed(context, "/faq");
 
-                     DropdownButton<String>(
-                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                       value: selectedMenuItem,
-                       onChanged: (String? newValue) {
-                         if (newValue != null) {
-                           setState(() {
-                             selectedMenuItem = newValue;
-                             // Add logic to navigate to the related page based on selectedMenuItem
-                             if (selectedMenuItem == 'Therapeutic') {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-
-                               );
-
-                             } else if (selectedMenuItem == 'Strength') {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                               );
-                             }
-                             else if (selectedMenuItem == 'Company') {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                               );
-                             }else if (selectedMenuItem == 'Form') {
-                               Navigator.push(
-                                 context,
-                                 MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                               );
-                             }
-                           });
-                         }
-                       },
-                       items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                           .map<DropdownMenuItem<String>>((String value) {
-                         return DropdownMenuItem<String>(
-                           value: value,
-                           child: Text(
-                             value,
-                             style:  TextStyle(
-                               fontWeight: FontWeight.bold,
-                               fontSize:  18 ,
-                               color: Colors.black,
-                             ),
-                           ),
-                         );
-                       }).toList(),
-                       // Set the underline property to Container() to hide the underline.
-                       underline: Container(),
-                     ),
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       title: 'Vendor?',
-                       press: () {
-                         Navigator.push(
-                           context,
-                           MaterialPageRoute(builder: (context) =>  LoginPage()),
-                         );
-                       },
-                     ),
-                     const SizedBox(
-                       height: 10,
-                     ),
-                     MenuItems(
-                       title: 'Contact Us',
-                       press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
-                     ),
-                   ],
-                 ),
-               )
-             ],
-           ),
-         ),
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
+                        title: 'Search Medicines',
+                        press: () {
+                          Navigator.pushNamed(context, "/alphabeticSearch");
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
+                        title: 'Seller?',
+                        press: () {
+                          Navigator.pushNamed(context, "/login");
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MenuItems(
+                        isActive: true,
+                        title: 'Contact Us',
+                        press: () {Navigator.pushNamed(context, "contactUs");},
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
          body: Stack(
            children:[ Column(
                children: <Widget>[
@@ -263,23 +213,41 @@ class _ContactFormState extends State<ContactForm> {
         // For example, you can parse the response JSON with below 2 lines
         final responseData = json.decode(response.body);
         print(responseData);
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Successful'),
-              content: const Text('Your feedback has been recorded. We will get back to you as soon as possible'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
+        final snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'Successful!',
+            message:
+            'Your feedback has been recorded. We will get back to you as soon as possible',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.success,
+          ),
         );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
+        // showDialog(
+        //   context: context,
+        //   builder: (context) {
+        //     return AlertDialog(
+        //       title: const Text('Successful'),
+        //       content: const Text('Your feedback has been recorded. We will get back to you as soon as possible'),
+        //       actions: [
+        //         TextButton(
+        //           onPressed: () {
+        //             Navigator.of(context).pop();
+        //           },
+        //           child: const Text('OK'),
+        //         ),
+        //       ],
+        //     );
+        //   },
+        // );
         // Do something with responseData.
       } else {
         // Handle the case when the request was not successful.
@@ -366,40 +334,43 @@ class _ContactFormState extends State<ContactForm> {
                 ),
                 onPressed: () {
                   if(nameController.text.isEmpty|| emailController.text.isEmpty || messageController.text.isEmpty){
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content: const Text('Please fill all the details correctly'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
-                    );  // showDialog
-                  }else if(!isValidEmail()){
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content: const Text('Entered mail is incorrect..'),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        );
-                      },
+                    final snackBar = SnackBar(
+                      /// need to set following properties for best effect of awesome_snackbar_content
+                      elevation: 0,
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      content: AwesomeSnackbarContent(
+                        title: 'Empty field!',
+                        message:
+                        'Please fill all the details correctly...',
+
+                        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                        contentType: ContentType.warning,
+                      ),
                     );
-                  }
+
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(snackBar);// showDialog
+                  }else if(!isValidEmail()){
+                    final snackBar = SnackBar(
+                      /// need to set following properties for best effect of awesome_snackbar_content
+                      elevation: 0,
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      content: AwesomeSnackbarContent(
+                        title: 'Incorrect mail!',
+                        message:
+                        'Entered Email is incorrect..',
+
+                        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                        contentType: ContentType.warning,
+                      ),
+                    );
+
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(snackBar);                  }
                   else{
                   // Handle form submission here
                   senddata();}

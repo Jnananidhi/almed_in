@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/widgets/bill_summary_widget.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart'as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,23 +72,28 @@ class CheckoutScreen extends StatefulWidget {
             // Product successfully added to cart
             print(jsonResponse);
            // print('Product added to cart!');
-            Fluttertoast.showToast(
-                msg: "Item added to cart",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.TOP_RIGHT,
-                fontSize: 16,
-                backgroundColor: Colors.black,
-                textColor: Colors.white);
+
           }
           else if (jsonResponse['status'] == 'error')
           {
-            Fluttertoast.showToast(
-                msg: "Item is already in the cart",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.TOP_RIGHT,
-                fontSize: 16,
-                backgroundColor: Colors.black,
-                textColor: Colors.white);
+            final snackBar = SnackBar(
+              /// need to set following properties for best effect of awesome_snackbar_content
+              elevation: 0,
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              content: AwesomeSnackbarContent(
+                title: 'Unsuccessful!',
+                message:
+                'Sorry, we encountered an issue while processing your order. Please try again later.',
+
+                /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                contentType: ContentType.failure,
+              ),
+            );
+
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(snackBar);
           }
           else {
             // Failed to add the product to cart

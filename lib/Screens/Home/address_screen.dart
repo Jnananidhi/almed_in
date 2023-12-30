@@ -8,8 +8,9 @@ import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -334,12 +335,19 @@ class _AddressScreenState extends State<AddressScreen> {
                                 );
                               }
                               else {
-                                Fluttertoast.showToast(
-                                  msg: 'Please select an address', // Your toast message
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
+                                final snackBar = SnackBar(
+                                  /// need to set following properties for best effect of awesome_snackbar_content
+                                  elevation: 0,
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: Colors.transparent,
+                                  content: AwesomeSnackbarContent(
+                                    title: 'Warning',
+                                    message:
+                                    'Select address to proceed..',
+
+                                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                    contentType: ContentType.warning,
+                                  ),
                                 );
                               }
 

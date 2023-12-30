@@ -1,9 +1,10 @@
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/file_upload.dart';
 import 'package:almed_in/constants.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+//import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 
@@ -742,14 +743,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     onPressed: (){
                                       if (_formKey.currentState!.validate()) {
                                         _uploadFiles();
-                                        Fluttertoast.showToast(
-                                          msg: 'Registration Completed successfully',
-                                          toastLength: Toast.LENGTH_LONG, // Duration for which the toast should be displayed
-                                          gravity: ToastGravity.CENTER, // Position of the toast message
-                                          timeInSecForIosWeb: 5, // Duration in seconds for iOS (ignored on Android)
-                                          backgroundColor: Colors.black87,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0,
+                                        final snackBar = SnackBar(
+                                          /// need to set following properties for best effect of awesome_snackbar_content
+                                          elevation: 0,
+                                          behavior: SnackBarBehavior.floating,
+                                          backgroundColor: Colors.transparent,
+                                          content: AwesomeSnackbarContent(
+                                            title: 'Successful!',
+                                            message:
+                                            'Thank you for joining us! Your registration is complete.',
+
+                                            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                            contentType: ContentType.success,
+                                          ),
                                         );
                                         Navigator.pushReplacement(
                                           context,

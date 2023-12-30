@@ -207,11 +207,7 @@ class ProductScreenState extends State<ProductScreen> {
           Column(
             children: <Widget>[
               Navigation(),
-              Divider(
-                thickness: 1,
-                height: 0.01,
-                color: kPrimaryColor,
-              ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(

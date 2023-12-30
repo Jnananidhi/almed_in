@@ -8,8 +8,8 @@ import 'package:almed_in/Screens/Home/widgets/Checkoutscreen_mobile.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/order_success.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart'as http;
@@ -242,23 +242,44 @@ class _ProductItemState extends State<ProductItem> {
         if (jsonResponse['status'] == 'success') {
           // Product successfully added to cart
           print('Product added to cart!');
-          Fluttertoast.showToast(
-              msg: "Item added to cart",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Added to cart',
+              message:
+              'Item successfully added to your cart..',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.success,
+            ),
+          );
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
         }
         else if (jsonResponse['status'] == 'error')
         {
-          Fluttertoast.showToast(
-              msg: "Item is already in the cart",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.TOP_RIGHT,
-              fontSize: 16,
-              backgroundColor: Colors.black,
-              textColor: Colors.white);
+          final snackBar = SnackBar(
+            /// need to set following properties for best effect of awesome_snackbar_content
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            content: AwesomeSnackbarContent(
+              title: 'Failed',
+              message:
+              'Item already in your cart..',
+
+              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+              contentType: ContentType.help,
+            ),
+          );
+
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(snackBar);
         }
         else {
           // Failed to add the product to cart
@@ -455,34 +476,57 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      color: kPrimaryColor,
-                      height: 40,
-                      onPressed: () {
-                        if(Responsive.isDesktop(context)) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckoutScreen()),
-                          );
-                        }else if(Responsive.isMobile(context)){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckoutScreenMobile()),
-                          );
-                        }
-                      },
-                      child: const Text(
-                        "Buy Now",
-                        style: TextStyle(color: kWhiteColor),
-                      ),
-                    ),
-                  ),
+                  //Container(
+                    // margin: EdgeInsets.all(10),
+                    // child: MaterialButton(
+                    //   shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(50)),
+                    //   color: kPrimaryColor,
+                    //   height: 40,
+                    //   onPressed: () {
+                    //     if(Responsive.isDesktop(context)) {
+                    //       if (username != "") {
+                    //         addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp as String);
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //               builder: (context) => CheckoutScreen()),
+                    //         );
+                    //       }
+                    //       else{
+                    //         showDialog(
+                    //           context: context,
+                    //           builder: (context) {
+                    //             return AlertDialog(
+                    //               content: const Text('Please login to add item in your cart'),
+                    //               actions: [
+                    //                 TextButton(
+                    //                   onPressed: () {
+                    //                     //Navigator.of(context).pop();
+                    //                     Navigator.pushNamed(context, "/login");
+                    //                   },
+                    //                   child: const Text('OK'),
+                    //                 ),
+                    //               ],
+                    //             );
+                    //           },
+                    //         );
+                    //       }
+                    //
+                    //     }else if(Responsive.isMobile(context)){
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => CheckoutScreenMobile()),
+                    //       );
+                    //     }
+                    //   },
+                    //   child: const Text(
+                    //     "Buy Now",
+                    //     style: TextStyle(color: kWhiteColor),
+                    //   ),
+                    // ),
+                  //),
                 ],
               ),
             ],
@@ -648,13 +692,24 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
 
                          }
                         else{
-                          Fluttertoast.showToast(
-                            msg: "Please login to add items to your cart",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
+                          final snackBar = SnackBar(
+                            /// need to set following properties for best effect of awesome_snackbar_content
+                            elevation: 0,
+                            behavior: SnackBarBehavior.floating,
+                            backgroundColor: Colors.transparent,
+                            content: AwesomeSnackbarContent(
+                              title: 'Login!',
+                              message:
+                              'Please login to add this item to your cart..',
+
+                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                              contentType: ContentType.warning,
+                            ),
                           );
+
+                          ScaffoldMessenger.of(context)
+                            ..hideCurrentSnackBar()
+                            ..showSnackBar(snackBar);
                         }
                         },
                         child: const Text(
@@ -665,34 +720,34 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                     ),
                   ),
                   SizedBox(height: 20,),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    child: MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50)),
-                      color: kPrimaryColor,
-                      height: 40,
-                      onPressed: () {
-                        if(Responsive.isDesktop(context)) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckoutScreen()),
-                          );
-                        }else if(Responsive.isMobile(context)){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CheckoutScreenMobile()),
-                          );
-                        }
-                      },
-                      child: const Text(
-                        "Buy Now",
-                        style: TextStyle(color: kWhiteColor),
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   margin: EdgeInsets.all(10),
+                  //   child: MaterialButton(
+                  //     shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(50)),
+                  //     color: kPrimaryColor,
+                  //     height: 40,
+                  //     onPressed: () {
+                  //       if(Responsive.isDesktop(context)) {
+                  //         Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => CheckoutScreen()),
+                  //         );
+                  //       }else if(Responsive.isMobile(context)){
+                  //         Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => CheckoutScreenMobile()),
+                  //         );
+                  //       }
+                  //     },
+                  //     child: const Text(
+                  //       "Buy Now",
+                  //       style: TextStyle(color: kWhiteColor),
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),]
           ),

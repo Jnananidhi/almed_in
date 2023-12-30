@@ -8,6 +8,7 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,114 +33,78 @@ class _UserProfileState extends State<UserProfile> {
    return Scaffold(
         backgroundColor: kWhiteColor,
         //scrollable widget
-        drawer: Drawer(
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const DrawerHeader(
-                      child: Center(
-                        child: Image(image: AssetImage('assets/logo.png')),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Home',
-                      press: () {Navigator.pushNamed(context, "/home");},
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+       drawer: Drawer(
+         backgroundColor: Colors.white,
+         child: ListView(
+           children: [
+             const DrawerHeader(
+               child: Center(
+                 child: Image(image: AssetImage('assets/logo_rmbck.png'),height: 80),
+               ),
+             ),
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 15),
+               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
 
+                     title: 'Home',
+                     press: () {},
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
+                     title: 'About Us',
+                     press: () {
+                       Navigator.pushNamed(context, "/aboutAlmed.in");
+                     },
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
+                     title: 'FAQ',
+                     press: () {
+                       Navigator.pushNamed(context, "/faq");
 
-                    // DropdownButton<String>(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                    //   value: selectedMenuItem,
-                    //   onChanged: (String? newValue) {
-                    //     if (newValue != null) {
-                    //       setState(() {
-                    //         selectedMenuItem = newValue;
-                    //         // Add logic to navigate to the related page based on selectedMenuItem
-                    //         if (selectedMenuItem == 'Therapeutic') {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                    //
-                    //           );
-                    //
-                    //         } else if (selectedMenuItem == 'Strength') {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                    //           );
-                    //         }
-                    //         else if (selectedMenuItem == 'Company') {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                    //           );
-                    //         }else if (selectedMenuItem == 'Form') {
-                    //           Navigator.push(
-                    //             context,
-                    //             MaterialPageRoute(builder: (context) => ProductScreen(selectedMenuItem: selectedMenuItem)),
-                    //           );
-                    //         }
-                    //       });
-                    //     }
-                    //   },
-                    //   items: ['Category','Therapeutic', 'Company', 'Form', 'Strength']
-                    //       .map<DropdownMenuItem<String>>((String value) {
-                    //     return DropdownMenuItem<String>(
-                    //       value: value,
-                    //       child: Text(
-                    //         value,
-                    //         style:  TextStyle(
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize:  18 ,
-                    //           color: Colors.black,
-                    //         ),
-                    //       ),
-                    //     );
-                    //   }).toList(),
-                    //   // Set the underline property to Container() to hide the underline.
-                    //   underline: Container(),
-                    // ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    MenuItems(
-                      title: 'Orders',
-                      press: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Logout',
-                      press: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutScreen()));
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MenuItems(
-                      title: 'Contact Us',
-                      press: () {Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactUsApp()));},
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
+                     },
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
+                     title: 'Search Medicines',
+                     press: () {
+                       Navigator.pushNamed(context, "/alphabeticSearch");
+                     },
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
+                     title: 'Seller?',
+                     press: () {
+                       Navigator.pushNamed(context, "/login");
+                     },
+                   ),
+                   const SizedBox(
+                     height: 10,
+                   ),
+                   MenuItems(
+                     title: 'Contact Us',
+                     press: () {Navigator.pushNamed(context, "contactUs");},
+                   ),
+                 ],
+               ),
+             )
+           ],
+         ),
+       ),
         body: Stack(
           children:[ Column(
               children: <Widget>[
@@ -237,14 +202,34 @@ class _UserProfilePageState extends State<UserProfilePage> {
   Future logout(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove('username');
-    Fluttertoast.showToast(
-      msg: "Logout!!",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER_LEFT,
-      fontSize: 16,
-      backgroundColor: Color.fromARGB(255, 211, 199, 242),
-      textColor: Colors.black,
+
+    final snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: 'Logout!',
+        message:
+        'Logout successful. See you again soon!',
+
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: ContentType.warning,
+      ),
     );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+
+    // Fluttertoast.showToast(
+    //   msg: "Logout!!",
+    //   toastLength: Toast.LENGTH_SHORT,
+    //   gravity: ToastGravity.CENTER_LEFT,
+    //   fontSize: 16,
+    //   backgroundColor: Color.fromARGB(255, 211, 199, 242),
+    //   textColor: Colors.black,
+    // );
     Navigator.pushNamed(context, "/login");
   }
 
@@ -347,7 +332,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 ),
                               ),
                               onTap: (){
-                              //  Navigator.pushNamed(context, "/myOrders");
+                              // Navigator.pushNamed(context, "/myOrders");
                               },
                             ),
                           ),// Add some space between the icon and text
@@ -750,7 +735,29 @@ class user_profle_mobileState extends State<user_profle_mobile> {
       username = preferences.getString('username')!;
     });
   }
+  Future logout(BuildContext context) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove('username');
+    final snackBar = SnackBar(
+      /// need to set following properties for best effect of awesome_snackbar_content
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: 'Logout!',
+        message:
+        'Logout successful. See you again soon!',
 
+        /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+        contentType: ContentType.warning,
+      ),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+    Navigator.pushNamed(context, "/login");
+  }
   Future getprofiledata() async {
     var url = "${api}profile.php";
     var response = await http.post(Uri.parse(url),body: {
@@ -786,6 +793,7 @@ class user_profle_mobileState extends State<user_profle_mobile> {
     return  Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+
         SizedBox(height: 20),
         CircleAvatar(
           radius: 60,
@@ -810,6 +818,53 @@ class user_profle_mobileState extends State<user_profle_mobile> {
         SizedBox(
           height: 10,
         ),
+
+        Column(children: [
+          SizedBox(height: 20),
+
+          SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            child: Container(
+                width: 100,
+                height: 50,
+                child: const Center(child: Text("My Orders",style: TextStyle(fontFamily: 'DMSans regular'),))),
+            style: ElevatedButton.styleFrom(
+              foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+            ),
+            onPressed: () {
+              // Navigator.pushNamed(context, "/myOrders");
+            },
+          ),
+
+          SizedBox(
+            height: 10,
+          ),
+
+          OutlinedButton(onPressed: (){
+            logout(context);
+          },
+            child:  Container(
+              width: 100,
+              height: 50,
+              child: const Center(child: Text("Logout",style: TextStyle(fontFamily: 'DMSans regular',color: Colors.red),))),
+            style: OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              side: BorderSide(color: Colors.red), // Add a red border
+            ),
+          ),
+
+
+          SizedBox(
+            height: 10,
+          ),
+        ],),
         ListTile(
           leading: Icon(Icons.health_and_safety,color: kSecondaryColor),
           contentPadding: EdgeInsets.zero,
