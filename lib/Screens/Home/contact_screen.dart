@@ -274,11 +274,18 @@ class _ContactFormState extends State<ContactForm> {
                 color: Colors.black,
                 fontFamily: 'DMSans Regular',
               ),
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
                   color: Colors.black,
                   width: 1.0,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: kSecondaryColor, // Change this color to the desired focus color
+                  width: 2.0, // Change the width if needed
                 ),
               ),
             ),
@@ -292,15 +299,23 @@ class _ContactFormState extends State<ContactForm> {
                 color: Colors.black,
                 fontFamily: 'DMSans Regular',
               ),
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
                   color: Colors.black,
                   width: 1.0,
                 ),
               ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: kSecondaryColor, // Change this color to the desired focus color
+                  width: 2.0, // Change the width if needed
+                ),
+              ),
             ),
           ),
+
           SizedBox(height: 20,),
           TextFormField(
             controller: messageController,
@@ -310,11 +325,18 @@ class _ContactFormState extends State<ContactForm> {
                 color: Colors.black,
                 fontFamily: 'DMSans Regular',
               ),
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
                   color: Colors.black,
                   width: 1.0,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide(
+                  color: kSecondaryColor, // Change this color to the desired focus color
+                  width: 2.0, // Change the width if needed
                 ),
               ),
             ),

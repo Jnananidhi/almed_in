@@ -4,10 +4,7 @@ import 'dart:convert';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
-import 'package:almed_in/Screens/Home/widgets/Checkoutscreen_mobile.dart';
-import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
-import 'package:almed_in/Screens/Home/widgets/order_success.dart';
-import 'package:almed_in/responsive.dart';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -341,9 +338,9 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                     SizedBox(height: 20,),
                     Text(
-                      'Quantity: ${widget.product.quantity}',
+                      'Company:${widget.product.company}',
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Colors.black,
                         fontFamily: 'DMSans Regular',
                       ),
                     ),
@@ -368,9 +365,9 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                     SizedBox(height: 20,),
                     Text(
-                      'Company:${widget.product.company}',
+                      'Quantity: ${widget.product.quantity}',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.grey,
                         fontFamily: 'DMSans Regular',
                       ),
                     ),
@@ -607,9 +604,9 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                         ),
                         SizedBox(height: 10,),
                         Text(
-                          'Quantity: ${widget.product.quantity}',
+                          'Company:${widget.product.company}',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black,
                             fontFamily: 'DMSans Regular',
                           ),
                         ),

@@ -266,5 +266,4 @@ class ProductScreenState extends State<ProductScreen> {
       ),
     );
   }
-
 }
