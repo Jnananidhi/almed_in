@@ -1,0 +1,33 @@
+<?php
+include 'config.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if a file was uploaded
+    if (isset($_FILES['file'])) {
+        $file = $_FILES['file'];
+
+        // Define the target directory where the uploaded file will be stored
+        $targetDirectory = "C://xampp//htdocs//almed//";
+
+        // Create the target directory if it doesn't exist
+        if (!file_exists($targetDirectory)) {
+            mkdir($targetDirectory, 0777, true);
+        }
+
+        // Generate a unique file name to avoid overwriting
+        $targetFileName = $targetDirectory . uniqid() . '_' . $file['name'];
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($file['tmp_name'], $targetFileName)) {
+            // File upload successful
+            echo "File uploaded successfully.";
+        } else {
+            // File upload failed
+            echo "File upload failed.";
+        }
+    } else {
+        echo "No file uploaded.";
+    }
+} else {
+    echo "Invalid request.";
+}
+?>
