@@ -1,18 +1,12 @@
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/banner.dart';
 import 'package:flutter/material.dart';
-import 'package:almed_in/Screens/Home/about_screen.dart';
-import 'package:almed_in/Screens/Home/faq_screen.dart';
-import 'package:almed_in/Screens/Home/products/widgets/allproducts.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
-import '../../responsive.dart';
-import 'Authentication/login_screen.dart';
-import 'contact_screen.dart';
 import 'products/product_section.dart';
 import 'widgets/bottomnav.dart';
 import 'widgets/menu.dart';
-import 'package:marquee/marquee.dart';
+import 'package:universal_html/html.dart' as html;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -34,6 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
         isLoading = false;
       });
     });
+
+
   }
 
   @override

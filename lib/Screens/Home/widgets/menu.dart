@@ -22,6 +22,8 @@ import '../products/widgets/hover_menu1.dart';
 import '../profile_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:universal_html/html.dart' as html;
+
 
 import 'alphabetic_search.dart';
 
@@ -148,6 +150,7 @@ class _NavigationState extends State<Navigation> {
       fetchCartCount();
     });
     super.initState();
+
   }
 
   void searchContacts(String searchTerm) {

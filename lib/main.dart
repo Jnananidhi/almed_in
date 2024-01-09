@@ -2,12 +2,15 @@
 
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
+import 'dart:html' as html;
+
 import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/address_screen.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/my_orders.dart';
+import 'package:almed_in/Screens/Home/not_found_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -41,8 +44,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'DMSans Bold',
       ),
-      builder: EasyLoading.init(),
       initialRoute: '/home',
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => NotFoundPage(), // Your 404 page
+        );
+      },
       routes: {
         '/home': (context) => HomeScreen(),
         '/cart': (context) => CartScreen(),

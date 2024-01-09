@@ -11,6 +11,7 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -256,6 +257,7 @@ class _CartScreenState extends State<CartScreen> {
       getcartitems();
       fetchCartPrice(username);
     });
+
     super.initState();
   }
 

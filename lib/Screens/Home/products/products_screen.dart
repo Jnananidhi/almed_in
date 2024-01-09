@@ -9,7 +9,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-
+import 'package:universal_html/html.dart' as html;
 import '../../../responsive.dart';
 import '../Authentication/login_screen.dart';
 import '../about_screen.dart';
@@ -57,6 +57,7 @@ class ProductScreenState extends State<ProductScreen> {
         isLoading = false;
       });
     });
+
   }
 
 

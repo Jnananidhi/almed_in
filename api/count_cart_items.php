@@ -14,7 +14,7 @@ if(!$conn){
   $CartCount=0;
   
   $check1 = "SELECT COUNT(`username`) AS CartCount FROM cart WHERE `username`='$username';";
-	$resultcheck1 = mysqli_query($conn, $check1) or die("query $check1 failed in sendFarmerData because". mysqli_error($conn));				
+	$resultcheck1 = mysqli_query($conn, $check1) or die("query $check1 failed in count_cartItems". mysqli_error($conn));
 	$recordcheck1 = mysqli_fetch_assoc($resultcheck1);
 	if($recordcheck1)
 	{
