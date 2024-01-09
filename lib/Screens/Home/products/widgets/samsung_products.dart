@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/model/samsung_model.dart';
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class SamsungProductCard extends StatelessWidget {

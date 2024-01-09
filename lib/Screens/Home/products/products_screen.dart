@@ -16,6 +16,9 @@ import '../about_screen.dart';
 import '../contact_screen.dart';
 import '../faq_screen.dart';
 import '../widgets/menu.dart';
+import 'dart:html' as html;
+
+
 
 class ProductScreen extends StatefulWidget {
   final String? selectedMenuItem,selectedProductName;
@@ -44,6 +47,10 @@ class ProductScreenState extends State<ProductScreen> {
     super.initState();
     fetchProducts();
     loadUsername();
+    html.window.onPopState.listen((_) {
+      // Refresh the page without navigating away
+      html.window.location.reload();
+    });
     print("nidhiiii$selectedProductName");
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
