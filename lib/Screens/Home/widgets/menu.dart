@@ -8,6 +8,7 @@ import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
+import 'package:hover_menu/hover_menu_lastitem.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart' as badges ;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -408,7 +409,7 @@ class _NavigationState extends State<Navigation> {
                           items: buildStrengthMenuItems(),
                           width: 500,
                         ),
-                        HoverMenu1(
+                        HoverMenuLastItem(
                           title: InkWell(child: HoverText("Company"),
                           onTap:(){
                             Navigator.push(
