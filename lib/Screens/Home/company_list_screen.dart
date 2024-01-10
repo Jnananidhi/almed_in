@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../constants.dart';
@@ -51,78 +52,92 @@ class FormScreenState extends State<FormScreen> {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
-    return Stack(
-      children:[ Column(
-        children:<Widget>[
-          Navigation(),
-          if( MediaQuery.of(context).size.width > 600)
-    Expanded(
-      child: SingleChildScrollView(
-        child:Container(
-                padding: EdgeInsets.all(8.0),
-                height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical, // Display items vertically
-                  itemCount: form.length, // Calculate the number of rows
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < form.length)
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topCenter, // Align each card to the top
-                                child: Padding(
-                                  padding:EdgeInsets.all(10),
-                                  child: CompanyDataItem(
-                                    image: form[i]['image'],
-                                    title: form[i]['FORM'],
-                                    press: (){
-                                    },
+    return Material(
+      child: Stack(
+        children:[ Column(
+          children:<Widget>[
+            Navigation(),
+            if( MediaQuery.of(context).size.width > 600)
+      Expanded(
+        child: SingleChildScrollView(
+          child:Container(
+                  padding: EdgeInsets.all(8.0),
+                  height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical, // Display items vertically
+                    itemCount: form.length, // Calculate the number of rows
+                    itemBuilder: (context, rowIndex) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                        children: [
+                          // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                          for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                            if (i < form.length)
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topCenter, // Align each card to the top
+                                  child: Padding(
+                                    padding:EdgeInsets.all(10),
+                                    child: CompanyDataItem(
+                                      image: form[i]['image'],
+                                      title: form[i]['FORM'],
+                                      press: (){
+                                      },
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
 
-                      ],
-                    );
-                  },
-                ),
-              ),),),
-            if( MediaQuery.of(context).size.width < 600)
-              Container(
-                padding: EdgeInsets.all(8.0),
-                height: form.length*100/crossAxisCount, // Fixed height for the additional items grid
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical, // Display items vertically
-                  // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
-                  itemCount: form.length,
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < form.length)
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topCenter, // Align each card to the top
-                                child: CompanyDataItem(
-                                  image: form[i]['image'],
-                                  title: form[i]['FORM'],
-                                  press: (){},
+                        ],
+                      );
+                    },
+                  ),
+                ),),),
+              if( MediaQuery.of(context).size.width < 600)
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  height: form.length*100/crossAxisCount, // Fixed height for the additional items grid
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical, // Display items vertically
+                    // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                    itemCount: form.length,
+                    itemBuilder: (context, rowIndex) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                        children: [
+                          for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                            if (i < form.length)
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topCenter, // Align each card to the top
+                                  child: CompanyDataItem(
+                                    image: form[i]['image'],
+                                    title: form[i]['FORM'],
+                                    press: (){},
+                                  ),
                                 ),
                               ),
-                            ),
 
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-        ],
-      ),],
+          ],
+        ),
+          Positioned(
+          top: MediaQuery.of(context).size.width < 600
+              ? 90// Adjust the value for mobile view
+              :50,
+          left: MediaQuery.of(context).size.width < 600
+              ? 0 // Adjust the value for mobile view
+              : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+          right: MediaQuery.of(context).size.width < 600
+              ? 0 // Adjust the value for mobile view
+              : MediaQuery.of(context).size.width * 0.25,
+          child: Search_bar(),
+        ),],
+      ),
     );
   }
 }
@@ -267,76 +282,90 @@ class ThereapeauticScreenState extends State<ThereapeauticScreen> {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
-    return Stack(
-      children:[ Column(
-        children:<Widget>[
-          Navigation(),
-           if( MediaQuery.of(context).size.width > 600)
-              Expanded(
-                child: SingleChildScrollView(
-                  child:Container(
-                    padding: EdgeInsets.all(8.0),
-                    height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical, // Display items vertically
-                      itemCount: therapeautic.length, // Calculate the number of rows
-                      itemBuilder: (context, rowIndex) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                          children: [
-                            // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
-                            for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                              if (i < therapeautic.length)
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.topCenter, // Align each card to the top
-                                    child: Padding(
-                                      padding:EdgeInsets.all(10),
-                                      child: DatabaseDataItem(
-                                        title: therapeautic[i]['therapeautic'],
-                                        press: (){
-                                        },
+    return Material(
+      child: Stack(
+        children:[ Column(
+          children:<Widget>[
+            Navigation(),
+             if( MediaQuery.of(context).size.width > 600)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child:Container(
+                      padding: EdgeInsets.all(8.0),
+                      height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical, // Display items vertically
+                        itemCount: therapeautic.length, // Calculate the number of rows
+                        itemBuilder: (context, rowIndex) {
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                            children: [
+                              // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                              for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                                if (i < therapeautic.length)
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topCenter, // Align each card to the top
+                                      child: Padding(
+                                        padding:EdgeInsets.all(10),
+                                        child: DatabaseDataItem(
+                                          title: therapeautic[i]['therapeautic'],
+                                          press: (){
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
 
-                          ],
-                        );
-                      },
-                    ),
-                  ),),),
-            if( MediaQuery.of(context).size.width < 600)
-              Container(
-                padding: EdgeInsets.all(8.0),
-                height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical, // Display items vertically
-                  // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
-                  itemCount: therapeautic.length,
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < therapeautic.length)
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topCenter, // Align each card to the top
-                                child: DatabaseDataItem(
-                                  title: therapeautic[i]['therapeautic'],
-                                  press: (){},
+                            ],
+                          );
+                        },
+                      ),
+                    ),),),
+              if( MediaQuery.of(context).size.width < 600)
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  height: therapeautic.length*100/crossAxisCount, // Fixed height for the additional items grid
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical, // Display items vertically
+                    // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                    itemCount: therapeautic.length,
+                    itemBuilder: (context, rowIndex) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                        children: [
+                          for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                            if (i < therapeautic.length)
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topCenter, // Align each card to the top
+                                  child: DatabaseDataItem(
+                                    title: therapeautic[i]['therapeautic'],
+                                    press: (){},
+                                  ),
                                 ),
                               ),
-                            ),
 
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-        ],
-      ),],
+          ],
+        ),
+          Positioned(
+            top: MediaQuery.of(context).size.width < 600
+                ? 90// Adjust the value for mobile view
+                :50,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar(),
+          ),],
+      ),
     );
   }
 }
@@ -387,76 +416,90 @@ class CompanyScreenState extends State<CompanyScreen> {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
-    return Stack(
-      children:[ Column(
-        children:<Widget>[
-          Navigation(),
-            if( MediaQuery.of(context).size.width > 600)
-              Expanded(
-                child: SingleChildScrollView(
-                  child:Container(
-                    padding: EdgeInsets.all(8.0),
-                    height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical, // Display items vertically
-                      itemCount: company.length, // Calculate the number of rows
-                      itemBuilder: (context, rowIndex) {
-                        return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                          children: [
-                            // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
-                            for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                              if (i < company.length)
-                                Expanded(
-                                  child: Align(
-                                    alignment: Alignment.topCenter, // Align each card to the top
-                                    child: Padding(
-                                      padding:EdgeInsets.all(10),
-                                      child: DatabaseDataItem(
-                                        title: company[i]['Company'],
-                                        press: (){
-                                        },
+    return Material(
+      child: Stack(
+        children:[ Column(
+          children:<Widget>[
+            Navigation(),
+              if( MediaQuery.of(context).size.width > 600)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child:Container(
+                      padding: EdgeInsets.all(8.0),
+                      height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical, // Display items vertically
+                        itemCount: company.length, // Calculate the number of rows
+                        itemBuilder: (context, rowIndex) {
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                            children: [
+                              // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                              for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                                if (i < company.length)
+                                  Expanded(
+                                    child: Align(
+                                      alignment: Alignment.topCenter, // Align each card to the top
+                                      child: Padding(
+                                        padding:EdgeInsets.all(10),
+                                        child: DatabaseDataItem(
+                                          title: company[i]['Company'],
+                                          press: (){
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
 
-                          ],
-                        );
-                      },
-                    ),
-                  ),),),
-            if( MediaQuery.of(context).size.width < 600)
-              Container(
-                padding: EdgeInsets.all(8.0),
-                height: company.length*100/crossAxisCount, // Fixed height for the additional items grid
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical, // Display items vertically
-                  // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
-                  itemCount: company.length,
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < company.length)
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topCenter, // Align each card to the top
-                                child: DatabaseDataItem(
-                                  title: company[i]['Company'],
-                                  press: (){},
+                            ],
+                          );
+                        },
+                      ),
+                    ),),),
+              if( MediaQuery.of(context).size.width < 600)
+                Container(
+                  padding: EdgeInsets.all(8.0),
+                  height: company.length*100/crossAxisCount, // Fixed height for the additional items grid
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical, // Display items vertically
+                    // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                    itemCount: company.length,
+                    itemBuilder: (context, rowIndex) {
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                        children: [
+                          for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                            if (i < company.length)
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topCenter, // Align each card to the top
+                                  child: DatabaseDataItem(
+                                    title: company[i]['Company'],
+                                    press: (){},
+                                  ),
                                 ),
                               ),
-                            ),
 
-                      ],
-                    );
-                  },
+                        ],
+                      );
+                    },
+                  ),
                 ),
-              ),
-        ],
-      ),],
+          ],
+        ),
+          Positioned(
+          top: MediaQuery.of(context).size.width < 600
+              ? 90// Adjust the value for mobile view
+              :50,
+          left: MediaQuery.of(context).size.width < 600
+              ? 0 // Adjust the value for mobile view
+              : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+          right: MediaQuery.of(context).size.width < 600
+              ? 0 // Adjust the value for mobile view
+              : MediaQuery.of(context).size.width * 0.25,
+          child: Search_bar(),
+        ),],
+      ),
     );
   }
 }
@@ -507,36 +550,66 @@ class StrengthScreenState extends State<StrengthScreen> {
   @override
   Widget build(BuildContext context) {
     final crossAxisCount = MediaQuery.of(context).size.width < 600 ? 2 : 5;
-    return Stack(
-      children:[ Column(
-        children:<Widget>[
-          Navigation(),
-          if( MediaQuery.of(context).size.width > 600)
-            Expanded(
-              child: SingleChildScrollView(
-                child:Container(
+    return Material(
+      child: Stack(
+        children:[ Column(
+          children:<Widget>[
+            Navigation(),
+            if( MediaQuery.of(context).size.width > 600)
+              Expanded(
+                child: SingleChildScrollView(
+                  child:Container(
+                    padding: EdgeInsets.all(8.0),
+                    height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical, // Display items vertically
+                      itemCount: strength.length, // Calculate the number of rows
+                      itemBuilder: (context, rowIndex) {
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
+                          children: [
+                            // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
+                            for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
+                              if (i < strength.length)
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.topCenter, // Align each card to the top
+                                    child: Padding(
+                                      padding:EdgeInsets.all(10),
+                                      child: DatabaseDataItem(
+                                        title: strength[i]['STRENGTH'],
+                                        press: (){
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                          ],
+                        );
+                      },
+                    ),
+                  ),),),
+              if( MediaQuery.of(context).size.width < 600)
+                Container(
                   padding: EdgeInsets.all(8.0),
-                  height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
+                  height: strength.length*100/crossAxisCount, // Fixed height for the additional items grid
                   child: ListView.builder(
                     scrollDirection: Axis.vertical, // Display items vertically
-                    itemCount: strength.length, // Calculate the number of rows
+                    // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
+                    itemCount: strength.length,
                     itemBuilder: (context, rowIndex) {
                       return Row(
                         crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
                         children: [
-                          // for (var i = rowIndex * crossAxisCount + crossAxisCount; i < (rowIndex + 1) * crossAxisCount + crossAxisCount; i++)
                           for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
                             if (i < strength.length)
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.topCenter, // Align each card to the top
-                                  child: Padding(
-                                    padding:EdgeInsets.all(10),
-                                    child: DatabaseDataItem(
-                                      title: strength[i]['STRENGTH'],
-                                      press: (){
-                                      },
-                                    ),
+                                  child: DatabaseDataItem(
+                                    title: strength[i]['STRENGTH'],
+                                    press: (){},
                                   ),
                                 ),
                               ),
@@ -545,38 +618,22 @@ class StrengthScreenState extends State<StrengthScreen> {
                       );
                     },
                   ),
-                ),),),
-            if( MediaQuery.of(context).size.width < 600)
-              Container(
-                padding: EdgeInsets.all(8.0),
-                height: strength.length*100/crossAxisCount, // Fixed height for the additional items grid
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical, // Display items vertically
-                  // itemCount: (form.length - crossAxisCount) ~/ crossAxisCount + 1, // Calculate the number of rows
-                  itemCount: strength.length,
-                  itemBuilder: (context, rowIndex) {
-                    return Row(
-                      crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top of each row
-                      children: [
-                        for (var i = rowIndex * crossAxisCount ;i<rowIndex * crossAxisCount + crossAxisCount; i++)
-                          if (i < strength.length)
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.topCenter, // Align each card to the top
-                                child: DatabaseDataItem(
-                                  title: strength[i]['STRENGTH'],
-                                  press: (){},
-                                ),
-                              ),
-                            ),
-
-                      ],
-                    );
-                  },
                 ),
-              ),
-        ],
-      ),],
+          ],
+        ),
+          Positioned(
+            top: MediaQuery.of(context).size.width < 600
+                ? 90// Adjust the value for mobile view
+                :50,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar(),
+          ),],
+      ),
     );
   }
 }
