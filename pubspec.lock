@@ -161,14 +161,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  fading_edge_scrollview:
-    dependency: transitive
-    description:
-      name: fading_edge_scrollview
-      sha256: c25c2231652ce774cc31824d0112f11f653881f43d7f5302c05af11942052031
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -345,10 +337,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_maps_flutter
-      sha256: c98817e21fcdc8e02db0c77e2411374293641d41f5b4d056dd28ee1ef6982f68
+      sha256: "71fe89f9614b19571b094cead3dac6b448f66f1509892309502e0446ba9be4e1"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.1"
+    version: "2.5.2"
   google_maps_flutter_android:
     dependency: transitive
     description:
@@ -461,14 +453,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.7.0"
-  marquee:
-    dependency: "direct main"
-    description:
-      name: marquee
-      sha256: "4b5243d2804373bdc25fc93d42c3b402d6ec1f4ee8d0bb72276edd04ae7addb8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
   matcher:
     dependency: transitive
     description:
@@ -509,14 +493,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  overlay_support:
-    dependency: "direct main"
-    description:
-      name: overlay_support
-      sha256: bde0a217184498b1e9a62ec4e2a22a56b5f724ec414fb2f9d798f1da26880760
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.1"
   path:
     dependency: "direct main"
     description:

@@ -35,6 +35,8 @@ class ProductScreenState extends State<ProductScreen> {
   List<Productt> products = [];
   bool isLoading = true;
 
+
+
   Future<void> loadUsername() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String storedUsername = preferences.getString('username') ?? '';
@@ -83,6 +85,10 @@ class ProductScreenState extends State<ProductScreen> {
       print('Failed to load products');
     }
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return isLoading
