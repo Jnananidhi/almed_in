@@ -38,7 +38,6 @@ import '../products/products_screen.dart';
     TextEditingController passwordController = TextEditingController();
     FocusNode _focusNode1 = FocusNode();
     FocusNode _focusNode2 = FocusNode();
-
     void togglePasswordVisibility() {
       setState(() {
         obscureText = !obscureText;
@@ -68,6 +67,7 @@ import '../products/products_screen.dart';
         // Store the username in SharedPreferences
         await _saveUsername(nameController.text);
         Provider.of<AuthProvider>(context, listen: false).login();
+
         Navigator.pop(context,true);
 
 
@@ -92,6 +92,7 @@ import '../products/products_screen.dart';
           ..showSnackBar(snackBar);
       }
     }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -8,7 +8,7 @@ import 'dart:convert';
 import '../widgets/menu.dart';
 
 class Productt {
-  final String id;
+   int id;
   final String name;
   final String content;
   final String therapeautic;
@@ -18,7 +18,7 @@ class Productt {
   final String gst;
   String quantity;
   final String imageUrl;
-   String mrp;
+  String mrp;
   final String discount;
 
   Productt({
@@ -40,7 +40,7 @@ class Productt {
     return Productt(
       id: json['id'],
       name: json['name'],
-      quantity: json['quantity'],
+     quantity: json['quantity'],
       content: json['content'],
       therapeautic: json['therapeautic'],
       strength: json['strength'],
