@@ -1,4 +1,4 @@
-import 'package:almed_in/Screens/Home/products/products_screen_test2.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/products/widgets/form.dart';
 import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
 
@@ -137,8 +137,10 @@ class ProductSection extends StatelessWidget {
                         onPressed: (){
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const ProductScreenTest2()),
-                          );                         // Navigator.pushNamed(context, "/product-screen");
+                            MaterialPageRoute(builder: (context) => const ProductScreen()),
+
+                          );
+                          //Navigator.pushNamed(context, "/product-screen");
                         }),
                   ),
                 ),

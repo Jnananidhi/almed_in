@@ -1,12 +1,12 @@
 import 'dart:convert';
 
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../products/products_screen.dart';
 import 'bottomnav.dart';
 import 'menu.dart';
 

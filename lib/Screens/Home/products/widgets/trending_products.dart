@@ -6,7 +6,6 @@ import 'package:almed_in/model/trending_model.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../widgets/custom_listview.dart';
-import '../products_screen.dart';
 
 class TrendingProductCard extends StatelessWidget {
   const TrendingProductCard({
