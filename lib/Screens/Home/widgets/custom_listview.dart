@@ -441,7 +441,7 @@ class _ProductItemState extends State<ProductItem> {
                         onPressed: () {
                       if (username != "") {
 
-                       addToCart(username,widget.product.id as String,1,widget.product.name,widget.product.mrp as String);
+                       addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp);
     Navigator.pushNamed(context, "/product-screen");}
 
                       else{

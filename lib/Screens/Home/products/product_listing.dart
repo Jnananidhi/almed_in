@@ -8,7 +8,7 @@ import 'dart:convert';
 import '../widgets/menu.dart';
 
 class Productt {
-   int id;
+   String id;
   final String name;
   final String content;
   final String therapeautic;
@@ -38,7 +38,7 @@ class Productt {
 
   factory Productt.fromJson(Map<String, dynamic> json) {
     return Productt(
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
      quantity: json['quantity'],
       content: json['content'],
