@@ -1,5 +1,6 @@
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/banner.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
@@ -155,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
             right: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            child: Search_bar1(),
           ),
 
           // Marquee(

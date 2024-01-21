@@ -181,7 +181,7 @@ class _LetterRowState extends State<LetterRow> {
                                       0),
                                 ),
                                 child: Text(letter, style: TextStyle(
-                                  fontSize: _size.width >= 370 ? 15 : 10,
+                                fontSize: _size.width >= 370 ? 15 : 10,
                                   color: !isEnabled ? Colors.grey : Colors
                                       .black,)),
                               ),

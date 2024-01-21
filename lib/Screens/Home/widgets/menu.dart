@@ -374,7 +374,7 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-                          Navigator.pushNamed(context, '/alphabeticSearch');
+                          Navigator.pushNamed(context, '/test');
                         }),
                         HoverMenu(
                           title:  InkWell(child:HoverText("Theurepeautic"),
