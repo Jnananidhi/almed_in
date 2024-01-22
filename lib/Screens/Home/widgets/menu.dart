@@ -377,47 +377,76 @@ class _NavigationState extends State<Navigation> {
                           Navigator.pushNamed(context, '/test');
                         }),
                         HoverMenu(
-                          title:  InkWell(child:HoverText("Theurepeautic"),
-                              onTap:(){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ThereapeauticScreen()),
-                                );
-                            }),
-                          items: buildTherapeuticMenuItems(),
-                          width: 500,
-                        ),
-                        HoverMenu(
-                          title:  InkWell(child:HoverText("Form"),
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const FormScreen()),
-                                );
-                              }),
-                          items: buildFormMenuItems(),
-                          width: 500,
-                          ),
-                        HoverMenu(
-                          title:  InkWell(child:HoverText("Strength"),
-                            onTap: (){
+                          title: InkWell(
+                            child: HoverText("Theurepeautic"),
+                            onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const StrengthScreen()),
+                                MaterialPageRoute(builder: (context) => const ThereapeauticScreen()),
                               );
-                            },),
-                          items: buildStrengthMenuItems(),
+                            },
+                          ),
+                          items: buildTherapeuticMenuItems().map((item) {
+                            return Container(
+                              color: Colors.white, // Set the desired background color
+                              child: item,
+                            );
+                          }).toList(),
                           width: 500,
                         ),
-                        HoverMenuLastItem(
-                          title: InkWell(child: HoverText("Company"),
-                          onTap:(){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const CompanyScreen()),
+                        HoverMenu(
+                          title: InkWell(
+                            child: HoverText("Form"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const FormScreen()),
+                              );
+                            },
+                          ),
+                          items: buildFormMenuItems().map((item) {
+                            return Container(
+                              color: Colors.white, // Set the desired background color
+                              child: item,
                             );
-                          }),
-                          items: buildCompanyMenuItems(),
+                          }).toList(),
+                          width: 500,
+                        ),
+                           HoverMenu(
+                            title: InkWell(
+                              child: HoverText("Strength"),
+                                       onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                          MaterialPageRoute(builder: (context) => const StrengthScreen()),
+                                          );
+                                             },
+                                              ),
+                                      items: buildStrengthMenuItems().map((item) {
+                                        return Container(
+                                          color: Colors.white, // Set the desired background color
+                                            child: item,
+                                              );
+                                          }).toList(),
+                                          width: 500,
+                                            ),
+
+                        HoverMenuLastItem(
+                          title: InkWell(
+                            child: HoverText("Company"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const CompanyScreen()),
+                              );
+                            },
+                          ),
+                          items: buildCompanyMenuItems().map((item) {
+                            return Container(
+                              color: Colors.white, // Set the desired background color
+                              child: item,
+                            );
+                          }).toList(),
                           width: 500,
                         ),
                             ],
