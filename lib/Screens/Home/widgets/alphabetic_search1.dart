@@ -1,13 +1,15 @@
+import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/constants.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:html' as html;
 import 'package:http/http.dart' as http;
 import 'package:number_paginator/number_paginator.dart';
 
-import 'package:number_paginator/number_paginator.dart';
+import '../products/products_screen.dart';
 
 class AlphabeticPage extends StatefulWidget {
   const AlphabeticPage({Key? key}) : super(key: key);
@@ -20,22 +22,49 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
   List productNames = [];
   String selectedLetter = 'A';
   int currentPage = 1; // Track the current page
-  String totalProductCount = "";
+  String totalProductCount = " ";
 
-  static const int itemsPerPage = 2; // Number of items per page
+  static const int itemsPerPage = 2;
 
-  Future<void> fetchProductCount() async {
+  void fetchProductCount(String letter) async {
     final url = Uri.parse('${api}fetchalphabeticCount.php');
-    final response = await http.post(url, body: {'letter': selectedLetter},);
+    final response = await http.post(url, body: {'letter': letter});
+
     if (response.statusCode == 200) {
+      print('Fetched count for $letter: ${response.body}');
       var jsonData = json.decode(response.body);
       var count = jsonData['TotalCount'];
 
       setState(() {
         totalProductCount = count.toString();
       });
+      if(count == "0")
+      {
+        Navigator.pushNamed(context, "/test");
+        final snackBar = SnackBar(
+          /// need to set following properties for best effect of awesome_snackbar_content
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'No Medicine yet..',
+            message:
+            'There was no medicines from Alphabet $selectedLetter',
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: ContentType.failure,
+          ),
+        );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
+      }
+    } else {
+      print('Failed to fetch count for $letter. Status code: ${response.statusCode}');
     }
   }
+
   void fetchProducts(String letter, int page) async {
 
     final response = await http.post(
@@ -48,7 +77,6 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
       setState(() {
         productNames = jsonData;
         selectedLetter = letter;
-        print(productNames);
       });
     } else {
       print('Failed to load products');
@@ -58,12 +86,12 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
   @override
   void initState() {
     super.initState();
-    fetchProductCount();
-    fetchProducts(selectedLetter, currentPage);
+     fetchProductCount(selectedLetter);
+     fetchProducts(selectedLetter, currentPage);
   }
 
   void onPageChanged(int newPage) {
-    fetchProducts(selectedLetter, newPage+1);
+    fetchProducts(selectedLetter, newPage + 1);
     setState(() {
       currentPage = newPage;
     });
@@ -76,54 +104,92 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
       body: Stack(
         children: [
           Column(
-            children: [
+            children:<Widget> [
               Navigation(),
-              SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(26, (index) {
-                  final letter = String.fromCharCode('A'.codeUnitAt(0) + index);
-                  return SizedBox(
-                    height: 40,
-                    width: 40,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        fetchProducts(letter, currentPage);
-                        print(letter);
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          letter == selectedLetter
-                              ? kSecondaryColor // Change the color for the selected letter
-                              : Colors.white,
-                        ),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+
+                      SizedBox(height: 20,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(26, (index) {
+                          final letter = String.fromCharCode('A'.codeUnitAt(0) + index);
+                          return SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  selectedLetter = letter;
+                                  print('Fetching count for letter: $letter');
+                                  fetchProductCount(letter);
+                                  fetchProducts(letter, currentPage);
+                                  print(letter);
+                                });
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                  letter == selectedLetter
+                                      ? kSecondaryColor // Change the color for the selected letter
+                                      : Colors.white,
+                                ),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                elevation: MaterialStateProperty.all<double>(0),
+                              ),
+                              child: Text(
+                                letter,
+                                style: TextStyle(
+                                  fontSize: _size.width >= 370 ? 15 : 10,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                      SizedBox(height: 20),
+                      Container(
+                        height: 400,
+                        child: Expanded(
+                          child: ListView.builder(
+                            itemCount: productNames.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                title: Text(productNames[index]),
+                                onTap: () {
+                                  print("aaaaa");
+                                  print(productNames[index]);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                      builder: (context) => ProductScreen(selectedProductName: productNames[index]),
+                                  ),
+                              );
+                            },
+                          );
+                        },
+                    )),
+                      ),
+                      Center(
+                        child: Container(
+                          width: 400,
+                          child: NumberPaginator(
+                            onPageChange: onPageChanged,
+                            //numberPages: 334,
+                            numberPages: (int.parse(totalProductCount) / itemsPerPage).ceil(),
                           ),
                         ),
-                        elevation: MaterialStateProperty.all<double>(0),
                       ),
-                      child: Text(
-                        letter,
-                        style: TextStyle(
-                          fontSize: _size.width >= 370 ? 15 : 10,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-              ),
-              SizedBox(height: 20),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: productNames.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(productNames[index]),
-                    );
-                  },
+                      BottomNav(),
+                    ],
+
+                  ),
                 ),
               ),
             ],
@@ -141,17 +207,11 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
             child: Search_bar(),
           ),
           // Add the pagination widget at the bottom of the page
-          Positioned(
-            bottom: 10,
-            left: 0,
-            right: 0,
-            child:NumberPaginator(
-              onPageChange: onPageChanged, numberPages: (int.parse(totalProductCount) / itemsPerPage).ceil(),
-            ),
-          ),
+
         ],
       ),
     );
   }
 }
+
 

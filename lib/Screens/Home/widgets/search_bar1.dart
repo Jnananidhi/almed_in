@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
@@ -184,3 +183,4 @@ class _Search_bar1State extends State<Search_bar1> {
     );
   }
 }
+

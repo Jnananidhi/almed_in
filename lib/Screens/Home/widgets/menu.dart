@@ -4,6 +4,8 @@ import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/cart_screen_mobile.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
+import 'package:almed_in/Screens/Home/test.dart';
+import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
@@ -125,7 +127,7 @@ class _NavigationState extends State<Navigation> {
     return form;
   }
   Future getcompany() async {
-    var url = "${api}product_name.php";
+    var url = "${api}almed_company.php";
     var response = await http.post(Uri.parse(url));
 
     if (response.statusCode == 200) {
@@ -374,7 +376,8 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-                          Navigator.pushNamed(context, '/test');
+
+                          Navigator.pushNamed(context, '/alphabeticSearch');
                         }),
                         HoverMenu(
                           title: InkWell(
@@ -386,7 +389,7 @@ class _NavigationState extends State<Navigation> {
                               );
                             },
                           ),
-                          items: buildTherapeuticMenuItems().map((item) {
+                          items: buildcompanyMenuItems().map((item) {
                             return Container(
                               color: Colors.white, // Set the desired background color
                               child: item,
@@ -441,7 +444,7 @@ class _NavigationState extends State<Navigation> {
                               );
                             },
                           ),
-                          items: buildCompanyMenuItems().map((item) {
+                          items: buildTherapeuticMenuItems().map((item) {
                             return Container(
                               color: Colors.white, // Set the desired background color
                               child: item,
@@ -461,6 +464,46 @@ class _NavigationState extends State<Navigation> {
 
         }
   List<Widget> buildTherapeuticMenuItems() {
+    List<Widget> items = [];
+
+    for (int i = 0; i < company.length; i += 3) {
+      // Create a row with two items
+      List<Widget> rowItems = [];
+
+      for (int j = 0; j < 3; j++) {
+        if (i + j < company.length) {
+          rowItems.add(
+            Expanded(
+              child: Container(
+                color: Colors.white, // Set the background color to white
+                child: Hoverdata(
+                  title:company[i + j]["Company"],
+                  press: (){
+                    print(company[i + j]["Company"]);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductScreen(selectedProductName: company[i + j]["Company"],),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          );
+        }
+      }//menu
+      // Add the row to the menu
+      items.add(
+        Row(
+          children: rowItems,
+        ),
+      );
+    }
+    return items;
+  }
+//theaurepetic
+  List<Widget> buildcompanyMenuItems() {
     List<Widget> items = [];
 
     for (int i = 0; i < therapeautic.length; i += 3) {
@@ -499,6 +542,8 @@ class _NavigationState extends State<Navigation> {
     }
     return items;
   }
+
+
   //form
   List<Widget> buildFormMenuItems() {
     List<Widget> items = [];
@@ -595,8 +640,9 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
-                  title: company[i + j]["Company"],
+                  title:company[i + j]["Company"],
                   press: (){
+                    print(company[i + j]["Company"]);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -609,7 +655,7 @@ class _NavigationState extends State<Navigation> {
             ),
           );
         }
-      }
+      }//menu
       // Add the row to the menu
       items.add(
         Row(

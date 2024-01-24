@@ -58,6 +58,8 @@ class _ProductScreenState extends State<ProductScreen> {
     );
 
     if (response.statusCode == 200) {
+      print('Response body: ${response.body}');
+
       final List<dynamic> jsonData = json.decode(response.body);
       List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
       print("kp$productsData");
