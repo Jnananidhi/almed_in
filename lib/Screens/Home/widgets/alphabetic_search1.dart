@@ -156,25 +156,29 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
                       SizedBox(height: 20),
                       Container(
                         height: 400,
-                        child: Expanded(
-                          child: ListView.builder(
-                            itemCount: productNames.length,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(productNames[index]),
-                                onTap: () {
-                                  print("aaaaa");
-                                  print(productNames[index]);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                      builder: (context) => ProductScreen(selectedProductName: productNames[index]),
-                                  ),
-                              );
-                            },
-                          );
-                        },
-                    )),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: productNames.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    title: Text(productNames[index]),
+                                    onTap: () {
+                                      print("AAAAA");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ProductScreen(selectedProductName: productNames[index]),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Center(
                         child: Container(

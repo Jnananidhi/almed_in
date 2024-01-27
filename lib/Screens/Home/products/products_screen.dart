@@ -11,7 +11,8 @@ import 'package:http/http.dart'as http;
 import '../../../constants.dart';
 import '../../../responsive.dart';
 class ProductScreen extends StatefulWidget {
-  final String? selectedMenuItem,selectedProductName;
+  //final List<String>? selectedProductNames;//selectedProductNames is from search bar onclick
+  final String? selectedMenuItem,selectedProductName;//selectedProductName from alphabetic search onclick
   const ProductScreen({super.key,this.selectedMenuItem,this.selectedProductName});
 
   @override
@@ -22,12 +23,14 @@ class _ProductScreenState extends State<ProductScreen> {
   int itemsPerPage = 10;
   String selectedMenuItem = 'Category';
   String? get selectedProductName => widget.selectedProductName;
+  //List<String>? get selectedProductNames=>selectedProductNames;
   List<Productt> products = [];
   String totalProductCount = "";
 
   @override
   void initState() {
     super.initState();
+   // print("selectedproductnames:$selectedProductNames");
     fetchProductCountAndProducts();
     print("nidhiiii$selectedProductName");
   }

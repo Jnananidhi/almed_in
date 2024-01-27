@@ -166,8 +166,6 @@ class _NavigationState extends State<Navigation> {
     }
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     bool isTherapeuticMenuVisible = false;
@@ -376,7 +374,6 @@ class _NavigationState extends State<Navigation> {
                       children: <Widget>[
                         InkWell(child: HoverText("Search Medicines"),
                         onTap:(){
-
                           Navigator.pushNamed(context, '/alphabeticSearch');
                         }),
                         HoverMenu(
