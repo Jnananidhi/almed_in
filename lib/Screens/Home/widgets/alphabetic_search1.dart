@@ -24,7 +24,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
   int currentPage = 1; // Track the current page
   String totalProductCount = " ";
 
-  static const int itemsPerPage = 2;
+  static const int itemsPerPage = 10;
 
   void fetchProductCount(String letter) async {
     final url = Uri.parse('${api}fetchalphabeticCount.php');
@@ -101,6 +101,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Column(
@@ -133,7 +134,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
                                 backgroundColor: MaterialStateProperty.all<Color>(
                                   letter == selectedLetter
                                       ? kSecondaryColor // Change the color for the selected letter
-                                      : Colors.white,
+                                      : kgreyColor,
                                 ),
                                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(

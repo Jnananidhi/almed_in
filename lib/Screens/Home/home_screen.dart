@@ -149,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Positioned(
             top: MediaQuery.of(context).size.width < 600
                 ? 90// Adjust the value for mobile view
-                :50,
+                :20,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view

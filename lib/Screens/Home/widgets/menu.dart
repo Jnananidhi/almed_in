@@ -212,9 +212,10 @@ class _NavigationState extends State<Navigation> {
 
                               child:
                               Image.asset(
-                                'assets/logo_500w.png',  // Make sure the path is correct
-                                fit: BoxFit.contain,
-                                height: 120,
+                                // 'assets/logo_500w.png',  // Make sure the path is correct
+                                // fit: BoxFit.contain,
+                                'almed.in_logo_small.png',
+
                               )
                           ),
                       ),

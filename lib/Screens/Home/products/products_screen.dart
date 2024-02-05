@@ -57,7 +57,7 @@ class _ProductScreenState extends State<ProductScreen> {
     int startIndex = currentPage * itemsPerPage;
 
     final response = await http.get(
-      Uri.parse('${api}getProductsPaginated.php?start=${startIndex.toString()}&limit=${itemsPerPage.toString()}'),
+      Uri.parse('${api}getProducts.php?start=${startIndex.toString()}&limit=${itemsPerPage.toString()}'),
     );
 
     if (response.statusCode == 200) {

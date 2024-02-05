@@ -69,30 +69,30 @@ class _ProductListScreenState extends State<ProductListScreen> {
   @override
   void initState() {
     super.initState();
-    fetchProducts();
+    //fetchProducts();
     print("manu");
   }
 
 
-  Future<void> fetchProducts() async {
-    final response = await http.get(Uri.parse('${api}getProducts.php'));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonData = json.decode(response.body);
-      List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
-      if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
-        // Filter the products list based on the selected product name
-        productsData = productsData.where((product) =>
-        product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
-        ).toList();
-      }
-      setState(() {
-        products = productsData;
-      });
-    } else {
-      // Handle the error when the HTTP request fails
-      print('Failed to load products');
-    }
-  }
+  // Future<void> fetchProducts() async {
+  //   final response = await http.get(Uri.parse('${api}getProducts.php'));
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> jsonData = json.decode(response.body);
+  //     List<Productt> productsData = jsonData.map((item) => Productt.fromJson(item)).toList();
+  //     if (widget.selectedProductName != null && widget.selectedProductName!.isNotEmpty) {
+  //       // Filter the products list based on the selected product name
+  //       productsData = productsData.where((product) =>
+  //       product.name.toLowerCase() == widget.selectedProductName?.toLowerCase()
+  //       ).toList();
+  //     }
+  //     setState(() {
+  //       products = productsData;
+  //     });
+  //   } else {
+  //     // Handle the error when the HTTP request fails
+  //     print('Failed to load products');
+  //   }
+  // }
 
 
 
