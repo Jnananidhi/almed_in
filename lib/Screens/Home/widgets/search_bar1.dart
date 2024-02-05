@@ -5,6 +5,8 @@ import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
 
+import '../test.dart';
+
 
 class Debouncer {
   final int milliseconds;
@@ -130,7 +132,7 @@ class _Search_bar1State extends State<Search_bar1> {
                     searchitem(searchTerm).then((value) =>  Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>ProductScreen(selectedProductName: searchTerm),
+                        builder: (context) =>ProductScreenFromSearch(selectedProductName: searchTerm),
                       ),
                     ));
                   }
@@ -166,7 +168,7 @@ class _Search_bar1State extends State<Search_bar1> {
                           searchitem(searchTerm).then((value) =>  Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>ProductScreen(selectedProductName: searchTerm),
+                              builder: (context) =>ProductScreenFromSearch(selectedProductName: searchTerm),
                             ),
                           ));
                         }
@@ -216,7 +218,7 @@ class _Search_bar1State extends State<Search_bar1> {
                         searchitem(suggestion).then((value) =>  Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>ProductScreen(selectedProductName: suggestion),
+                            builder: (context) =>ProductScreenFromSearch(selectedProductName: suggestion),
                           ),
                         ));
                       },

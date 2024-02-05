@@ -133,15 +133,32 @@ class ProductSection extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 5),
                   margin: const EdgeInsets.symmetric(horizontal: 10),
                   child:Center(
-                    child: CustomButton(label: "All Products",
-                        onPressed: (){
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const ProductScreen()),
-
-                          );
-                          //Navigator.pushNamed(context, "/product-screen");
-                        }),
+                    child:
+                    // CustomButton(label: "All Products",
+                    //     onPressed: (){
+                    //       Navigator.push(
+                    //         context,
+                    //         MaterialPageRoute(builder: (context) => const ProductScreen()),
+                    //
+                    //       );
+                    //       //Navigator.pushNamed(context, "/product-screen");
+                    //     },
+                    // ),
+                    ElevatedButton(
+                      child: Container(
+                          width: 100,
+                          height: 50,
+                          child: const Center(child: Text("All Products"))),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/product-screen");
+                      },
+                    ),
                   ),
                 ),
 

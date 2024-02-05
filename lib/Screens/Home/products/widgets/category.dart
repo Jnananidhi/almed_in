@@ -139,16 +139,21 @@ class _CateegoryState extends State<Cateegory> {
             },
           ),
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: kPrimaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+      ElevatedButton(
+        child: Container(
+          width: 100,
+          height: 50,
+          child: Center(child: Text(showAllItems ? "Hide" : "View More")),),
+        style: ElevatedButton.styleFrom(
+          foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-          onPressed: toggleShowAllItems,
-          child: Text(showAllItems ? "Hide" : "View More"),
         ),
+
+        onPressed: toggleShowAllItems,
+
+      ),
       ],
     );
   }
