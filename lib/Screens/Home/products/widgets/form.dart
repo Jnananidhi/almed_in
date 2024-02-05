@@ -230,14 +230,26 @@ class _FormDataItemState extends State<FormDataItem> {
                 child: Column(
                   children: [
                     // Add any widgets you want to display within the card, e.g., Text
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(40), // Adjust the radius as needed
-                      child: Image.network(
-                        widget.image,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover, // Use "cover" to fill the circular area
-                      ),
+                    Image.network(
+                      widget.image,
+                      width: 100, // Set width as needed
+                      height: 100, // Set height as needed
+                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        }
+                      },
+                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return Text('Failed to load image');
+                      },
                     ),
                     Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),
                     Spacer(),

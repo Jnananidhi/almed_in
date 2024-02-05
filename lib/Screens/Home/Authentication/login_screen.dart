@@ -9,6 +9,7 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:almed_in/constants.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
@@ -410,15 +411,15 @@ import '../products/products_screen.dart';
             ],),
           Positioned(
             top: MediaQuery.of(context).size.width < 600
-                ? 90// Adjust the value for mobile view
-                :50,
+                ? 90 // Adjust the value for mobile view
+                : 20,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
             right: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            child: Search_bar1(),
           ),
 
         ] ),

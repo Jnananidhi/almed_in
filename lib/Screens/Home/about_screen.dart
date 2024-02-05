@@ -1,6 +1,7 @@
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
@@ -163,14 +164,14 @@ class _AboutScreenState extends State<AboutScreen> {
             Positioned(
               top: MediaQuery.of(context).size.width < 600
                   ? 90// Adjust the value for mobile view
-                  :50,
+                  :20,
               left: MediaQuery.of(context).size.width < 600
                   ? 0 // Adjust the value for mobile view
                   : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
               right: MediaQuery.of(context).size.width < 600
                   ? 0 // Adjust the value for mobile view
                   : MediaQuery.of(context).size.width * 0.25,
-              child: Search_bar(),
+              child: Search_bar1(),
             ),
 
           ]),

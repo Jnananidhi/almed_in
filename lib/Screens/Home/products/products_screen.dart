@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:flutter/material.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:http/http.dart'as http;
@@ -127,10 +128,16 @@ class _ProductScreenState extends State<ProductScreen> {
 
         ),
           Positioned(
-            top: MediaQuery.of(context).size.width < 600 ? 90 : 50,
-            left: MediaQuery.of(context).size.width < 600 ? 0 : MediaQuery.of(context).size.width * 0.22,
-            right: MediaQuery.of(context).size.width < 600 ? 0 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            top: MediaQuery.of(context).size.width < 600
+                ? 90 // Adjust the value for mobile view
+                : 20,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar1(),
           ),
         ],
       ),

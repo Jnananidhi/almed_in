@@ -1,10 +1,10 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
+import 'package:almed_in/Screens/Home/Category.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
 import 'package:almed_in/Screens/Home/cart_screen_desktop.dart';
 import 'package:almed_in/Screens/Home/cart_screen_mobile.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
-import 'package:almed_in/Screens/Home/test.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -203,21 +203,24 @@ class _NavigationState extends State<Navigation> {
                           icon: Icon(Icons.menu)),
                     //title
                     if (Responsive.isDesktop(context))
-                      Container(
-                        color: kWhiteColor,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/home');
-                            },
+                      Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Container(
+                          color: kWhiteColor,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/home');
+                              },
 
-                              child:
-                              Image.asset(
-                                // 'assets/logo_500w.png',  // Make sure the path is correct
-                                // fit: BoxFit.contain,
-                                'almed.in_logo_small.png',
+                                child:
+                                Image.asset(
+                                  // 'assets/logo_500w.png',  // Make sure the path is correct
+                                  // fit: BoxFit.contain,
+                                  'almed.in_logo_small.png',
 
-                              )
-                          ),
+                                )
+                            ),
+                        ),
                       ),
                     if (!Responsive.isDesktop(context))
                       Container(
@@ -481,7 +484,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(selectedProductName: company[i + j]["Company"],),
+                        builder: (context) => FetchedCategoryProduct(selectedProductName: company[i + j]["Company"],),
                       ),
                     );
                   },
@@ -521,7 +524,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(selectedProductName: therapeautic[i + j]["therapeautic"],),
+                        builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i + j]["therapeautic"],),
                       ),
                     );
                   },
@@ -565,7 +568,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(selectedProductName: form[i + j]["FORM"]),
+                        builder: (context) => FetchedCategoryProduct(selectedProductName: form[i + j]["FORM"]),
                       ),
                     );
                   },
@@ -604,7 +607,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(selectedProductName: strength[i + j]["STRENGTH"]),
+                        builder: (context) => FetchedCategoryProduct(selectedProductName: strength[i + j]["STRENGTH"]),
                       ),
                     );
                   },
@@ -644,7 +647,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductScreen(selectedProductName: company[i + j]["Company"],),
+                        builder: (context) => FetchedCategoryProduct(selectedProductName: company[i + j]["Company"],),
                       ),
                     );
                   },

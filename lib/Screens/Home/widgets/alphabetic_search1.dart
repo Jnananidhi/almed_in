@@ -1,6 +1,8 @@
+import 'package:almed_in/Screens/Home/test.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:almed_in/constants.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
@@ -170,7 +172,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => ProductScreen(selectedProductName: productNames[index]),
+                                          builder: (context) => ProductScreenFromSearch(selectedProductName: productNames[index]),
                                         ),
                                       );
                                     },
@@ -202,14 +204,14 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
           Positioned(
             top: MediaQuery.of(context).size.width < 600
                 ? 90 // Adjust the value for mobile view
-                : 50,
+                : 20,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
             right: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            child: Search_bar1(),
           ),
           // Add the pagination widget at the bottom of the page
 

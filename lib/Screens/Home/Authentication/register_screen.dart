@@ -4,6 +4,7 @@ import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/faq.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/registration_form.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -107,15 +108,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
             Positioned(
               top: MediaQuery.of(context).size.width < 600
-                  ? 90// Adjust the value for mobile view
-                  :50,
+                  ? 90 // Adjust the value for mobile view
+                  : 20,
               left: MediaQuery.of(context).size.width < 600
                   ? 0 // Adjust the value for mobile view
                   : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
               right: MediaQuery.of(context).size.width < 600
                   ? 0 // Adjust the value for mobile view
                   : MediaQuery.of(context).size.width * 0.25,
-              child: Search_bar(),
+              child: Search_bar1(),
             ),
           ]
         )

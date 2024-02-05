@@ -54,9 +54,9 @@ class _HeroBannerState extends State<HeroBanner> {
                 height: _size.width <500
                     ? 250
                     : _size.width >= 500
-                    ? 500
+                    ? 358
                     : 300,
-                aspectRatio: 16 / 9,
+                aspectRatio: 15 / 9,
                 viewportFraction: 1,
                 initialPage: 0,
                 enableInfiniteScroll: true,
@@ -121,7 +121,7 @@ class SliderCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20), // Same radius as the border
                         child: Image.asset(
                           image,
-                          height: _size.width >= 500 ? 400 : 200,
+                          height: _size.width >= 500 ? 300 : 200,
                           width: _size.width >= 500 ? 1200 : 600,
                           fit: BoxFit.fill,
                         )),

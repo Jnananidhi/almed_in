@@ -41,43 +41,43 @@ class _LetterRowState extends State<LetterRow> {
     return items;
   }
 
-  Future getform() async {
-    var url = "${api}FORM.php";
-    var response = await http.post(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      setState(() {
-        form = jsonData;
-        items.addAll(form.map<String>((item) => item['FORM']).toList());
-      });
-    }
-    else {
-      print('Failed to load data. Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-    }
-
-    return form;
-  }
-
-  Future getcompany() async {
-    var url = "${api}almed_company.php";
-    var response = await http.post(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      var jsonData = json.decode(response.body);
-      setState(() {
-        company = jsonData;
-        items.addAll(company.map<String>((item) => item['Company']).toList());
-      });
-    }
-    else {
-      print('Failed to load data. Status code: ${response.statusCode}');
-      print('Response body: ${response.body}');
-    }
-
-    return company;
-  }
+  // Future getform() async {
+  //   var url = "${api}FORM.php";
+  //   var response = await http.post(Uri.parse(url));
+  //
+  //   if (response.statusCode == 200) {
+  //     var jsonData = json.decode(response.body);
+  //     setState(() {
+  //       form = jsonData;
+  //       items.addAll(form.map<String>((item) => item['FORM']).toList());
+  //     });
+  //   }
+  //   else {
+  //     print('Failed to load data. Status code: ${response.statusCode}');
+  //     print('Response body: ${response.body}');
+  //   }
+  //
+  //   return form;
+  // }
+  //
+  // Future getcompany() async {
+  //   var url = "${api}almed_company.php";
+  //   var response = await http.post(Uri.parse(url));
+  //
+  //   if (response.statusCode == 200) {
+  //     var jsonData = json.decode(response.body);
+  //     setState(() {
+  //       company = jsonData;
+  //       items.addAll(company.map<String>((item) => item['Company']).toList());
+  //     });
+  //   }
+  //   else {
+  //     print('Failed to load data. Status code: ${response.statusCode}');
+  //     print('Response body: ${response.body}');
+  //   }
+  //
+  //   return company;
+  // }
 
 
   late List<bool> isLetterEnabled;
@@ -89,7 +89,8 @@ class _LetterRowState extends State<LetterRow> {
     super.initState();
     isLetterEnabled = List.generate(26, (_) => false);
     groupedItems = {};
-    Future.wait([gettherapeautic(),getcompany(), getform(), ]).then((_) {
+    //Future.wait([gettherapeautic(),getcompany(), getform(), ]).then((_) {
+    Future.wait([gettherapeautic()]).then((_) {
       // After both therapeautic and form data are fetched, proceed to group items
       _groupItems();
     });

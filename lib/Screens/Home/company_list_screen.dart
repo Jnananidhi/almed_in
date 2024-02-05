@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:almed_in/Screens/Home/Category.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../../constants.dart';
@@ -82,6 +84,12 @@ class FormScreenState extends State<FormScreen> {
                                       image: form[i]['image'],
                                       title: form[i]['FORM'],
                                       press: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => FetchedCategoryProduct(selectedProductName: form[i]['FORM']),
+                                          ),
+                                        );
                                       },
                                     ),
                                   ),
@@ -113,7 +121,15 @@ class FormScreenState extends State<FormScreen> {
                                   child: CompanyDataItem(
                                     image: form[i]['image'],
                                     title: form[i]['FORM'],
-                                    press: (){},
+                                    press: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FetchedCategoryProduct(selectedProductName: form[i]['FORM']),
+                                        ),
+                                      );
+                                    }
+                                    ,
                                   ),
                                 ),
                               ),
@@ -125,17 +141,17 @@ class FormScreenState extends State<FormScreen> {
                 ),
           ],
         ),
-          Positioned(
-          top: MediaQuery.of(context).size.width < 600
-              ? 90// Adjust the value for mobile view
-              :50,
-          left: MediaQuery.of(context).size.width < 600
-              ? 0 // Adjust the value for mobile view
-              : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-          right: MediaQuery.of(context).size.width < 600
-              ? 0 // Adjust the value for mobile view
-              : MediaQuery.of(context).size.width * 0.25,
-          child: Search_bar(),
+        Positioned(
+        top: MediaQuery.of(context).size.width < 600
+        ? 90// Adjust the value for mobile view
+            :20,
+        left: MediaQuery.of(context).size.width < 600
+        ? 0 // Adjust the value for mobile view
+            : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+        right: MediaQuery.of(context).size.width < 600
+        ? 0 // Adjust the value for mobile view
+            : MediaQuery.of(context).size.width * 0.25,
+        child: Search_bar1(),
         ),],
       ),
     );
@@ -311,6 +327,12 @@ class ThereapeauticScreenState extends State<ThereapeauticScreen> {
                                         child: DatabaseDataItem(
                                           title: therapeautic[i]['therapeautic'],
                                           press: (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                                              ),
+                                            );
                                           },
                                         ),
                                       ),
@@ -341,7 +363,14 @@ class ThereapeauticScreenState extends State<ThereapeauticScreen> {
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: DatabaseDataItem(
                                     title: therapeautic[i]['therapeautic'],
-                                    press: (){},
+                                    press: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -355,15 +384,15 @@ class ThereapeauticScreenState extends State<ThereapeauticScreen> {
         ),
           Positioned(
             top: MediaQuery.of(context).size.width < 600
-                ? 90// Adjust the value for mobile view
-                :50,
+                ? 90 // Adjust the value for mobile view
+                : 20,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
             right: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            child: Search_bar1(),
           ),],
       ),
     );
@@ -445,6 +474,12 @@ class CompanyScreenState extends State<CompanyScreen> {
                                         child: DatabaseDataItem(
                                           title: company[i]['Company'],
                                           press: (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => FetchedCategoryProduct(selectedProductName: company[i]['Company']),
+                                              ),
+                                            );
                                           },
                                         ),
                                       ),
@@ -475,7 +510,14 @@ class CompanyScreenState extends State<CompanyScreen> {
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: DatabaseDataItem(
                                     title: company[i]['Company'],
-                                    press: (){},
+                                    press: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FetchedCategoryProduct(selectedProductName: company[i]['Company']),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -488,17 +530,17 @@ class CompanyScreenState extends State<CompanyScreen> {
           ],
         ),
           Positioned(
-          top: MediaQuery.of(context).size.width < 600
-              ? 90// Adjust the value for mobile view
-              :50,
-          left: MediaQuery.of(context).size.width < 600
-              ? 0 // Adjust the value for mobile view
-              : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-          right: MediaQuery.of(context).size.width < 600
-              ? 0 // Adjust the value for mobile view
-              : MediaQuery.of(context).size.width * 0.25,
-          child: Search_bar(),
-        ),],
+            top: MediaQuery.of(context).size.width < 600
+                ? 90 // Adjust the value for mobile view
+                : 20,
+            left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+            right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                : MediaQuery.of(context).size.width * 0.25,
+            child: Search_bar1(),
+          ),],
       ),
     );
   }
@@ -579,6 +621,12 @@ class StrengthScreenState extends State<StrengthScreen> {
                                       child: DatabaseDataItem(
                                         title: strength[i]['STRENGTH'],
                                         press: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => FetchedCategoryProduct(selectedProductName: strength[i]['STRENGTH']),
+                                            ),
+                                          );
                                         },
                                       ),
                                     ),
@@ -609,7 +657,14 @@ class StrengthScreenState extends State<StrengthScreen> {
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: DatabaseDataItem(
                                     title: strength[i]['STRENGTH'],
-                                    press: (){},
+                                    press: (){
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FetchedCategoryProduct(selectedProductName: strength[i]['STRENGTH']),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -623,15 +678,15 @@ class StrengthScreenState extends State<StrengthScreen> {
         ),
           Positioned(
             top: MediaQuery.of(context).size.width < 600
-                ? 90// Adjust the value for mobile view
-                :50,
+                ? 90 // Adjust the value for mobile view
+                : 20,
             left: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
             right: MediaQuery.of(context).size.width < 600
                 ? 0 // Adjust the value for mobile view
                 : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar(),
+            child: Search_bar1(),
           ),],
       ),
     );
