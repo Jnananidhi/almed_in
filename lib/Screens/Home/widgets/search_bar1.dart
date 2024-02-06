@@ -4,7 +4,7 @@ import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart'as http;
-
+import 'package:universal_html/html.dart' as html;
 import '../test.dart';
 
 
@@ -35,6 +35,14 @@ class _Search_bar1State extends State<Search_bar1> {
   List<String> searchSuggestions = [];
   List<String> searcheditem = [];//items name comletely fetched from suggestins and onclick
   final _debouncer = Debouncer(milliseconds: 500); // Adjust the duration as needed
+
+
+
+  void clearSearchSuggestions() {
+    searchSuggestions.clear();
+    searchController.clear(); // Clear the text in the search box
+    setState(() {});
+  }
 
   // Function to make API call and update searchSuggestions
   Future<void> fetchSuggestions(String searchTerm) async {
@@ -102,6 +110,19 @@ class _Search_bar1State extends State<Search_bar1> {
       // Handle errors here, e.g., show an error message
       print("Error: ${response.statusCode}");
     }
+  }
+
+  @override
+  void initState() {
+    html.window.onClick.listen((event) {
+      final clickedElement = event.target;
+
+      // Check if the clicked element is not a child of the search box.
+      if (clickedElement != searchController) {
+        clearSearchSuggestions();
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -190,15 +211,15 @@ class _Search_bar1State extends State<Search_bar1> {
             Container(
               width: kMaxWidth / 1.5,
               decoration: BoxDecoration(
-                color: kgreyColor,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20.0),
                 border: Border.all(
-                  color: kPrimaryColor,
+                  color: kSecondaryColor,
                 ),
               ),
               constraints: const BoxConstraints(
                 maxWidth: kMaxWidth,
-                maxHeight: 200,
+                maxHeight: 400,
               ),
               child: SingleChildScrollView(
                 child: Column(

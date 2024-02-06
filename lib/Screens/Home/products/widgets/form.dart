@@ -153,7 +153,7 @@ class _FormCardState extends State<FormCard> {
             style: ElevatedButton.styleFrom(
               foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
 
@@ -201,7 +201,7 @@ class _FormDataItemState extends State<FormDataItem> {
         child:  AnimatedDefaultTextStyle(
           duration: Duration(milliseconds: 300),
           style: TextStyle(
-            fontSize: isHovered ? 20.0 : 16.0,
+            fontSize: 16.0,
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
             color: isHovered ? kPrimaryColor : Colors.black,),
 
@@ -219,9 +219,9 @@ class _FormDataItemState extends State<FormDataItem> {
               ),
 
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(15.0),
                 color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-                boxShadow: [if (isHovered) kDefaultShadow],
+                //boxShadow: [if (isHovered) kDefaultShadow],
                 border: Border.all(
                   color: kgreyColor, // Set the border color to grey
                   width: 3.0,       // Set the border width
