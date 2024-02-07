@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/Category.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -69,7 +70,14 @@ class _FormCardState extends State<FormCard> {
                       child: FormDataItem(
                         image: form[i]['image'],
                         title: form[i]['FORM'],
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FetchedCategoryProduct(selectedProductName: form[i]['image']),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -101,6 +109,12 @@ class _FormCardState extends State<FormCard> {
                                   image: form[i]['image'],
                                   title: form[i]['FORM'],
                                   press: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FetchedCategoryProduct(selectedProductName: form[i]['image']),
+                                      ),
+                                    );
                                   },
                                 ),
                               ),
@@ -133,7 +147,14 @@ class _FormCardState extends State<FormCard> {
                               child: FormDataItem(
                                 image: form[i]['image'],
                                 title: form[i]['FORM'],
-                                press: (){},
+                                press: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FetchedCategoryProduct(selectedProductName: form[i]['image']),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),

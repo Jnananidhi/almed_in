@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:almed_in/Screens/Home/Category.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:http/http.dart' as http;
@@ -68,7 +69,14 @@ class _CateegoryState extends State<Cateegory> {
                     padding: EdgeInsets.only(right: 7),
                     child: CategoryCard(
                       title: capitalize(contact[i]['Company']),
-                      press: () {},
+                      press: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FetchedCategoryProduct(selectedProductName: contact[i]['Company'],),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -95,7 +103,14 @@ class _CateegoryState extends State<Cateegory> {
                           padding:EdgeInsets.only(bottom: 7,left: 7),
                           child: CategoryCard(
                             title: contact[i]['Company'],
-                            press: (){},
+                            press: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FetchedCategoryProduct(selectedProductName: contact[i]['Company'],),
+                                ),
+                              );
+                            },
 
                           ),
                         ),
@@ -128,7 +143,12 @@ class _CateegoryState extends State<Cateegory> {
                             child: CategoryCard(
                               title: contact[i]['Company'],
                               press: () {
-                                // Handle card tap action here
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FetchedCategoryProduct(selectedProductName: contact[i]['Company'],),
+                                  ),
+                                );
                               },
                             ),
                           ),

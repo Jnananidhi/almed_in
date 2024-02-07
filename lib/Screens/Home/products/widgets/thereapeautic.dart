@@ -1,3 +1,4 @@
+import 'package:almed_in/Screens/Home/Category.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -68,7 +69,14 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                       padding: EdgeInsets.only(right: 7),
                       child: DatabaseDataItem(
                         title: therapeautic[i]['therapeautic'],
-                        press: () {},
+                        press: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -95,7 +103,14 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                                 padding:EdgeInsets.only(bottom: 7,left: 7),
                                 child: DatabaseDataItem(
                                   title: therapeautic[i]['therapeautic'],
-                                  press: (){},
+                                  press: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                                      ),
+                                    );
+                                  },
 
                                 ),
                               ),
@@ -128,7 +143,14 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                                 padding:EdgeInsets.only(bottom: 7),
                                 child: DatabaseDataItem(
                                   title: therapeautic[i]['therapeautic'],
-                                  press: (){},
+                                  press: (){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),

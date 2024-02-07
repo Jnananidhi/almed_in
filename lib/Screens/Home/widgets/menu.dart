@@ -485,7 +485,7 @@ class _NavigationState extends State<Navigation> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FetchedCategoryProduct(selectedProductName: company[i + j]["Company"],),
+                        builder: ( context) => FetchedCategoryProduct(selectedProductName: company[i + j]["Company"],),
                       ),
                     );
                   },
