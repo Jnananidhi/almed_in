@@ -332,7 +332,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                                 ),
                               ),
                               onTap: (){
-                              // Navigator.pushNamed(context, "/myOrders");
+                               Navigator.pushNamed(context, "/myOrders");
                               },
                             ),
                           ),// Add some space between the icon and text
