@@ -41,6 +41,7 @@ class Navigation extends StatefulWidget    {
 }
 
 class _NavigationState extends State<Navigation> {
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1).toLowerCase();
   List contact = [];
   final searchcontroller = TextEditingController();
   List<String> searchSuggestions = [];
@@ -478,7 +479,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
-                  title:company[i + j]["Company"],
+                  title:capitalize(company[i + j]["Company"]),
                   press: (){
                     print(company[i + j]["Company"]);
                     Navigator.push(
@@ -518,7 +519,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
-                  title:therapeautic[i + j]["therapeautic"],
+                  title:capitalize(therapeautic[i + j]["therapeautic"]),
                   press: (){
                     print(therapeautic[i + j]["therapeautic"]);
                     Navigator.push(
@@ -563,7 +564,7 @@ class _NavigationState extends State<Navigation> {
                 //   title: Text(form[i + j]["FORM"],style: TextStyle(fontFamily: 'DMSans Regular'),),
                 // ),
                 child: Hoverdata(
-                  title: form[i + j]["FORM"],
+                  title: capitalize(form[i + j]["FORM"]),
                   press: (){
                     Navigator.push(
                       context,
@@ -602,7 +603,7 @@ class _NavigationState extends State<Navigation> {
               child: Container(
                 color: Colors.white, // Set the background color to white
                 child: Hoverdata(
-                  title: strength[i + j]["STRENGTH"],
+                  title: capitalize(strength[i + j]["STRENGTH"]),
                   press: (){
                     Navigator.push(
                       context,

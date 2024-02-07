@@ -264,7 +264,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductScreenFromSearch(selectedProductName: item),
+                builder: (context) => FetchedCategoryProduct(selectedProductName: item),
               ),
             );
           });

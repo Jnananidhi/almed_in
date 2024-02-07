@@ -63,7 +63,7 @@ class _Search_bar1State extends State<Search_bar1> {
       print(data);
 
       if (data is List) {
-        List<String> apiResponse = data.map((product) => product["name"].toString()).toList();
+        List<String> apiResponse = data.map((product) => product["content"].toString()).toList();
 
         // Update the state with the new suggestions
         setState(() {
@@ -97,7 +97,7 @@ class _Search_bar1State extends State<Search_bar1> {
       print(data);
 
       if (data is List) {
-        List<String> apiResponse = data.map((product) => product["name"].toString()).toList();
+        List<String> apiResponse = data.map((product) => product["content"].toString()).toList();
 
         // Update the state with the new suggestions
         setState(() {

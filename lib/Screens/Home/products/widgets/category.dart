@@ -49,6 +49,7 @@ class _CateegoryState extends State<Cateegory> {
       showAllItems = !showAllItems;
     });
   }
+  String capitalize(String s) => s[0].toUpperCase() + s.substring(1).toLowerCase();
 
   @override
     Widget build(BuildContext context) {
@@ -66,7 +67,7 @@ class _CateegoryState extends State<Cateegory> {
                   child: Padding(
                     padding: EdgeInsets.only(right: 7),
                     child: CategoryCard(
-                      title: contact[i]['Company'],
+                      title: capitalize(contact[i]['Company']),
                       press: () {},
                     ),
                   ),

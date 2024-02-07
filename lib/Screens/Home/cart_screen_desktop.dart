@@ -501,7 +501,21 @@ class _CartScreenState extends State<CartScreen> {
                                                   cart[index]['quantity'] = parsedValue.toString();
                                                 },
                                                 onSubmitted: (value) {
-                                                  // Handle the submitted value if needed
+                                                  setState(() {
+                                                    int parsedValue = int.tryParse(quantityController.text) ?? 1;
+                                                    parsedValue = parsedValue.clamp(1, 100);
+
+                                                    cart[index]['quantity'] = parsedValue.toString();
+                                                  });
+                                                  //to refresh the page...
+                                                  //Navigator.of(context).pop();
+                                                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                                    builder: (context) => CartScreen(), // Replace with the actual class name of your page
+                                                  ));
+                                                  num calculatedValue = pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1);
+                                                  print('calculatedValue$calculatedValue');
+                                                  updatecart(username,cart[index]['product_id'],cart[index]['quantity'],calculatedValue.toString());
+
                                                 },
                                               ),
 
