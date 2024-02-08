@@ -118,7 +118,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                       height: 10,
                     ),
                     Text(
-                      "\$${widget.products.price}",
+                      "\₹${widget.products.price}",
                       style: const TextStyle(
                         fontSize: 16,
                       ),

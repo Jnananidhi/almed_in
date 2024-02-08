@@ -457,7 +457,7 @@ class _CartScreenState extends State<CartScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       // Display the dynamically calculated total price
-                                      Text('\$${(pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1))}'),
+                                      Text('\₹${(pprice * (int.tryParse(cart[index]['quantity'] ?? '1') ?? 1))}'),
                                       const SizedBox(width: 20,),
                                       Container(
 
@@ -593,14 +593,14 @@ class _CartScreenState extends State<CartScreen> {
                               SizedBox(height: 5),
                               Divider(thickness: 2,),
                               SizedBox(height: 5),
-                              BillItem(label: 'Total Bill (MRP) ' ,value:dataa[0]['total']),
+                              BillItem(label: 'Total Bill (MRP) ' ,value:'\₹${dataa[0]['total']}'),
                               SizedBox(height: 5),
                               BillItem(label: 'Total Discount ',value:'-0'),
                               SizedBox(height: 5),
-                              BillItem(label: 'Shipping Fee ' ,value: '50'),
+                              BillItem(label: 'Shipping Fee ' ,value: '\₹50'),
                               Divider(thickness: 2,),
                               SizedBox(height: 5),
-                              BillItem(label: 'To Be Paid ',value:dataa[0]['total']),
+                              BillItem(label: 'To Be Paid ',value:'\₹${dataa[0]['total']}'),
                             ],
                           ),
                         ),

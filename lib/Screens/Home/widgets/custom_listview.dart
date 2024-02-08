@@ -296,27 +296,34 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10),
+      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10,top: 10),
       child: Container(
-        width: MediaQuery.of(context).size.width, // Set the width to the desired size
+        width: MediaQuery.of(context).size.width/0.5, // Set the width to the desired size
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(15.0),
           border: Border.all(color: kgreyColor, width: 3),
 
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
                ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(
-                  widget.product.imageUrl,
-                  width: 80,
-                  height: 100,
-                  fit: BoxFit.cover,
+                borderRadius: BorderRadius.circular(10),
+                child:
+                // Image.network(
+                //   widget.product.imageUrl,
+                //   width: 80,
+                //   height: 100,
+                //   fit: BoxFit.cover,
+                // ),
+                Image.network(
+                  'assets/products/inhaler.webp',
+                  width: 100,
+                  height: 120,
+                  fit: BoxFit.contain,
                 ),
               ),
               SizedBox(width: 20,),
@@ -387,7 +394,7 @@ class _ProductItemState extends State<ProductItem> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Price: ${widget.product.mrp}',
+                              'Price : \₹${widget.product.mrp}',
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
@@ -396,7 +403,7 @@ class _ProductItemState extends State<ProductItem> {
                             ),
                             SizedBox(height: 20,),
                             Text(
-                              'Discount: ${widget.product.discount}',
+                              'Discount :  \₹${widget.product.discount}',
                               style: TextStyle(
                                 color: Colors.green,
                                 fontFamily: 'DMSans Regular',

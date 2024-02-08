@@ -18,7 +18,7 @@ List<Product> trendingProducts = [
   Product(
     id: 1,
     image: 'assets/products/capsule.webp',
-    title: "'Evion 400mg Capsule 10'S'",
+    title: '''Evion 400mg Capsule 10'S''',
     price: 64,
   ),
   Product(
