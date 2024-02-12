@@ -48,6 +48,7 @@ class _MyOrdersState extends State<MyOrders> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     // Assuming you receive orders from PHP
       return Scaffold(
 

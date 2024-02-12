@@ -7,6 +7,7 @@ import 'package:almed_in/Screens/Home/products/products_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
+import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
 import 'package:almed_in/constants.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class _UserProfileState extends State<UserProfile> {
   String selectedMenuItem = 'Category';
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
    return Scaffold(
         backgroundColor: kWhiteColor,
         //scrollable widget
@@ -119,7 +121,9 @@ class _UserProfileState extends State<UserProfile> {
                           ),
                         //now we create menu and header
                         if (Responsive.isDesktop(context))
-                        UserProfilePage(),
+                        Container(
+                            constraints: BoxConstraints(minHeight: screenHeight/1.5),
+                            child: UserProfilePage()),
                         if (!Responsive.isDesktop(context))
                           user_profle_mobile(),
                          BottomNav()
@@ -128,18 +132,18 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   ),
                 )]),
-            Positioned(
-              top: MediaQuery.of(context).size.width < 600
-                  ? 90// Adjust the value for mobile view
-                  :50,
-              left: MediaQuery.of(context).size.width < 600
-                  ? 0 // Adjust the value for mobile view
-                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-              right: MediaQuery.of(context).size.width < 600
-                  ? 0 // Adjust the value for mobile view
-                  : MediaQuery.of(context).size.width * 0.25,
-              child: Search_bar(),
-            ),],
+                Positioned(
+                top: MediaQuery.of(context).size.width < 600
+                ? 90 // Adjust the value for mobile view
+                    : 20,
+                left: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                    : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+                right: MediaQuery.of(context).size.width < 600
+                ? 0 // Adjust the value for mobile view
+                    : MediaQuery.of(context).size.width * 0.25,
+                child: Search_bar1(),
+                ),],
         ));
   }
 }

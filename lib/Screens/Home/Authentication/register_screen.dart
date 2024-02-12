@@ -24,6 +24,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: kWhiteColor,
         //scrollable widget
@@ -94,12 +95,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      RegistrationForm(),
-                      BottomNav(),
-                      // Add more widgets here as needed
-                    ],
+                  child: Container(
+                    constraints: BoxConstraints(minHeight: screenHeight/1.5),
+                    child: Column(
+                      children: [
+                        RegistrationForm(),
+                        BottomNav(),
+                        // Add more widgets here as needed
+                      ],
+                    ),
                   ),
                 ),
               ),

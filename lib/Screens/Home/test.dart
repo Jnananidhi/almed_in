@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/widgets/bottomnav.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
@@ -65,6 +66,7 @@ class _ProductScreenState extends State<ProductScreenFromSearch> {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -74,15 +76,25 @@ class _ProductScreenState extends State<ProductScreenFromSearch> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for (var product in products)
-                        Container(
-                          height: Responsive.isDesktop(context) ? 120 : 200,
-                          child: Responsive.isDesktop(context)
-                              ? ProductItem(product)
-                              : ProductItem_mobile(product),
+                      Container(
+                        constraints: BoxConstraints(minHeight: screenHeight/1.5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            for (var product in products)
+                              Container(
+                                height: Responsive.isDesktop(context) ? 120 : 200,
+                                child: Responsive.isDesktop(context)
+                                    ? ProductItem(product)
+                                    : ProductItem_mobile(product),
+                              ),
+
+                          ],
                         ),
+                      ),
+                      BottomNav(),
                     ],
                   ),
                 ),

@@ -170,7 +170,7 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
                          SingleChildScrollView(
                         child: Container(
                         width: kMaxWidth,
-                          constraints: BoxConstraints(minHeight: screenHeight/2.5),
+                          constraints: BoxConstraints(minHeight: screenHeight/1.5),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: _buildColumnsForItems(productNames.cast<String>()),
