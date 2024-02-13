@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/widgets/custom_listview.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
@@ -90,56 +91,72 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-         Column(
+      body: WillPopScope(
+        onWillPop: () async {
+          // Perform your custom logic here if needed
+          // For example, if you want to navigate to a specific page
+          // Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyCustomPage()));
+
+          // Navigate back without showing a dialog
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()),
+          );
+
+          // Return true to allow the default behavior (popping the route)
+          return true;
+        },
+        child: Stack(
           children: [
-            Navigation(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (var product in products)
-                      Container(
-                        height: Responsive.isDesktop(context) ? 120 : 200,
-                        child: Responsive.isDesktop(context)
-                            ? ProductItem(product)
-                            : ProductItem_mobile(product),
-                      ),
-                  ],
+           Column(
+            children: [
+              Navigation(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (var product in products)
+                        Container(
+                          height: Responsive.isDesktop(context) ? 120 : 200,
+                          child: Responsive.isDesktop(context)
+                              ? ProductItem(product)
+                              : ProductItem_mobile(product),
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Container(
-              height: 50,
-              padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.22),
-              child: NumberPaginator(
-                numberPages: (int.parse(totalProductCount) / itemsPerPage).ceil(),
-                onPageChange: (index) {
-                  setState(() {
-                    currentPage = index;
-                    fetchAllProducts(); // Fetch products when changing page
-                  });
-                },
+              Container(
+                height: 50,
+                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width*0.22),
+                child: NumberPaginator(
+                  numberPages: (int.parse(totalProductCount) / itemsPerPage).ceil(),
+                  onPageChange: (index) {
+                    setState(() {
+                      currentPage = index;
+                      fetchAllProducts(); // Fetch products when changing page
+                    });
+                  },
+                ),
               ),
+            ],
+
+          ),
+            Positioned(
+              top: MediaQuery.of(context).size.width < 600
+                  ? 90 // Adjust the value for mobile view
+                  : 20,
+              left: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
+              right: MediaQuery.of(context).size.width < 600
+                  ? 0 // Adjust the value for mobile view
+                  : MediaQuery.of(context).size.width * 0.25,
+              child: Search_bar1(),
             ),
           ],
-
         ),
-          Positioned(
-            top: MediaQuery.of(context).size.width < 600
-                ? 90 // Adjust the value for mobile view
-                : 20,
-            left: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.22, // Adjust the value for desktop view
-            right: MediaQuery.of(context).size.width < 600
-                ? 0 // Adjust the value for mobile view
-                : MediaQuery.of(context).size.width * 0.25,
-            child: Search_bar1(),
-          ),
-        ],
       ),
 
     );
