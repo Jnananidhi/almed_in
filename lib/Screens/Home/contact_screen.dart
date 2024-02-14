@@ -27,6 +27,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
   String selectedMenuItem = 'Category';
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
       return Scaffold(
          backgroundColor: kWhiteColor,
          //scrollable widget
@@ -114,7 +115,7 @@ class _ContactUsAppState extends State<ContactUsApp> {
                        children: [
                          //now we create menu and header
 
-                         ContactUsScreen(),
+                         Container(child: ContactUsScreen(),constraints: BoxConstraints(minHeight: screenHeight/1.5),),
                          const BottomNav()
                          //now we will make our site responsive
                        ],

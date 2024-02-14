@@ -1,7 +1,9 @@
 
 
+import 'package:almed_in/Screens/Home/Authentication/forgot1.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
+import 'package:almed_in/Screens/Home/Authentication/register_screen.dart';
 import 'dart:html' as html;
 
 import 'package:almed_in/Screens/Home/about_screen.dart';
@@ -11,6 +13,7 @@ import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/my_orders.dart';
 import 'package:almed_in/Screens/Home/not_found_screen.dart';
+import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';
 import 'package:flutter/material.dart';
@@ -58,8 +61,11 @@ class MyApp extends StatelessWidget {
         '/faq': (context) => FaqScreen(),
         '/contactUs': (context) => ContactUsApp(),
         '/login': (context) => LoginPage(),
+        '/register': (context) => RegistrationScreen(),
         '/alphabeticSearch': (context) => AlphabeticPage(),
         //'/test':(context)=> AlphabeticPage(),
+        '/forgot_password': (context) => forgot1(),
+        '/userProfile': (context) => UserProfile(),
         '/address-page': (context) => AddressScreen(),
         '/product-screen': (context) => ProductScreen(),
         '/myOrders':(context) => MyOrders(),

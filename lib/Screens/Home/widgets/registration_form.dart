@@ -629,8 +629,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton1 != null
-                                        ? Text('Selected File 1: ${_fileButton1!.name}')
-                                        : Text('No file selected for DL 1'),
+                                        ? Text('Selected File 1: ${_fileButton1!.name}', style: TextStyle(color: Colors.green),)
+                                        : Text('No file selected for DL 1',style: TextStyle(color: Colors.red)),
                                     SizedBox(height: 20),
                                     // ElevatedButton(
                                     //   onPressed: _pickFileButton1,
@@ -676,8 +676,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton2 != null
-                                        ? Text('Selected File 2: ${_fileButton2!.name}')
-                                        : Text('No file selected for DL 2'),
+                                        ? Text('Selected File 2: ${_fileButton2!.name}',style: TextStyle(color: Colors.green))
+                                        : Text('No file selected for DL 2',style: TextStyle(color: Colors.red)),
                                     SizedBox(height: 20),
                                   ],
                                 ),),
@@ -713,8 +713,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     ),
                                     SizedBox(height: 20),
                                     _fileButton3 != null
-                                        ? Text('Selected File 3: ${_fileButton3!.name}')
-                                        : Text('No file selected for GST'),
+                                        ? Text('Selected File 3: ${_fileButton3!.name}',style: TextStyle(color: Colors.green))
+                                        : Text('No file selected for GST',style: TextStyle(color: Colors.red)),
                                     SizedBox(height: 20),
                                   ],
                                 ),),

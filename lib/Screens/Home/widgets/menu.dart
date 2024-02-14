@@ -339,8 +339,7 @@ class _NavigationState extends State<Navigation> {
                             String? username = preferences.getString(
                                 'username');
                             if (username != null) {
-                              Navigator.push(context, MaterialPageRoute(
-                                  builder: (context) => UserProfile()));
+                              Navigator.pushNamed(context, "/userProfile");
                             } else {
                               Navigator.pushNamed(context, "/login");
                             }
@@ -358,8 +357,7 @@ class _NavigationState extends State<Navigation> {
                             String? username = preferences.getString(
                             'username');
                             if (username != null) {
-                            Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => UserProfile()));}
+                              Navigator.pushNamed(context, "/userProfile");}
                                 else{
                               Navigator.pushNamed(context, "/login");}
                                 },

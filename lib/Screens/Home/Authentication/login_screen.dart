@@ -333,10 +333,7 @@ import '../products/products_screen.dart';
                                     const SizedBox(height: 10),
                                     TextButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => forgot1()),
-                                        );
+                                        Navigator.pushNamed(context, "/forgot_password");
                                       },
                                       child: Text(
                                         'Forgot Password?',textAlign: TextAlign.right,
@@ -387,10 +384,7 @@ import '../products/products_screen.dart';
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => RegistrationScreen()),
-                                    );
+                                    Navigator.pushNamed(context, "/register");
                                   },
                                   child: Text(
                                     'Register',textAlign: TextAlign.right,
