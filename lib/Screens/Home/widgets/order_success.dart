@@ -1,3 +1,4 @@
+import 'package:almed_in/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -147,6 +148,26 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen> {
             Lottie.asset("assets/success_animation.json",repeat: false,height: 200),
             const Text("Order Successful",textAlign: TextAlign.center,style: TextStyle(color: Colors.teal,fontSize: 18,fontFamily: 'DMSans Bold',fontWeight: FontWeight.bold)),
             const Text("Your Order id 0000000 has been successfully confirmed\nThanks for buying at Almed..",textAlign: TextAlign.center,style: TextStyle(color: Colors.black,fontSize: 16,fontFamily: 'DMSans Light',fontWeight: FontWeight.bold)),
+            Padding(
+              padding: EdgeInsets.only(top:10),
+              child: ElevatedButton(
+                child: Container(
+                  width: 100,
+                  height: 50,
+                  child: Center(child: Text("Home")),),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+
+                onPressed:(){
+                  Navigator.pushNamed(context, "/home");
+                } ,
+
+              ),
+            ),
           ],
     ),
         ),

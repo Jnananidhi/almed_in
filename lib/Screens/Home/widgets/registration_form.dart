@@ -477,6 +477,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter Post Code';
                                     }
+                                    else if (value.length < 6) {
+                                      return 'Please enter valid Post Code';
+                                    } else if (value.length > 6) {
+                                      return 'Please enter valid Post Code';
+                                    }
                                     return null;
                                   },
                                 ),
@@ -515,6 +520,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter Mobile Number';
                                     }
+                                    else if (value.length != 10) {
+                                      return 'Please enter valid Mobile Number';
+                                    }
                                     return null;
                                   },
                                 ),
@@ -531,7 +539,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                     labelText: 'Email',
-
                                     filled: true,
                                     fillColor: kgreyColor,
                                     labelStyle: TextStyle(fontSize: 16),
@@ -550,9 +557,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter Email';
                                     }
+                                    // Regular expression for email validation
+                                    final RegExp emailRegExp =
+                                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                                    if (!emailRegExp.hasMatch(value)) {
+                                      return 'Please enter a valid email';
+                                    }
                                     return null;
                                   },
                                 ),
+
                               ),
                             ),
                             Expanded(
@@ -592,6 +606,12 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     if (value == null || value.isEmpty) {
                                       return 'Please enter password';
                                     }
+                                    else if (value.length < 4) {
+                                      return 'at least enter 5 characters';
+                                    } else if (value.length > 12) {
+                                      return 'maximum character is 12';
+                                    }
+                                    return null;
                                     return null;
                                   },
                                 ),
