@@ -587,7 +587,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                     widget.product.imageUrl,
                     width: 30,
                     height: 70,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
                 SizedBox(width: 20,),
