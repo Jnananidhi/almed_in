@@ -232,6 +232,7 @@ import '../products/products_screen.dart';
                       margin: EdgeInsets.only(top: 15),
                       width: 380,
                       child: Card(
+                        color: Color.fromRGBO(190, 250, 255, 80),
                         elevation: 10,
                         child: Column(
                           mainAxisSize: MainAxisSize.min, // Set the mainAxisSize to min
