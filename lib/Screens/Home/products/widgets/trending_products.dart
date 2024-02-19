@@ -173,9 +173,15 @@ class _TrendingProductsState extends State<TrendingProducts> {
           width: 300,
           height: 280,
           decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: kgreyColor, width: 3),
-              boxShadow: [if (isHover) kDefaultShadow]),
+
+            boxShadow: isHover ? [kDefaultShadow] : [],
+            borderRadius: BorderRadius.circular(15.0),
+            color: kWhiteColor, // Change color on hover
+            border: Border.all(
+              color: kgreyColor, // Set the border color to grey
+              width: 3.0,       // Set the border width
+            ),
+          ),
           child: Stack(
             fit: StackFit.passthrough,
             children: [
@@ -211,7 +217,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
               ),
               isHover
                   ? Container(
-                      color: Colors.black12,
+
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

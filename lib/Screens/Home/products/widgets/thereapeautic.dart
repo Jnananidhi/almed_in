@@ -236,13 +236,14 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
               ),
 
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-                //boxShadow: [if (isHovered) kDefaultShadow],
-                border: Border.all(
-                  color: kgreyColor, // Set the border color to grey
-                  width: 3.0,       // Set the border width
-                ),
+
+                  boxShadow: isHovered ? [kDefaultShadow] : [],
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: kWhiteColor, // Change color on hover
+                  border: Border.all(
+                    color: kgreyColor, // Set the border color to grey
+                    width: 3.0,       // Set the border width
+                  ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
