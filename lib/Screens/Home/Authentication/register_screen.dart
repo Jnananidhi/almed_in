@@ -100,6 +100,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     child: Column(
                       children: [
                         RegistrationForm(),
+                        SizedBox(height: 50,),
                         BottomNav(),
                         // Add more widgets here as needed
                       ],

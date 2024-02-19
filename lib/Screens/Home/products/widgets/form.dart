@@ -270,7 +270,11 @@ class _FormDataItemState extends State<FormDataItem> {
                         }
                       },
                       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                        return Text('Failed to load image');
+                        return  Image.asset(
+                          'default.png', // Path to default image
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                        );
                       },
                     ),
                     Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),

@@ -189,12 +189,33 @@ class _TrendingProductsState extends State<TrendingProducts> {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Image.network(
-                      widget.image,
-                      height: 150,
-                      width: 150,
-                      fit: BoxFit.contain,
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Network image or default image
+                        widget.image.isNotEmpty
+                            ? Image.network(
+                          widget.image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: 150,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'default.png', // Path to default image
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+                              height: 150,
+                            );
+                          },
+                        )
+                            : Image.asset(
+                          'default.png', // Path to default image
+                          fit: BoxFit.fill,
+                          width: double.infinity,
+                        ),
+                      ],
                     ),
+
                     const SizedBox(
                       height: 10,
                     ),

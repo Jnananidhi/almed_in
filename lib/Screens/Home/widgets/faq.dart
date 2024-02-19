@@ -12,11 +12,20 @@ class Faq extends StatefulWidget {
 }
 
 class _FaqState extends State<Faq> {
+  int _selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
     return Column(
         children: [
          if (Responsive.isDesktop(context))
+           Padding(
+             padding: const EdgeInsets.all(8.0),
+             child: Text("FAQs",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 24,),),
+           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("General Questions",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 22,),),
+          ),
            Column(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [

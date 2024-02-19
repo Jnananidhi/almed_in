@@ -35,7 +35,7 @@ class _CustomButtonState extends State<CustomButton> {
         }),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0), // Adjust the radius to control the curve
+            borderRadius: BorderRadius.circular(10.0), // Adjust the radius to control the curve
           ),
         ),
       ),
