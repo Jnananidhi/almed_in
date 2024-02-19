@@ -37,7 +37,7 @@ class _ExpandableCardState extends State<ExpandableCard> {
           children: [
       Padding(
       padding:
-      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      const EdgeInsets.symmetric( horizontal: 5),
       child:ExpansionTileCard(
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class _ExpandableCardState extends State<ExpandableCard> {
           Text(
             widget.question,
             style: const TextStyle(
-              fontSize: 20,
+              fontSize: 18,
               fontFamily:'DMSans Bold' ,
               color: Colors.black,
             ),
@@ -58,7 +58,7 @@ class _ExpandableCardState extends State<ExpandableCard> {
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 10),
               child: Text(widget.description, textAlign: TextAlign.left,
-                  style: const TextStyle(fontFamily:'DMSans Regular' ,fontSize: 16, color: Colors.black,height: 2 )),
+                  style: const TextStyle(fontFamily:'DMSans Regular' ,fontSize: 16, color: Colors.black,height: 1.5 )),
             ),
           )
         ],

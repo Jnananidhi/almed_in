@@ -89,7 +89,7 @@ class _HeroBannerState extends State<HeroBanner> {
                 height: _size.width <500
                     ? 250
                     : _size.width >= 500
-                    ? 358
+                    ? 400
                     : 300,
                 aspectRatio: 15 / 9,
                 viewportFraction: 1,
