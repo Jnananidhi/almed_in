@@ -190,7 +190,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         widget.image.isNotEmpty
                             ? Image.network(
                           widget.image,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                           width: double.infinity,
                           height: 150,
                           errorBuilder: (context, error, stackTrace) {
@@ -204,7 +204,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         )
                             : Image.asset(
                           'default.png', // Path to default image
-                          fit: BoxFit.fill,
+                          fit: BoxFit.contain,
                           width: double.infinity,
                         ),
                       ],
@@ -216,7 +216,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                     Text(
                       widget.title,
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
                       height: 10,

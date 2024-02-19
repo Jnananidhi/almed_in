@@ -1,6 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+//font size
+//title font :16
+//see all : button : 12
+//heading :20
+
+
+
+
 //color
 const kPrimaryColor = Color(0xff372e86);
 const kSecondaryColor = Color(0xFF00AFBB);

@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/company_list_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:http/http.dart' as http;
@@ -160,20 +162,22 @@ class _CateegoryState extends State<Cateegory> {
             },
           ),
         ),
-      ElevatedButton(
-        child: Container(
-          width: 100,
-          height: 50,
-          child: Center(child: Text(showAllItems ? "Hide" : "View More")),),
-        style: ElevatedButton.styleFrom(
-          foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
+      Padding(
+        padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+          children: [
+            CustomButton(
+              text: ("SEE ALL"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CompanyScreen()),
+                );
+              },
+            ),
+          ],
         ),
-
-        onPressed: toggleShowAllItems,
-
       ),
       ],
     );
@@ -183,15 +187,17 @@ class _CateegoryState extends State<Cateegory> {
 
 class CategoryCard extends StatefulWidget {
   final String title;
+  //final String image;
   final Function() press;
 
+  // DatabaseDataItem({required this.title, required this.image,required this.press});
   CategoryCard({required this.title, required this.press});
-
   @override
   _CategoryCardState createState() => _CategoryCardState();
 }
 
 class _CategoryCardState extends State<CategoryCard> {
+
   bool isHovered = false;
 
 
@@ -214,53 +220,77 @@ class _CategoryCardState extends State<CategoryCard> {
       child:  AnimatedDefaultTextStyle(
         duration: Duration(milliseconds: 300),
         style: TextStyle(
-        fontSize: 16.0,
-        fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-        color: isHovered ? kPrimaryColor : Colors.black,),
+          fontSize: 16.0,
+          fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+          color: isHovered ? kPrimaryColor : Colors.black,),
 
-      child: InkWell(
-        onTap: widget.press,
-        child: Container(
-
-          width: _size.width <= 770
-              ? _size.width/2
-              : _size.width >= 975
-              ? 300
-              : 200,
-          height: 100,
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-          ),
-
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.0),
-            color: isHovered ?  kgreyColor:kWhiteColor, // Change color on hover
-              //boxShadow: [if (isHovered) kDefaultShadow],
-            border: Border.all(
-              color: kgreyColor, // Set the border color to grey
-              width: 3.0,       // Set the border width
+        child: InkWell(
+          onTap: widget.press,
+          child: Container(
+            width: _size.width <= 770
+                ? _size.width/2
+                : _size.width >= 975
+                ? 300
+                : 200,
+            height: 160,
+            padding: const EdgeInsets.symmetric(
+                vertical: 10
             ),
-          ),
-          child: Column(
-            children: [
-              // Add any widgets you want to display within the card, e.g., Text
-              Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular'),),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Icon(
-                    Icons.local_hospital, // You can use any medical icon here
-                    color: Colors.blue,
-                    size: 24,
-                  ),
-                ],
-              )
-            ],
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
+              //boxShadow: [if (isHovered) kDefaultShadow],
+              border: Border.all(
+                color: kgreyColor, // Set the border color to grey
+                width: 3.0,       // Set the border width
+              ),
+            ),
+            child: Column(
+              children: [
+                // Add any widgets you want to display within the card, e.g., Text
+                // Image.network(
+                //   widget.image,
+                //   width: 100, // Set width as needed
+                //   height: 100, // Set height as needed
+                //   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                //     if (loadingProgress == null) {
+                //       return child;
+                //     } else {
+                //       return Center(
+                //         child: CircularProgressIndicator(
+                //           value: loadingProgress.expectedTotalBytes != null
+                //               ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                //               : null,
+                //         ),
+                //       );
+                //     }
+                //   },
+                //   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                //     return  Image.asset(
+                //       'default.png', // Path to default image
+                //       fit: BoxFit.cover,
+                //       width: 100, // Set width as needed
+                //       height: 100,
+                //     );
+                //   },
+                // ),
+                Image.asset(
+                  'company.webp', // Path to default image
+                  fit: BoxFit.fill,
+                  width: 100, // Set width as needed
+                  height: 100,
+                ),
+                Spacer(),
+                Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
+                Spacer(),
+
+              ],
+            ),
           ),
         ),
       ),
-    ));
+    );
   }
 }
 

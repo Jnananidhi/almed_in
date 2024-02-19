@@ -1,6 +1,6 @@
 import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/contact_screen.dart';
-import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:almed_in/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/constants.dart';
@@ -45,26 +45,25 @@ class BottomNav extends StatelessWidget {
                         "Not finding the medicines?",
                     style: TextStyle(
                       fontFamily: 'DMSans Light' ,
-                      fontSize: _size.width >= 370 ? 20 : 10,
+                      fontSize: _size.width >= 370 ? 16 : 10,
                     ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    ElevatedButton(
-                      child: Container(
-                          width: 100,
-                          height: 50,
-                          child: const Center(child: Text("Let us know"))),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center, // Align children to the end (right side)
+                        children: [
+                          CustomButton(
+                            text: "Let us Know",
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/contactUs");
+                            },
+                          ),
+                        ],
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/contactUs");
-                      },
                     ),
                     const SizedBox(
                       height: 10,

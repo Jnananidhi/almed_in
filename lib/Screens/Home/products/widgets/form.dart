@@ -1,4 +1,6 @@
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/company_list_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -68,7 +70,7 @@ class _FormCardState extends State<FormCard> {
                     child: Padding(
                       padding: EdgeInsets.only(right: 7),
                       child: FormDataItem(
-                        image: form[i]['image'],
+                        image: form[i]['IMAGE'],
                         title: form[i]['FORM'],
                         press: () {
                           Navigator.push(
@@ -106,7 +108,7 @@ class _FormCardState extends State<FormCard> {
                               child: Padding(
                                 padding:EdgeInsets.only(bottom: 7,left: 7),
                                 child: FormDataItem(
-                                  image: form[i]['image'],
+                                  image: form[i]['IMAGE'],
                                   title: form[i]['FORM'],
                                   press: (){
                                     Navigator.push(
@@ -145,7 +147,7 @@ class _FormCardState extends State<FormCard> {
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
                               child: FormDataItem(
-                                image: form[i]['image'],
+                                image: form[i]['IMAGE'],
                                 title: form[i]['FORM'],
                                 press: (){
                                   Navigator.push(
@@ -165,21 +167,20 @@ class _FormCardState extends State<FormCard> {
               ),
             ),
         Padding(
-          padding: EdgeInsets.only(top:10),
-          child:ElevatedButton(
-            child: Container(
-              width: 100,
-              height: 50,
-              child: Center(child: Text(showAllItems ? "Hide" : "View More")),),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+          padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+            children: [
+              CustomButton(
+                text: ( "SEE ALL"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const FormScreen()),
+                  );
+                },
               ),
-            ),
-
-            onPressed: toggleShowAllItems,
-
+            ],
           ),
         ),
       ],
@@ -270,24 +271,17 @@ class _FormDataItemState extends State<FormDataItem> {
                       },
                       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                         return  Image.asset(
-                          'default.png', // Path to default image
+                          'Form.webp', // Path to default image
                           fit: BoxFit.fill,
-                          width: double.infinity,
+                          width: 100, // Set width as needed
+                          height: 100,
                         );
                       },
                     ),
-                    Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 18),),
                     Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Icon(
-                          Icons.local_hospital, // You can use any medical icon here
-                          color: Colors.blue,
-                          size: 24,
-                        ),
-                      ],
-                    )
+                    Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
+                    Spacer(),
+
                   ],
                 ),
               ),

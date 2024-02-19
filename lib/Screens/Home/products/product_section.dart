@@ -1,9 +1,9 @@
 import 'package:almed_in/Screens/Home/products/products_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:almed_in/Screens/Home/products/widgets/form.dart';
 import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
 
 import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
-import 'package:almed_in/Screens/Home/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/widgets/author.dart';
 import 'package:almed_in/constants.dart';
@@ -40,7 +40,7 @@ class ProductSection extends StatelessWidget {
                             bottom: BorderSide(color: kSecondaryColor, width: 3))),
                     child: const Text(
                       "Company",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -61,7 +61,7 @@ class ProductSection extends StatelessWidget {
                             bottom: BorderSide(color: kSecondaryColor, width: 3))),
                     child: const Text(
                       "Theaureapatic",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class ProductSection extends StatelessWidget {
                             bottom: BorderSide(color: kSecondaryColor, width: 3))),
                     child: const Text(
                       "Form",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -103,7 +103,7 @@ class ProductSection extends StatelessWidget {
                             bottom: BorderSide(color: kSecondaryColor, width: 3))),
                     child: const Text(
                       "Strength",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -124,7 +124,7 @@ class ProductSection extends StatelessWidget {
                             bottom: BorderSide(color: kSecondaryColor, width: 3))),
                     child: const Text(
                       "Trending Products",
-                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -154,20 +154,19 @@ class ProductSection extends StatelessWidget {
                     //       //Navigator.pushNamed(context, "/product-screen");
                     //     },
                     // ),
-                    ElevatedButton(
-                      child: Container(
-                          width: 100,
-                          height: 50,
-                          child: const Center(child: Text("All Products"))),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+                        children: [
+                          CustomButton(
+                            text: "All Products",
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/product-screen");
+                            },
+                          ),
+                        ],
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/product-screen");
-                      },
                     ),
                   ),
                 ),

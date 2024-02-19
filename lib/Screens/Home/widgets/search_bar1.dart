@@ -167,6 +167,7 @@ class _Search_bar1State extends State<Search_bar1> {
                   },
                   decoration: InputDecoration(
                     hintText: "Search Medicines Here..",
+                    hintStyle: TextStyle(fontSize: 14),
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.search),
                     suffixIcon: InkWell(
@@ -175,7 +176,7 @@ class _Search_bar1State extends State<Search_bar1> {
                           width: MediaQuery.of(context).size.width < 600
                               ? kMaxWidth / 25.5
                               : kMaxWidth / 15.5,
-                          child: const Center(child: Text("Search")),
+                          child: const Center(child: Text("Search",style: TextStyle(fontSize: 12),)),
                         ),
                         onPressed: () {
                           String searchTerm = searchController.text;
@@ -234,7 +235,7 @@ class _Search_bar1State extends State<Search_bar1> {
                             : Colors.transparent, // Default background color
                         child: ListTile(
                           leading: Icon(Icons.search),
-                          title: Text(searchSuggestions[index]),
+                          title: Text(searchSuggestions[index],style: TextStyle(fontSize: 14),),
                           onTap: () {
                             String selectedSuggestion = searchSuggestions[index];
                             searchitem(selectedSuggestion).then((value) => Navigator.push(
