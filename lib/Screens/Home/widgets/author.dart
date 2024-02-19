@@ -37,7 +37,7 @@ class Author extends StatelessWidget {
           ),
         if (!Responsive.isDesktop(context))
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",
@@ -81,61 +81,56 @@ class _CategoryCardState extends State<CategoryCard> {
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: InkWell(
-        onHover: (value) {
-          setState(() {
-            isHover = value;
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          width: _size.width <= 770
-              ? _size.width
-              : _size.width >= 975
-                  ?kMaxWidth/3
-                  : 200,
-          decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                  color:  lightColor,// Adjust the value as needed
+    return InkWell(
+      onHover: (value) {
+        setState(() {
+          isHover = value;
+        });
+      },
+      child: Container(
+        width: _size.width <= 770
+            ? _size.width
+            : _size.width >= 975
+                ?kMaxWidth/3
+                : 200,
+        decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+                color:  lightColor,// Adjust the value as needed
+            ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              widget.title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
 
-              ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 15,
-              ),
-              Text(
-                widget.title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-
-          Padding(
-            padding:  const EdgeInsets.only(left: 20.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Icon(
-                Icons.format_quote_rounded,
-                color: kSecondaryColor,
-              ),
+        Padding(
+          padding:  const EdgeInsets.only(left: 20.0),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Icon(
+              Icons.format_quote_rounded,
+              color: kSecondaryColor,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              widget.description,textAlign: TextAlign.left,
-              style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular',height: 1.5),
-            ),),
-              const SizedBox(
-                height: 15,
-              ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            widget.description,textAlign: TextAlign.left,
+            style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular',height: 1.5),
+          ),),
+            const SizedBox(
+              height: 15,
+            ),
 
-            ],
-          ),
+          ],
         ),
       ),
     );
