@@ -186,12 +186,14 @@ class _StrengthCardState extends State<StrengthCard> {
   }
 }
 
+
 class strengthDataItem extends StatefulWidget {
   final String title;
+  //final String image;
   final Function() press;
 
+  // DatabaseDataItem({required this.title, required this.image,required this.press});
   strengthDataItem({required this.title, required this.press});
-
   @override
   _strengthDataItemState createState() => _strengthDataItemState();
 }
@@ -207,65 +209,89 @@ class _strengthDataItemState extends State<strengthDataItem> {
 
     Size _size = MediaQuery.of(context).size;
     return MouseRegion(
-        onEnter: (_) {
-          setState(() {
-            isHovered = true;
-          });
-        },
-        onExit: (_) {
-          setState(() {
-            isHovered = false;
-          });
-        },
-        child:  AnimatedDefaultTextStyle(
-          duration: Duration(milliseconds: 300),
-          style: TextStyle(
-            fontSize: 16.0,
-            fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-            color: isHovered ? kPrimaryColor : Colors.black,),
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      child:  AnimatedDefaultTextStyle(
+        duration: Duration(milliseconds: 300),
+        style: TextStyle(
+          fontSize: 16.0,
+          fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+          color: isHovered ? kPrimaryColor : Colors.black,),
 
-          child: InkWell(
-            onTap: widget.press,
-            child: Container(
+        child: InkWell(
+          onTap: widget.press,
+          child: Container(
+            width: _size.width <= 770
+                ? _size.width/2
+                : _size.width >= 975
+                ? 300
+                : 200,
+            height: 160,
+            padding: const EdgeInsets.symmetric(
+                vertical: 10
+            ),
 
-              width: _size.width <= 770
-                  ? _size.width/2
-                  : _size.width >= 975
-                  ? 300
-                  : 200,
-              height: 100,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.0),
-                color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-                //boxShadow: [if (isHovered) kDefaultShadow],
-                border: Border.all(
-                  color: kgreyColor, // Set the border color to grey
-                  width: 3.0,       // Set the border width
-                ),
-              ),
-              child: Column(
-                children: [
-                  // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular'),),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Icon(
-                        Icons.local_hospital, // You can use any medical icon here
-                        color: Colors.blue,
-                        size: 24,
-                      ),
-                    ],
-                  )
-                ],
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.0),
+              color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
+              //boxShadow: [if (isHovered) kDefaultShadow],
+              border: Border.all(
+                color: kgreyColor, // Set the border color to grey
+                width: 3.0,       // Set the border width
               ),
             ),
+            child: Column(
+              children: [
+                // Add any widgets you want to display within the card, e.g., Text
+                // Image.network(
+                //   widget.image,
+                //   width: 100, // Set width as needed
+                //   height: 100, // Set height as needed
+                //   loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                //     if (loadingProgress == null) {
+                //       return child;
+                //     } else {
+                //       return Center(
+                //         child: CircularProgressIndicator(
+                //           value: loadingProgress.expectedTotalBytes != null
+                //               ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                //               : null,
+                //         ),
+                //       );
+                //     }
+                //   },
+                //   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                //     return  Image.asset(
+                //       'default.png', // Path to default image
+                //       fit: BoxFit.cover,
+                //       width: 100, // Set width as needed
+                //       height: 100,
+                //     );
+                //   },
+                // ),
+                Image.asset(
+                  'strength.jpg', // Path to default image
+                  fit: BoxFit.fill,
+                  width: 100, // Set width as needed
+                  height: 100,
+                ),
+                Spacer(),
+                Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
+                Spacer(),
+
+              ],
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
