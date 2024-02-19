@@ -16,7 +16,7 @@ class Author extends StatelessWidget {
       children: [
         if (Responsive.isDesktop(context))
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               CategoryCard(
                   image: "assets/products/users/pharmacy.png",

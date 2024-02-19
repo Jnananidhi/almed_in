@@ -31,15 +31,17 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                  child: const Text(
-                    "Company",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                    child: const Text(
+                      "Company",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -50,15 +52,17 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                  child: const Text(
-                    "Theaureapatic",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                    child: const Text(
+                      "Theaureapatic",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -69,15 +73,17 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                  child: const Text(
-                    "Form",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                    child: const Text(
+                      "Form",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -88,15 +94,17 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                  child: const Text(
-                    "Strength",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                    child: const Text(
+                      "Strength",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -107,15 +115,17 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: const BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: kSecondaryColor, width: 3))),
-                  child: const Text(
-                    "Trending Products",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: const BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: kSecondaryColor, width: 3))),
+                    child: const Text(
+                      "Trending Products",
+                      style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
 

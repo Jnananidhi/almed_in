@@ -48,43 +48,43 @@ class _HeroBannerState extends State<HeroBanner> {
     return Column(
       children: [
         CarouselSlider(
-            // items: [
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner1.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Mobile',
-            //       image: 'assets/products/banner/Banner2.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner3.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner4.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner5.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner6.png',
-            //       press: () {}),
-            //   SliderCard(
-            //       title: 'Headphone',
-            //       image: 'assets/products/banner/Banner7.png',
-            //       press: () {}),
-            // ],
-            items: trending_products.map((item) {
-              return SliderCard(
-                title: item['title'],
-                image: item['image'], // Assuming imageUrl is the field containing the image URL in your database.
-                press: () {},
-              );
-            }).toList(),
+            items: [
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner1.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Mobile',
+                  image: 'assets/products/banner/Banner2.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner3.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner4.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner5.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner6.png',
+                  press: () {}),
+              SliderCard(
+                  title: 'Headphone',
+                  image: 'assets/products/banner/Banner7.png',
+                  press: () {}),
+            ],
+            // items: trending_products.map((item) {
+            //   return SliderCard(
+            //     title: item['title'],
+            //     image: item['image'], // Assuming imageUrl is the field containing the image URL in your database.
+            //     press: () {},
+            //   );
+            // }).toList(),
             options: CarouselOptions(
                 height: _size.width <500
                     ? 250
@@ -97,8 +97,8 @@ class _HeroBannerState extends State<HeroBanner> {
                 enableInfiniteScroll: true,
                 reverse: false,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 2),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayInterval: Duration(seconds: 4),
+                autoPlayAnimationDuration: Duration(milliseconds: 900),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enlargeCenterPage: true,
                 scrollDirection: Axis.horizontal,
@@ -136,28 +136,28 @@ class SliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+      //padding: EdgeInsets.only(top: 10, left: 10,right: 10),
       color: kWhiteColor,
-      width: kMaxWidth,
+      width: _size.width,
       child: Row(
         children: [
           Expanded(
               child: Column(
                 children: [
                   Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
-                      border: Border.all(
-                        color: Color(0xFF00AFBB), // Border color
-                        width: 1.0, // Border width
-                      ),
-                    ),
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.circular(20), // Adjust the radius as needed
+                    //   border: Border.all(
+                    //     color: Color(0xFF00AFBB), // Border color
+                    //     width: 1.0, // Border width
+                    //   ),
+                    // ),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20), // Same radius as the border
+                       // borderRadius: BorderRadius.circular(20), // Same radius as the border
                         child: Image.network(
                           image,
-                          height: _size.width >= 500 ? 300 : 200,
-                          width: _size.width >= 500 ? 1200 : 600,
+                          height: _size.width >= 500 ? 340 : 200,
+                          width: _size.width,
                           fit: BoxFit.fill,
                         )),
                   )],

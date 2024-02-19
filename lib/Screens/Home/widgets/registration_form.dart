@@ -177,7 +177,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
               ),
               // elevation: 10,
               child: Container(
-                decoration: const BoxDecoration(color: kWhiteColor),
+                color: Color.fromRGBO(190, 250, 255, 80),
                 child:  Form(
                   key: _formKey,
                   child: Padding(
@@ -758,32 +758,48 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                 child: SizedBox(
                                   height: 40,
                                   width: 150,
-                                  child: CustomButton(
-                                    label: 'Submit',
-                                    onPressed: (){
-                                      if (_formKey.currentState!.validate()) {
-                                        _uploadFiles();
-                                        final snackBar = SnackBar(
-                                          /// need to set following properties for best effect of awesome_snackbar_content
-                                          elevation: 0,
-                                          behavior: SnackBarBehavior.floating,
-                                          backgroundColor: Colors.transparent,
-                                          content: AwesomeSnackbarContent(
-                                            title: 'Successful!',
-                                            message:
-                                            'Thank you for joining us! Your registration is complete.',
+                                  child:Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: ElevatedButton(
+                                      child: Container(
+                                          width: double.infinity,
+                                          height: 50,
+                                          child: const Center(child: Text("Register"))),
+                                      onPressed: (){
+                                        if (_formKey.currentState!.validate()) {
+                                          _uploadFiles();
+                                          final snackBar = SnackBar(
+                                            /// need to set following properties for best effect of awesome_snackbar_content
+                                            elevation: 0,
+                                            behavior: SnackBarBehavior.floating,
+                                            backgroundColor: Colors.transparent,
+                                            content: AwesomeSnackbarContent(
+                                              title: 'Successful!',
+                                              message:
+                                              'Thank you for joining us! Your registration is complete.',
 
-                                            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-                                            contentType: ContentType.success,
-                                          ),
-                                        );
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                                        );
-                                      }
-                                    },
+                                              /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                                              contentType: ContentType.success,
+                                            ),
+                                          );
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                                          );
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(15),
+                                        ),
+                                      ),
+                                    ),
                                   ),
+
                                 ),
                               ),
                             ],

@@ -152,11 +152,23 @@ class BottomNav extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {},
-                      child: Text(
-                        "Almed.in All Rights Reserved",
-                        style: TextStyle(
-                          fontFamily: 'DMSans Light',
-                          fontSize: _size.width >= 370 ? 15 : 10,
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.copyright_sharp,
+                                size: _size.width >= 370 ? 15 : 10, // Adjust the size as needed
+                              ),
+                            ),
+                            TextSpan(
+                              text: " 2024 Almed.in. All Rights Reserved",
+                              style: TextStyle(
+                                fontFamily: 'DMSans Light',
+                                fontSize: _size.width >= 370 ? 15 : 10,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
