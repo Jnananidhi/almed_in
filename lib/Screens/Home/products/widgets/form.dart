@@ -228,6 +228,7 @@ class _FormDataItemState extends State<FormDataItem> {
             color: isHovered ? kPrimaryColor : Colors.black,),
 
           child: InkWell(
+            borderRadius: BorderRadius.circular(15),
             onTap: widget.press,
             child: Container(
               width: _size.width <= 770

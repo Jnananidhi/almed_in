@@ -82,7 +82,7 @@ class SliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      //padding: EdgeInsets.only(top: 10, left: 10,right: 10),
+      padding: EdgeInsets.only(top: 10, left: 30,right: 30),
       color: kWhiteColor,
       width: _size.width,
       child: Row(

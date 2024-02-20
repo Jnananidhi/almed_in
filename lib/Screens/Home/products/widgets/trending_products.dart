@@ -162,6 +162,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+        borderRadius: BorderRadius.circular(15),
         onTap: widget.press,
         onHover: (value) {
           setState(() {
@@ -196,7 +197,7 @@ class _TrendingProductsState extends State<TrendingProducts> {
                         widget.image.isNotEmpty
                             ? Image.network(
                           widget.image,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.contain,
                           width: double.infinity,
                           height: 150,
                           errorBuilder: (context, error, stackTrace) {

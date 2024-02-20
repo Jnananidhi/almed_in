@@ -62,13 +62,13 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
       children: [
         if (!showAllItems)
           Container(
-            //padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 for (var i = 0; i < crossAxisCount && i < therapeautic.length; i++)
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: 7),
                       child: DatabaseDataItem(
                         title: therapeautic[i]['therapeautic'],
                         press: () {
@@ -161,7 +161,7 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
               ),
             ),
         Padding(
-          padding: EdgeInsets.only(top: 10, right: 8), // Add right padding
+          padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
             children: [
@@ -223,6 +223,7 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
           color: isHovered ? kPrimaryColor : Colors.black,),
 
         child: InkWell(
+          borderRadius: BorderRadius.circular(15),
           onTap: widget.press,
           child: Container(
             width: _size.width <= 770
@@ -237,8 +238,8 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-              //boxShadow: [if (isHovered) kDefaultShadow],
+              color: kWhiteColor, // Change color on hover
+              boxShadow: isHovered ? [kDefaultShadow] : [],
               border: Border.all(
                 color: kgreyColor, // Set the border color to grey
                 width: 3.0,       // Set the border width

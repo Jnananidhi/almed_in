@@ -102,9 +102,15 @@ class _CategoryCardState extends State<CategoryCard> {
             const SizedBox(
               height: 15,
             ),
-            Text(
-              widget.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  widget.title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
+                ),
+              ),
             ),
             const SizedBox(
               height: 15,

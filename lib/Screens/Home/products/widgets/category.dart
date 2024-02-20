@@ -225,6 +225,7 @@ class _CategoryCardState extends State<CategoryCard> {
           color: isHovered ? kPrimaryColor : Colors.black,),
 
         child: InkWell(
+          borderRadius: BorderRadius.circular(15),
           onTap: widget.press,
           child: Container(
             width: _size.width <= 770
@@ -239,8 +240,8 @@ class _CategoryCardState extends State<CategoryCard> {
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-              //boxShadow: [if (isHovered) kDefaultShadow],
+              color: kWhiteColor, // Change color on hover
+              boxShadow: isHovered ? [kDefaultShadow] : [],
               border: Border.all(
                 color: kgreyColor, // Set the border color to grey
                 width: 3.0,       // Set the border width
