@@ -85,7 +85,7 @@ class _CategoryCardState extends State<CategoryCard> {
     if (_size.width <= 770) {
       cardWidth = _size.width;
     } else if (_size.width >= 975) {
-      cardWidth = kMaxWidth / 3;
+      cardWidth =_size.width / 3.2;
     } else {
       cardWidth = 200;
     }

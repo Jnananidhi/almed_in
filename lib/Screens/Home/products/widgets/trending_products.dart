@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
 import 'package:almed_in/Screens/Home/products/widgets/test.dart';
@@ -46,31 +48,52 @@ class _TrendingProductCardState extends State<TrendingProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: StaggeredGridView.countBuilder(
-        //shrink wrap to avoid error
-        shrinkWrap: true,
-        physics: ScrollPhysics(),
-        crossAxisCount: 4,
-        itemCount: trendingProducts.length,
-        itemBuilder: (BuildContext context, int index) => TrendingProducts(
-          press: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FetchedCategoryProduct(selectedProductName: trendingProducts[index]['BRAND_NAME']),
-              ),
-            );
-          },
-          title: trendingProducts[index]['BRAND_NAME'],
-          image: trendingProducts[index]['IMAGE'],
-          price: trendingProducts[index]['PRICE'],
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8,left: 8,right: 8),
+          child: StaggeredGridView.countBuilder(
+            //shrink wrap to avoid error
+            shrinkWrap: true,
+            physics: ScrollPhysics(),
+            crossAxisCount: 4,
+            itemCount: trendingProducts.length,
+            itemBuilder: (BuildContext context, int index) => TrendingProducts(
+              press: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => FetchedCategoryProduct(selectedProductName: trendingProducts[index]['BRAND_NAME']),
+                  ),
+                );
+              },
+              title: trendingProducts[index]['BRAND_NAME'],
+              image: trendingProducts[index]['IMAGE'],
+              price: trendingProducts[index]['PRICE'],
+            ),
+            staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+            mainAxisSpacing: 10.0,
+            crossAxisSpacing: 10.0,
+          ),
         ),
-        staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
-        mainAxisSpacing: 10.0,
-        crossAxisSpacing: 10.0,
-      ),
+        Padding(
+          padding: EdgeInsets.only( right: 10), // Add right padding
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+            children: [
+              CustomButton(
+                text: ("All Products"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ProductScreen()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

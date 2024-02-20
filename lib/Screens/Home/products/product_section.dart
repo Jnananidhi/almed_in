@@ -139,37 +139,37 @@ class ProductSection extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child:Center(
-                    child:
-                    // CustomButton(label: "All Products",
-                    //     onPressed: (){
-                    //       Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(builder: (context) => const ProductScreen()),
-                    //
-                    //       );
-                    //       //Navigator.pushNamed(context, "/product-screen");
-                    //     },
-                    // ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 10,), // Add right padding
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
-                        children: [
-                          CustomButton(
-                            text: "All Products",
-                            onPressed: () {
-                              Navigator.pushNamed(context, "/product-screen");
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(vertical: 5),
+                //   margin: const EdgeInsets.symmetric(horizontal: 10),
+                //   child:Center(
+                //     child:
+                //     // CustomButton(label: "All Products",
+                //     //     onPressed: (){
+                //     //       Navigator.push(
+                //     //         context,
+                //     //         MaterialPageRoute(builder: (context) => const ProductScreen()),
+                //     //
+                //     //       );
+                //     //       //Navigator.pushNamed(context, "/product-screen");
+                //     //     },
+                //     // ),
+                //     Padding(
+                //       padding: EdgeInsets.only(top: 10,), // Add right padding
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+                //         children: [
+                //           CustomButton(
+                //             text: "All Products",
+                //             onPressed: () {
+                //               Navigator.pushNamed(context, "/product-screen");
+                //             },
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 Center(
                   child: Container(
