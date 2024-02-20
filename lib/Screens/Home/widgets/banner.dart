@@ -60,7 +60,7 @@ class _HeroBannerState extends State<HeroBanner> {
               'assets/products/banner/Banner6.png',
               'assets/products/banner/Banner7.png',
             ],
-            height: 350.0, // Adjust the height of the banner as needed
+            height: 400.0, // Adjust the height of the banner as needed
           ),
 
         ],
@@ -104,7 +104,7 @@ class SliderCard extends StatelessWidget {
                           image,
                           height: _size.width >= 500 ? 340 : 200,
                           width: kMaxWidth,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.contain,
                         )),
                   )],
               )),
