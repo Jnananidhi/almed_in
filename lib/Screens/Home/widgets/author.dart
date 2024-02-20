@@ -62,12 +62,10 @@ class Author extends StatelessWidget {
 }
 
 class CategoryCard extends StatefulWidget {
-
   const CategoryCard({
     Key? key,
     required this.image,
     required this.title,
-
     required this.description,
   }) : super(key: key);
   final String image, title, description;
@@ -78,9 +76,20 @@ class CategoryCard extends StatefulWidget {
 
 class _CategoryCardState extends State<CategoryCard> {
   bool isHover = false;
+
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
+
+    double cardWidth;
+    if (_size.width <= 770) {
+      cardWidth = _size.width;
+    } else if (_size.width >= 975) {
+      cardWidth = kMaxWidth / 3;
+    } else {
+      cardWidth = 200;
+    }
+
     return InkWell(
       onHover: (value) {
         setState(() {
@@ -88,54 +97,47 @@ class _CategoryCardState extends State<CategoryCard> {
         });
       },
       child: Container(
-        width: _size.width <= 770
-            ? _size.width
-            : _size.width >= 975
-                ?kMaxWidth/3
-                : 200,
+        width: cardWidth,
         decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-                color:  lightColor,// Adjust the value as needed
-            ),
+          borderRadius: BorderRadius.circular(20.0),
+          color: lightColor,
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 15,
-            ),
+            SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: _size.width >= 370 ? 18 : 11,color: kPrimaryColor),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                widget.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: _size.width >= 370 ? 18 : 11,
+                  color: kPrimaryColor,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Icon(
+                Icons.format_quote_rounded,
+                color: kSecondaryColor,
+              ),
             ),
-
-        Padding(
-          padding:  const EdgeInsets.only(left: 20.0),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Icon(
-              Icons.format_quote_rounded,
-              color: kSecondaryColor,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                widget.description,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'DMSans Regular',
+                  height: 1.5,
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Text(
-            widget.description,textAlign: TextAlign.left,
-            style: const TextStyle(fontSize: 16,fontFamily: 'DMSans Regular',height: 1.5),
-          ),),
-            const SizedBox(
-              height: 15,
-            ),
-
+            SizedBox(height: 15),
           ],
         ),
       ),

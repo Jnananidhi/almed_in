@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar1.dart';
@@ -303,11 +304,16 @@ class ThereapeauticScreenState extends State<ThereapeauticScreen> {
         children:[ Column(
           children:<Widget>[
             Navigation(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Therapeautic",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 24,),),
+            ),
              if( MediaQuery.of(context).size.width > 600)
                 Expanded(
                   child: SingleChildScrollView(
                     child:Container(
-                      padding: EdgeInsets.all(8.0),
+                      width: double.infinity,
+                      //padding: EdgeInsets.all(8.0),
                       height: MediaQuery.of(context).size.height, // Fixed height for the additional items grid
                       child: ListView.builder(
                         scrollDirection: Axis.vertical, // Display items vertically
@@ -695,87 +701,87 @@ class StrengthScreenState extends State<StrengthScreen> {
 
 
 //generalized card
-class DatabaseDataItem extends StatefulWidget {
-  final String title;
-  final Function() press;
-
-  DatabaseDataItem({required this.title, required this.press});
-
-  @override
-  _DatabaseDataItemState createState() => _DatabaseDataItemState();
-}
-
-class _DatabaseDataItemState extends State<DatabaseDataItem> {
-
-  bool isHovered = false;
-
-
-  @override
-
-  Widget build(BuildContext context) {
-
-    Size _size = MediaQuery.of(context).size;
-    return MouseRegion(
-        onEnter: (_) {
-          setState(() {
-            isHovered = true;
-          });
-        },
-        onExit: (_) {
-          setState(() {
-            isHovered = false;
-          });
-        },
-        child:  AnimatedDefaultTextStyle(
-          duration: Duration(milliseconds: 300),
-          style: TextStyle(
-            fontSize: isHovered ? 20.0 : 16.0,
-            fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-            color: isHovered ? kPrimaryColor : Colors.black,),
-
-          child: InkWell(
-            onTap: widget.press,
-            child: Container(
-              width: _size.width <= 770
-                  ? _size.width/2
-                  : _size.width >= 975
-                  ? 300
-                  : 200,
-              height: 100,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10,
-              ),
-
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
-                boxShadow: [if (isHovered) kDefaultShadow],
-                border: Border.all(
-                  color: kgreyColor, // Set the border color to grey
-                  width: 3.0,       // Set the border width
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Add any widgets you want to display within the card, e.g., Text
-                  Text(widget.title,textAlign: TextAlign.center,),
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      Icon(
-                        Icons.health_and_safety, // You can use any medical icon here
-                        color: Colors.blue,
-                        size: 24,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        ));
-  }
-}
+// class DatabaseDataItem extends StatefulWidget {
+//   final String title;
+//   final Function() press;
+//
+//   DatabaseDataItem({required this.title, required this.press});
+//
+//   @override
+//   _DatabaseDataItemState createState() => _DatabaseDataItemState();
+// }
+//
+// class _DatabaseDataItemState extends State<DatabaseDataItem> {
+//
+//   bool isHovered = false;
+//
+//
+//   @override
+//
+//   Widget build(BuildContext context) {
+//
+//     Size _size = MediaQuery.of(context).size;
+//     return MouseRegion(
+//         onEnter: (_) {
+//           setState(() {
+//             isHovered = true;
+//           });
+//         },
+//         onExit: (_) {
+//           setState(() {
+//             isHovered = false;
+//           });
+//         },
+//         child:  AnimatedDefaultTextStyle(
+//           duration: Duration(milliseconds: 300),
+//           style: TextStyle(
+//             fontSize: isHovered ? 20.0 : 16.0,
+//             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
+//             color: isHovered ? kPrimaryColor : Colors.black,),
+//
+//           child: InkWell(
+//             onTap: widget.press,
+//             child: Container(
+//               width: _size.width <= 770
+//                   ? _size.width/2
+//                   : _size.width >= 975
+//                   ? 300
+//                   : 200,
+//               height: 100,
+//               padding: const EdgeInsets.symmetric(
+//                 vertical: 10,
+//               ),
+//
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(20.0),
+//                 color: isHovered ?   kgreyColor:kWhiteColor, // Change color on hover
+//                 boxShadow: [if (isHovered) kDefaultShadow],
+//                 border: Border.all(
+//                   color: kgreyColor, // Set the border color to grey
+//                   width: 3.0,       // Set the border width
+//                 ),
+//               ),
+//               child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   // Add any widgets you want to display within the card, e.g., Text
+//                   Text(widget.title,textAlign: TextAlign.center,),
+//                   Spacer(),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.end,
+//                     crossAxisAlignment: CrossAxisAlignment.end,
+//                     children: <Widget>[
+//                       Icon(
+//                         Icons.health_and_safety, // You can use any medical icon here
+//                         color: Colors.blue,
+//                         size: 24,
+//                       ),
+//                     ],
+//                   )
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ));
+//   }
+// }
