@@ -168,12 +168,15 @@ class _AlphabeticPageState extends State<AlphabeticPage> {
                         child: Column(
                           children: [
                          SingleChildScrollView(
-                        child: Container(
-                        width: kMaxWidth,
-                          constraints: BoxConstraints(minHeight: screenHeight/1.5),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _buildColumnsForItems(productNames.cast<String>()),
+                        child: Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: Container(
+                          width: double.infinity,
+                            constraints: BoxConstraints(minHeight: screenHeight/1.5),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: _buildColumnsForItems(productNames.cast<String>()),
+                            ),
                           ),
                         ),
                       ),

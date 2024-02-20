@@ -434,7 +434,7 @@ class _NavigationState extends State<Navigation> {
                                           width: 500,
                                             ),
 
-                        HoverMenuLastItem(
+                        HoverMenu1(
                           title: InkWell(
                             child: HoverText("Company"),
                             onTap: () {
@@ -871,7 +871,7 @@ class HoverdataState extends State<Hoverdata> {
         child:  AnimatedDefaultTextStyle(
           duration: Duration(milliseconds: 300),
           style: TextStyle(
-            fontSize: 16.0,
+            fontSize: 13.0,
             fontFamily: 'DMSans Regular',
             fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
             color: isHovered ? kPrimaryColor : Colors.black,),
@@ -879,7 +879,7 @@ class HoverdataState extends State<Hoverdata> {
           child: InkWell(
             onTap: widget.press,
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               child: Column(
                 children: [
                   // Add any widgets you want to display within the card, e.g., Text

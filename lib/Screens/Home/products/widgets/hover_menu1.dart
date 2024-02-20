@@ -1,6 +1,7 @@
-library hover_menu;
-
-import 'package:almed_in/Screens/Home/company_list_screen.dart';
+/* A new file for the last menu option to make it's drop down position not go beyond screen size.
+The dropdown position starts from the
+remaining screen portion and end exactly where the option item name ends.
+ */
 import 'package:flutter/material.dart';
 
 class HoverMenu1 extends StatefulWidget {
@@ -21,124 +22,50 @@ class HoverMenu1 extends StatefulWidget {
 
 class HoverMenu1State extends State<HoverMenu1> {
   OverlayEntry? _overlayEntry;
-  final _titleFocusNode = FocusNode();
-  final _overlayFocusNode = FocusNode();
-  bool _isTitleHovered = false;
-  bool _isOverlayHovered = false;
+  final _focusNode = FocusNode();
+  bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
-    _titleFocusNode.addListener(_onTitleFocusChanged);
-    _overlayFocusNode.addListener(_onOverlayFocusChanged);
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
   void dispose() {
-    _titleFocusNode.dispose();
-    _overlayFocusNode.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
-  void _onTitleFocusChanged() {
-    setState(() {
-      _isTitleHovered = _titleFocusNode.hasFocus;
-    });
-
-    if (_titleFocusNode.hasFocus) {
-      _showOverlay();
-    } else if (!_overlayFocusNode.hasFocus) {
-      _hideOverlay();
-    }
-  }
-
-  void _onOverlayFocusChanged() {
-    setState(() {
-      _isOverlayHovered = _overlayFocusNode.hasFocus;
-    });
-
-    if (_overlayFocusNode.hasFocus) {
-      _showOverlay();
-    } else if (!_titleFocusNode.hasFocus) {
-      _hideOverlay();
-    }
-  }
-
-  void _showOverlay() {
-    if (_overlayEntry == null) {
+  void _onFocusChanged() {
+    if (_focusNode.hasFocus) {
       _overlayEntry = _createOverlayEntry();
-      Overlay.of(context)?.insert(_overlayEntry!);
+      Overlay.of(context).insert(_overlayEntry!);
+    } else {
+      _overlayEntry?.remove();
+      _removeOverlay();
     }
   }
 
-  void _hideOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
+  void _removeOverlay() {
+    _isHovered = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          _isTitleHovered = true;
-        });
-        _titleFocusNode.requestFocus();
-      },
-      onExit: (_) {
-        setState(() {
-          _isTitleHovered = false;
-        });
-        if (!_isOverlayHovered) {
-          _titleFocusNode.unfocus();
+    return TextButton(
+      focusNode: _focusNode,
+      onHover: (isHovered) {
+        if (isHovered && !_isHovered) {
+          _focusNode.requestFocus();
+          _isHovered = true;
         }
       },
-      child: TextButton(
-        focusNode: _titleFocusNode,
-        onPressed: () {
-        },
-        child: widget.title,
-      ),
+      onPressed: () {},
+      child: widget.title,
     );
   }
 
-  // OverlayEntry _createOverlayEntry() {
-  //   final renderBox = context.findRenderObject() as RenderBox;
-  //   final size = renderBox.size;
-  //   final offset = renderBox.localToGlobal(Offset.zero);
-  //
-  //   return OverlayEntry(
-  //     maintainState: true,
-  //     builder: (context) => Positioned(
-  //       right: offset.dy-size.width,
-  //       top: offset.dy + size.height,
-  //       width: widget.width ?? 200,
-  //       child: MouseRegion(
-  //         onEnter: (_) {
-  //           setState(() {
-  //             _isOverlayHovered = true;
-  //           });
-  //           _overlayFocusNode.requestFocus();
-  //         },
-  //         onExit: (_) {
-  //           setState(() {
-  //             _isOverlayHovered = false;
-  //           });
-  //           if (!_isTitleHovered) {
-  //             _overlayFocusNode.unfocus();
-  //           }
-  //         },
-  //         child: Container(
-  //           child: ListView(
-  //             padding: EdgeInsets.zero,
-  //             shrinkWrap: true,
-  //             children: widget.items,
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
   OverlayEntry _createOverlayEntry() {
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
@@ -147,36 +74,25 @@ class HoverMenu1State extends State<HoverMenu1> {
     return OverlayEntry(
       maintainState: true,
       builder: (context) => Positioned(
-        right: offset.dy - size.width,
+        right: offset.dy - size.width*0.7,
         top: offset.dy + size.height,
         width: widget.width ?? 200,
-        child: MouseRegion(
-          onEnter: (_) {
-            setState(() {
-              _isOverlayHovered = true;
-            });
-            _overlayFocusNode.requestFocus();
-          },
-          onExit: (_) {
-            setState(() {
-              _isOverlayHovered = false;
-            });
-            if (!_isTitleHovered && !_isOverlayHovered) {
-              _overlayFocusNode.unfocus();
-               _hideOverlay();
+        child: TextButton(
+          onPressed: () {},
+          onHover: (isHovered) {
+            if (isHovered && _isHovered) {
+              _focusNode.requestFocus();
+            } else {
+              _focusNode.unfocus();
             }
           },
-          child: Container(
-
-            child: ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: widget.items,
-            ),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            children: widget.items,
           ),
         ),
       ),
     );
   }
-
 }

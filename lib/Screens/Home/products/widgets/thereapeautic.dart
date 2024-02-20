@@ -62,13 +62,13 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
       children: [
         if (!showAllItems)
           Container(
-            padding: EdgeInsets.all(8.0),
+            //padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 for (var i = 0; i < crossAxisCount && i < therapeautic.length; i++)
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 7),
+                      padding: EdgeInsets.only(right: 10),
                       child: DatabaseDataItem(
                         title: therapeautic[i]['therapeautic'],
                         press: () {
