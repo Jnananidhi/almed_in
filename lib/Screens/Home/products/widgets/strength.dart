@@ -1,4 +1,6 @@
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/company_list_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -60,13 +62,13 @@ class _StrengthCardState extends State<StrengthCard> {
       children: [
         if (!showAllItems)
           Container(
-            padding: EdgeInsets.all(8.0),
+           // padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 for (var i = 0; i < crossAxisCount && i < strength.length; i++)
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 7,),
+                      padding: EdgeInsets.only(right: 10),
                       child: strengthDataItem(
                         title: strength[i]['STRENGTH'],
                         press: () {
@@ -101,20 +103,17 @@ class _StrengthCardState extends State<StrengthCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: Padding(
-                                padding:EdgeInsets.only(bottom: 7,left: 7),
-                                child: strengthDataItem(
-                                  title: strength[i]['STRENGTH'],
-                                  press: (){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FetchedCategoryProduct(selectedProductName: strength[i]['STRENGTH']),
-                                      ),
-                                    );
-                                  },
+                              child: strengthDataItem(
+                                title: strength[i]['STRENGTH'],
+                                press: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FetchedCategoryProduct(selectedProductName: strength[i]['STRENGTH']),
+                                    ),
+                                  );
+                                },
 
-                                ),
                               ),
                             ),
                           ),
@@ -164,21 +163,20 @@ class _StrengthCardState extends State<StrengthCard> {
               ),
             ),
         Padding(
-          padding: EdgeInsets.only(top:10),
-          child: ElevatedButton(
-            child: Container(
-              width: 100,
-              height: 50,
-              child: Center(child: Text(showAllItems ? "Hide" : "View More")),),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+          padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+            children: [
+              CustomButton(
+                text: ("SEE ALL"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const StrengthScreen()),
+                  );
+                },
               ),
-            ),
-
-            onPressed: toggleShowAllItems,
-
+            ],
           ),
         ),
       ],
@@ -277,11 +275,13 @@ class _strengthDataItemState extends State<strengthDataItem> {
                 //     );
                 //   },
                 // ),
-                Image.asset(
-                  'strength.jpg', // Path to default image
-                  fit: BoxFit.fill,
-                  width: 100, // Set width as needed
-                  height: 100,
+                ClipOval(
+                  child: Image.asset(
+                    'strength.jpg', // Path to default image
+                    fit: BoxFit.fill,
+                    width: 100, // Set width as needed
+                    height: 100,
+                  ),
                 ),
                 Spacer(),
                 Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),

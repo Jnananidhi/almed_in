@@ -46,8 +46,8 @@ class _HeroBannerState extends State<HeroBanner> {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Padding(
-      padding:
-      const EdgeInsets.symmetric( horizontal: 10),
+
+      padding: EdgeInsets.all(8.0),
       child: Column(
         children: [
           CircularHeroBanner(
@@ -157,6 +157,7 @@ class _CircularHeroBannerState extends State<CircularHeroBanner> {
     return Stack(
       children: [
         Container(
+          padding: EdgeInsets.all(10),
            width: double.infinity,
           height: widget.height,
           child: PageView.builder(

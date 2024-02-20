@@ -1,4 +1,6 @@
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/company_list_screen.dart';
+import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -60,13 +62,13 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
       children: [
         if (!showAllItems)
           Container(
-            padding: EdgeInsets.all(8.0),
+            //padding: EdgeInsets.all(8.0),
             child: Row(
               children: [
                 for (var i = 0; i < crossAxisCount && i < therapeautic.length; i++)
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.only(right: 7),
+                      padding: EdgeInsets.only(right: 10),
                       child: DatabaseDataItem(
                         title: therapeautic[i]['therapeautic'],
                         press: () {
@@ -139,19 +141,16 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
                           Expanded(
                             child: Align(
                               alignment: Alignment.topCenter, // Align each card to the top
-                              child: Padding(
-                                padding:EdgeInsets.only(bottom: 7),
-                                child: DatabaseDataItem(
-                                  title: therapeautic[i]['therapeautic'],
-                                  press: (){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
-                                      ),
-                                    );
-                                  },
-                                ),
+                              child: DatabaseDataItem(
+                                title: therapeautic[i]['therapeautic'],
+                                press: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FetchedCategoryProduct(selectedProductName: therapeautic[i]['therapeautic']),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -162,21 +161,20 @@ class _DatabaseDataCardState extends State<DatabaseDataCard> {
               ),
             ),
         Padding(
-          padding: EdgeInsets.only(top:10),
-          child: ElevatedButton(
-            child: Container(
-                width: 100,
-                height: 50,
-              child: Center(child: Text(showAllItems ? "Hide" : "View More")),),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: kWhiteColor, backgroundColor: kPrimaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+          padding: EdgeInsets.only(top: 10, right: 8), // Add right padding
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
+            children: [
+              CustomButton(
+                text: ("SEE ALL"),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ThereapeauticScreen()),
+                  );
+                },
               ),
-            ),
-
-            onPressed: toggleShowAllItems,
-
+            ],
           ),
         ),
       ],
@@ -275,12 +273,15 @@ class _DatabaseDataItemState extends State<DatabaseDataItem> {
                 //     );
                 //   },
                 // ),
-                Image.asset(
-                  'default.png', // Path to default image
-                  fit: BoxFit.fill,
-                  width: 100, // Set width as needed
-                  height: 100,
+                ClipOval(
+                  child: Image.asset(
+                    'therapeutic.webp', // Path to default image
+                    fit: BoxFit.fill,
+                    width: 100, // Set width as needed
+                    height: 100,
+                  ),
                 ),
+
                 Spacer(),
                 Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
                 Spacer(),

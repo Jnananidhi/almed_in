@@ -155,7 +155,7 @@ class ProductSection extends StatelessWidget {
                     //     },
                     // ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10, right: 10), // Add right padding
+                      padding: EdgeInsets.only(top: 10,), // Add right padding
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end, // Align children to the end (right side)
                         children: [

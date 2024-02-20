@@ -61,14 +61,14 @@ class _CateegoryState extends State<Cateegory> {
     children: [
       if (!showAllItems)
         Container(
-          padding: EdgeInsets.all(8.0),
+          //padding: EdgeInsets.all(8.0),
 
           child: Row(
             children: [
               for (var i = 0; i < crossAxisCount && i < contact.length; i++)
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(right: 7),
+                    padding: EdgeInsets.only(right: 10),
                     child: CategoryCard(
                       title: capitalize(contact[i]['Company']),
                       press: () {
@@ -275,11 +275,13 @@ class _CategoryCardState extends State<CategoryCard> {
                 //     );
                 //   },
                 // ),
-                Image.asset(
-                  'company.webp', // Path to default image
-                  fit: BoxFit.fill,
-                  width: 100, // Set width as needed
-                  height: 100,
+                ClipOval(
+                  child: Image.asset(
+                    'company.webp', // Path to default image
+                    fit: BoxFit.fill,
+                    width: 100, // Set width as needed
+                    height: 100,
+                  ),
                 ),
                 Spacer(),
                 Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
