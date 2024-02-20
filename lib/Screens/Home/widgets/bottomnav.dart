@@ -19,23 +19,14 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.white,
-            Color(0xFFABE0E1) // Your color code
-             // You can add more colors for the gradient
-          ],
-        ),
-      ),
+      color: Color.fromRGBO(242,242,242,0.2),
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.all(10),
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
             constraints: const BoxConstraints(maxWidth: double.infinity),
             child: Column(
               children: [
@@ -69,15 +60,15 @@ class BottomNav extends StatelessWidget {
                       height: 10,
                     ),
                     const Divider(
-                      thickness: 0.5,
-                      color: Colors.black,
+                      thickness: 0.2,
+                      color: Colors.grey,
                     ),
                     const SizedBox(
                       height: 10,
                     ),
 
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         MenuItems(
                           title: 'Home',
@@ -108,31 +99,9 @@ class BottomNav extends StatelessWidget {
                         ),
                       ],
                     ),
-
-            //         Text(
-            //           "Disclaimer",
-            //           style: TextStyle(
-            //             fontFamily: 'DMSans Bold' ,
-            //             fontSize: _size.width >= 370 ? 20 : 10,
-            //           ),
-            //         ),
-            //
-            // Text(
-            //   "The contents of this website are for informational purposes only and not intended to be a substitute for professional medical advice, diagnosis, or treatment. Please seek the advice of physician or other qualified health provider with any questions you may have regarding a medical condition. Do not disregard professional medical advice or delay in seeking it because of something you have read on this website.",
-            //   textAlign: TextAlign.center,
-            //   style: TextStyle(
-            //     height:2,
-            //     color: Colors.black,
-            //     fontFamily: 'DMSans Regular' ,
-            //     fontSize: _size.width >= 370 ? 15 : 10,
-            //   ),
-            // ),
-
-
-
-                    const Divider(
-                      thickness: 0.5,
-                      color: Colors.black,
+                     const Divider(
+                      thickness: 0.2,
+                      color: Colors.grey,
                     ),
                   const SizedBox(
                       height: 10,
@@ -149,6 +118,39 @@ class BottomNav extends StatelessWidget {
                 !Responsive.isMobile(context)
                     ?Row(
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        MenuItems(
+                          title: 'Terms Of Service',
+                          press: () {
+                            Navigator.pushNamed(context, '/home');
+
+                          },
+                        ),
+                        MenuItems(
+                          title: 'Privacy Policy',
+                          press: () {
+                            Navigator.pushNamed(context, '/aboutAlmed.in');
+
+                          },
+                        ),
+                        MenuItems(
+                          title: 'Refund Policy',
+                          press: () {
+                            Navigator.pushNamed(context, '/faq');
+                          },
+                        ),
+                        MenuItems(
+                          title: 'Shopping Policy',
+                          press: () {
+                            Navigator.pushNamed(context, '/contactUs');
+
+                          },
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
                     InkWell(
                       onTap: () {},
                       child: Text.rich(
@@ -170,26 +172,6 @@ class BottomNav extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                    const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:<Widget> [
-                        Text("Designed with ",
-                          style: TextStyle(
-                            fontFamily: 'DMSans Light',
-                            fontSize:15,
-                          ),
-                        ),
-                        Image.asset(
-                            'heart_icon.png',height: 10,width: 10),
-                        Text(" by Linkable Technologies",
-                          style: TextStyle(
-                            fontFamily: 'DMSans Light',
-                            fontSize:15,
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 )
