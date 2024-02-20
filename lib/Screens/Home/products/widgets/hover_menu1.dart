@@ -59,6 +59,9 @@ class HoverMenu1State extends State<HoverMenu1> {
         if (isHovered && !_isHovered) {
           _focusNode.requestFocus();
           _isHovered = true;
+        } else if (!isHovered && _isHovered) {
+          _focusNode.unfocus(); // Unfocus when cursor leaves the overlay
+          _isHovered = false;
         }
       },
       onPressed: () {},
@@ -74,18 +77,22 @@ class HoverMenu1State extends State<HoverMenu1> {
     return OverlayEntry(
       maintainState: true,
       builder: (context) => Positioned(
-        right: offset.dy - size.width*0.7,
+        right: offset.dy - size.width * 0.7,
         top: offset.dy + size.height,
         width: widget.width ?? 200,
         child: TextButton(
           onPressed: () {},
           onHover: (isHovered) {
-            if (isHovered && _isHovered) {
-              _focusNode.requestFocus();
-            } else {
-              _focusNode.unfocus();
-            }
+            setState(() {
+              _isHovered = isHovered;
+              if (isHovered) {
+                _focusNode.requestFocus();
+              } else if (!isHovered && !_isHovered) {
+                _focusNode.unfocus();
+              }
+            });
           },
+
           child: ListView(
             padding: EdgeInsets.zero,
             shrinkWrap: true,

@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:almed_in/Screens/Home/Category.dart';
+import 'package:almed_in/Screens/Home/products/widgets/category.dart';
+import 'package:almed_in/Screens/Home/products/widgets/form.dart';
+import 'package:almed_in/Screens/Home/products/widgets/strength.dart';
 import 'package:almed_in/Screens/Home/products/widgets/thereapeautic.dart';
 import 'package:almed_in/Screens/Home/widgets/menu.dart';
 import 'package:almed_in/Screens/Home/widgets/search_bar.dart';
@@ -60,6 +63,10 @@ class FormScreenState extends State<FormScreen> {
         children:[ Column(
           children:<Widget>[
             Navigation(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Form",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 24,),),
+            ),
             if( MediaQuery.of(context).size.width > 600)
       Expanded(
         child: SingleChildScrollView(
@@ -81,8 +88,8 @@ class FormScreenState extends State<FormScreen> {
                                   alignment: Alignment.topCenter, // Align each card to the top
                                   child: Padding(
                                     padding:EdgeInsets.all(10),
-                                    child: CompanyDataItem(
-                                      image: form[i]['image'],
+                                    child: FormDataItem(
+                                      image: form[i]['IMAGE'],
                                       title: form[i]['FORM'],
                                       press: (){
                                         Navigator.push(
@@ -456,6 +463,10 @@ class CompanyScreenState extends State<CompanyScreen> {
         children:[ Column(
           children:<Widget>[
             Navigation(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Company",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 24,),),
+            ),
               if( MediaQuery.of(context).size.width > 600)
                 Expanded(
                   child: SingleChildScrollView(
@@ -477,7 +488,7 @@ class CompanyScreenState extends State<CompanyScreen> {
                                       alignment: Alignment.topCenter, // Align each card to the top
                                       child: Padding(
                                         padding:EdgeInsets.all(10),
-                                        child: DatabaseDataItem(
+                                        child: CategoryCard(
                                           title: company[i]['Company'],
                                           press: (){
                                             Navigator.push(
@@ -514,7 +525,7 @@ class CompanyScreenState extends State<CompanyScreen> {
                               Expanded(
                                 child: Align(
                                   alignment: Alignment.topCenter, // Align each card to the top
-                                  child: DatabaseDataItem(
+                                  child: CategoryCard(
                                     title: company[i]['Company'],
                                     press: (){
                                       Navigator.push(
@@ -603,6 +614,10 @@ class StrengthScreenState extends State<StrengthScreen> {
         children:[ Column(
           children:<Widget>[
             Navigation(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Strength",style: TextStyle(color: kSecondaryColor,fontWeight: FontWeight.bold,fontSize: 24,),),
+            ),
             if( MediaQuery.of(context).size.width > 600)
               Expanded(
                 child: SingleChildScrollView(
@@ -624,7 +639,7 @@ class StrengthScreenState extends State<StrengthScreen> {
                                     alignment: Alignment.topCenter, // Align each card to the top
                                     child: Padding(
                                       padding:EdgeInsets.all(10),
-                                      child: DatabaseDataItem(
+                                      child: strengthDataItem(
                                         title: strength[i]['STRENGTH'],
                                         press: (){
                                           Navigator.push(

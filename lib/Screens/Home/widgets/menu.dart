@@ -379,7 +379,7 @@ class _NavigationState extends State<Navigation> {
                         onTap:(){
                           Navigator.pushNamed(context, '/alphabeticSearch');
                         }),
-                        HoverMenu(
+                        hovermenu(
                           title: InkWell(
                             child: HoverText("Theurepeautic"),
                             onTap: () {
@@ -397,7 +397,7 @@ class _NavigationState extends State<Navigation> {
                           }).toList(),
                           width: 500,
                         ),
-                        HoverMenu(
+                        hovermenu(
                           title: InkWell(
                             child: HoverText("Form"),
                             onTap: () {
@@ -415,7 +415,7 @@ class _NavigationState extends State<Navigation> {
                           }).toList(),
                           width: 500,
                         ),
-                           HoverMenu(
+                        hovermenu(
                             title: InkWell(
                               child: HoverText("Strength"),
                                        onTap: () {

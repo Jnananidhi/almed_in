@@ -188,7 +188,7 @@ class _CircularHeroBannerState extends State<CircularHeroBanner> {
           ),
         ),
         Positioned(
-          bottom: 10.0,
+          bottom: 0,
           left: 0,
           right: 0,
           child: Row(

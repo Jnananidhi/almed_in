@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Hover_Menu extends StatefulWidget {
+class hovermenu extends StatefulWidget {
   final Widget title;
   final double? width;
   final List<Widget> items;
 
-  const Hover_Menu({
+  const hovermenu({
     Key? key,
     required this.title,
     this.items = const [],
@@ -13,95 +13,55 @@ class Hover_Menu extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _HoverMenuState createState() => _HoverMenuState();
+  hovermenuState createState() => hovermenuState();
 }
 
-class _HoverMenuState extends State<Hover_Menu> {
+class hovermenuState extends State<hovermenu> {
   OverlayEntry? _overlayEntry;
-  final _titleFocusNode = FocusNode();
-  final _overlayFocusNode = FocusNode();
-  bool _isTitleHovered = false;
-  bool _isOverlayHovered = false;
+  final _focusNode = FocusNode();
+  bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
-    _titleFocusNode.addListener(_onTitleFocusChanged);
-    _overlayFocusNode.addListener(_onOverlayFocusChanged);
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
   void dispose() {
-    _titleFocusNode.dispose();
-    _overlayFocusNode.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
-  void _onTitleFocusChanged() {
-    setState(() {
-      _isTitleHovered = _titleFocusNode.hasFocus;
-    });
-
-    if (_titleFocusNode.hasFocus) {
-      _showOverlay();
-    } else if (!_overlayFocusNode.hasFocus) {
-      _hideOverlay();
-    }
-  }
-
-  void _onOverlayFocusChanged() {
-    setState(() {
-      _isOverlayHovered = _overlayFocusNode.hasFocus || _isTitleHovered;
-    });
-
-    if (!_isOverlayHovered) {
-      _hideOverlay();
-    } else {
-      _showOverlay();
-    }
-  }
-
-
-  void _showOverlay() {
-    if (_overlayEntry == null) {
+  void _onFocusChanged() {
+    if (_focusNode.hasFocus) {
       _overlayEntry = _createOverlayEntry();
-      Overlay.of(context)?.insert(_overlayEntry!);
+      Overlay.of(context).insert(_overlayEntry!);
+    } else {
+      _overlayEntry?.remove();
+      _removeOverlay();
     }
   }
 
-  void _hideOverlay() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
+  void _removeOverlay() {
+    _isHovered = false;
   }
-  void _hideOverlayIfNotHovered() {
-    if (!_isTitleHovered && !_isOverlayHovered) {
-      _hideOverlay();
-    }
-  }
-
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          _isTitleHovered = true;
-        });
-        _titleFocusNode.requestFocus();
-      },
-      onExit: (_) {
-        setState(() {
-          _isTitleHovered = false;
-        });
-        if (!_isOverlayHovered) {
-          _titleFocusNode.unfocus();
+    return TextButton(
+      focusNode: _focusNode,
+      onHover: (isHovered) {
+        if (isHovered && !_isHovered) {
+          _focusNode.requestFocus();
+          _isHovered = true;
+        } else if (!isHovered && _isHovered) {
+          _focusNode.unfocus(); // Unfocus when cursor leaves the overlay
+          _isHovered = false;
         }
       },
-      child: TextButton(
-        focusNode: _titleFocusNode,
-        onPressed: () {},
-        child: widget.title,
-      ),
+      onPressed: () {},
+      child: widget.title,
     );
   }
 
@@ -116,34 +76,26 @@ class _HoverMenuState extends State<Hover_Menu> {
         left: offset.dx,
         top: offset.dy + size.height,
         width: widget.width ?? 200,
-        child: MouseRegion(
-          onEnter: (_) {
+        child: TextButton(
+          onPressed: () {},
+          onHover: (isHovered) {
             setState(() {
-              _isOverlayHovered = true;
+              _isHovered = isHovered;
+              if (isHovered) {
+                _focusNode.requestFocus();
+              } else if (!isHovered && !_isHovered) {
+                _focusNode.unfocus();
+              }
             });
-            _overlayFocusNode.requestFocus();
           },
-          onExit: (_) {
-            setState(() {
-              _isOverlayHovered = false;
-            });
-            _hideOverlayIfNotHovered();
-          },
-          child: GestureDetector(
-            onTap: () {
-              _hideOverlay();
-            },
-            child: Container(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                children: widget.items,
-              ),
-            ),
+
+          child: ListView(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            children: widget.items,
           ),
         ),
       ),
     );
-
   }
 }
