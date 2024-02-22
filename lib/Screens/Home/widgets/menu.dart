@@ -776,18 +776,13 @@ class _MenuItemsState extends State<MenuItems> {
           child: Text(
             widget.title,
             style: TextStyle(
-              fontFamily: 'DMSans Regular',
+              fontFamily: 'DMSans Light',
               fontWeight: widget.isActive == true
                   ? FontWeight.bold
                   : isHover
                       ? FontWeight.bold
                       : FontWeight.normal,
               fontSize: _size.width >= 370 ? 15 : 10,
-              color: widget.isActive == true
-                  ? kPrimaryColor
-                  : isHover
-                      ? kPrimaryColor
-                      : Colors.black,
             ),
           ),
         ),

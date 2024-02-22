@@ -13,7 +13,9 @@ import 'package:almed_in/Screens/Home/contact_screen.dart';
 import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/my_orders.dart';
 import 'package:almed_in/Screens/Home/not_found_screen.dart';
+import 'package:almed_in/Screens/Home/privacy_policy.dart';
 import 'package:almed_in/Screens/Home/profile_screen.dart';
+import 'package:almed_in/Screens/Home/terms_of_service_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Screens/Home/cart_provider.dart';
 import 'Screens/Home/products/products_screen.dart';
 import 'Screens/Home/products/widgets/test.dart';
+import 'Screens/Home/refund_policy.dart';
+import 'Screens/Home/shipping_policy.dart';
 import 'Screens/Home/widgets/custom_listview.dart';
 void main() async {
   runApp(
@@ -51,24 +55,28 @@ class MyApp extends StatelessWidget {
       initialRoute: '/home',
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
-          builder: (context) => NotFoundPage(), // Your 404 page
+          builder: (context) => const NotFoundPage(), // Your 404 page
         );
       },
       routes: {
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => const HomeScreen(),
         '/cart': (context) => CartScreen(),
-        '/aboutAlmed.in': (context) => AboutScreen(),
-        '/faq': (context) => FaqScreen(),
-        '/contactUs': (context) => ContactUsApp(),
-        '/login': (context) => LoginPage(),
-        '/register': (context) => RegistrationScreen(),
-        '/alphabeticSearch': (context) => AlphabeticPage(),
+        '/aboutAlmed.in': (context) => const AboutScreen(),
+        '/faq': (context) => const FaqScreen(),
+        '/contactUs': (context) => const ContactUsApp(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegistrationScreen(),
+        '/alphabeticSearch': (context) => const AlphabeticPage(),
         //'/test':(context)=> AlphabeticPage(),
-        '/forgot_password': (context) => forgot1(),
+        '/forgot_password': (context) => const forgot1(),
         '/userProfile': (context) => UserProfile(),
         '/address-page': (context) => AddressScreen(),
-        '/product-screen': (context) => ProductScreen(),
-        '/myOrders':(context) => MyOrders(),
+        '/product-screen': (context) => const ProductScreen(),
+        '/myOrders':(context) => const MyOrders(),
+        '/privacy-policy':(context) => const PrivacyPolicyScreen(),
+        '/terms-of-service': (context) => const TermsScreen(),
+        '/shipping-policy': (context) => const ShippingPolicyRefund(),
+        '/refund-policy': (context) => const RefundPolicyScreen(),
       },
     );
   }

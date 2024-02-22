@@ -244,7 +244,7 @@ class _strengthDataItemState extends State<strengthDataItem> {
               boxShadow: isHovered ? [kDefaultShadow] : [],
               border: Border.all(
                 color: kgreyColor, // Set the border color to grey
-                width: 3.0,       // Set the border width
+                width: 2.0,       // Set the border width
               ),
             ),
             child: Column(
