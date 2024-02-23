@@ -1,24 +1,23 @@
 //this is product showing page
 import 'dart:convert';
 
-import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
-import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
-import 'package:almed_in/Screens/Home/contact_screen.dart';
-import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
-import 'package:almed_in/Screens/Home/products/products_screen.dart';
-import 'package:almed_in/Screens/Home/products/widgets/custom_button.dart';
-import 'package:almed_in/Screens/Home/widgets/menu.dart';
-import 'package:almed_in/constants.dart';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart'as http;
-
+import '../../../constants.dart';
+import '../Authentication/login_screen.dart';
+import '../about_screen.dart';
+import '../contact_screen.dart';
+import '../faq_screen.dart';
+import '../products/products_screen.dart';
+import 'Checkoutscreen.dart';
+import 'menu.dart';
 
 class ProductListItem extends StatefulWidget {
   final Productt product;
@@ -297,173 +296,126 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15.0),
-        border: Border.all(color: kgreyColor, width: 3),
-      ),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            // For larger screens, display in a row with image on the left
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    child: Image.asset(
-                      'Form.webp', // Replace with your product image URL
-                      fit: BoxFit.contain,
-                      height: 100,
-                      width: 100,
+      margin: EdgeInsets.only(left: 10, right: 10,bottom: 10,top: 10),
+      child: Container(
+        width: MediaQuery.of(context).size.width/0.5, // Set the width to the desired size
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.0),
+          border: Border.all(color: kgreyColor, width: 3),
+
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child:
+                // Image.network(
+                //   widget.product.imageUrl,
+                //   width: 80,
+                //   height: 100,
+                //   fit: BoxFit.cover,
+                // ),
+                Image.network(
+                  'assets/products/inhaler.webp',
+                  width: 100,
+                  height: 120,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              SizedBox(width: 20,),
+
+              Container(
+                width: MediaQuery.of(context).size.width/4,
+                margin: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.product.name,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontFamily: 'DMSans Bold',
+                      ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.product.name,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.normal,
-                        ),
+                    SizedBox(height: 20,),
+                    Text(
+                      'Company:${widget.product.company}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'DMSans Regular',
                       ),
-                      SizedBox(height: 10.0),
-                      Text(
-                        'Company : ${widget.product.company}',
-                        style: TextStyle(
-                            fontSize: 14.0,
-                            fontFamily: 'DMSans regular'
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 10.0),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-
-                    children: [
-                      SizedBox(height: 10.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 16.0, // Adjusted width
-                            height: 24.0,
-                            child: Icon(
-                              Icons.circle,
-                              size: 8.0,
-                            ),
-                          ),
-                          SizedBox(width: 4.0), // Adjusted width, reduce the space
-                          Expanded(
-                            child: Text(
-                              'Content : ${widget.product.content}',
+              ),
+              SizedBox(width: 20,),
+              Container(
+                margin: EdgeInsets.all(10),
+                width: MediaQuery.of(context).size.width/4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Content:${widget.product.content}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.black,
+                        fontFamily: 'DMSans Bold',
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    Text(
+                      'Quantity: ${widget.product.quantity}',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontFamily: 'DMSans Regular',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 20,),
+              Consumer<AuthProvider>(
+                  builder: (context, authProvider, child) {
+                    if (username != "") {
+                      // User is logged in, display the Container with prices
+                      return Container(
+                        margin: EdgeInsets.all(10),
+                        width: MediaQuery.of(context).size.width/8,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Price : \₹${widget.product.mrp}',
                               style: TextStyle(
-                                fontSize: 14.0,
-                                fontFamily: 'DMSans regular',
-                                height: 1.5,
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontFamily: 'DMSans Bold',
                               ),
-                              softWrap: true, // Allow line breaks for long text
-                              maxLines: 3,
-                              // Set the maximum number of lines
                             ),
-                          ),
-                        ],
-                      ),
-                      // SizedBox(height: 10.0),
-                      // Row(
-                      //   crossAxisAlignment: CrossAxisAlignment.center,
-                      //   children: [
-                      //     Container(
-                      //       alignment: Alignment.center,
-                      //       width: 16.0, // Adjusted width
-                      //       height: 24.0,
-                      //       child: Icon(
-                      //         Icons.circle,
-                      //         size: 8.0,
-                      //       ),
-                      //     ),
-                      //     SizedBox(width: 4.0), // Adjusted width, reduce the space
-                      //     Text(
-                      //       'Company: ${widget.product.company}',
-                      //       style: TextStyle(
-                      //         fontSize: 14.0,
-                      //         fontFamily: 'DMSans regular',
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      SizedBox(height: 10.0),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            width: 16.0, // Adjusted width
-                            height: 24.0,
-                            child: Icon(
-                              Icons.circle,
-                              size: 8.0,
-                            ),
-                          ),
-                          SizedBox(width: 4.0), // Adjusted width, reduce the space
-                          Text(
-                            'Pack Size',
-                            style: TextStyle(
-                              fontSize: 14.0,
-                              fontFamily: 'DMSans regular',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(width: 10.0),
-                Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 10.0),
-                        if (username != "")
-                          Column(
-                            children: [
-                              Text(
-                                'Price : \₹${widget.product.mrp}', // Example price
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    fontFamily: 'DMSans regular'
-                                ),
+                            SizedBox(height: 20,),
+                            Text(
+                              'Discount :  \₹${widget.product.discount}',
+                              style: TextStyle(
+                                color: Colors.green,
+                                fontFamily: 'DMSans Regular',
                               ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                'Discount :  \₹${widget.product.discount}', // Example quantity
-                                style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.green,
-                                    fontFamily: 'DMSans regular'
-                                ),
-                              ),
-                            ],
-                          )
-
-                        else
-                          TextButton( onPressed: () async {
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      // User is not logged in, show login button or other content
+                      return Container(margin: EdgeInsets.all(10),
+                          child: TextButton( onPressed: () async {
                             // Navigate to ScreenB
                             final result = await Navigator.push(
                               context,
@@ -478,57 +430,110 @@ class _ProductItemState extends State<ProductItem> {
                               );
                             }
                           },
-                            child: Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Bold',color: Colors.red),),),
-                        SizedBox(height: 10.0),
-                        CustomButton(
-                          text: "Add to Cart",
-                          onPressed: () {
-                            if (username != "") {
+                            child: Text('Login to view prices',style: TextStyle(fontFamily: 'DMSans Bold',color: Colors.red),),));
+                    }
+                  }),
+              SizedBox(width: 20,),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: MaterialButton(
+                        color: kPrimaryColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50)),
+                        height: 40,
+                        onPressed: () {
+                          if (username != "") {
 
-                              addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp);
-                              Navigator.pushNamed(context, "/product-screen");}
+                            addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp);
+                            Navigator.pushNamed(context, "/product-screen");}
 
-                            else{
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    content: const Text('Please login to add item in your cart'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          //Navigator.of(context).pop();
-                                          Navigator.pushNamed(context, "/login");
-                                        },
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }},
+                          else{
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: const Text('Please login to add item in your cart'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        //Navigator.of(context).pop();
+                                        Navigator.pushNamed(context, "/login");
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }},
+                        child: const Text(
+                          "Add to Cart",
+                          style: TextStyle(color: kWhiteColor),
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            );
-          } else {
-            // For smaller screens, display in a column with image on top
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.network(
-                  'Form.webp', // Replace with your product image URL
-                  fit: BoxFit.cover,
-                ),
-                SizedBox(height: 10.0), // Reduce the height here
-                //_buildProductDetails(),
-              ],
-            );
-          }
-        },
+                  SizedBox(height: 20,),
+                  //Container(
+                  // margin: EdgeInsets.all(10),
+                  // child: MaterialButton(
+                  //   shape: RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(50)),
+                  //   color: kPrimaryColor,
+                  //   height: 40,
+                  //   onPressed: () {
+                  //     if(Responsive.isDesktop(context)) {
+                  //       if (username != "") {
+                  //         addToCart(username,widget.product.id,1,widget.product.name,widget.product.mrp as String);
+                  //         Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => CheckoutScreen()),
+                  //         );
+                  //       }
+                  //       else{
+                  //         showDialog(
+                  //           context: context,
+                  //           builder: (context) {
+                  //             return AlertDialog(
+                  //               content: const Text('Please login to add item in your cart'),
+                  //               actions: [
+                  //                 TextButton(
+                  //                   onPressed: () {
+                  //                     //Navigator.of(context).pop();
+                  //                     Navigator.pushNamed(context, "/login");
+                  //                   },
+                  //                   child: const Text('OK'),
+                  //                 ),
+                  //               ],
+                  //             );
+                  //           },
+                  //         );
+                  //       }
+                  //
+                  //     }else if(Responsive.isMobile(context)){
+                  //       Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => CheckoutScreenMobile()),
+                  //       );
+                  //     }
+                  //   },
+                  //   child: const Text(
+                  //     "Buy Now",
+                  //     style: TextStyle(color: kWhiteColor),
+                  //   ),
+                  // ),
+                  //),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

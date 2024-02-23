@@ -135,7 +135,6 @@ class _Search_bar1State extends State<Search_bar1> {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15.0),
@@ -171,36 +170,40 @@ class _Search_bar1State extends State<Search_bar1> {
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons.search),
                     suffixIcon: InkWell(
-                      child: ElevatedButton(
-                        child: Container(
-                          width: MediaQuery.of(context).size.width < 600
-                              ? kMaxWidth / 25.5
-                              : kMaxWidth / 15.5,
-                          child: const Center(child: Text("Search",style: TextStyle(fontSize: 12),)),
-                        ),
-                        onPressed: () {
-                          String searchTerm = searchController.text;
-                          if (searchTerm.isNotEmpty) {
-                            print("manu$searchTerm");
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => ProductScreen(selectedProductName: searchTerm),
-                            //   ),
-                            // );
-                            searchitem(searchTerm).then((value) =>  Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>ProductScreenFromSearch(selectedProductName: searchTerm),
-                              ),
-                            ));
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: kWhiteColor,
-                          backgroundColor: kPrimaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+
+                        child: ElevatedButton(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width < 600
+                                ? kMaxWidth / 25.5
+                                : kMaxWidth / 15.5,
+                            child: const Center(child: Text("Search",style: TextStyle(fontSize: 12),)),
+                          ),
+                          onPressed: () {
+                            String searchTerm = searchController.text;
+                            if (searchTerm.isNotEmpty) {
+                              print("manu$searchTerm");
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => ProductScreen(selectedProductName: searchTerm),
+                              //   ),
+                              // );
+                              searchitem(searchTerm).then((value) =>  Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>ProductScreenFromSearch(selectedProductName: searchTerm),
+                                ),
+                              ));
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: kWhiteColor,
+                            backgroundColor: kSecondaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                         ),
                       ),
@@ -231,7 +234,8 @@ class _Search_bar1State extends State<Search_bar1> {
                       },
                       child: Container(
                         color: index == hoveredIndex
-                            ? Colors.grey.withOpacity(0.3) // Background color when hovered
+                            //? Colors.grey.withOpacity(0.3) // Background color when hovered
+                        ?Color(0xFFCBECF9)
                             : Colors.transparent, // Default background color
                         child: ListTile(
                           leading: Icon(Icons.search),

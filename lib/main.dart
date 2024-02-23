@@ -16,6 +16,7 @@ import 'package:almed_in/Screens/Home/not_found_screen.dart';
 import 'package:almed_in/Screens/Home/profile_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';
+import 'package:almed_in/Screens/Home/widgets/product_description.dart';
 import 'package:flutter/material.dart';
 import 'package:almed_in/Screens/Home/home_screen.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -69,6 +70,7 @@ class MyApp extends StatelessWidget {
         '/address-page': (context) => AddressScreen(),
         '/product-screen': (context) => ProductScreen(),
         '/myOrders':(context) => MyOrders(),
+        '/product_description':(context) => ProductDescriptionScreen(),
       },
     );
   }
