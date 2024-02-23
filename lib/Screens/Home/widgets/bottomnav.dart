@@ -124,27 +124,26 @@ class BottomNav extends StatelessWidget {
                         MenuItems(
                           title: 'Terms Of Service',
                           press: () {
-                            //Navigator.pushNamed(context, '/home');
-
+                            Navigator.pushNamed(context, '/terms-of-service');
                           },
                         ),
                         MenuItems(
                           title: 'Privacy Policy',
                           press: () {
-                            //Navigator.pushNamed(context, '/aboutAlmed.in');
+                            Navigator.pushNamed(context, '/privacy-policy');
 
                           },
                         ),
                         MenuItems(
                           title: 'Refund Policy',
                           press: () {
-                           // Navigator.pushNamed(context, '/faq');
+                           Navigator.pushNamed(context, '/refund-policy');
                           },
                         ),
                         MenuItems(
-                          title: 'Shopping Policy',
+                          title: 'Shipping Policy',
                           press: () {
-                            //Navigator.pushNamed(context, '/contactUs');
+                            Navigator.pushNamed(context, '/shipping-policy');
 
                           },
                         ),

@@ -244,7 +244,7 @@ class _CategoryCardState extends State<CategoryCard> {
               boxShadow: isHovered ? [kDefaultShadow] : [],
               border: Border.all(
                 color: kgreyColor, // Set the border color to grey
-                width: 3.0,       // Set the border width
+                width: 2.0,       // Set the border width
               ),
             ),
             child: Column(
@@ -279,7 +279,7 @@ class _CategoryCardState extends State<CategoryCard> {
                 ClipOval(
                   child: Image.asset(
                     'company.webp', // Path to default image
-                    fit: BoxFit.fill,
+                    fit: BoxFit.contain,
                     width: 100, // Set width as needed
                     height: 100,
                   ),

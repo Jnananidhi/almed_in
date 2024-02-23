@@ -107,7 +107,7 @@ class _CategoryCardState extends State<CategoryCard> {
           children: [
             SizedBox(height: 15),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
                 widget.title,
                 style: TextStyle(
