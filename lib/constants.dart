@@ -16,7 +16,7 @@ const kSecondaryColor = Color(0xFF00AFBB);
 const lightColor =Color(0xFFEEF4FF);
 const kDarkblueColor = Color(0xff25396f);
 const kgreyColor = Color(0xfff1f1f1);
-const kDarkgreyColor = Color(0xff8d91a7);
+const kDarkgreyColor = Color(0xff8d91a7,);
 const kWhiteColor = Color(0xffffffff);
 
 const kDefaultPadding = 20.0;
@@ -33,7 +33,7 @@ final kDefaultShadow = BoxShadow(
 );
 
 //const String api = "api/"; //for server
-const String api = 'http://localhost:8080/almed/';
+const String api = 'http://localhost/almed/';
 const String GMAP_API ="AIzaSyCOucQzY-nsUsDumyl8M1HjP-wGqTClB-M";
  
 const String aboutus = '''Almed.in is India's first online B28 marketplace for all content medicines. We have more than 800 molecule contents and about 3000 of their extensions.

@@ -15,6 +15,8 @@ import 'package:almed_in/Screens/Home/my_orders.dart';
 import 'package:almed_in/Screens/Home/not_found_screen.dart';
 import 'package:almed_in/Screens/Home/privacy_policy.dart';
 import 'package:almed_in/Screens/Home/profile_screen.dart';
+import 'package:almed_in/Screens/Home/refund_policy.dart';
+import 'package:almed_in/Screens/Home/shipping_policy.dart';
 import 'package:almed_in/Screens/Home/terms_of_service_screen.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search.dart';
 import 'package:almed_in/Screens/Home/widgets/alphabetic_search1.dart';

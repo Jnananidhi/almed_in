@@ -187,24 +187,24 @@ class _StrengthCardState extends State<StrengthCard> {
 
 class strengthDataItem extends StatefulWidget {
   final String title;
-  //final String image;
+ // final String image;
   final Function() press;
 
-  // DatabaseDataItem({required this.title, required this.image,required this.press});
-  strengthDataItem({required this.title, required this.press});
+  strengthDataItem({
+    required this.title,
+    //required this.image,
+    required this.press,
+  });
+
   @override
   _strengthDataItemState createState() => _strengthDataItemState();
 }
 
 class _strengthDataItemState extends State<strengthDataItem> {
-
   bool isHovered = false;
 
-
   @override
-
   Widget build(BuildContext context) {
-
     Size _size = MediaQuery.of(context).size;
     return MouseRegion(
       onEnter: (_) {
@@ -217,39 +217,28 @@ class _strengthDataItemState extends State<strengthDataItem> {
           isHovered = false;
         });
       },
-      child:  AnimatedDefaultTextStyle(
+      child: AnimatedContainer(
         duration: Duration(milliseconds: 300),
-        style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-          color: isHovered ? kPrimaryColor : Colors.black,),
-
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: isHovered ? [BoxShadow(color: kPrimaryColor.withOpacity(0.8), blurRadius: 10, offset: Offset(0, 5))] : [],
+          color: kWhiteColor, // Change color on hover
+          border: Border.all(
+            color: Color(0xFFC9C9C9),  // Set the border color to grey
+            width: 1.0, // Set the border width
+          ),
+        ),
+        width: _size.width <= 770 ? _size.width / 2 : _size.width >= 975 ? 300 : 200,
+        height: 160,
         child: InkWell(
           borderRadius: BorderRadius.circular(15),
           onTap: widget.press,
-          child: Container(
-            width: _size.width <= 770
-                ? _size.width/2
-                : _size.width >= 975
-                ? 300
-                : 200,
-            height: 160,
-            padding: const EdgeInsets.symmetric(
-                vertical: 10
-            ),
-
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              color: kWhiteColor, // Change color on hover
-              boxShadow: isHovered ? [kDefaultShadow] : [],
-              border: Border.all(
-                color: kgreyColor, // Set the border color to grey
-                width: 2.0,       // Set the border width
-              ),
-            ),
-            child: Column(
-              children: [
-                // Add any widgets you want to display within the card, e.g., Text
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child:
                 // Image.network(
                 //   widget.image,
                 //   width: 100, // Set width as needed
@@ -268,28 +257,28 @@ class _strengthDataItemState extends State<strengthDataItem> {
                 //     }
                 //   },
                 //   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                //     return  Image.asset(
-                //       'default.png', // Path to default image
-                //       fit: BoxFit.cover,
-                //       width: 100, // Set width as needed
-                //       height: 100,
-                //     );
-                //   },
-                // ),
-                ClipOval(
-                  child: Image.asset(
-                    'strength.jpg', // Path to default image
-                    fit: BoxFit.fill,
-                    width: 100, // Set width as needed
-                    height: 100,
-                  ),
+                //     return
+                      Image.asset(
+                       'strength.jpg',  // Path to default image
+                      fit: BoxFit.fill,
+                      width: 100, // Set width as needed
+                      height: 100,
+                    ),
+                 // },
+               // ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'DMSans Regular',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: isHovered ? kPrimaryColor : Colors.black,
                 ),
-                Spacer(),
-                Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
-                Spacer(),
-
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

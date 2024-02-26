@@ -720,7 +720,7 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                     // Container(
                     //   margin: EdgeInsets.all(10),
                     //   child: MaterialButton(
-                    //     shape: RoundedRectangleBorder(
+                    //     shape: RoundedRectangle Border(
                     //         borderRadius: BorderRadius.circular(50)),
                     //     color: kPrimaryColor,
                     //     height: 40,
@@ -737,9 +737,9 @@ class ProductItem_mobileState extends State<ProductItem_mobile> {
                     //           MaterialPageRoute(
                     //               builder: (context) => CheckoutScreenMobile()),
                     //         );
-                    //       }
+                    //       }/
                     //     },
-                    //     child: const Text(
+                    //     child: const T ext(
                     //       "Buy Now",
                     //       style: TextStyle(color: kWhiteColor),
                     //     ),

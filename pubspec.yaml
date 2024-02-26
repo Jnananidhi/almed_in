@@ -51,7 +51,7 @@ dependencies:
   dio: ^5.3.3 #file upload
   path: ^1.8.3 #file upload
   lottie: ^2.7.0 #animations
-
+  neopop: ^1.0.2
   google_maps_flutter: ^2.5.2
   geolocator: ^10.1.0
   shared_preferences: ^2.2.2

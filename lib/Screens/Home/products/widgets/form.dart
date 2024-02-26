@@ -188,107 +188,103 @@ class _FormCardState extends State<FormCard> {
   }
 }
 
+
+
 class FormDataItem extends StatefulWidget {
   final String title;
   final String image;
   final Function() press;
 
-  FormDataItem({required this.title, required this.image,required this.press});
+  FormDataItem({
+    required this.title,
+    required this.image,
+    required this.press,
+  });
 
   @override
   _FormDataItemState createState() => _FormDataItemState();
 }
 
 class _FormDataItemState extends State<FormDataItem> {
-
   bool isHovered = false;
 
-
   @override
-
   Widget build(BuildContext context) {
-
     Size _size = MediaQuery.of(context).size;
     return MouseRegion(
-        onEnter: (_) {
-          setState(() {
-            isHovered = true;
-          });
-        },
-        onExit: (_) {
-          setState(() {
-            isHovered = false;
-          });
-        },
-        child:  AnimatedDefaultTextStyle(
-          duration: Duration(milliseconds: 300),
-          style: TextStyle(
-            fontSize: 16.0,
-            fontWeight: isHovered ? FontWeight.bold : FontWeight.normal,
-            color: isHovered ? kPrimaryColor : Colors.black,),
-
-          child: InkWell(
-            borderRadius: BorderRadius.circular(15),
-            onTap: widget.press,
-            child: Container(
-              width: _size.width <= 770
-                  ? _size.width/2
-                  : _size.width >= 975
-                  ? 300
-                  : 200,
-              height: 160,
-              padding: const EdgeInsets.symmetric(
-                vertical: 10
-              ),
-
-              decoration: BoxDecoration(
-
-                boxShadow: isHovered ? [kDefaultShadow] : [],
-                borderRadius: BorderRadius.circular(15.0),
-                color: kWhiteColor, // Change color on hover
-                border: Border.all(
-                  color: kgreyColor, // Set the border color to grey
-                  width: 2.0,       // Set the border width
-                ),
-              ),
-                child: Column(
-                  children: [
-                    // Add any widgets you want to display within the card, e.g., Text
-                    Image.network(
-                      widget.image,
-                      width: 100, // Set width as needed
-                      height: 100, // Set height as needed
-                      loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        }
-                      },
-                      errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                        return  Image.asset(
-                          'Form.webp', // Path to default image
-                          fit: BoxFit.fill,
-                          width: 100, // Set width as needed
-                          height: 100,
-                        );
-                      },
-                    ),
-                    Spacer(),
-                    Text(widget.title,textAlign: TextAlign.center,style: TextStyle(fontFamily: 'DMSans Regular',fontSize: 16),),
-                    Spacer(),
-
-                  ],
-                ),
-              ),
-            ),
+      onEnter: (_) {
+        setState(() {
+          isHovered = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHovered = false;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: isHovered ? [BoxShadow(color: kPrimaryColor.withOpacity(0.8), blurRadius: 10, offset: Offset(0, 5))] : [],
+          color: kWhiteColor, // Change color on hover
+          border: Border.all(
+            color: Color(0xFFC9C9C9),  // Set the border color to grey
+            width: 1.0, // Set the border width
           ),
-        );
+        ),
+        width: _size.width <= 770 ? _size.width / 2 : _size.width >= 975 ? 300 : 200,
+        height: 160,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(15),
+          onTap: widget.press,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image.network(
+                  widget.image,
+                  width: 100, // Set width as needed
+                  height: 100, // Set height as needed
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    }
+                  },
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return Image.asset(
+                      'Form.webp', // Path to default image
+                      fit: BoxFit.fill,
+                      width: 100, // Set width as needed
+                      height: 100,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                widget.title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'DMSans Regular',
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: isHovered ? kPrimaryColor : Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

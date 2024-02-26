@@ -35,7 +35,7 @@ class BottomNav extends StatelessWidget {
                     Text(
                         "Not finding the medicines?",
                     style: TextStyle(
-                      fontFamily: 'DMSans Light' ,
+                      fontFamily: 'DMSans regular' ,
                       fontSize: _size.width >= 370 ? 16 : 10,
                     ),
                     ),
@@ -60,8 +60,8 @@ class BottomNav extends StatelessWidget {
                       height: 10,
                     ),
                     const Divider(
-                      thickness: 0.2,
-                      color: Colors.grey,
+                      thickness: 0.8,
+                      color:  Color(0xFFC9C9C9),
                     ),
                     const SizedBox(
                       height: 10,
@@ -100,8 +100,8 @@ class BottomNav extends StatelessWidget {
                       ],
                     ),
                      const Divider(
-                      thickness: 0.2,
-                      color: Colors.grey,
+                      thickness: 0.8,
+                      color:  Color(0xFFC9C9C9),
                     ),
                   const SizedBox(
                       height: 10,

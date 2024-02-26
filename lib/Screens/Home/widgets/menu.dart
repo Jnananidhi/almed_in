@@ -776,7 +776,7 @@ class _MenuItemsState extends State<MenuItems> {
           child: Text(
             widget.title,
             style: TextStyle(
-              fontFamily: 'DMSans Light',
+              fontFamily: 'DMSans regular',
               fontWeight: widget.isActive == true
                   ? FontWeight.bold
                   : isHover

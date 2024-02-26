@@ -1,23 +1,23 @@
 //this is product showing page
 import 'dart:convert';
 
+import 'package:almed_in/Screens/Home/Authentication/login_screen.dart';
 import 'package:almed_in/Screens/Home/Authentication/login_status.dart';
+import 'package:almed_in/Screens/Home/about_screen.dart';
 import 'package:almed_in/Screens/Home/cart_provider.dart';
+import 'package:almed_in/Screens/Home/contact_screen.dart';
+import 'package:almed_in/Screens/Home/faq_screen.dart';
 import 'package:almed_in/Screens/Home/products/product_listing.dart';
+import 'package:almed_in/Screens/Home/products/products_screen.dart';
+import 'package:almed_in/Screens/Home/widgets/menu.dart';
+import 'package:almed_in/constants.dart';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart'as http;
-import '../../../constants.dart';
-import '../Authentication/login_screen.dart';
-import '../about_screen.dart';
-import '../contact_screen.dart';
-import '../faq_screen.dart';
-import '../products/products_screen.dart';
-import 'Checkoutscreen.dart';
-import 'menu.dart';
+
 
 class ProductListItem extends StatefulWidget {
   final Productt product;

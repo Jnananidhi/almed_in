@@ -202,8 +202,8 @@ class _TrendingProductsState extends State<TrendingProducts> {
             borderRadius: BorderRadius.circular(15.0),
             color: kWhiteColor, // Change color on hover
             border: Border.all(
-              color: kgreyColor, // Set the border color to grey
-              width: 2.0,       // Set the border width
+              color: Color(0xFFC9C9C9),  // Set the border color to grey
+              width: 1.0,       // Set the border width
             ),
           ),
           child: Stack(

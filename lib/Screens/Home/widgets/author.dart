@@ -100,6 +100,7 @@ class _CategoryCardState extends State<CategoryCard> {
         width: cardWidth,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
+
           color: lightColor,
         ),
         child: Column(
